@@ -1,12 +1,19 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 import db, { initDatabase } from './database/db.js';
 import { ConnectionManager } from './game-connectors/connection-manager.js';
 import { SessionManager } from './session-manager.js';
 
+const require = createRequire(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-    app.quit();
+if (process.platform === 'win32') {
+    if (require('electron-squirrel-startup')) {
+        app.quit();
+    }
 }
 
 const createWindow = () => {
@@ -46,7 +53,7 @@ const createWindow = () => {
         // Open the DevTools.
         mainWindow.webContents.openDevTools();
     } else {
-        mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+        mainWindow.loadFile(path.join(__dirname, '../../dist/index.html'));
     }
 };
 
