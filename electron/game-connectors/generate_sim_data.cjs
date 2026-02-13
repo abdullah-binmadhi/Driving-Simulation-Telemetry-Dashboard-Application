@@ -83,6 +83,31 @@ function updatePhysics() {
         rpm = 6000;
     }
 
+    // Damage Simulation
+    // Initialize if not present (handled by closure in loop below, but here we update)
+    // We'll use a global object for damage state to persist across frames
+
+    // Engine Wear (High RPM = more wear)
+    if (rpm > 6000) damageState.engine -= 0.0005;
+
+    // Transmission Wear (Shifting)
+    // (Handled in shift logic below)
+
+    // Brake Wear
+    if (brake > 0.5) damageState.brakes -= 0.001;
+
+    // Suspension Wear (G-Force)
+    if (Math.abs(gForceX) > 0.5 || Math.abs(gForceY) > 0.5) damageState.suspension -= 0.0002;
+
+    // Aero Wear (Speed)
+    if (speed > 150) damageState.aero -= 0.0001;
+
+    // Clamp values
+    Object.keys(damageState).forEach(k => {
+        damageState[k] = Math.max(0, damageState[k]);
+    });
+
+
     // Lap Timing
     lapTime += 1000 / FPS; // ms
     if (lapTime > 90000) lapTime = 0; // Reset every 90s (mock lap)
@@ -107,8 +132,18 @@ function updatePhysics() {
         tireWear: [...tireWear],
         lapTime: lapTime,
         bestLap: 85400, // 1:25.400 static best
+        carDamage: { ...damageState }
     };
 }
+
+// Damage State
+const damageState = {
+    engine: 1.0,
+    transmission: 1.0,
+    suspension: 1.0,
+    brakes: 1.0,
+    aero: 1.0
+};
 
 // Generate loop
 for (let i = 0; i < TOTAL_FRAMES; i++) {

@@ -31,6 +31,15 @@ export interface TelemetryData {
     lastLap?: number;
     bestLap?: number;
 
+    // Car Health (0.0 - 1.0, where 1.0 is 100%)
+    carDamage?: {
+        engine: number;
+        transmission: number;
+        suspension: number;
+        brakes: number;
+        aero: number;
+    };
+
     // Position (if available)
     posX?: number;
     posY?: number;

@@ -7,6 +7,7 @@ import RPMGauge from './RPMGauge';
 import LiveGraph from './LiveGraph';
 import TireStatus from './TireStatus';
 import LapTiming from './LapTiming';
+import CarHealth from './CarHealth';
 
 const MAX_HISTORY = 100; // Keep last 100 points for graphing
 
@@ -63,13 +64,17 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Main Gauges */}
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-slate-900 rounded-2xl p-6 flex items-center justify-center border border-slate-800">
-                        <svg viewBox="0 0 200 200" className="w-full h-full max-w-[300px]">
+                    <div className="bg-slate-900 rounded-2xl p-6 flex items-center justify-center border border-slate-800 relative">
+                        {/* Speedometer - make it fill more space */}
+                        <svg viewBox="0 0 200 200" className="w-full h-full max-w-[400px]">
                             <Speedometer speed={data.speed} />
                         </svg>
                     </div>
                     <div className="flex flex-col gap-6">
                         <RPMGauge rpm={data.rpm} gear={data.gear} />
+
+                        {/* Car Health Widget */}
+                        <CarHealth damage={data.carDamage} />
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
