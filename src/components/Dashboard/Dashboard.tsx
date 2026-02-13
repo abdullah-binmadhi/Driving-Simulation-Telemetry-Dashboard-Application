@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
+import { useSettingsStore } from '../../stores/settingsStore';
 import { useTelemetryListener } from '../../hooks/useTelemetry';
 import Speedometer from './Speedometer';
 import RPMGauge from './RPMGauge';
@@ -27,7 +28,18 @@ const Dashboard = () => {
         }
     }, [data]);
 
-    if (!isConnected || !data) {
+    const { game } = useSettingsStore();
+    const isSimMode = game?.simulationEnabled;
+
+    if ((!isConnected && !isSimMode) || !data) {
+        if (isSimMode && !data) {
+            return (
+                <div className="flex flex-col items-center justify-center h-full text-slate-400">
+                    <div className="animate-pulse text-xl">Starting Simulation...</div>
+                </div>
+            );
+        }
+
         return (
             <div className="flex flex-col items-center justify-center h-full text-slate-400">
                 <div className="animate-pulse text-xl">Waiting for game connection...</div>

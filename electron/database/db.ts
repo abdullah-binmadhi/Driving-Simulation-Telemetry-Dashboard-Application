@@ -1,8 +1,14 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import { app } from 'electron';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 
-const dbPath = process.env.VITE_DEV_SERVER_URL
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Determine database path based on environment
+const isDev = process.env.NODE_ENV === 'development' || process.env.VITE_DEV_SERVER_URL;
+const dbPath = isDev
   ? path.join(__dirname, '../../driving_telemetry.db') // Dev: project root
   : path.join(app.getPath('userData'), 'driving_telemetry.db'); // Prod: userData
 
