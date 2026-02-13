@@ -17,4 +17,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getSessions: () => ipcRenderer.invoke('get-sessions'),
     getSessionTelemetry: (sessionId: number) => ipcRenderer.invoke('get-session-telemetry', sessionId),
     exportSessionCSV: (sessionId: number) => ipcRenderer.invoke('export-session-csv', sessionId),
+    toggleSimulationMode: (enabled: boolean) => ipcRenderer.invoke('toggle-simulation-mode', enabled),
 });

@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware';
 interface GameSettings {
     beamngPort: number;
     assettoCorsaEnabled: boolean;
+    simulationEnabled: boolean;
 }
 
 interface AppSettings {
@@ -24,6 +25,7 @@ export const useSettingsStore = create<SettingsState>()(
             game: {
                 beamngPort: 4444,
                 assettoCorsaEnabled: true,
+                simulationEnabled: false,
             },
             app: {
                 theme: 'dark',

@@ -15,7 +15,31 @@ const Settings = () => {
                     <h2 className="text-xl font-semibold mb-4 text-blue-400">Game Integration</h2>
 
                     <div className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Simulation Mode Toggle */}
+                        <div className="space-y-2">
+                            <label className="text-sm text-slate-400">Simulation Mode</label>
+                            <div className="flex items-center justify-between bg-slate-950 border border-slate-700 rounded-lg px-4 py-2">
+                                <div className="flex items-center gap-2">
+                                    <div className={`w-3 h-3 rounded-full ${game.simulationEnabled ? 'bg-orange-500 animate-pulse' : 'bg-slate-600'}`}></div>
+                                    <span className="text-sm text-slate-300">Generate Mock Data</span>
+                                </div>
+                                <button
+                                    onClick={async () => {
+                                        const newState = !game.simulationEnabled;
+                                        updateGameSettings({ simulationEnabled: newState });
+                                        if (window.electronAPI && window.electronAPI.toggleSimulationMode) {
+                                            await window.electronAPI.toggleSimulationMode(newState);
+                                        }
+                                    }}
+                                    className={`px-4 py-1 rounded-full text-xs font-bold transition-all ${game.simulationEnabled ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+                                >
+                                    {game.simulationEnabled ? 'ACTIVE' : 'OFF'}
+                                </button>
+                            </div>
+                            <p className="text-xs text-slate-500">Generates fake telemetry data for testing the dashboard without a game.</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
                             <div className="space-y-2">
                                 <label className="text-sm text-slate-400">BeamNG.drive OutGauge Port</label>
                                 <input

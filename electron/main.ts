@@ -94,13 +94,17 @@ const createWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+// Global reference to prevent garbage collection and access from IPC
+let connectionManager: ConnectionManager;
+let sessionManager: SessionManager;
+
 app.on('ready', () => {
     initDatabase();
     createWindow();
 
     // Start Connection Manager
-    const connectionManager = new ConnectionManager();
-    const sessionManager = new SessionManager();
+    connectionManager = new ConnectionManager();
+    sessionManager = new SessionManager();
 
     connectionManager.start();
 
@@ -135,6 +139,15 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
+});
+
+// Simulation Mode IPC
+ipcMain.handle('toggle-simulation-mode', (_, enabled: boolean) => {
+    if (connectionManager) {
+        connectionManager.setSimulationMode(enabled);
+        return { success: true };
+    }
+    return { success: false, message: 'Connection manager not initialized' };
 });
 
 // In this file you can include the rest of your app's specific main process
