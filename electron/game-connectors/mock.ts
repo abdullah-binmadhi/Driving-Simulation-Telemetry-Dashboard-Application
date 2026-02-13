@@ -4,6 +4,7 @@ import type { TelemetryData } from '../../src/types/telemetry.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { app } from 'electron';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,8 +14,6 @@ export class MockConnector extends EventEmitter implements GameConnector {
     private interval: NodeJS.Timeout | null = null;
 
     // Load static data
-    // In a real app we might load this async, here we just require it or import it.
-    // We'll use fs to read it to ensure it's fresh.
     private sessionData: TelemetryData[] = [];
     private currentIndex = 0;
 
@@ -25,17 +24,35 @@ export class MockConnector extends EventEmitter implements GameConnector {
 
     private loadData() {
         try {
-            // We use a relative path. In production, this needs care, but for dev:
-            // This is a simple require since we are in Electron/Node
-            const dataPath = path.join(__dirname, 'simulated-session.json');
-            // Check if file exists, if not, fallback to empty or generate
-            if (fs.existsSync(dataPath)) {
+            const pathsToTry = [
+                path.join(__dirname, 'simulated-session.json'),
+            ];
+
+            // In packaged app, we use extraResources which puts the file in resources/simulated-session.json
+            if (app && app.isPackaged) {
+                pathsToTry.unshift(path.join(process.resourcesPath, 'simulated-session.json'));
+            } else if (app) {
+                // Dev mode fallback
+                pathsToTry.push(path.join(app.getAppPath(), 'dist-electron', 'electron', 'game-connectors', 'simulated-session.json'));
+                pathsToTry.push(path.join(app.getAppPath(), 'electron', 'game-connectors', 'simulated-session.json'));
+            }
+
+            let dataPath = '';
+            for (const p of pathsToTry) {
+                if (fs.existsSync(p)) {
+                    dataPath = p;
+                    break;
+                }
+            }
+
+            if (dataPath) {
+                console.log(`[Mock] Loading data from: ${dataPath}`);
                 this.sessionData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
             } else {
-                console.error('Mock data file not found:', dataPath);
+                console.error('[Mock] Data file not found. Tried:', pathsToTry);
             }
         } catch (e) {
-            console.error('Failed to load mock data:', e);
+            console.error('[Mock] Failed to load mock data:', e);
         }
     }
 

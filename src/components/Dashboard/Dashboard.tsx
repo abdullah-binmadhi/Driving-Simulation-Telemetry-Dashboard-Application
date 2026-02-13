@@ -5,6 +5,8 @@ import { useTelemetryListener } from '../../hooks/useTelemetry';
 import Speedometer from './Speedometer';
 import RPMGauge from './RPMGauge';
 import LiveGraph from './LiveGraph';
+import TireStatus from './TireStatus';
+import LapTiming from './LapTiming';
 
 const MAX_HISTORY = 100; // Keep last 100 points for graphing
 
@@ -42,7 +44,7 @@ const Dashboard = () => {
 
         return (
             <div className="flex flex-col items-center justify-center h-full text-slate-400">
-                <div className="animate-pulse text-xl">Waiting for game connection...</div>
+                <div className="animate-pulse text-xl">Waiting for Game Connection...</div>
                 <div className="text-sm mt-2">Launch BeamNG.drive or Assetto Corsa</div>
             </div>
         );
@@ -59,11 +61,9 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Main Gagues */}
+                {/* Main Gauges */}
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-slate-900 rounded-2xl p-6 flex items-center justify-center border border-slate-800">
-                        {/* SVG Speedometer takes props */}
-                        {/* Passing a key to force re-render if needed, but react handles props */}
                         <svg viewBox="0 0 200 200" className="w-full h-full max-w-[300px]">
                             <Speedometer speed={data.speed} />
                         </svg>
@@ -88,21 +88,34 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Side Metrics */}
-                <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
-                    <h2 className="text-lg font-semibold mb-4 text-slate-300">Vehicle Dynamics</h2>
-                    <div className="space-y-4">
-                        <div className="flex justify-between border-b border-slate-800 pb-2">
-                            <span className="text-slate-500">G-Force X (Lat)</span>
-                            <span className="font-mono">{data.gForceX.toFixed(2)} G</span>
-                        </div>
-                        <div className="flex justify-between border-b border-slate-800 pb-2">
-                            <span className="text-slate-500">G-Force Y (Long)</span>
-                            <span className="font-mono">{data.gForceY.toFixed(2)} G</span>
-                        </div>
-                        <div className="flex justify-between border-b border-slate-800 pb-2">
-                            <span className="text-slate-500">Fuel</span>
-                            <span className="font-mono">{(data.fuel || 0).toFixed(1)} %</span>
+                {/* Side Metrics Column */}
+                <div className="flex flex-col gap-6">
+                    {/* Lap Timing */}
+                    <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
+
+                    {/* Tire Status */}
+                    <TireStatus temps={data.tireTemp} wear={data.tireWear} />
+
+                    {/* Vehicle Dynamics */}
+                    <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow">
+                        <h2 className="text-lg font-semibold mb-4 text-slate-300">Vehicle Dynamics</h2>
+                        <div className="space-y-4">
+                            <div className="flex justify-between border-b border-slate-800 pb-2">
+                                <span className="text-slate-500">G-Force X (Lat)</span>
+                                <span className="font-mono">{data.gForceX.toFixed(2)} G</span>
+                            </div>
+                            <div className="flex justify-between border-b border-slate-800 pb-2">
+                                <span className="text-slate-500">G-Force Y (Long)</span>
+                                <span className="font-mono">{data.gForceY.toFixed(2)} G</span>
+                            </div>
+                            <div className="flex justify-between border-b border-slate-800 pb-2">
+                                <span className="text-slate-500">Fuel</span>
+                                <span className="font-mono">{(data.fuel || 0).toFixed(1)} %</span>
+                            </div>
+                            <div className="flex justify-between border-b border-slate-800 pb-2">
+                                <span className="text-slate-500">Engine Temp</span>
+                                <span className="font-mono">{(data.engineTemp || 0).toFixed(0)} °C</span>
+                            </div>
                         </div>
                     </div>
                 </div>

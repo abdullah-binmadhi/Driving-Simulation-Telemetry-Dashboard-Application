@@ -38,6 +38,12 @@
       "!dist-electron/**/*.db*",
       "dist/**/*"
     ],
+    "extraResources": [
+      {
+        "from": "electron/game-connectors/simulated-session.json",
+        "to": "simulated-session.json"
+      }
+    ],
     "mac": {
       "category": "public.app-category.simulation"
     },

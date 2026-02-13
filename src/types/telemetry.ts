@@ -22,6 +22,15 @@ export interface TelemetryData {
     engineTemp?: number;
     oilTemp?: number;
 
+    // Tires (FL, FR, RL, RR)
+    tireTemp?: [number, number, number, number];
+    tireWear?: [number, number, number, number]; // 0.0 - 1.0 (1.0 = 100% wear/dead or 100% health? usually 100% health in sims, let's assume 1.0 = New)
+
+    // Timing
+    lapTime?: number;    // Current lap time in ms
+    lastLap?: number;
+    bestLap?: number;
+
     // Position (if available)
     posX?: number;
     posY?: number;
