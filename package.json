@@ -10,7 +10,7 @@
     "dev:ui": "vite",
     "dev:electron": "tsc -p tsconfig.electron.json -w & wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
     "build": "tsc -b && vite build && npm run build:electron && electron-builder",
-    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:electron": "tsc -p tsconfig.electron.json && cp electron/game-connectors/simulated-session.json dist-electron/electron/game-connectors/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -35,6 +35,7 @@
     },
     "files": [
       "dist-electron/**/*",
+      "!dist-electron/**/*.db*",
       "dist/**/*"
     ],
     "mac": {

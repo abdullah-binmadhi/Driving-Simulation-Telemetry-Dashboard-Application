@@ -14,9 +14,6 @@ export class ConnectionManager extends EventEmitter {
     constructor() {
         super();
         this.mockConnector = new MockConnector();
-        // FORCE ENABLE FOR DEBUGGING
-        // this.isSimulationMode = true;
-
         this.connectors = [
             new BeamNGConnector(),
             new AssettoCorsaConnector()
