@@ -8,7 +8,8 @@ import LiveGraph from './LiveGraph';
 import TireStatus from './TireStatus';
 import LapTiming from './LapTiming';
 import CarHealth from './CarHealth';
-
+import DriverProfile from './DriverProfile';
+import SessionInfo from './SessionInfo';
 const MAX_HISTORY = 100; // Keep last 100 points for graphing
 
 const Dashboard = () => {
@@ -52,7 +53,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="p-8 h-full flex flex-col gap-6">
+        <div className="p-4 h-full flex flex-col gap-4">
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold">Live Dashboard</h1>
                 <div className="flex items-center gap-2">
@@ -61,47 +62,45 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Main Gauges */}
-                <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-slate-900 rounded-2xl p-6 flex items-center justify-center border border-slate-800 relative">
-                        {/* Speedometer - make it fill more space */}
-                        <svg viewBox="0 0 200 200" className="w-full h-full max-w-[400px]">
-                            <Speedometer speed={data.speed} />
-                        </svg>
-                    </div>
-                    <div className="flex flex-col gap-6">
-                        <RPMGauge rpm={data.rpm} gear={data.gear} />
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
 
-                        {/* Car Health Widget */}
+                {/* LEFT COLUMN: Driver & Session Info (3 cols) */}
+                <div className="xl:col-span-3 flex flex-col gap-6 order-2 xl:order-1">
+                    <DriverProfile />
+                    <SessionInfo />
+                </div>
+
+                {/* CENTER COLUMN: Main Gauges (6 cols) */}
+                <div className="xl:col-span-6 flex flex-col gap-6 order-1 xl:order-2">
+
+
+                    <RPMGauge rpm={data.rpm} gear={data.gear} />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <CarHealth damage={data.carDamage} />
-
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                                <span className="text-slate-400 text-xs uppercase">Throttle</span>
-                                <div className="h-2 bg-slate-900 rounded-full mt-2 overflow-hidden">
+                        <div className="flex flex-col gap-4 justify-between h-full">
+                            <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex-grow flex flex-col justify-center">
+                                <span className="text-slate-400 text-xs uppercase mb-2">Throttle</span>
+                                <div className="h-4 bg-slate-900 rounded-full overflow-hidden w-full">
                                     <div className="h-full bg-green-500 transition-all duration-75" style={{ width: `${data.throttle * 100}%` }}></div>
                                 </div>
+                                <span className="text-right text-xs font-mono text-green-400 mt-1">{(data.throttle * 100).toFixed(0)}%</span>
                             </div>
-                            <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                                <span className="text-slate-400 text-xs uppercase">Brake</span>
-                                <div className="h-2 bg-slate-900 rounded-full mt-2 overflow-hidden">
+                            <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex-grow flex flex-col justify-center">
+                                <span className="text-slate-400 text-xs uppercase mb-2">Brake</span>
+                                <div className="h-4 bg-slate-900 rounded-full overflow-hidden w-full">
                                     <div className="h-full bg-red-500 transition-all duration-75" style={{ width: `${data.brake * 100}%` }}></div>
                                 </div>
+                                <span className="text-right text-xs font-mono text-red-400 mt-1">{(data.brake * 100).toFixed(0)}%</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Side Metrics Column */}
-                <div className="flex flex-col gap-6">
-                    {/* Lap Timing */}
+                {/* RIGHT COLUMN: Telemetry Metrics (3 cols) */}
+                <div className="xl:col-span-3 flex flex-col gap-6 order-3">
                     <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
-
-                    {/* Tire Status */}
                     <TireStatus temps={data.tireTemp} wear={data.tireWear} />
-
-                    {/* Vehicle Dynamics */}
                     <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow">
                         <h2 className="text-lg font-semibold mb-4 text-slate-300">Vehicle Dynamics</h2>
                         <div className="space-y-4">
@@ -125,8 +124,8 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Graph */}
-                <div className="lg:col-span-3">
+                {/* Live Graph covers full width at bottom */}
+                <div className="col-span-1 xl:col-span-12 order-4">
                     <LiveGraph data={speedHistory} title="Speed Over Time" />
                 </div>
             </div>

@@ -12,11 +12,28 @@ interface AppSettings {
     unitSystem: 'metric' | 'imperial';
 }
 
+interface DriverSettings {
+    name: string;
+    team: string;
+    carNumber: string;
+    carModel: string;
+}
+
+interface SessionSettings {
+    trackName: string;
+    sessionType: 'Practice' | 'Qualifying' | 'Race';
+    weather: 'Sunny' | 'Rain' | 'Cloudy' | 'Night';
+}
+
 interface SettingsState {
     game: GameSettings;
     app: AppSettings;
+    driver: DriverSettings;
+    session: SessionSettings;
     updateGameSettings: (settings: Partial<GameSettings>) => void;
     updateAppSettings: (settings: Partial<AppSettings>) => void;
+    updateDriverSettings: (settings: Partial<DriverSettings>) => void;
+    updateSessionSettings: (settings: Partial<SessionSettings>) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -31,6 +48,17 @@ export const useSettingsStore = create<SettingsState>()(
                 theme: 'dark',
                 unitSystem: 'metric',
             },
+            driver: {
+                name: 'Driver 1',
+                team: 'Racing Team',
+                carNumber: '44',
+                carModel: 'GT3 Cup',
+            },
+            session: {
+                trackName: 'Silverstone',
+                sessionType: 'Practice',
+                weather: 'Sunny',
+            },
             updateGameSettings: (settings) =>
                 set((state) => ({
                     game: { ...state.game, ...settings },
@@ -38,6 +66,14 @@ export const useSettingsStore = create<SettingsState>()(
             updateAppSettings: (settings) =>
                 set((state) => ({
                     app: { ...state.app, ...settings },
+                })),
+            updateDriverSettings: (settings) =>
+                set((state) => ({
+                    driver: { ...state.driver, ...settings },
+                })),
+            updateSessionSettings: (settings) =>
+                set((state) => ({
+                    session: { ...state.session, ...settings },
                 })),
         }),
         {
