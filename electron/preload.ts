@@ -15,4 +15,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     maximize: () => ipcRenderer.send('window-maximize'),
     close: () => ipcRenderer.send('window-close'),
     getSessions: () => ipcRenderer.invoke('get-sessions'),
+    getSessionTelemetry: (sessionId: number) => ipcRenderer.invoke('get-session-telemetry', sessionId),
+    exportSessionCSV: (sessionId: number) => ipcRenderer.invoke('export-session-csv', sessionId),
 });

@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import db, { initDatabase } from './database/db.js';
@@ -45,6 +46,39 @@ const createWindow = () => {
     ipcMain.handle('get-sessions', async () => {
         const stmt = db.prepare('SELECT * FROM sessions ORDER BY start_time DESC LIMIT 50');
         return stmt.all();
+    });
+
+    ipcMain.handle('get-session-telemetry', async (_, sessionId: number) => {
+        const stmt = db.prepare('SELECT * FROM telemetry WHERE session_id = ? ORDER BY timestamp ASC');
+        return stmt.all(sessionId);
+    });
+
+    ipcMain.handle('export-session-csv', async (_, sessionId: number) => {
+        const { canceled, filePath } = await dialog.showSaveDialog({
+            title: 'Export Session CSV',
+            defaultPath: `session-${sessionId}.csv`,
+            filters: [{ name: 'CSV Files', extensions: ['csv'] }]
+        });
+
+        if (canceled || !filePath) return { success: false, message: 'Cancelled' };
+
+        try {
+            const stmt = db.prepare('SELECT * FROM telemetry WHERE session_id = ? ORDER BY timestamp ASC');
+            const data = stmt.all(sessionId) as any[];
+
+            if (data.length === 0) return { success: false, message: 'No data found' };
+
+            // Generate CSV manually
+            const headers = Object.keys(data[0]).join(',');
+            const rows = data.map(row => Object.values(row).join(','));
+            const csvContent = [headers, ...rows].join('\n');
+
+            await fs.promises.writeFile(filePath, csvContent, 'utf-8');
+            return { success: true, message: 'Export successful' };
+        } catch (error: any) {
+            console.error('Export failed:', error);
+            return { success: false, message: error.message };
+        }
     });
 
     // and load the index.html of the app.

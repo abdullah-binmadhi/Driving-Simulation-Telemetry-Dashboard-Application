@@ -14,9 +14,11 @@ export interface Session {
 interface SessionState {
     sessions: Session[];
     selectedSession: Session | null;
+    telemetryLogs: any[]; // Replace 'any' with TelemetryData if available
     isLoading: boolean;
     loadSessions: () => Promise<void>;
     selectSession: (session: Session) => void;
+    exportSession: (sessionId: number) => Promise<{ success: boolean; message: string }>;
 }
 
 // Mock data for now, will replace with IPC calls to DB
@@ -36,6 +38,7 @@ const mockSessions: Session[] = [
 export const useSessionStore = create<SessionState>((set) => ({
     sessions: [],
     selectedSession: null,
+    telemetryLogs: [],
     isLoading: false,
     loadSessions: async () => {
         set({ isLoading: true });
@@ -52,5 +55,27 @@ export const useSessionStore = create<SessionState>((set) => ({
             set({ isLoading: false });
         }
     },
-    selectSession: (session) => set({ selectedSession: session }),
+    selectSession: async (session) => {
+        set({ selectedSession: session, telemetryLogs: [] }); // Clear previous logs
+        if (session && window.electronAPI) {
+            try {
+                const logs = await window.electronAPI.getSessionTelemetry(session.id);
+                set({ telemetryLogs: logs });
+            } catch (error) {
+                console.error('Failed to load session logs', error);
+            }
+        }
+    },
+    exportSession: async (sessionId) => {
+        if (window.electronAPI) {
+            try {
+                const result = await window.electronAPI.exportSessionCSV(sessionId);
+                return result;
+            } catch (error) {
+                console.error('Failed to export session', error);
+                return { success: false, message: 'Export failed' };
+            }
+        }
+        return { success: false, message: 'Electron API not available' };
+    },
 }));

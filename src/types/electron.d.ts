@@ -5,6 +5,8 @@ export interface IElectronAPI {
     maximize: () => void;
     close: () => void;
     getSessions: () => Promise<any[]>;
+    getSessionTelemetry: (sessionId: number) => Promise<any[]>;
+    exportSessionCSV: (sessionId: number) => Promise<{ success: boolean; message: string }>;
 }
 
 declare global {
