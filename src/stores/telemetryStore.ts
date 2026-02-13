@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { TelemetryData } from '../types/telemetry';
+import type { TelemetryData } from '../types/telemetry';
 
 interface TelemetryState {
     data: TelemetryData | null;

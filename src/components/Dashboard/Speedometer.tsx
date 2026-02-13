@@ -1,15 +1,14 @@
-import React, { useMemo } from 'react';
-import { GaugeCircle } from 'lucide-react';
+import React from 'react';
 
 interface SpeedometerProps {
     speed: number;
     unit?: 'km/h' | 'mph';
-    maxSpeed?: number;
 }
 
-const Speedometer: React.FC<SpeedometerProps> = ({ speed, unit = 'km/h', maxSpeed = 240 }) => {
-    const percentage = Math.min(Math.max(speed / maxSpeed, 0), 1);
-    const angle = percentage * 240 - 120; // -120 to 120 degrees
+const Speedometer: React.FC<SpeedometerProps> = ({ speed, unit = 'km/h' }) => {
+    const maxSpeed = 240;
+    const percentage = Math.min(speed / maxSpeed, 1);
+    // Angle calculation moved inline if needed or removed if unused
 
     return (
         <div className="relative w-64 h-64 flex flex-col items-center justify-center">

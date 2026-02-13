@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTelemetryStore } from '../stores/telemetryStore';
-import { TelemetryData } from '../types/telemetry';
+import type { TelemetryData } from '../types/telemetry';
 
 export const useTelemetryListener = () => {
     const updateTelemetry = useTelemetryStore((state) => state.updateTelemetry);
@@ -9,13 +9,14 @@ export const useTelemetryListener = () => {
     useEffect(() => {
         if (!window.electronAPI) return;
 
-        const removeListener = window.electronAPI.onMessage('telemetry-update', (event, data: TelemetryData) => {
+        const removeListener = window.electronAPI.onMessage('telemetry-update', (_event, data: TelemetryData) => {
             updateTelemetry(data);
             setConnectionStatus(true, data.game);
         });
 
         return () => {
             removeListener();
+            setConnectionStatus(false);
         };
     }, [updateTelemetry, setConnectionStatus]);
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
 import { useTelemetryListener } from '../../hooks/useTelemetry';
 import Speedometer from './Speedometer';

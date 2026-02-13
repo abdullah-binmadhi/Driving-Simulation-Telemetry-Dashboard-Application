@@ -1,6 +1,7 @@
 import dgram from 'dgram';
 import { EventEmitter } from 'events';
-import { TelemetryData } from '../../src/types/telemetry';
+import { TelemetryData } from '../../src/types/telemetry.js';
+import { GameConnector } from '../connector-interface.js';
 
 export class BeamNGConnector extends EventEmitter {
     public readonly name = 'BeamNG.drive';

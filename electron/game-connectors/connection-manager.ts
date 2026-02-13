@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
-import { BeamNGConnector } from './beamng';
-import { AssettoCorsaConnector } from './assetto-corsa';
-import { GameConnector } from '../../src/types/connector';
-import type { TelemetryData } from '../../src/types/telemetry';
+import { BeamNGConnector } from './beamng.js';
+import { AssettoCorsaConnector } from './assetto-corsa.js';
+import { GameConnector } from '../connector-interface.js';
+import type { TelemetryData } from '../../src/types/telemetry.js';
 
 export class ConnectionManager extends EventEmitter {
     private connectors: GameConnector[] = [];

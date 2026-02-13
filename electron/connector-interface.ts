@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { TelemetryData } from './telemetry';
+import type { TelemetryData } from '../src/types/telemetry.js';
 
 export interface GameConnector extends EventEmitter {
     start(): void;

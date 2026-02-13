@@ -6,6 +6,7 @@
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "concurrently -k \"npm run dev:ui\" \"npm run dev:electron\"",
+    "electron:dev": "npm run dev",
     "dev:ui": "vite",
     "dev:electron": "tsc -p tsconfig.electron.json -w & wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
     "build": "tsc -b && vite build && npm run build:electron && electron-builder",
@@ -50,7 +51,6 @@
     "@types/node": "^24.10.13",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@types/react-router-dom": "^5.3.3",
     "@types/ws": "^8.18.1",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.24",

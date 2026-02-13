@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import { GameConnector } from '../../src/types/connector';
-import type { TelemetryData } from '../../src/types/telemetry';
+import { GameConnector } from '../connector-interface.js';
+import type { TelemetryData } from '../../src/types/telemetry.js';
 
 export class AssettoCorsaConnector extends EventEmitter implements GameConnector {
     public readonly name = 'Assetto Corsa';

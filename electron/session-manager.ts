@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
-import db from './database/db';
-import type { TelemetryData } from '../src/types/telemetry';
+import { app } from 'electron';
+import db from './database/db.js';
+import type { TelemetryData } from '../src/types/telemetry.js';
 
 export class SessionManager extends EventEmitter {
     private currentSessionId: number | null = null;

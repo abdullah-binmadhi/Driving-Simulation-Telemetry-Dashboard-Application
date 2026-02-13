@@ -1,6 +1,4 @@
-import React from 'react';
 import { useSettingsStore } from '../../stores/settingsStore';
-import { Save } from 'lucide-react';
 
 const Settings = () => {
     const { game, app, updateGameSettings, updateAppSettings } = useSettingsStore();

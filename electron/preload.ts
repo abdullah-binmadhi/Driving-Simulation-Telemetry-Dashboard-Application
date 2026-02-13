@@ -4,10 +4,6 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('electronAPI', {
     sendMessage: (channel: string, data: any) => ipcRenderer.send(channel, data),
-    onMessage: (channel: string, callback: (event: any, ...args: any[]) => void) => {
-        ipcRenderer.on(channel, callback);
-        return () => ipcRenderer.removeListener(channel, callback);
-    },
     onMessage: (channel: string, func: (...args: any[]) => void) => {
         const subscription = (_event: any, ...args: any[]) => func(_event, ...args);
         ipcRenderer.on(channel, subscription);
@@ -15,5 +11,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
             ipcRenderer.removeListener(channel, subscription);
         };
     },
+    minimize: () => ipcRenderer.send('window-minimize'),
+    maximize: () => ipcRenderer.send('window-maximize'),
+    close: () => ipcRenderer.send('window-close'),
     getSessions: () => ipcRenderer.invoke('get-sessions'),
 });
