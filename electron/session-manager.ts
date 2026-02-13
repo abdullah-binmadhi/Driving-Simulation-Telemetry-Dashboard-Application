@@ -10,6 +10,13 @@ export class SessionManager extends EventEmitter {
     private lastActivityTime: number = Date.now();
     private isRecording = false;
 
+    // Session Stats
+    private sessionCoastTime = 0;
+    private sessionDistance = 0;
+    private startFuel = 0;
+    private lastFuel = 0;
+    private lastTimestamp = 0;
+
     constructor() {
         super();
     }
@@ -22,28 +29,47 @@ export class SessionManager extends EventEmitter {
 
         if (this.isRecording) {
             this.buffer.push(data);
+
+            // Stats Calculation
+            const now = data.timestamp;
+            if (this.lastTimestamp > 0) {
+                const dt = (now - this.lastTimestamp) / 1000; // seconds
+                if (dt > 0 && dt < 1) { // Sanity check for dt
+                    // Distance: speed (km/h) / 3.6 = m/s * dt = meters
+                    this.sessionDistance += (data.speed / 3.6) * dt;
+
+                    // Coasting: Throttle & Brake < 5%
+                    if (data.throttle < 0.05 && data.brake < 0.05 && data.speed > 5) {
+                        this.sessionCoastTime += (dt * 1000); // ms
+                    }
+                }
+            }
+            this.lastTimestamp = now;
+            this.lastFuel = data.fuel || 0;
             this.lastActivityTime = Date.now();
 
             if (this.buffer.length >= this.BATCH_SIZE) {
                 this.flushBuffer();
             }
 
-            // Auto-stop if idle for 30 seconds
-            // Note: This check depends on how often processData is called.
-            // If game pauses, we might not get data. 
-            // Ideally we check this via a separate interval or rely on data stream.
+            // Auto-stop logic (simple timeout for now, can be improved)
         }
     }
 
     private startSession(data: TelemetryData) {
         console.log('Starting new session...');
         this.isRecording = true;
+        this.sessionCoastTime = 0;
+        this.sessionDistance = 0;
+        this.startFuel = data.fuel || 0;
+        this.lastFuel = this.startFuel;
+        this.lastTimestamp = data.timestamp;
+
         try {
             const stmt = db.prepare(`
         INSERT INTO sessions (game, vehicle, start_time, notes)
         VALUES (?, ?, ?, ?)
       `);
-            // We don't have vehicle info in TelemetryData yet, maybe extract from somewhere or default
             const vehicle = 'Unknown';
             const result = stmt.run(data.game, vehicle, Date.now(), 'Auto-started session');
             this.currentSessionId = result.lastInsertRowid as number;
@@ -61,19 +87,46 @@ export class SessionManager extends EventEmitter {
         console.log('Stopping session...');
         this.flushBuffer();
 
+        // Get final fuel
+        // We don't have the *last* data point here easily unless we store it. 
+        // But we can approximate with what's in buffer or just ignore precise fuel for now if buffer flushed.
+        // Better: let's use the last known data point in buffer if available, or just not update fuel if we can't.
+        // actually we can just store `lastFuel` in processData.
+
         try {
-            // Update session end time and stats
-            // Calculate simple score: 100 - (harsh events count * penalty)
-            // For now, let's just use a placeholder random score or based on avg speed for testing
+            // Calculate final stats
             const score = Math.min(100, Math.max(0, 100 - Math.random() * 20)); // Placeholder
+
+            // Fuel Used (Approximate, might be % or Liters depending on game)
+            // We need the last data point's fuel. 
+            // Since we don't have easy access to "last packet" here without storing it, 
+            // let's just assume we can get it from the last buffer item if exists, 
+            // OR we should have stored `currentFuel` in class.
+            // Let's simplified: we assume we tracked consumption or just update logic next time.
+            // For now, let's just leave fuel_used as 0 unless we track `lastFuel` in state.
+
+            // Let's assume we want to write what we have:
+            const distanceKm = this.sessionDistance / 1000;
+            const fuelUsed = Math.max(0, this.startFuel - this.lastFuel);
+            // Efficiency: km / unit. Avoid divide by zero.
+            const efficiency = fuelUsed > 0 ? distanceKm / fuelUsed : 0;
 
             const endStmt = db.prepare(`
         UPDATE sessions 
-        SET end_time = ?, duration = ? - start_time, score = ?
+        SET end_time = ?, duration = ? - start_time, score = ?, 
+            distance_traveled = ?, coast_time = ?, fuel_used = ?, efficiency = ?
         WHERE id = ?
       `);
             const now = Date.now();
-            endStmt.run(now, now, Math.round(score), this.currentSessionId);
+
+            // Placeholder for fuel used since we didn't track "lastFuel" property yet. 
+            // I'll update the class to track `lastFuel` in the next edit or just pass 0 for now.
+            endStmt.run(
+                now, now, Math.round(score),
+                distanceKm, Math.round(this.sessionCoastTime),
+                fuelUsed, efficiency,
+                this.currentSessionId
+            );
 
             this.emit('session-stopped', { id: this.currentSessionId, score });
         } catch (e) {

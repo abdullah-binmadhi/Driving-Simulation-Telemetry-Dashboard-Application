@@ -3,6 +3,7 @@ import Layout from './components/Layout/Layout';
 import Dashboard from './components/Dashboard/Dashboard';
 import Analysis from './components/Analysis/Analysis';
 import Settings from './components/Settings/Settings';
+import ReactionTest from './components/ReactionTest/ReactionTest';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="analysis" element={<Analysis />} />
+          <Route path="reaction" element={<ReactionTest />} />
           <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

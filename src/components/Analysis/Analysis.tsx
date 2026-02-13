@@ -44,10 +44,22 @@ const Analysis = () => {
                                 </button>
                             </div>
 
-                            <div className="grid grid-cols-3 gap-4 mb-6 shrink-0">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 shrink-0">
                                 <div className="bg-slate-800 p-4 rounded-xl">
                                     <div className="text-slate-400 text-sm">Duration</div>
                                     <div className="text-xl font-mono">{(selectedSession.duration / 60000).toFixed(1)} m</div>
+                                </div>
+                                <div className="bg-slate-800 p-4 rounded-xl">
+                                    <div className="text-slate-400 text-sm">Distance</div>
+                                    <div className="text-xl font-mono">{(selectedSession.distance_traveled || 0).toFixed(2)} km</div>
+                                </div>
+                                <div className="bg-slate-800 p-4 rounded-xl">
+                                    <div className="text-slate-400 text-sm">Coast Time</div>
+                                    <div className="text-xl font-mono">{((selectedSession.coast_time || 0) / 1000).toFixed(1)} s</div>
+                                </div>
+                                <div className="bg-slate-800 p-4 rounded-xl">
+                                    <div className="text-slate-400 text-sm">Efficiency</div>
+                                    <div className="text-xl font-mono">{(selectedSession.efficiency || 0).toFixed(2)} km/L</div>
                                 </div>
                                 <div className="bg-slate-800 p-4 rounded-xl">
                                     <div className="text-slate-400 text-sm">Score</div>

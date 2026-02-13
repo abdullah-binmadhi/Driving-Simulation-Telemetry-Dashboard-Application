@@ -9,6 +9,10 @@ export interface Session {
     duration: number;
     score: number;
     notes: string;
+    coast_time?: number;
+    fuel_used?: number;
+    efficiency?: number;
+    distance_traveled?: number;
 }
 
 interface SessionState {

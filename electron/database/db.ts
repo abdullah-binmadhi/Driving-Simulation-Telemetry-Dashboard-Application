@@ -26,7 +26,10 @@ export const initDatabase = () => {
       avg_speed REAL,
       top_speed REAL,
       score INTEGER,
-      notes TEXT
+      notes TEXT,
+      coast_time INTEGER DEFAULT 0,
+      fuel_used REAL DEFAULT 0,
+      efficiency REAL DEFAULT 0
     );
 
     CREATE TABLE IF NOT EXISTS telemetry (
@@ -66,6 +69,21 @@ export const initDatabase = () => {
   `;
 
   db.exec(schema);
+
+  // Migrations: Check if columns exist and add them if not
+  const tables = db.prepare("PRAGMA table_info(sessions)").all() as any[];
+  const columns = tables.map(c => c.name);
+
+  if (!columns.includes('coast_time')) {
+    db.exec('ALTER TABLE sessions ADD COLUMN coast_time INTEGER DEFAULT 0');
+  }
+  if (!columns.includes('fuel_used')) {
+    db.exec('ALTER TABLE sessions ADD COLUMN fuel_used REAL DEFAULT 0');
+  }
+  if (!columns.includes('efficiency')) {
+    db.exec('ALTER TABLE sessions ADD COLUMN efficiency REAL DEFAULT 0');
+  }
+
   console.log('Database initialized at:', dbPath);
 };
 

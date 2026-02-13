@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Gauge, Settings, Activity, BarChart2 } from 'lucide-react';
+import { Gauge, Settings, Activity, BarChart2, Timer } from 'lucide-react';
 
 const Sidebar = () => {
     return (
@@ -27,6 +27,16 @@ const Sidebar = () => {
                     title="Analysis"
                 >
                     <BarChart2 size={24} />
+                </NavLink>
+
+                <NavLink
+                    to="/reaction"
+                    className={({ isActive }: { isActive: boolean }) =>
+                        `p-3 mx-2 rounded-xl transition-all duration-200 hover:bg-slate-800 flex justify-center ${isActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' : 'text-slate-400 hover:text-white'}`
+                    }
+                    title="Reaction Test"
+                >
+                    <Timer size={24} />
                 </NavLink>
 
                 <NavLink
