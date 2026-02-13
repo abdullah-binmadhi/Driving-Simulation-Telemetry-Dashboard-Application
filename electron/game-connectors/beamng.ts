@@ -1,25 +1,29 @@
 import dgram from 'dgram';
 import { EventEmitter } from 'events';
 import { TelemetryData } from '../../src/types/telemetry.js';
-import { GameConnector } from '../connector-interface.js';
 
 export class BeamNGConnector extends EventEmitter {
     public readonly name = 'BeamNG.drive';
-    private socket: dgram.Socket;
+    private socket: dgram.Socket | null = null;
     private port: number;
     private isConnected: boolean = false;
 
     constructor(port: number = 4444) {
         super();
         this.port = port;
-        this.socket = dgram.createSocket('udp4');
     }
 
     start() {
+        if (this.socket) {
+            // Already running or not properly cleaned up
+            try { this.socket.close(); } catch (e) { /* ignore */ }
+        }
+
+        this.socket = dgram.createSocket('udp4');
+
         this.socket.on('error', (err) => {
             console.error(`BeamNG connector error:\n${err.stack}`);
-            this.socket.close();
-            this.isConnected = false;
+            this.stop(); // Use stop() to clean up
             this.emit('status', 'error');
         });
 
@@ -39,16 +43,30 @@ export class BeamNGConnector extends EventEmitter {
         });
 
         this.socket.on('listening', () => {
-            const address = this.socket.address();
-            console.log(`BeamNG connector listening ${address.address}:${address.port}`);
-            this.emit('status', 'listening');
+            const address = this.socket?.address();
+            if (address) {
+                console.log(`BeamNG connector listening ${address.address}:${address.port}`);
+                this.emit('status', 'listening');
+            }
         });
 
-        this.socket.bind(this.port);
+        try {
+            this.socket.bind(this.port);
+        } catch (e) {
+            console.error('Failed to bind BeamNG socket:', e);
+            this.emit('status', 'error');
+        }
     }
 
     stop() {
-        this.socket.close();
+        if (this.socket) {
+            try {
+                this.socket.close();
+            } catch (e) {
+                console.error('Error closing BeamNG socket:', e);
+            }
+            this.socket = null;
+        }
         this.isConnected = false;
         this.emit('status', 'disconnected');
     }
@@ -78,31 +96,25 @@ export class BeamNGConnector extends EventEmitter {
         //     int id;                 // 92-95
         // }
 
-        // Note: OutGauge is ~96 bytes. BeamNG might send slightly different depending on version, 
-        // but the core fields usually align.
-
         if (buffer.length < 96) {
             // Just a sanity check, though standard OutGauge is 96 bytes.
         }
 
-        const time = buffer.readUInt32LE(0);
+        // const time = buffer.readUInt32LE(0);
         // const car = buffer.slice(4, 8).toString();
         const gear = buffer.readInt8(10); // 0=R, 1=N, 2=1st... (LFS standard)
-        // BeamNG might map differently. Usually: 0=R, 1=N, 2=1...
-        // Let's normalize to: -1=R, 0=N, 1=1...
-        // If LFS standard: 0=R, 1=N, 2=1... -> map to -1, 0, 1...
+
         const normalizedGear = gear - 1;
 
-        const speed = buffer.readFloatLE(12); // m/s usually? Or km/h? OutGauge doc says m/s usually?
-        // BeamNG Lua usually sends m/s.
+        const speed = buffer.readFloatLE(12); // m/s usually? top speed of 300kmh is ~83m/s
+
         const speedKmh = speed * 3.6;
 
         const rpm = buffer.readFloatLE(16);
         const engTemp = buffer.readFloatLE(24);
         const fuel = buffer.readFloatLE(28);
-        // const oilTemp = buffer.readFloatLE(36);
 
-        const throttle = buffer.readFloatLE(48); // 0-1 (approx, scale might be 0-100 or 0-1)
+        const throttle = buffer.readFloatLE(48); // 0-1
         const brake = buffer.readFloatLE(52);    // 0-1
         const clutch = buffer.readFloatLE(56);   // 0-1
 
@@ -112,10 +124,10 @@ export class BeamNGConnector extends EventEmitter {
             speed: speedKmh,
             rpm: rpm,
             gear: normalizedGear,
-            throttle: throttle, // Verify range during testing
+            throttle: throttle,
             brake: brake,
             clutch: clutch,
-            steering: 0, // OutGauge doesn't include steering angle by default :(
+            steering: 0,
             gForceX: 0,
             gForceY: 0,
             gForceZ: 0,
