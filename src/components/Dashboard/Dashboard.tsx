@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
 import { useSettingsStore } from '../../stores/settingsStore';
 import { useTelemetryListener } from '../../hooks/useTelemetry';
-import Speedometer from './Speedometer';
+
 import RPMGauge from './RPMGauge';
 import LiveGraph from './LiveGraph';
 import TireStatus from './TireStatus';

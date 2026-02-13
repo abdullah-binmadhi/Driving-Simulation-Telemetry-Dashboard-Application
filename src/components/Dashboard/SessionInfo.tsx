@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Map, Cloud, Flag, Clock } from 'lucide-react';
 import { useSettingsStore } from '../../stores/settingsStore';
 

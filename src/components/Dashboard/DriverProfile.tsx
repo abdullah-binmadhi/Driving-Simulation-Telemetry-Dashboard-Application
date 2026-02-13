@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { User, Flag, Shield, Car } from 'lucide-react';
 import { useSettingsStore } from '../../stores/settingsStore';
 
