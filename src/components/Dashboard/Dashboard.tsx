@@ -19,6 +19,7 @@ import InputVisualizer from './InputVisualizer';
 import TrackMap from './TrackMap';
 import SessionStats from './SessionStats';
 import DataLogger from './DataLogger';
+import BehaviorAnalysis from './BehaviorAnalysis';
 
 const MAX_HISTORY = 100; // Keep last 100 points for graphing
 
@@ -93,6 +94,7 @@ const Dashboard = () => {
                         gForceY={data.gForceY}
                         maxG={2.5}
                     />
+                    <BehaviorAnalysis />
                     <DataLogger />
                 </div>
 

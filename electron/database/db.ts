@@ -56,6 +56,26 @@ export const initDatabase = () => {
       gForceZ REAL,
       fuel REAL,
       engineTemp REAL,
+      throttle_delta REAL DEFAULT 0,
+      brake_delta REAL DEFAULT 0,
+      steering_delta REAL DEFAULT 0,
+      speed_delta REAL DEFAULT 0,
+      gforce_combined REAL DEFAULT 0,
+      slip_angle_estimate REAL DEFAULT 0,
+      is_coasting INTEGER DEFAULT 0,
+      is_wots INTEGER DEFAULT 0,
+      is_braking INTEGER DEFAULT 0,
+      is_turning INTEGER DEFAULT 0,
+      jerk_x REAL DEFAULT 0,
+      jerk_y REAL DEFAULT 0,
+      distance_traveled REAL DEFAULT 0,
+      turn_radius REAL DEFAULT 0,
+      pedal_overlap REAL DEFAULT 0,
+      is_trail_braking INTEGER DEFAULT 0,
+      oversteer_correction INTEGER DEFAULT 0,
+      understeer_plough INTEGER DEFAULT 0,
+      coasting_time_pct REAL DEFAULT 0,
+      brake_bias_utilization REAL DEFAULT 0,
       FOREIGN KEY (session_id) REFERENCES sessions (id)
     );
 
@@ -88,6 +108,25 @@ export const initDatabase = () => {
   }
   if (!columns.includes('efficiency')) {
     db.exec('ALTER TABLE sessions ADD COLUMN efficiency REAL DEFAULT 0');
+  }
+
+  // Migrations for Telemetry table
+  const telemetryTables = db.prepare("PRAGMA table_info(telemetry)").all() as any[];
+  const telemetryColumns = telemetryTables.map(c => c.name);
+
+  const mlColumns = [
+    'throttle_delta', 'brake_delta', 'steering_delta', 'speed_delta',
+    'gforce_combined', 'slip_angle_estimate', 'is_coasting', 'is_wots',
+    'is_braking', 'is_turning', 'jerk_x', 'jerk_y', 'distance_traveled',
+    'turn_radius', 'pedal_overlap', 'is_trail_braking',
+    'oversteer_correction', 'understeer_plough', 'coasting_time_pct', 'brake_bias_utilization'
+  ];
+
+  for (const col of mlColumns) {
+    if (!telemetryColumns.includes(col)) {
+      const type = col.startsWith('is_') ? 'INTEGER DEFAULT 0' : 'REAL DEFAULT 0';
+      db.exec(`ALTER TABLE telemetry ADD COLUMN ${col} ${type}`);
+    }
   }
 
   console.log('Database initialized at:', dbPath);

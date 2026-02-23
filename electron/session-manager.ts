@@ -15,9 +15,11 @@ export class SessionManager extends EventEmitter {
     // Session Stats
     private sessionCoastTime = 0;
     private sessionDistance = 0;
+    private sessionStartTime = 0;
     private startFuel = 0;
     private lastFuel = 0;
     private lastTimestamp = 0;
+    private lastData: TelemetryData | null = null;
 
     constructor() {
         super();
@@ -31,9 +33,40 @@ export class SessionManager extends EventEmitter {
         }
 
         if (this.isRecording) {
+            // ML Feature Calculation
+            if (this.lastData && this.lastTimestamp > 0) {
+                const dt = (data.timestamp - this.lastTimestamp) / 1000;
+                if (dt > 0 && dt < 1) { // Sanity check for massive time jumps
+                    data.throttleDelta = (data.throttle - this.lastData.throttle) / dt;
+                    data.brakeDelta = (data.brake - this.lastData.brake) / dt;
+                    data.steeringDelta = (data.steering - this.lastData.steering) / dt;
+                    data.speedDelta = (data.speed - this.lastData.speed) / dt;
+                    data.jerkX = ((data.gForceX || 0) - (this.lastData.gForceX || 0)) / dt;
+                    data.jerkY = ((data.gForceY || 0) - (this.lastData.gForceY || 0)) / dt;
+                } else {
+                    data.throttleDelta = 0; data.brakeDelta = 0; data.steeringDelta = 0;
+                    data.speedDelta = 0; data.jerkX = 0; data.jerkY = 0;
+                }
+            } else {
+                data.throttleDelta = 0;
+                data.brakeDelta = 0;
+                data.steeringDelta = 0;
+                data.speedDelta = 0;
+                data.jerkX = 0;
+                data.jerkY = 0;
+            }
+
+            data.gforceCombined = Math.sqrt(Math.pow(data.gForceX || 0, 2) + Math.pow(data.gForceY || 0, 2));
+            data.slipAngleEstimate = 0; // Requires complex vehicle dynamics, leaving 0 for now
+            data.isCoasting = (data.throttle < 0.05 && data.brake < 0.05 && data.speed > 5) ? 1 : 0;
+            data.isWots = (data.throttle > 0.95) ? 1 : 0;
+            data.isBraking = (data.brake > 0.05) ? 1 : 0;
+            data.isTurning = (Math.abs(data.steering) > 0.05) ? 1 : 0;
+
+            this.lastData = { ...data }; // Copy for next frame comparison
             this.buffer.push(data);
 
-            // Stats Calculation
+            // Stats Calculation and Spatial Distance
             const now = data.timestamp;
             if (this.lastTimestamp > 0) {
                 const dt = (now - this.lastTimestamp) / 1000; // seconds
@@ -47,6 +80,23 @@ export class SessionManager extends EventEmitter {
                     }
                 }
             }
+
+            data.distanceTraveled = this.sessionDistance;
+
+            // Turn Radius = V^2 / Ac. Ac is LatG * 9.81
+            const velocityMS = data.speed / 3.6;
+            const latG = Math.abs(data.gForceX || 0) * 9.81;
+            data.turnRadius = latG > 0.1 ? (Math.pow(velocityMS, 2) / latG) : 0;
+
+            data.pedalOverlap = data.throttle * data.brake;
+            data.isTrailBraking = (data.brake > 0.05 && Math.abs(data.steering) > 0.1) ? 1 : 0;
+
+            // Behavioral States
+            data.oversteerCorrection = (Math.abs(data.steering) > 0.3 && Math.abs(data.gForceX || 0) > 0.5 && (Math.sign(data.steering) !== Math.sign(data.gForceX || 0))) ? 1 : 0;
+            data.understeerPlough = (Math.abs(data.steering) > 0.6 && Math.abs(data.gForceX || 0) < 0.4) ? 1 : 0;
+            data.coastingTimePct = this.sessionCoastTime > 0 ? (this.sessionCoastTime / (Date.now() - this.sessionStartTime)) * 100 : 0;
+            data.brakeBiasUtilization = (data.brake > 0) ? Math.min(1, data.brake / (velocityMS / 30 + 0.1)) : 0;
+
             this.lastTimestamp = now;
             this.lastFuel = data.fuel || 0;
             this.lastActivityTime = Date.now();
@@ -70,9 +120,11 @@ export class SessionManager extends EventEmitter {
         this.isRecording = true;
         this.sessionCoastTime = 0;
         this.sessionDistance = 0;
+        this.sessionStartTime = Date.now();
         this.startFuel = data.fuel || 0;
         this.lastFuel = this.startFuel;
         this.lastTimestamp = data.timestamp;
+        this.lastData = null; // Reset starting data
 
         try {
             const stmt = db.prepare(`
@@ -159,10 +211,18 @@ export class SessionManager extends EventEmitter {
         const insert = db.prepare(`
       INSERT INTO telemetry (
         session_id, timestamp, speed, rpm, gear, throttle, brake, steering, 
-        gForceX, gForceY, gForceZ, fuel, engineTemp
+        gForceX, gForceY, gForceZ, fuel, engineTemp,
+        throttle_delta, brake_delta, steering_delta, speed_delta,
+        gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
+        jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
+        oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization
       ) VALUES (
         @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @steering,
-        @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp
+        @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
+        @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
+        @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
+        @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
+        @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization
       )
     `);
 
@@ -181,7 +241,27 @@ export class SessionManager extends EventEmitter {
                     gForceY: row.gForceY || 0,
                     gForceZ: row.gForceZ || 0,
                     fuel: row.fuel || 0,
-                    engineTemp: row.engineTemp || 0
+                    engineTemp: row.engineTemp || 0,
+                    throttle_delta: row.throttleDelta || 0,
+                    brake_delta: row.brakeDelta || 0,
+                    steering_delta: row.steeringDelta || 0,
+                    speed_delta: row.speedDelta || 0,
+                    gforce_combined: row.gforceCombined || 0,
+                    slip_angle_estimate: row.slipAngleEstimate || 0,
+                    is_coasting: row.isCoasting || 0,
+                    is_wots: row.isWots || 0,
+                    is_braking: row.isBraking || 0,
+                    is_turning: row.isTurning || 0,
+                    jerk_x: row.jerkX || 0,
+                    jerk_y: row.jerkY || 0,
+                    distance_traveled: row.distanceTraveled || 0,
+                    turn_radius: row.turnRadius || 0,
+                    pedal_overlap: row.pedalOverlap || 0,
+                    is_trail_braking: row.isTrailBraking || 0,
+                    oversteer_correction: row.oversteerCorrection || 0,
+                    understeer_plough: row.understeerPlough || 0,
+                    coasting_time_pct: row.coastingTimePct || 0,
+                    brake_bias_utilization: row.brakeBiasUtilization || 0
                 });
             }
         });

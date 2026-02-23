@@ -44,4 +44,32 @@ export interface TelemetryData {
     posX?: number;
     posY?: number;
     posZ?: number;
+
+    // Derived Machine Learning Features (Calculated in backend)
+    throttleDelta?: number;
+    brakeDelta?: number;
+    steeringDelta?: number;
+    speedDelta?: number;
+    gforceCombined?: number;
+    slipAngleEstimate?: number;
+
+    // Advanced Kinematics & Driver Behavior
+    jerkX?: number;             // Rate of change of Lateral G (Smoothness)
+    jerkY?: number;             // Rate of change of Longitudinal G
+    distanceTraveled?: number;   // Cumulative meters in the session
+    turnRadius?: number;         // Estimated corner radius based on speed & Lat G
+    pedalOverlap?: number;       // Throttle * Brake 
+
+    // Categorical ML Flags (1 or 0)
+    isCoasting?: number;
+    isWots?: number;
+    isBraking?: number;
+    isTurning?: number;
+    isTrailBraking?: number;
+
+    // Complex Driver Behavioral States
+    oversteerCorrection?: number;
+    understeerPlough?: number;
+    coastingTimePct?: number;
+    brakeBiasUtilization?: number;
 }
