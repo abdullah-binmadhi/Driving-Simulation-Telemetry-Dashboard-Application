@@ -68,11 +68,31 @@ const createWindow = () => {
 
             if (data.length === 0) return { success: false, message: 'No data found' };
 
-            // Format timestamps for easier reading in CSV
+            // Format timestamps for easier reading in CSV and clean up columns
             const formattedData = data.map(row => {
                 const date = new Date(Number(row.timestamp));
                 const timeStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}.${date.getMilliseconds().toString().padStart(3, '0')}`;
-                return { ...row, timestamp: timeStr };
+
+                // Remove unwanted columns
+                const { session_id, id, ...cleanRow } = row;
+
+                // Rename columns
+                const renamedRow: Record<string, any> = { ...cleanRow, timestamp: timeStr };
+                const renameMap: Record<string, string> = {
+                    'pos_x': 'x', 'pos_y': 'y', 'pos_z': 'z',
+                    'is_coasting': 'coasting', 'is_wots': 'wots',
+                    'is_braking': 'braking', 'is_turning': 'turning',
+                    'is_trail_braking': 'trail_braking'
+                };
+
+                for (const [oldKey, newKey] of Object.entries(renameMap)) {
+                    if (oldKey in renamedRow) {
+                        renamedRow[newKey] = renamedRow[oldKey];
+                        delete renamedRow[oldKey];
+                    }
+                }
+
+                return renamedRow;
             });
 
             // Generate CSV manually
