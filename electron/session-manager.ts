@@ -215,14 +215,16 @@ export class SessionManager extends EventEmitter {
         throttle_delta, brake_delta, steering_delta, speed_delta,
         gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
         jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
-        oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization
+        oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization,
+        damage_engine, damage_transmission, damage_suspension, damage_brakes, damage_aero
       ) VALUES (
         @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @steering,
         @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
         @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
         @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
         @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
-        @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization
+        @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization,
+        @damage_engine, @damage_transmission, @damage_suspension, @damage_brakes, @damage_aero
       )
     `);
 
@@ -261,7 +263,12 @@ export class SessionManager extends EventEmitter {
                     oversteer_correction: row.oversteerCorrection || 0,
                     understeer_plough: row.understeerPlough || 0,
                     coasting_time_pct: row.coastingTimePct || 0,
-                    brake_bias_utilization: row.brakeBiasUtilization || 0
+                    brake_bias_utilization: row.brakeBiasUtilization || 0,
+                    damage_engine: row.carDamage?.engine ?? 1,
+                    damage_transmission: row.carDamage?.transmission ?? 1,
+                    damage_suspension: row.carDamage?.suspension ?? 1,
+                    damage_brakes: row.carDamage?.brakes ?? 1,
+                    damage_aero: row.carDamage?.aero ?? 1
                 });
             }
         });

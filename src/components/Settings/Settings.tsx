@@ -39,6 +39,38 @@ const Settings = () => {
                             <p className="text-xs text-slate-500">Generates fake telemetry data for testing the dashboard without a game.</p>
                         </div>
 
+                        {/* Transmission Type Toggle (Simulation Only) */}
+                        {game.simulationEnabled && (
+                            <div className="space-y-2 mt-4 p-4 bg-slate-900 border border-slate-700/50 rounded-lg">
+                                <label className="text-sm text-slate-400">Simulation Transmission Type</label>
+                                <div className="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-lg border border-slate-700">
+                                    <button
+                                        onClick={async () => {
+                                            updateGameSettings({ transmissionType: 'automatic' });
+                                            if (window.electronAPI && window.electronAPI.updateSimulationTransmission) {
+                                                await window.electronAPI.updateSimulationTransmission('automatic');
+                                            }
+                                        }}
+                                        className={`px-4 py-1.5 rounded-md text-sm transition-colors ${game.transmissionType !== 'manual' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+                                    >
+                                        Automatic
+                                    </button>
+                                    <button
+                                        onClick={async () => {
+                                            updateGameSettings({ transmissionType: 'manual' });
+                                            if (window.electronAPI && window.electronAPI.updateSimulationTransmission) {
+                                                await window.electronAPI.updateSimulationTransmission('manual');
+                                            }
+                                        }}
+                                        className={`px-4 py-1.5 rounded-md text-sm transition-colors ${game.transmissionType === 'manual' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+                                    >
+                                        Manual (Includes Clutch)
+                                    </button>
+                                </div>
+                                <p className="text-xs text-slate-500 mt-2">Manual mode simulates clutch engagement during shifts.</p>
+                            </div>
+                        )}
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
                             <div className="space-y-2">
                                 <label className="text-sm text-slate-400">BeamNG.drive OutGauge Port</label>

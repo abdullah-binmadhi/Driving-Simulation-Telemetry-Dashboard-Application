@@ -177,6 +177,14 @@ ipcMain.handle('toggle-simulation-mode', (_, enabled: boolean) => {
     return { success: false, message: 'Connection manager not initialized' };
 });
 
+ipcMain.handle('update-simulation-transmission', (_, type: 'automatic' | 'manual') => {
+    if (connectionManager) {
+        connectionManager.setSimulationTransmission(type);
+        return { success: true };
+    }
+    return { success: false, message: 'Connection manager not initialized' };
+});
+
 // Manual Session Control IPC
 ipcMain.handle('start-session', () => {
     if (sessionManager) {

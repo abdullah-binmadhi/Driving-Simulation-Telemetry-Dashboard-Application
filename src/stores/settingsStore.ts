@@ -5,6 +5,7 @@ interface GameSettings {
     beamngPort: number;
     assettoCorsaEnabled: boolean;
     simulationEnabled: boolean;
+    transmissionType: 'automatic' | 'manual';
 }
 
 interface AppSettings {
@@ -43,6 +44,7 @@ export const useSettingsStore = create<SettingsState>()(
                 beamngPort: 4444,
                 assettoCorsaEnabled: true,
                 simulationEnabled: false,
+                transmissionType: 'automatic',
             },
             app: {
                 theme: 'dark',

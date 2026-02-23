@@ -77,4 +77,10 @@ export class ConnectionManager extends EventEmitter {
         this.mockConnector.stop();
         this.connectors.forEach(c => c.stop());
     }
+
+    setSimulationTransmission(type: 'automatic' | 'manual') {
+        if (this.mockConnector) {
+            this.mockConnector.setTransmissionType(type);
+        }
+    }
 }

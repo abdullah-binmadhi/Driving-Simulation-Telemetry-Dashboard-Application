@@ -9,6 +9,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
 
     // Physics State
     private time = 0;
+    private transmissionType: 'automatic' | 'manual' = 'automatic';
     private speed = 0;
     private gear = 1;
     private rpm = 1000;
@@ -50,6 +51,11 @@ export class MockConnector extends EventEmitter implements GameConnector {
         }
         this.emit('status', 'disconnected');
         console.log('Simulation Mode stopped');
+    }
+
+    setTransmissionType(type: 'automatic' | 'manual') {
+        this.transmissionType = type;
+        console.log(`[Mock] Transmission set to: ${type}`);
     }
 
     private emitNextFrame() {
@@ -114,7 +120,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
 
         this.speed += acceleration * dt; // speed in m/s
 
-        // RPM and Gear Logic (Simple automatic transmission)
+        // RPM and Gear Logic
         let clutch = 0;
         const speedKmh = this.speed * 3.6;
 
@@ -125,16 +131,40 @@ export class MockConnector extends EventEmitter implements GameConnector {
         // Calculate theoretical RPM based on wheel speed and current gear
         let targetRpm = Math.max(800, (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference);
 
-        // Auto shift up
-        if (targetRpm > 7000 && this.gear < 6) {
-            this.gear++;
-            clutch = 1.0; // Spike clutch on shift
-            targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
-        }
-        // Auto shift down
-        else if (targetRpm < 3000 && this.gear > 1 && brake > 0.1) {
-            this.gear--;
-            clutch = 1.0;
+        if (this.transmissionType === 'automatic') {
+            // Auto shift up
+            if (targetRpm > 7000 && this.gear < 6) {
+                this.gear++;
+                clutch = 1.0; // Spike clutch on automatic shift
+                targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
+            }
+            // Auto shift down
+            else if (targetRpm < 3000 && this.gear > 1 && brake > 0.1) {
+                this.gear--;
+                clutch = 1.0;
+                targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
+            }
+        } else {
+            // Manual Transmission Model
+            // Simulate the driver shifting gears based on speed
+            const shiftingWindow = loopTime;
+
+            // Hardcoded optimal shifting points based on track loop
+            const isShiftingUp = (shiftingWindow > 3.0 && shiftingWindow < 3.3) || (shiftingWindow > 6.0 && shiftingWindow < 6.3);
+            const isShiftingDown = (shiftingWindow > 14.5 && shiftingWindow < 14.8) || (shiftingWindow > 15.5 && shiftingWindow < 15.8);
+
+            if (isShiftingUp || isShiftingDown) {
+                clutch = 1.0; // Fully depressed
+                throttleTarget = 0.0; // Lift off throttle safely
+
+                // Do the physical gear change halfway through the clutch press
+                if (isShiftingUp && this.gear < 6 && targetRpm > 5000) {
+                    this.gear++;
+                } else if (isShiftingDown && this.gear > 1 && targetRpm < 5000) {
+                    this.gear--;
+                }
+            }
+
             targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
         }
 
@@ -200,7 +230,13 @@ export class MockConnector extends EventEmitter implements GameConnector {
             bestLap: this.bestLap,
             lastLap: this.lastLap,
 
-            carDamage: { engine: 0, transmission: 0, suspension: 0, brakes: 0, aero: 0 },
+            carDamage: {
+                engine: Math.max(0, 1.0 - (this.distanceTraveled * 0.00001) - (this.engineTemp > 110 ? 0.001 : 0)), // High temp wears engine
+                transmission: Math.max(0, 1.0 - (this.distanceTraveled * 0.000005) - (clutch > 0.8 && throttle > 0.8 ? 0.0005 : 0)), // Bad shifts
+                suspension: Math.max(0, 1.0 - (this.distanceTraveled * 0.000002) - (Math.abs(gForceLat) > 1.5 ? 0.0001 : 0)), // Hard cornering
+                brakes: Math.max(0, 1.0 - (this.distanceTraveled * 0.000015) - (brake > 0.8 ? 0.0002 : 0)), // Hard braking
+                aero: Math.max(0, 1.0 - (this.distanceTraveled * 0.000001)) // General wear
+            },
             fuel: 50 - (this.distanceTraveled / 1000), // slowly drains
             engineTemp: this.engineTemp,
 

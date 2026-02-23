@@ -10,6 +10,7 @@ export interface IElectronAPI {
     toggleSimulationMode: (enabled: boolean) => Promise<{ success: boolean; message?: string }>;
     startSession: () => Promise<{ success: boolean; message?: string }>;
     stopSession: () => Promise<{ success: boolean; sessionId?: number; message?: string }>;
+    updateSimulationTransmission: (type: 'automatic' | 'manual') => Promise<{ success: boolean; message?: string }>;
 }
 
 declare global {
