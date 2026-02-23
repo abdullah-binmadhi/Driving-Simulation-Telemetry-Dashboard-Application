@@ -4,12 +4,17 @@ import { useSettingsStore } from '../../stores/settingsStore';
 import { useTelemetryListener } from '../../hooks/useTelemetry';
 
 import RPMGauge from './RPMGauge';
-import LiveGraph from './LiveGraph';
 import TireStatus from './TireStatus';
 import LapTiming from './LapTiming';
 import CarHealth from './CarHealth';
 import DriverProfile from './DriverProfile';
 import SessionInfo from './SessionInfo';
+
+// New Enhancements
+import FrictionCircle from './FrictionCircle';
+import LiveMultiGraph from './LiveMultiGraph';
+import InputVisualizer from './InputVisualizer';
+
 const MAX_HISTORY = 100; // Keep last 100 points for graphing
 
 const Dashboard = () => {
@@ -17,13 +22,23 @@ const Dashboard = () => {
     useTelemetryListener();
 
     const { data, isConnected, activeGame } = useTelemetryStore();
-    const [speedHistory, setSpeedHistory] = useState<{ timestamp: number, value: number }[]>([]);
+
+    // Store history for the multi-trace graph
+    const [telemetryHistory, setTelemetryHistory] = useState<{
+        timestamp: number, speed: number, rpm: number, throttle: number, brake: number
+    }[]>([]);
 
     // Update history when new data arrives
     useEffect(() => {
         if (data) {
-            setSpeedHistory(prev => {
-                const newHistory = [...prev, { timestamp: data.timestamp, value: data.speed }];
+            setTelemetryHistory(prev => {
+                const newHistory = [...prev, {
+                    timestamp: data.timestamp,
+                    speed: data.speed,
+                    rpm: data.rpm,
+                    throttle: data.throttle * 100, // convert to %
+                    brake: data.brake * 100       // convert to %
+                }];
                 if (newHistory.length > MAX_HISTORY) {
                     return newHistory.slice(newHistory.length - MAX_HISTORY);
                 }
@@ -68,32 +83,27 @@ const Dashboard = () => {
                 <div className="xl:col-span-3 flex flex-col gap-6 order-2 xl:order-1">
                     <DriverProfile />
                     <SessionInfo />
+                    {/* Add Friction Circle below Session Info */}
+                    <FrictionCircle
+                        gForceX={data.gForceX}
+                        gForceY={data.gForceY}
+                        maxG={2.5}
+                    />
                 </div>
 
                 {/* CENTER COLUMN: Main Gauges (6 cols) */}
                 <div className="xl:col-span-6 flex flex-col gap-6 order-1 xl:order-2">
-
-
                     <RPMGauge rpm={data.rpm} gear={data.gear} />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <CarHealth damage={data.carDamage} />
-                        <div className="flex flex-col gap-4 justify-between h-full">
-                            <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex-grow flex flex-col justify-center">
-                                <span className="text-slate-400 text-xs uppercase mb-2">Throttle</span>
-                                <div className="h-4 bg-slate-900 rounded-full overflow-hidden w-full">
-                                    <div className="h-full bg-green-500 transition-all duration-75" style={{ width: `${data.throttle * 100}%` }}></div>
-                                </div>
-                                <span className="text-right text-xs font-mono text-green-400 mt-1">{(data.throttle * 100).toFixed(0)}%</span>
-                            </div>
-                            <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex-grow flex flex-col justify-center">
-                                <span className="text-slate-400 text-xs uppercase mb-2">Brake</span>
-                                <div className="h-4 bg-slate-900 rounded-full overflow-hidden w-full">
-                                    <div className="h-full bg-red-500 transition-all duration-75" style={{ width: `${data.brake * 100}%` }}></div>
-                                </div>
-                                <span className="text-right text-xs font-mono text-red-400 mt-1">{(data.brake * 100).toFixed(0)}%</span>
-                            </div>
-                        </div>
+                        {/* Replace simple bars with full Input Visualizer */}
+                        <InputVisualizer
+                            steering={data.steering}
+                            throttle={data.throttle}
+                            brake={data.brake}
+                            clutch={data.clutch}
+                        />
                     </div>
                 </div>
 
@@ -105,14 +115,6 @@ const Dashboard = () => {
                         <h2 className="text-lg font-semibold mb-4 text-slate-300">Vehicle Dynamics</h2>
                         <div className="space-y-4">
                             <div className="flex justify-between border-b border-slate-800 pb-2">
-                                <span className="text-slate-500">G-Force X (Lat)</span>
-                                <span className="font-mono">{data.gForceX.toFixed(2)} G</span>
-                            </div>
-                            <div className="flex justify-between border-b border-slate-800 pb-2">
-                                <span className="text-slate-500">G-Force Y (Long)</span>
-                                <span className="font-mono">{data.gForceY.toFixed(2)} G</span>
-                            </div>
-                            <div className="flex justify-between border-b border-slate-800 pb-2">
                                 <span className="text-slate-500">Fuel</span>
                                 <span className="font-mono">{(data.fuel || 0).toFixed(1)} %</span>
                             </div>
@@ -120,13 +122,17 @@ const Dashboard = () => {
                                 <span className="text-slate-500">Engine Temp</span>
                                 <span className="font-mono">{(data.engineTemp || 0).toFixed(0)} °C</span>
                             </div>
+                            <div className="flex justify-between border-b border-slate-800 pb-2">
+                                <span className="text-slate-500">Oil Temp</span>
+                                <span className="font-mono">{(data.oilTemp || 0).toFixed(0)} °C</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Live Graph covers full width at bottom */}
+                {/* BOTTOM ROW: Multi-Trace Live Graph */}
                 <div className="col-span-1 xl:col-span-12 order-4">
-                    <LiveGraph data={speedHistory} title="Speed Over Time" />
+                    <LiveMultiGraph data={telemetryHistory} title="Telemetry Traces" />
                 </div>
             </div>
         </div>
