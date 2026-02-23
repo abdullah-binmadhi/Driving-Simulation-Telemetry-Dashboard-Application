@@ -269,7 +269,4 @@ export class MockConnector extends EventEmitter implements GameConnector {
 
         this.emit('data', frame);
     }
-
-        this.emit('data', frame);
-    }
 }
