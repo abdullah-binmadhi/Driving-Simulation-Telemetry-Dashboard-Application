@@ -9,6 +9,8 @@ export class SessionManager extends EventEmitter {
     private readonly BATCH_SIZE = 60; // Insert every ~1 second if 60Hz
     private lastActivityTime: number = Date.now();
     private isRecording = false;
+    private manualStartRequested = false;
+
 
     // Session Stats
     private sessionCoastTime = 0;
@@ -22,9 +24,10 @@ export class SessionManager extends EventEmitter {
     }
 
     public processData(data: TelemetryData) {
-        // Auto-start session if moving and not recording
-        if (!this.isRecording && data.speed > 5) {
+        // Start session only if manually requested and we have valid data
+        if (!this.isRecording && this.manualStartRequested && data.speed > -1) {
             this.startSession(data);
+            this.manualStartRequested = false;
         }
 
         if (this.isRecording) {
@@ -56,6 +59,12 @@ export class SessionManager extends EventEmitter {
         }
     }
 
+    public beginManualSession() {
+        if (!this.isRecording) {
+            this.manualStartRequested = true;
+        }
+    }
+
     private startSession(data: TelemetryData) {
         console.log('Starting new session...');
         this.isRecording = true;
@@ -82,8 +91,9 @@ export class SessionManager extends EventEmitter {
     }
 
     public stopSession() {
-        if (!this.isRecording || !this.currentSessionId) return;
+        if (!this.isRecording || !this.currentSessionId) return null;
 
+        const id = this.currentSessionId;
         console.log('Stopping session...');
         this.flushBuffer();
 
@@ -135,6 +145,7 @@ export class SessionManager extends EventEmitter {
 
         this.isRecording = false;
         this.currentSessionId = null;
+        return id;
     }
 
     private flushBuffer() {

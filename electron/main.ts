@@ -68,9 +68,16 @@ const createWindow = () => {
 
             if (data.length === 0) return { success: false, message: 'No data found' };
 
+            // Format timestamps for easier reading in CSV
+            const formattedData = data.map(row => {
+                const date = new Date(Number(row.timestamp));
+                const timeStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}.${date.getMilliseconds().toString().padStart(3, '0')}`;
+                return { ...row, timestamp: timeStr };
+            });
+
             // Generate CSV manually
-            const headers = Object.keys(data[0]).join(',');
-            const rows = data.map(row => Object.values(row).join(','));
+            const headers = Object.keys(formattedData[0]).join(',');
+            const rows = formattedData.map(row => Object.values(row).join(','));
             const csvContent = [headers, ...rows].join('\n');
 
             await fs.promises.writeFile(filePath, csvContent, 'utf-8');
@@ -148,6 +155,23 @@ ipcMain.handle('toggle-simulation-mode', (_, enabled: boolean) => {
         return { success: true };
     }
     return { success: false, message: 'Connection manager not initialized' };
+});
+
+// Manual Session Control IPC
+ipcMain.handle('start-session', () => {
+    if (sessionManager) {
+        sessionManager.beginManualSession();
+        return { success: true };
+    }
+    return { success: false, message: 'Session manager not initialized' };
+});
+
+ipcMain.handle('stop-session', () => {
+    if (sessionManager) {
+        const id = sessionManager.stopSession();
+        return { success: true, sessionId: id };
+    }
+    return { success: false, message: 'Session manager not initialized' };
 });
 
 // In this file you can include the rest of your app's specific main process

@@ -8,6 +8,8 @@ export interface IElectronAPI {
     getSessionTelemetry: (sessionId: number) => Promise<any[]>;
     exportSessionCSV: (sessionId: number) => Promise<{ success: boolean; message: string }>;
     toggleSimulationMode: (enabled: boolean) => Promise<{ success: boolean; message?: string }>;
+    startSession: () => Promise<{ success: boolean; message?: string }>;
+    stopSession: () => Promise<{ success: boolean; sessionId?: number; message?: string }>;
 }
 
 declare global {
