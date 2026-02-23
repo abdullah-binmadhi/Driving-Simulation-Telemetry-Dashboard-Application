@@ -15,6 +15,11 @@ import FrictionCircle from './FrictionCircle';
 import LiveMultiGraph from './LiveMultiGraph';
 import InputVisualizer from './InputVisualizer';
 
+// Research Enhancements
+import TrackMap from './TrackMap';
+import SessionStats from './SessionStats';
+import DataLogger from './DataLogger';
+
 const MAX_HISTORY = 100; // Keep last 100 points for graphing
 
 const Dashboard = () => {
@@ -69,8 +74,8 @@ const Dashboard = () => {
 
     return (
         <div className="p-4 h-full flex flex-col gap-4">
-            <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">Live Dashboard</h1>
+            <div className="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800 shadow-sm">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Research Telemetry</h1>
                 <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                     <span className="text-green-500 font-medium">{activeGame} Connected</span>
@@ -79,25 +84,24 @@ const Dashboard = () => {
 
             <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
 
-                {/* LEFT COLUMN: Driver & Session Info (3 cols) */}
-                <div className="xl:col-span-3 flex flex-col gap-6 order-2 xl:order-1">
+                {/* LEFT COLUMN (3 cols) */}
+                <div className="xl:col-span-3 flex flex-col gap-4 order-2 xl:order-1">
                     <DriverProfile />
                     <SessionInfo />
-                    {/* Add Friction Circle below Session Info */}
                     <FrictionCircle
                         gForceX={data.gForceX}
                         gForceY={data.gForceY}
                         maxG={2.5}
                     />
+                    <DataLogger />
                 </div>
 
-                {/* CENTER COLUMN: Main Gauges (6 cols) */}
-                <div className="xl:col-span-6 flex flex-col gap-6 order-1 xl:order-2">
+                {/* CENTER COLUMN (6 cols) */}
+                <div className="xl:col-span-6 flex flex-col gap-4 order-1 xl:order-2">
                     <RPMGauge rpm={data.rpm} gear={data.gear} />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <CarHealth damage={data.carDamage} />
-                        {/* Replace simple bars with full Input Visualizer */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <TrackMap />
                         <InputVisualizer
                             steering={data.steering}
                             throttle={data.throttle}
@@ -107,32 +111,17 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* RIGHT COLUMN: Telemetry Metrics (3 cols) */}
-                <div className="xl:col-span-3 flex flex-col gap-6 order-3">
+                {/* RIGHT COLUMN (3 cols) */}
+                <div className="xl:col-span-3 flex flex-col gap-4 order-3">
+                    <SessionStats />
                     <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
                     <TireStatus temps={data.tireTemp} wear={data.tireWear} />
-                    <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow">
-                        <h2 className="text-lg font-semibold mb-4 text-slate-300">Vehicle Dynamics</h2>
-                        <div className="space-y-4">
-                            <div className="flex justify-between border-b border-slate-800 pb-2">
-                                <span className="text-slate-500">Fuel</span>
-                                <span className="font-mono">{(data.fuel || 0).toFixed(1)} %</span>
-                            </div>
-                            <div className="flex justify-between border-b border-slate-800 pb-2">
-                                <span className="text-slate-500">Engine Temp</span>
-                                <span className="font-mono">{(data.engineTemp || 0).toFixed(0)} °C</span>
-                            </div>
-                            <div className="flex justify-between border-b border-slate-800 pb-2">
-                                <span className="text-slate-500">Oil Temp</span>
-                                <span className="font-mono">{(data.oilTemp || 0).toFixed(0)} °C</span>
-                            </div>
-                        </div>
-                    </div>
+                    <CarHealth damage={data.carDamage} />
                 </div>
 
-                {/* BOTTOM ROW: Multi-Trace Live Graph */}
+                {/* BOTTOM ROW (12 cols) */}
                 <div className="col-span-1 xl:col-span-12 order-4">
-                    <LiveMultiGraph data={telemetryHistory} title="Telemetry Traces" />
+                    <LiveMultiGraph data={telemetryHistory} title="Real-time Telemetry Traces" />
                 </div>
             </div>
         </div>
