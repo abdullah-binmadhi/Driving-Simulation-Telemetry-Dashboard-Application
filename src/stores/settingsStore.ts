@@ -6,6 +6,7 @@ interface GameSettings {
     assettoCorsaEnabled: boolean;
     simulationEnabled: boolean;
     transmissionType: 'automatic' | 'manual';
+    drivingBehavior: 'Drunk' | 'High' | 'Reckless' | 'Normal' | 'Slow' | 'New driver' | 'Professional';
 }
 
 interface AppSettings {
@@ -45,6 +46,7 @@ export const useSettingsStore = create<SettingsState>()(
                 assettoCorsaEnabled: true,
                 simulationEnabled: false,
                 transmissionType: 'automatic',
+                drivingBehavior: 'Normal',
             },
             app: {
                 theme: 'dark',

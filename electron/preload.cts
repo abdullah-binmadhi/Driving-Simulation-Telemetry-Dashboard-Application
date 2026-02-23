@@ -21,4 +21,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     startSession: () => ipcRenderer.invoke('start-session'),
     stopSession: () => ipcRenderer.invoke('stop-session'),
     updateSimulationTransmission: (type: 'automatic' | 'manual') => ipcRenderer.invoke('update-simulation-transmission', type),
+    updateSimulationBehavior: (behavior: string) => ipcRenderer.invoke('update-simulation-behavior', behavior),
 });

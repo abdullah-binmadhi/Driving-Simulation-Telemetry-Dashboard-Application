@@ -83,4 +83,10 @@ export class ConnectionManager extends EventEmitter {
             this.mockConnector.setTransmissionType(type);
         }
     }
+
+    setSimulationBehavior(behavior: 'Drunk' | 'High' | 'Reckless' | 'Normal' | 'Slow' | 'New driver' | 'Professional') {
+        if (this.mockConnector) {
+            this.mockConnector.setDrivingBehavior(behavior);
+        }
+    }
 }

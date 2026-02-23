@@ -8,11 +8,18 @@ const Layout = () => {
 
     // Sync simulation mode with backend on startup
     useEffect(() => {
-        if (window.electronAPI && window.electronAPI.toggleSimulationMode) {
-            console.log('Syncing Simulation Mode:', game.simulationEnabled);
-            window.electronAPI.toggleSimulationMode(game.simulationEnabled);
+        if (window.electronAPI) {
+            if (window.electronAPI.toggleSimulationMode) {
+                window.electronAPI.toggleSimulationMode(game.simulationEnabled);
+            }
+            if (window.electronAPI.updateSimulationTransmission) {
+                window.electronAPI.updateSimulationTransmission(game.transmissionType);
+            }
+            if (window.electronAPI.updateSimulationBehavior) {
+                window.electronAPI.updateSimulationBehavior(game.drivingBehavior);
+            }
         }
-    }, [game.simulationEnabled]); // Re-sync if it changes (redundant with toggle but safe)
+    }, [game.simulationEnabled, game.transmissionType, game.drivingBehavior]);
 
     return (
         <div className="flex h-screen bg-slate-950 text-white overflow-hidden font-sans">

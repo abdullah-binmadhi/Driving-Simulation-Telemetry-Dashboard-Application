@@ -10,6 +10,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
     // Physics State
     private time = 0;
     private transmissionType: 'automatic' | 'manual' = 'automatic';
+    private drivingBehavior: 'Drunk' | 'High' | 'Reckless' | 'Normal' | 'Slow' | 'New driver' | 'Professional' = 'Normal';
     private speed = 0;
     private gear = 1;
     private rpm = 1000;
@@ -25,6 +26,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
     private posX = 0;
     private posZ = 0;
     private heading = 0;
+    private clutchTimer = 0;
 
     constructor() {
         super();
@@ -58,6 +60,11 @@ export class MockConnector extends EventEmitter implements GameConnector {
         console.log(`[Mock] Transmission set to: ${type}`);
     }
 
+    setDrivingBehavior(behavior: 'Drunk' | 'High' | 'Reckless' | 'Normal' | 'Slow' | 'New driver' | 'Professional') {
+        this.drivingBehavior = behavior;
+        console.log(`[Mock] Driving behavior set to: ${behavior}`);
+    }
+
     private emitNextFrame() {
         const dt = 1 / 60; // 60 FPS
         this.time += dt;
@@ -70,109 +77,135 @@ export class MockConnector extends EventEmitter implements GameConnector {
         let brakeTarget = 0;
         let steeringTarget = 0;
 
+        // Base line pathing (Professional/Normal)
         if (loopTime < 5) {
-            // Straight: 100% throttle
             throttleTarget = 1.0;
             brakeTarget = 0.0;
             steeringTarget = 0.0;
         } else if (loopTime < 7) {
-            // Heavy Braking zone into a corner
             throttleTarget = 0.0;
-            brakeTarget = 0.8 + (Math.sin(this.time * 5) * 0.05); // slight modulate
+            brakeTarget = 0.8;
             steeringTarget = 0.0;
         } else if (loopTime < 11) {
-            // Trail braking into a right corner
-            throttleTarget = (loopTime - 7) * 0.1; // slow throttle build
-            brakeTarget = Math.max(0, 0.5 - (loopTime - 7) * 0.2); // trailing off
-            steeringTarget = Math.min(1.0, (loopTime - 7) * 0.5); // turning right
+            throttleTarget = (loopTime - 7) * 0.1;
+            brakeTarget = Math.max(0, 0.5 - (loopTime - 7) * 0.2);
+            steeringTarget = Math.min(1.0, (loopTime - 7) * 0.5);
         } else if (loopTime < 14) {
-            // Short straight
             throttleTarget = 1.0;
             brakeTarget = 0.0;
-            steeringTarget = Math.max(0, 1.0 - (loopTime - 11) * 0.5); // returning to center
+            steeringTarget = Math.max(0, 1.0 - (loopTime - 11) * 0.5);
         } else if (loopTime < 16) {
-            // Braking into left corner
             throttleTarget = 0.0;
             brakeTarget = 0.9;
             steeringTarget = 0.0;
         } else {
-            // Long left corner exit
             throttleTarget = Math.min(1.0, (loopTime - 16) * 0.25);
             brakeTarget = 0.0;
-            steeringTarget = -Math.min(1.0, (loopTime - 16) * 0.4); // turning left
+            steeringTarget = -Math.min(1.0, (loopTime - 16) * 0.4);
         }
 
-        // Add micro-adjustments for realism
-        const throttle = Math.max(0, Math.min(1, throttleTarget + Math.sin(this.time * 12) * 0.02));
-        const brake = Math.max(0, Math.min(1, brakeTarget + Math.cos(this.time * 8) * 0.01));
-        const steering = Math.max(-1, Math.min(1, steeringTarget + Math.sin(this.time * 15) * 0.02));
+        // Apply Behavior Modifications
+        let noiseLevel = 0.02;
+        let performanceMultiplier = 1.0;
+        let healthDamageRate = 1.0;
+
+        switch (this.drivingBehavior) {
+            case 'Drunk':
+                noiseLevel = 0.15;
+                performanceMultiplier = 0.7;
+                healthDamageRate = 3.0;
+                break;
+            case 'High':
+                noiseLevel = 0.08;
+                performanceMultiplier = 0.8;
+                healthDamageRate = 1.5;
+                break;
+            case 'Reckless':
+                noiseLevel = 0.05;
+                throttleTarget = Math.min(1.0, throttleTarget * 1.2);
+                brakeTarget = brakeTarget > 0 ? 1.0 : 0.0; // All or nothing braking
+                performanceMultiplier = 1.1; // pushing hard
+                healthDamageRate = 5.0; // crashing often
+                break;
+            case 'Slow':
+                throttleTarget *= 0.6;
+                performanceMultiplier = 0.5;
+                break;
+            case 'New driver':
+                noiseLevel = 0.04;
+                brakeTarget *= 1.3; // panic braking
+                performanceMultiplier = 0.8;
+                healthDamageRate = 1.2;
+                break;
+            case 'Professional':
+                noiseLevel = 0.005;
+                performanceMultiplier = 1.2;
+                healthDamageRate = 0.8;
+                break;
+        }
+
+        // Add micro-adjustments and behavior noise
+        const throttle = Math.max(0, Math.min(1, throttleTarget + Math.sin(this.time * 12) * noiseLevel));
+        const brake = Math.max(0, Math.min(1, brakeTarget + Math.cos(this.time * 8) * noiseLevel));
+        let steering = Math.max(-1, Math.min(1, steeringTarget + Math.sin(this.time * 15) * noiseLevel));
+
+        // Unpredictable swerving for Drunk/High
+        if (this.drivingBehavior === 'Drunk' || this.drivingBehavior === 'High') {
+            steering += Math.sin(this.time * 2) * noiseLevel * 5;
+        }
 
         // --- Vehicle Physics Model ---
+        let acceleration = (throttle * 8.0 * performanceMultiplier) - (this.speed * this.speed * 0.003) - (this.speed * 0.02) - (brake * 15.0);
 
-        // Acceleration = throttle * power_factor - air_drag - rolling_resistance - brake * brake_factor
-        let acceleration = (throttle * 8.0) - (this.speed * this.speed * 0.003) - (this.speed * 0.02) - (brake * 15.0);
-
-        // Prevent reversing for now
         if (this.speed <= 0.1 && acceleration < 0) {
             acceleration = 0;
             this.speed = 0;
         }
 
-        this.speed += acceleration * dt; // speed in m/s
+        this.speed += acceleration * dt;
 
         // RPM and Gear Logic
         let clutch = 0;
-        const speedKmh = this.speed * 3.6;
-
-        const gearRatios = [0, 3.5, 2.1, 1.5, 1.1, 0.9, 0.7]; // Example ratios
+        const gearRatios = [0, 3.5, 2.1, 1.5, 1.1, 0.9, 0.7];
         const finalDrive = 3.5;
-        const wheelCircumference = 2.0; // meters
+        const wheelCircumference = 2.0;
 
-        // Calculate theoretical RPM based on wheel speed and current gear
         let targetRpm = Math.max(800, (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference);
 
         if (this.transmissionType === 'automatic') {
-            // Auto shift up
             if (targetRpm > 7000 && this.gear < 6) {
                 this.gear++;
-                clutch = 1.0; // Spike clutch on automatic shift
+                this.clutchTimer = 0.2; // 200ms
                 targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
-            }
-            // Auto shift down
-            else if (targetRpm < 3000 && this.gear > 1 && brake > 0.1) {
+            } else if (targetRpm < 3000 && this.gear > 1 && brake > 0.1) {
                 this.gear--;
-                clutch = 1.0;
+                this.clutchTimer = 0.2;
                 targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
             }
         } else {
-            // Manual Transmission Model
-            // Simulate the driver shifting gears based on speed
+            // Manual Transmission
             const shiftingWindow = loopTime;
-
-            // Hardcoded optimal shifting points based on track loop
-            const isShiftingUp = (shiftingWindow > 3.0 && shiftingWindow < 3.3) || (shiftingWindow > 6.0 && shiftingWindow < 6.3);
-            const isShiftingDown = (shiftingWindow > 14.5 && shiftingWindow < 14.8) || (shiftingWindow > 15.5 && shiftingWindow < 15.8);
+            const isShiftingUp = (shiftingWindow > 3.0 && shiftingWindow < 3.5) || (shiftingWindow > 6.0 && shiftingWindow < 6.5);
+            const isShiftingDown = (shiftingWindow > 14.5 && shiftingWindow < 15.0) || (shiftingWindow > 15.5 && shiftingWindow < 16.0);
 
             if (isShiftingUp || isShiftingDown) {
-                clutch = 1.0; // Fully depressed
-                throttleTarget = 0.0; // Lift off throttle safely
-
-                // Do the physical gear change halfway through the clutch press
+                this.clutchTimer = 0.5; // Manual shifts take longer
                 if (isShiftingUp && this.gear < 6 && targetRpm > 5000) {
                     this.gear++;
                 } else if (isShiftingDown && this.gear > 1 && targetRpm < 5000) {
                     this.gear--;
                 }
             }
-
             targetRpm = (this.speed * 60 * gearRatios[this.gear] * finalDrive) / wheelCircumference;
         }
 
-        // Smooth RPM slightly to simulate engine inertia
+        if (this.clutchTimer > 0) {
+            clutch = 1.0;
+            this.clutchTimer -= dt;
+        }
+
         this.rpm = this.rpm + (targetRpm - this.rpm) * 0.2;
 
-        // Spatial Movement Model (X, Z map movement based on heading and speed)
-        // Adjust heading based on steering and speed (tighter turn at low speed for same steering angle)
         const turnRate = steering * (this.speed > 0 ? (10 / (this.speed + 5)) : 0);
         this.heading += turnRate * dt;
 
@@ -180,73 +213,62 @@ export class MockConnector extends EventEmitter implements GameConnector {
         this.posZ += Math.sin(this.heading) * this.speed * dt;
         this.distanceTraveled += this.speed * dt;
 
-        // Kinematics (G-Forces)
         const gForceLong = acceleration / 9.81;
-        const gForceLat = (this.speed * this.speed * turnRate) / 9.81; // Centripetal accel
+        const gForceLat = (this.speed * this.speed * turnRate) / 9.81;
 
-        // Fake Lap completion trigger (loop crossed start line)
-        if (loopTime < dt * 2 && this.time > 1) { // Just looped
-            this.lastLap = this.lapTime;
-            if (this.bestLap === 0 || this.lapTime < this.bestLap) {
-                this.bestLap = this.lapTime;
-            }
-            this.lapTime = 0;
-        }
-
-        // Temperatures (very basic buildup)
+        // Temperatures and Damage
         this.engineTemp = 80 + (this.rpm / 8000) * 20 + Math.sin(this.time) * 2;
-        this.tireTemp = this.tireTemp.map(t => Math.max(70, Math.min(120, t + (Math.abs(gForceLat) * dt) - ((t - 70) * dt * 0.1))));
-        this.brakeTemp = this.brakeTemp.map(t => Math.max(50, Math.min(600, t + (brake * 50 * dt) - ((t - 50) * dt * 0.5))));
+        this.tireTemp = this.tireTemp.map(t => Math.max(70, Math.min(120, t + (Math.abs(gForceLat) * dt * performanceMultiplier) - ((t - 70) * dt * 0.1))));
+        this.brakeTemp = this.brakeTemp.map(t => Math.max(50, Math.min(600, t + (brake * 50 * dt * performanceMultiplier) - ((t - 50) * dt * 0.5))));
 
-        // Suspension and Wheel Speeds
-        const weightTransferLong = gForceLong * 0.1;
-        const weightTransferLat = gForceLat * 0.1;
+        // Advanced Telemetry Calculations
+        const slipAngleEstimate = Math.abs(gForceLat) * 5 + (this.speed > 20 ? Math.random() * 2 : 0);
+        const oversteerCorrection = (gForceLat > 1.2 && steering < -0.2) ? Math.abs(steering) : 0;
+        const understeerPlough = (gForceLat > 1.0 && Math.abs(steering) > 0.8) ? 0.5 : 0;
+        const coastingTimePct = (throttle === 0 && brake === 0) ? 1.0 : 0.0;
 
-        const suspFL = 0.5 - weightTransferLong + weightTransferLat;
-        const suspFR = 0.5 - weightTransferLong - weightTransferLat;
-        const suspRL = 0.5 + weightTransferLong + weightTransferLat;
-        const suspRR = 0.5 + weightTransferLong - weightTransferLat;
-
-        // Slip slightly on heavy throttle or braking
-        const slip = (throttle * 2.0) - (brake * 1.5) + (Math.random() * 0.5 - 0.25);
-        const wheelSpd = this.speed + (this.gear <= 2 && throttle > 0.8 ? slip : 0);
+        // Health impact based on behavior
+        const wearBase = this.distanceTraveled * 0.000001 * healthDamageRate;
+        const carDamage = {
+            engine: Math.max(0, 1.0 - wearBase - (this.engineTemp > 110 ? 0.001 * healthDamageRate : 0)),
+            transmission: Math.max(0, 1.0 - wearBase * 0.5 - (clutch > 0.8 && throttle > 0.8 ? 0.0005 * healthDamageRate : 0)),
+            suspension: Math.max(0, 1.0 - wearBase * 0.2 - (Math.abs(gForceLat) > 1.5 ? 0.0001 * healthDamageRate : 0)),
+            brakes: Math.max(0, 1.0 - wearBase * 1.5 - (brake > 0.8 ? 0.0002 * healthDamageRate : 0)),
+            aero: Math.max(0, 1.0 - wearBase * 0.1 - (this.speed > 50 && this.drivingBehavior === 'New driver' ? 0.00001 : 0))
+        };
 
         const frame: TelemetryData = {
             timestamp: Date.now(),
             game: 'Simulation Mode',
-            speed: this.speed * 3.6, // GUI expects km/h or mph, but our speed is m/s. Multiply by 3.6 for km/h.
+            speed: this.speed * 3.6,
             rpm: this.rpm,
             gear: this.gear,
             throttle: throttle,
             brake: brake,
             clutch: clutch,
             steering: steering,
-
-            gForceX: gForceLat,  // Lateral
-            gForceY: gForceLong, // Longitudinal
-            gForceZ: 1.0,        // Gravity
-
+            gForceX: gForceLat,
+            gForceY: gForceLong,
+            gForceZ: 1.0,
             lapTime: this.lapTime,
             bestLap: this.bestLap,
             lastLap: this.lastLap,
-
-            carDamage: {
-                engine: Math.max(0, 1.0 - (this.distanceTraveled * 0.00001) - (this.engineTemp > 110 ? 0.001 : 0)), // High temp wears engine
-                transmission: Math.max(0, 1.0 - (this.distanceTraveled * 0.000005) - (clutch > 0.8 && throttle > 0.8 ? 0.0005 : 0)), // Bad shifts
-                suspension: Math.max(0, 1.0 - (this.distanceTraveled * 0.000002) - (Math.abs(gForceLat) > 1.5 ? 0.0001 : 0)), // Hard cornering
-                brakes: Math.max(0, 1.0 - (this.distanceTraveled * 0.000015) - (brake > 0.8 ? 0.0002 : 0)), // Hard braking
-                aero: Math.max(0, 1.0 - (this.distanceTraveled * 0.000001)) // General wear
-            },
-            fuel: 50 - (this.distanceTraveled / 1000), // slowly drains
+            carDamage,
+            fuel: 50 - (this.distanceTraveled / 1000),
             engineTemp: this.engineTemp,
-
             tireTemp: [this.tireTemp[0], this.tireTemp[1], this.tireTemp[2], this.tireTemp[3]],
-            tireWear: [100, 100, 100, 100], // 100% health
-
+            tireWear: [100, 100, 100, 100],
             posX: this.posX,
-            posY: 0, // Flat track
-            posZ: this.posZ
+            posY: 0,
+            posZ: this.posZ,
+            slipAngleEstimate,
+            oversteerCorrection,
+            understeerPlough,
+            coastingTimePct
         };
+
+        this.emit('data', frame);
+    }
 
         this.emit('data', frame);
     }

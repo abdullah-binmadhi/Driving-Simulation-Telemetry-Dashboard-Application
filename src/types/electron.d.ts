@@ -11,6 +11,7 @@ export interface IElectronAPI {
     startSession: () => Promise<{ success: boolean; message?: string }>;
     stopSession: () => Promise<{ success: boolean; sessionId?: number; message?: string }>;
     updateSimulationTransmission: (type: 'automatic' | 'manual') => Promise<{ success: boolean; message?: string }>;
+    updateSimulationBehavior: (behavior: string) => Promise<{ success: boolean; message?: string }>;
 }
 
 declare global {
