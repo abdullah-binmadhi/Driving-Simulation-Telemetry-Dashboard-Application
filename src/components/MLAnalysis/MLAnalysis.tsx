@@ -1,7 +1,8 @@
 import React from 'react';
-import { Play, FileJson, AlertTriangle, Brain, Target, Activity, Settings, GitCommit, Zap } from 'lucide-react';
+import { Play, FileText, AlertTriangle, Brain, Target, Activity, Settings, GitCommit, Zap } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ScatterChart, Scatter, ZAxis } from 'recharts';
 import { useState, useRef, useEffect } from 'react';
+import Papa from 'papaparse';
 
 // Types for ML Output
 interface MLResults {
@@ -74,22 +75,42 @@ const MLAnalysis = () => {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            try {
-                const json = JSON.parse(event.target?.result as string);
-                // Ensure it's roughly the right shape before accepting it
-                if (Array.isArray(json) && json.length > 100 && json[0].speed !== undefined) {
-                    setSessionData(json);
-                    setHasData(true);
+        Papa.parse(file, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            complete: (results) => {
+                const data = results.data as any[];
+                if (data.length > 50) {
+                    // Normalize keys (handle 'Speed' vs 'speed')
+                    const normalizedData = data.map((row, i) => {
+                        const getVal = (key: string) => {
+                            const foundKey = Object.keys(row).find(k => k.toLowerCase().includes(key));
+                            return foundKey ? Number(row[foundKey]) || 0 : 0;
+                        };
+                        return {
+                            timestamp: getVal('timestamp') || getVal('time') || (i * 16),
+                            speed: getVal('speed') || getVal('vel'),
+                            throttle: getVal('throttle') || getVal('gas'),
+                            brake: getVal('brake'),
+                            steering: getVal('steering') || getVal('steer')
+                        };
+                    });
+
+                    if (normalizedData[0].speed !== undefined || normalizedData[0].throttle !== undefined) {
+                        setSessionData(normalizedData);
+                        setHasData(true);
+                    } else {
+                        alert('Could not definitively find "speed", "throttle", "brake", and "steering" columns in the CSV headers.');
+                    }
                 } else {
-                    alert('Invalid telemetry JSON format. Need an array of objects with {speed, throttle, brake, steering, timestamp}.');
+                    alert('CSV is too short or invalid. Need at least 50 data points for ML analysis.');
                 }
-            } catch (err) {
-                alert('Failed to parse JSON file.');
+            },
+            error: (err: any) => {
+                alert('Failed to parse CSV file: ' + err.message);
             }
-        };
-        reader.readAsText(file);
+        });
     };
 
     const runAnalysis = () => {
@@ -136,9 +157,9 @@ const MLAnalysis = () => {
 
                 <div className="flex items-center gap-4 bg-slate-900 p-2 rounded-xl border border-slate-800">
                     <label className="flex items-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer transition-colors border border-slate-700 font-semibold">
-                        <FileJson className="w-5 h-5 text-blue-400" />
-                        <span>Load Session JSON</span>
-                        <input type="file" accept=".json" className="hidden" onChange={handleFileUpload} />
+                        <FileText className="w-5 h-5 text-blue-400" />
+                        <span>Load Session CSV</span>
+                        <input type="file" accept=".csv" className="hidden" onChange={handleFileUpload} />
                     </label>
 
                     <button
@@ -175,7 +196,7 @@ const MLAnalysis = () => {
                 <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-3xl m-8 text-slate-500">
                     <Brain className="w-24 h-24 text-slate-800 mb-6" />
                     <h2 className="text-2xl font-bold text-slate-400">Awaiting Telemetry Data</h2>
-                    <p className="max-w-md text-center mt-2">Upload a recorded JSON session file and click Run Analysis to begin processing.</p>
+                    <p className="max-w-md text-center mt-2">Upload a recorded CSV session file and click Run Analysis to begin processing.</p>
                 </div>
             )}
 

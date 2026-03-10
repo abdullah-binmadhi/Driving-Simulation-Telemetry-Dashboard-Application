@@ -28,7 +28,7 @@ class BrowserSimulator {
         this.isRunning = true;
         useTelemetryStore.getState().setConnectionStatus(true, 'Browser Simulation');
 
-        this.interval = setInterval(() => {
+        this.interval = window.setInterval(() => {
             if (!this.isRunning) return;
             this.emitNextFrame();
         }, 1000 / 60); // 60Hz
@@ -37,7 +37,7 @@ class BrowserSimulator {
     stop() {
         this.isRunning = false;
         if (this.interval) {
-            clearInterval(this.interval);
+            window.clearInterval(this.interval);
             this.interval = null;
         }
         useTelemetryStore.getState().setConnectionStatus(false, '');
