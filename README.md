@@ -6,13 +6,43 @@ This application connects to racing simulators (or runs natively with a built-in
 
 ![Dashboard Preview](https://github.com/abdullah-binmadhi/Driving-Simulation-Telemetry-Dashboard-Application/assets/hero-image.png) <!-- Update later with a real path if needed -->
 
-## Features
+## Pages & Features
 
-- **Live Traces**: Dynamic Multi-Graph visualizing Speed, RPM, Throttle (%), and Brake (%).
-- **Friction Circle**: A live G-Force diagram plotting lateral and longitudinal stress limits (Max 2.5G).
-- **Behavior Analysis**: Smoothness, brake capacity utilization, and oversteer/understeer behavioral tracking variables.
-- **Track Mapper**: Real-time positional mapping recreating the track geometry dynamically as you drive.
-- **Data Logger**: Export deduplicated, formatted session histories as `.csv` sheets straight to your local system for deep Machine Learning or statistical analysis.
+### 1. The Dashboard (`/`)
+
+![Dashboard Live View](docs/images/dashboard.png)
+The main hub of the application. It visualizes live, high-frequency telemetry data stripped from racing simulators (or the built-in browser engine) to analyze current vehicle dynamics.
+
+- **Live Traces**: A dynamic multi-graph plotting real-time Speed, RPM, Throttle (%), and Brake (%).
+- **Friction Circle**: An active G-Force mapping component displaying longitudinal and lateral stress limits (Max 2.5G).
+- **Vehicle Health**: Live degradation monitors for the Engine, Transmission, Suspension, Brakes, and Aerodynamics.
+- **Session Extremes**: Automatically tracks and holds peak values like maximum Speed, average Throttle utilization, and peak G-Forces over the current run.
+- **Track Mapper**: Generates a live top-down map of the vehicle's position.
+
+### 2. Telemetry Analysis (`/analysis`)
+
+![Analysis View](docs/images/analysis.png)
+The historical post-session deep dive page built for engineers and mechanics.
+
+- **CSV Log Uploads**: Upload previous driving runs (exported from the Dashboard) for deep visual scrutiny.
+- **Timeline Filtering**: Scrub through historic data visually to isolate precise corners or accidents.
+- **Lap Comparison**: Overlay runs to compare braking points and throttle application differences between laps or distinct driver behaviors.
+
+### 3. Reaction Test (`/reaction`)
+
+![Reaction Test View](docs/images/reaction.png)
+A built-in cognitive training tool intended for driver warm-ups before hitting the simulator.
+
+- **Start Lights Simulation**: Mimics standard Formula 1 red-light starting sequences on a randomized hold timer.
+- **Reflex Tracking**: Accurately measures jump-starts, false reactions, and milli-second true reaction times upon light extinguishment.
+
+### 4. Settings Configuration (`/settings`)
+
+![Settings View](docs/images/settings.png)
+The application control center.
+
+- **Connection Bridge**: Manage live data feeds from supported simulators (Assetto Corsa, BeamNG).
+- **Simulation Mode**: A native browser physics fallback that generates mock telemetry without requiring a heavy game to test the dashboard. Includes mock behavior states (e.g., Professional Driver, Drunk, Reckless) to watch the gauges react differently.
 
 ---
 
