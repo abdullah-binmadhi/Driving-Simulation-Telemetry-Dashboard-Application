@@ -68,15 +68,21 @@ const createWindow = () => {
 
             if (data.length === 0) return { success: false, message: 'No data found' };
 
-            // Format timestamps for easier reading in CSV and clean up columns
-            const formattedData = data.map(row => {
+            // Track timestamps to remove identical ms collisions
+            const seenTimestamps = new Set<string>();
+
+            // Clean columns and ensure max 2 decimals for bloat reduction
+            const formattedData = data.reduce((acc, row) => {
                 const date = new Date(Number(row.timestamp));
                 const timeStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}.${date.getMilliseconds().toString().padStart(3, '0')}`;
 
-                // Remove unwanted columns
+                if (seenTimestamps.has(timeStr)) return acc;
+                seenTimestamps.add(timeStr);
+
+                // Remove unwieldy db keys
                 const { session_id, id, ...cleanRow } = row;
 
-                // Rename columns
+                // Rename columns to matching telemetry syntax
                 const renamedRow: Record<string, any> = { ...cleanRow, timestamp: timeStr };
                 const renameMap: Record<string, string> = {
                     'pos_x': 'x', 'pos_y': 'y', 'pos_z': 'z',
@@ -92,12 +98,31 @@ const createWindow = () => {
                     }
                 }
 
-                return renamedRow;
-            });
+                // Scale known percentages to 100
+                if ('throttle' in renamedRow) renamedRow.throttle *= 100;
+                if ('brake' in renamedRow) renamedRow.brake *= 100;
+                if ('clutch' in renamedRow) renamedRow.clutch *= 100;
+
+                // Fix all floating geometries/telemetry variables to max 2 decimals
+                for (const key of Object.keys(renamedRow)) {
+                    if (typeof renamedRow[key] === 'number') {
+                        // We check if it's a float by seeing if it has fractions
+                        if (!Number.isInteger(renamedRow[key])) {
+                            renamedRow[key] = parseFloat((renamedRow[key] as number).toFixed(2));
+                        }
+                    }
+                }
+
+                acc.push(renamedRow);
+                return acc;
+            }, [] as any[]);
+
+            // Fallback check in case the deduplication deletes the whole array
+            if (formattedData.length === 0) return { success: false, message: 'All data points were duplicates' };
 
             // Generate CSV manually
             const headers = Object.keys(formattedData[0]).join(',');
-            const rows = formattedData.map(row => Object.values(row).join(','));
+            const rows = formattedData.map((row: any) => Object.values(row).join(','));
             const csvContent = [headers, ...rows].join('\n');
 
             await fs.promises.writeFile(filePath, csvContent, 'utf-8');
