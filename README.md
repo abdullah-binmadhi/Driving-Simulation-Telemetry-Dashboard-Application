@@ -4,7 +4,6 @@ An advanced, real-time vehicle telemetry dashboard built using **Electron**, **R
 
 This application connects to racing simulators (or runs natively with a built-in Browser Simulator fallback) to visualize complex driving physics dynamics mathematically. It includes real-time track mapping, G-force friction circles, input behavior analysis, and precision data logging.
 
-![Dashboard Preview](https://github.com/abdullah-binmadhi/Driving-Simulation-Telemetry-Dashboard-Application/assets/hero-image.png) <!-- Update later with a real path if needed -->
 
 ## Pages & Features
 
