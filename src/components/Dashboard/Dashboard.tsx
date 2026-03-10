@@ -111,6 +111,8 @@ const Dashboard = () => {
                             clutch={data.clutch}
                         />
                     </div>
+
+                    <LiveMultiGraph data={telemetryHistory} title="Real-time Telemetry Traces" />
                 </div>
 
                 {/* RIGHT COLUMN (3 cols) */}
@@ -119,11 +121,6 @@ const Dashboard = () => {
                     <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
                     <TireStatus temps={data.tireTemp} wear={data.tireWear} />
                     <CarHealth damage={data.carDamage} />
-                </div>
-
-                {/* BOTTOM ROW (12 cols) */}
-                <div className="col-span-1 xl:col-span-12 order-4">
-                    <LiveMultiGraph data={telemetryHistory} title="Real-time Telemetry Traces" />
                 </div>
             </div>
         </div>

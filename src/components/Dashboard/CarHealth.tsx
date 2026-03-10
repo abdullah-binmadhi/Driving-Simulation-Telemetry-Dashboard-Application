@@ -43,7 +43,7 @@ const CarHealth: React.FC<CarHealthProps> = ({ damage }) => {
     const d = damage || { engine: 1, transmission: 1, suspension: 1, brakes: 1, aero: 1 };
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
+        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow">
             <h2 className="text-lg font-semibold mb-4 text-slate-300 flex items-center gap-2">
                 <span>Vehicle Health</span>
                 <span className="text-xs font-normal text-slate-500 bg-slate-800 px-2 py-0.5 rounded animate-pulse">
