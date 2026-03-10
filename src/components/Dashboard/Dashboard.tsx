@@ -74,7 +74,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="p-4 h-full flex flex-col gap-4">
+        <div className="p-4 min-h-full flex flex-col gap-4">
             <div className="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800 shadow-sm">
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Research Telemetry</h1>
                 <div className="flex items-center gap-2">

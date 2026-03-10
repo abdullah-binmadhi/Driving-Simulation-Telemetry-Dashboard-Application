@@ -114,7 +114,7 @@ const TrackMap = () => {
                 </button>
             </div>
 
-            <div className="w-full aspect-square max-h-64 rounded-xl border-2 border-slate-800 bg-slate-950 flex items-center justify-center overflow-hidden">
+            <div className="w-full aspect-square rounded-xl border-2 border-slate-800 bg-slate-950 flex items-center justify-center overflow-hidden">
                 <canvas
                     ref={canvasRef}
                     width={400}
