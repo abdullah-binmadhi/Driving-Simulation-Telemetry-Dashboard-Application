@@ -205,6 +205,10 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         const hmmData = [];
         const stateCounts: Record<string, number> = { 'Cruising': 0, 'Slow / Cautious': 0, 'Cornering': 0, 'Erratic': 0 };
 
+        const avgSpeed = speeds.reduce((a, b) => a + b, 0) / speeds.length;
+        const avgSteer = steerings.reduce((a, b) => a + Math.abs(b), 0) / steerings.length;
+        const avgJerk = jerks.reduce((a, b) => a + b, 0) / jerks.length;
+
         // Map clusters to human names based on cluster centroids
         const clusterNames = ans.centroids.map((c: any) => {
             const [cSpeedNorm, cSteerNorm, cJerkNorm] = c;
@@ -214,9 +218,16 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             const cSteer = cSteerNorm * maxSteerAbs;
             const cJerk = cJerkNorm * maxJerk;
 
-            if (cJerk > 5 || cSteer > 0.3) return 'Erratic'; // Weaving or highly jerky
-            if (cSteer > 0.1) return 'Cornering';
-            if (cSpeed < 40) return 'Slow / Cautious'; // slow speed proxy
+            // Erratic: Jerk is significantly above average baseline (e.g., 200%) OR steering is exceptionally high while moving
+            if (cJerk > Math.max(avgJerk * 2.0, 5) || (cSteer > Math.max(avgSteer * 2.5, 0.2) && cSpeed > 20)) return 'Erratic';
+
+            // Cornering: Steering is above average, but not violently erratic
+            if (cSteer > Math.max(avgSteer * 1.5, 0.1)) return 'Cornering';
+
+            // Slow/Cautious: Speed is significantly below average 
+            if (cSpeed < avgSpeed * 0.6 || cSpeed < 30) return 'Slow / Cautious';
+
+            // Default to normal cruising when inputs are standard
             return 'Cruising';
         });
 
