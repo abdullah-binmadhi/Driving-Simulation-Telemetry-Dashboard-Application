@@ -38,6 +38,7 @@ interface MLResults {
             error: number; // High error means erratic behavior
         }>;
         maxError: number;
+        analysisText?: string;
     };
     hmm: {
         data: Array<{
@@ -56,7 +57,7 @@ const INITIAL_RESULTS: MLResults = {
     pca: { data: [], profile: 'Unknown' },
     anomalies: { data: [], anomalyCount: 0 },
     svm: { overlapPercentage: 0, overlapEvents: 0 },
-    lstm: { data: [], maxError: 0 },
+    lstm: { data: [], maxError: 0, analysisText: "Awaiting analysis..." },
     hmm: { data: [], statePercentages: {} },
     isProcessing: false,
     progress: 0,
@@ -126,7 +127,7 @@ const MLAnalysis = () => {
 
         workerRef.current.onmessage = (e) => {
             if (e.data.type === 'PROGRESS') setResults(r => ({ ...r, progress: e.data.progress }));
-            if (e.data.type === 'COMPLETE') setResults({ ...e.data.results, isProcessing: false });
+            if (e.data.type === 'COMPLETE') setResults(r => ({ ...r, ...e.data.results, isProcessing: false, progress: 100, error: null }));
             if (e.data.type === 'ERROR') setResults(r => ({ ...r, isProcessing: false, error: e.data.message }));
         };
 
@@ -267,6 +268,8 @@ const MLAnalysis = () => {
                                     <YAxis stroke="#475569" dataKey="speed" domain={['auto', 'auto']} />
                                     <Tooltip
                                         contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
+                                        itemStyle={{ color: '#e2e8f0' }}
+                                        labelStyle={{ color: '#cbd5e1' }}
                                         labelFormatter={(t) => `Time: ${(t / 1000).toFixed(1)}s`}
                                     />
                                     {/* Anomalies highlighted using custom dots */}
@@ -304,7 +307,7 @@ const MLAnalysis = () => {
                                     <XAxis type="number" dataKey="x" name="Component 1" stroke="#475569" hide />
                                     <YAxis type="number" dataKey="y" name="Component 2" stroke="#475569" hide />
                                     <ZAxis type="number" dataKey="intensity" range={[10, 50]} />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '8px' }} />
+                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '8px' }} itemStyle={{ color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1' }} />
                                     <Scatter name="Driving States" data={results.pca.data} fill="#6366f1" opacity={0.6} />
 
                                     {/* Quadrant Lines */}
@@ -349,7 +352,12 @@ const MLAnalysis = () => {
                                 <Activity className="w-5 h-5 text-cyan-500" />
                                 Erratic Behavior Tracking
                             </h3>
-                            <p className="text-sm text-slate-400">LSTM Autoencoders (Reconstruction Error)</p>
+                            <p className="text-sm text-slate-400 mb-3">LSTM Autoencoders (Reconstruction Error)</p>
+                            {results.lstm.analysisText && results.lstm.analysisText !== "Awaiting analysis..." && (
+                                <div className="bg-cyan-950/30 border border-cyan-900/50 rounded-xl p-3 text-sm text-cyan-300">
+                                    {results.lstm.analysisText}
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex-1 w-full min-h-[200px] mt-4">
@@ -360,6 +368,8 @@ const MLAnalysis = () => {
                                     <YAxis stroke="#475569" domain={[0, 'auto']} />
                                     <Tooltip
                                         contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
+                                        itemStyle={{ color: '#e2e8f0' }}
+                                        labelStyle={{ color: '#cbd5e1' }}
                                         labelFormatter={() => `Loss (Error)`}
                                     />
                                     <Line type="monotone" dataKey="error" stroke="#06b6d4" strokeWidth={2} dot={false} strokeOpacity={0.8} />
@@ -422,7 +432,7 @@ const CustomReferenceLines = () => (
 const getStateColor = (state: string, isBg: boolean = false) => {
     switch (state) {
         case 'Cruising': return isBg ? 'bg-emerald-500' : 'bg-emerald-500';
-        case 'Braking': return isBg ? 'bg-blue-500' : 'bg-blue-500';
+        case 'Slow / Cautious': return isBg ? 'bg-blue-500' : 'bg-blue-500';
         case 'Cornering': return isBg ? 'bg-amber-500' : 'bg-amber-500';
         case 'Erratic': return isBg ? 'bg-red-500' : 'bg-red-500';
         default: return 'bg-slate-500';

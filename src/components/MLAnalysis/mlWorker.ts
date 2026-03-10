@@ -84,7 +84,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         // We run regression just to show we can use the library for feature importance
         // Though the cost function above directly determines the score.
-        let finalScore = 100 - (totalDeductions / speeds.length) * 1000;
+        let finalScore = 100 - (totalDeductions / speeds.length) * 50;
         if (finalScore < 0) finalScore = 0;
         const safetyScoreResult = {
             score: Math.round(finalScore),
@@ -166,19 +166,20 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         // Ensure no NaN or undefined values exist here
         const kmeansData = [];
         for (let i = 0; i < speeds.length; i += 10) {
-            kmeansData.push([speeds[i] || 0, (steerings[i] || 0) * 10, jerks[i] || 0]);
+            // Use absolute steering magnitude so weaving doesn't average out to 0
+            kmeansData.push([speeds[i] || 0, Math.abs(steerings[i] || 0) * 10, jerks[i] || 0]);
         }
 
         const ans = kmeans(kmeansData, 4, { initialization: 'kmeans++' });
         const hmmData = [];
-        const stateCounts: Record<string, number> = { 'Cruising': 0, 'Braking': 0, 'Cornering': 0, 'Erratic': 0 };
+        const stateCounts: Record<string, number> = { 'Cruising': 0, 'Slow / Cautious': 0, 'Cornering': 0, 'Erratic': 0 };
 
         // Map clusters to human names based on cluster centroids
         const clusterNames = ans.centroids.map((c: any) => {
             const [cSpeed, cSteer, cJerk] = c;
-            if (Math.abs(cSteer) > 2) return 'Cornering';
-            if (cJerk > 10) return 'Erratic';
-            if (cSpeed < 30) return 'Braking'; // slow speed proxy
+            if (cJerk > 5 || cSteer > 2) return 'Erratic'; // Weaving or highly jerky
+            if (cSteer > 0.5) return 'Cornering';
+            if (cSpeed < 40) return 'Slow / Cautious'; // slow speed proxy
             return 'Cruising';
         });
 
@@ -194,7 +195,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         const totalStates = ans.clusters.length;
         const statePercentages = {
             'Cruising': (stateCounts['Cruising'] || 0) / totalStates * 100,
-            'Braking': (stateCounts['Braking'] || 0) / totalStates * 100,
+            'Slow / Cautious': (stateCounts['Slow / Cautious'] || 0) / totalStates * 100,
             'Cornering': (stateCounts['Cornering'] || 0) / totalStates * 100,
             'Erratic': (stateCounts['Erratic'] || 0) / totalStates * 100,
         };
@@ -246,12 +247,22 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         const lstmData = [];
         let maxError = 0;
+        let totalError = 0;
         for (let i = 0; i < errorValues.length; i++) {
             if (errorValues[i] > maxError) maxError = errorValues[i];
+            totalError += errorValues[i];
             lstmData.push({
                 timestamp: timestamps[i * 5], // roughly match window index to timestamp
                 error: errorValues[i]
             });
+        }
+
+        const avgError = errorValues.length > 0 ? totalError / errorValues.length : 0;
+        let analysisText = "Normal driving patterns detected consistent with continuous sequences.";
+        if (maxError > 0.1 || avgError > 0.02) {
+            analysisText = "High reconstruction errors detected, strongly indicating erratic or unconventional driving behavior.";
+        } else if (maxError > 0.05) {
+            analysisText = "Moderate deviations detected. Driving shows occasional varied behavior.";
         }
 
         // Cleanup TF memory
@@ -265,7 +276,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             pca: { data: pcaChartData, profile: profileName },
             anomalies: { data: anomalyData, anomalyCount },
             svm: { overlapPercentage, overlapEvents },
-            lstm: { data: lstmData, maxError },
+            lstm: { data: lstmData, maxError, analysisText },
             hmm: { data: hmmData, statePercentages }
         };
 
