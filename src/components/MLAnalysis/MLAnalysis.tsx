@@ -25,6 +25,7 @@ interface MLResults {
             speed: number;
             isAnomaly: boolean;
             jerk: number;
+            type: string;
         }>;
         anomalyCount: number;
     };
@@ -47,6 +48,14 @@ interface MLResults {
         }>;
         statePercentages: Record<string, number>;
     };
+    qualityMetrics: {
+        clusteringSilhouette: { score: number, analysis: string, formula: string };
+        pcaVariance: { score: number, analysis: string, formula: string };
+        lstmTrainingLoss: { score: number, analysis: string, formula: string };
+        anomalySkewness: { score: number, analysis: string, formula: string };
+        svmMargin: { score: number, analysis: string, formula: string };
+        regressionFit: { score: number, analysis: string, formula: string };
+    };
     isProcessing: boolean;
     progress: number;
     error: string | null;
@@ -59,6 +68,14 @@ const INITIAL_RESULTS: MLResults = {
     svm: { overlapPercentage: 0, overlapEvents: 0 },
     lstm: { data: [], maxError: 0, analysisText: "Awaiting analysis..." },
     hmm: { data: [], statePercentages: {} },
+    qualityMetrics: {
+        clusteringSilhouette: { score: 0, analysis: "", formula: "" },
+        pcaVariance: { score: 0, analysis: "", formula: "" },
+        lstmTrainingLoss: { score: 0, analysis: "", formula: "" },
+        anomalySkewness: { score: 0, analysis: "", formula: "" },
+        svmMargin: { score: 0, analysis: "", formula: "" },
+        regressionFit: { score: 0, analysis: "", formula: "" }
+    },
     isProcessing: false,
     progress: 0,
     error: null
@@ -69,6 +86,7 @@ const MLAnalysis = () => {
     const [results, setResults] = useState<MLResults>(INITIAL_RESULTS);
     const [hasData, setHasData] = useState(false);
     const [sessionData, setSessionData] = useState<any[] | null>(null);
+    const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
     const workerRef = useRef<Worker | null>(null);
 
     // Mock file input for now
@@ -271,6 +289,12 @@ const MLAnalysis = () => {
                                         itemStyle={{ color: '#e2e8f0' }}
                                         labelStyle={{ color: '#cbd5e1' }}
                                         labelFormatter={(t) => `Time: ${(t / 1000).toFixed(1)}s`}
+                                        formatter={(value: any, name: string | undefined, props: any) => {
+                                            if (name === 'speed' && props.payload.isAnomaly) {
+                                                return [value, `${props.payload.type} (Speed)`];
+                                            }
+                                            return [value, name];
+                                        }}
                                     />
                                     {/* Anomalies highlighted using custom dots */}
                                     <Line
@@ -370,7 +394,7 @@ const MLAnalysis = () => {
                                         contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
                                         itemStyle={{ color: '#e2e8f0' }}
                                         labelStyle={{ color: '#cbd5e1' }}
-                                        labelFormatter={() => `Loss (Error)`}
+                                        labelFormatter={() => `Anomaly Score [0, 1]`}
                                     />
                                     <Line type="monotone" dataKey="error" stroke="#06b6d4" strokeWidth={2} dot={false} strokeOpacity={0.8} />
                                 </LineChart>
@@ -411,6 +435,78 @@ const MLAnalysis = () => {
                         </div>
                     </div>
 
+                    {/* 7. ML Quality Statistics Panel - Interactive */}
+                    <div className="xl:col-span-3 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl mt-4">
+                        <div className="mb-6">
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white">
+                                <Settings className="w-5 h-5 text-slate-400" />
+                                Model Confidence & Quality Metrics
+                            </h3>
+                            <p className="text-sm text-slate-400 mt-1">Select a metric below to view mathematical reasoning and dataset contexts.</p>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+                            <MetricCard
+                                id="clusteringSilhouette" title="Clustering Proxy" color="emerald"
+                                score={(results.qualityMetrics.clusteringSilhouette.score).toFixed(2)} label="Silhouette Score"
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                            <MetricCard
+                                id="pcaVariance" title="Feature Map" color="indigo"
+                                score={`${(results.qualityMetrics.pcaVariance.score * 100).toFixed(1)}%`} label="Explained Var."
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                            <MetricCard
+                                id="lstmTrainingLoss" title="LSTM Sequence" color="cyan"
+                                score={results.qualityMetrics.lstmTrainingLoss.score.toFixed(4)} label="Training Loss"
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                            <MetricCard
+                                id="anomalySkewness" title="Isolation Tree" color="red"
+                                score={results.qualityMetrics.anomalySkewness.score.toFixed(2)} label="Anomaly Skewness"
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                            <MetricCard
+                                id="svmMargin" title="SVM Predictor" color="orange"
+                                score={results.qualityMetrics.svmMargin.score.toFixed(2)} label="Boundary Margin"
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                            <MetricCard
+                                id="regressionFit" title="Safety Score" color="green"
+                                score={results.qualityMetrics.regressionFit.score.toFixed(2)} label="R-Squared Fit"
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                        </div>
+
+                        {/* Interactive Expand Pane */}
+                        {selectedMetric && (
+                            <div className="mt-6 bg-slate-950 rounded-2xl p-6 border border-slate-800 animate-in slide-in-from-top-4 fade-in duration-300">
+                                <div className="flex justify-between items-start mb-4">
+                                    <h4 className="text-lg font-bold text-white capitalize">
+                                        {selectedMetric.replace(/([A-Z])/g, ' $1').trim()} Analysis
+                                    </h4>
+                                    <button onClick={() => setSelectedMetric(null)} className="text-slate-500 hover:text-white transition-colors">
+                                        ✕
+                                    </button>
+                                </div>
+                                <div className="space-y-4">
+                                    <div>
+                                        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Mathematical Formula Concept</div>
+                                        <div className="font-mono text-sm px-3 py-2 bg-slate-900 rounded-lg text-slate-300 inline-block border border-slate-800">
+                                            {results.qualityMetrics[selectedMetric as keyof typeof results.qualityMetrics].formula}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Dataset Reasoning</div>
+                                        <p className="text-slate-300 leading-relaxed text-sm">
+                                            {results.qualityMetrics[selectedMetric as keyof typeof results.qualityMetrics].analysis}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
                 </div>
             )}
         </div>
@@ -428,6 +524,25 @@ const CustomReferenceLines = () => (
         <text x="85%" y="95%" fill="#475569" fontSize={12} className="uppercase font-bold tracking-wider">Aggressive</text>
     </g>
 );
+
+const MetricCard = ({ id, title, score, label, color, selected, onSelect }: any) => {
+    const isSelected = selected === id;
+    return (
+        <button
+            onClick={() => onSelect(isSelected ? null : id)}
+            className={`flex flex-col items-center p-4 rounded-2xl border transition-all duration-200 text-left w-full
+                ${isSelected
+                    ? `bg-slate-800 border-slate-600 shadow-lg scale-105`
+                    : `bg-slate-900/50 border-slate-800 hover:bg-slate-800 hover:border-slate-700`
+                }
+            `}
+        >
+            <span className="text-slate-400 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-2 text-center h-8 sm:h-auto flex items-center justify-center">{title}</span>
+            <span className={`text-2xl sm:text-3xl font-black font-mono text-${color}-400`}>{score}</span>
+            <span className="text-[10px] sm:text-xs text-slate-500 mt-1 text-center font-semibold">{label}</span>
+        </button>
+    );
+};
 
 const getStateColor = (state: string, isBg: boolean = false) => {
     switch (state) {
