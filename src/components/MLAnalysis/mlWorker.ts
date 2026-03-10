@@ -30,18 +30,31 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         // Step 1: Data Preprocessing
         // We need to extract the raw numbers from the JSON structure
-        const timestamps = rawData.map(d => d.timestamp || 0);
-        const speeds = rawData.map(d => Number(d.speed) || 0);
-        const throttles = rawData.map(d => Number(d.throttle) || 0);
-        const brakes = rawData.map(d => Number(d.brake) || 0);
-        const steerings = rawData.map(d => Number(d.steering) || 0);
+        // AND defensively filter out any undefined/NaN rows from bad CSV parsing
+        const validData = rawData.filter(d =>
+            d.speed !== undefined && !isNaN(Number(d.speed)) &&
+            d.throttle !== undefined && !isNaN(Number(d.throttle)) &&
+            d.brake !== undefined && !isNaN(Number(d.brake)) &&
+            d.steering !== undefined && !isNaN(Number(d.steering))
+        );
+
+        if (validData.length < 50) {
+            throw new Error("Not enough valid numerical rows after parsing the dataset.");
+        }
+
+        const timestamps = validData.map(d => Number(d.timestamp) || 0);
+        const speeds = validData.map(d => Number(d.speed) || 0);
+        const throttles = validData.map(d => Number(d.throttle) || 0);
+        const brakes = validData.map(d => Number(d.brake) || 0);
+        const steerings = validData.map(d => Number(d.steering) || 0);
+
         // Calculate Jerk (derivative of acceleration)
         const jerks: number[] = [0];
         for (let i = 1; i < speeds.length; i++) {
             const dt = (timestamps[i] - timestamps[i - 1]) / 1000 || 0.016; // protect dt=0
             const a1 = (speeds[i] - speeds[i - 1]) / dt;
             const a0 = i > 1 ? (speeds[i - 1] - speeds[i - 2]) / dt : 0;
-            jerks.push(Math.abs((a1 - a0) / dt));
+            jerks.push(Math.abs((a1 - a0) / dt) || 0);
         }
 
         self.postMessage({ type: 'PROGRESS', progress: 15 });
@@ -150,9 +163,10 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         // --- Model 5: Contextual State (K-Means Clustering serving as HMM) ---
         // Group the data into 4 behavioral "States" (e.g. Stop&Go, Cruising, Cornering)
+        // Ensure no NaN or undefined values exist here
         const kmeansData = [];
         for (let i = 0; i < speeds.length; i += 10) {
-            kmeansData.push([speeds[i], steerings[i] * 10, jerks[i]]); // Multiply steering to give it weight
+            kmeansData.push([speeds[i] || 0, (steerings[i] || 0) * 10, jerks[i] || 0]);
         }
 
         const ans = kmeans(kmeansData, 4, { initialization: 'kmeans++' });
@@ -202,7 +216,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             const window = [];
             for (let j = 0; j < seqLength; j++) {
                 // Normalize roughly
-                window.push([speeds[i + j] / 200, steerings[i + j] / 5]);
+                window.push([(speeds[i + j] || 0) / 200, (steerings[i + j] || 0) / 5]);
             }
             lstmInput.push(window);
         }
