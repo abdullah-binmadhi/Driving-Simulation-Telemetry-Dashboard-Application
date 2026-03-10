@@ -15,10 +15,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
     "better-sqlite3": "^12.6.2",
     "clsx": "^2.1.1",
     "express": "^5.2.1",
     "lucide-react": "^0.563.0",
+    "ml-kmeans": "^7.0.0",
+    "ml-pca": "^4.1.1",
+    "ml-regression-multivariate-linear": "^2.0.4",
+    "ml-svm": "^2.1.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0",
