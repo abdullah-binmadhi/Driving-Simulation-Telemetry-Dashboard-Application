@@ -18,7 +18,16 @@ This application connects to racing simulators (or runs natively with a built-in
 
 ## Installation & Setup
 
-Before starting, ensure you have [Node.js](https://nodejs.org/) (version 18+ recommended) installed on your system.
+Before starting, ensure you have [Node.js](https://nodejs.org/) (version 18+ recommended) and Git installed on your system.
+
+### Step 0: Get the Files
+
+First, you need to download the source code from GitHub. Open your terminal or IDE (like VSCode) and run:
+
+```bash
+git clone https://github.com/abdullah-binmadhi/Driving-Simulation-Telemetry-Dashboard-Application.git
+cd Driving-Simulation-Telemetry-Dashboard-Application
+```
 
 ### Option 1: Development Server (Browser or Live Mock)
 
