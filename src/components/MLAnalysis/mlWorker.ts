@@ -175,7 +175,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         // Map clusters to human names based on cluster centroids
         const clusterNames = ans.centroids.map((c: any) => {
-            const [cSpeed, cSteer, cJerk] = c.centroid;
+            const [cSpeed, cSteer, cJerk] = c;
             if (Math.abs(cSteer) > 2) return 'Cornering';
             if (cJerk > 10) return 'Erratic';
             if (cSpeed < 30) return 'Braking'; // slow speed proxy
