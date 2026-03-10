@@ -1,6 +1,6 @@
 import * as tf from '@tensorflow/tfjs';
 import { PCA } from 'ml-pca';
-import { SVM } from 'ml-svm';
+import SVM from 'ml-svm';
 import { kmeans } from 'ml-kmeans';
 
 export type IncomingMessage = {
