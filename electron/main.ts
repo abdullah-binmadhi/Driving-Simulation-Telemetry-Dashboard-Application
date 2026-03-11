@@ -11,11 +11,12 @@ const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (process.platform === 'win32') {
-    if (require('electron-squirrel-startup')) {
-        app.quit();
-    }
-}
+// Disabled as we use electron-builder with NSIS
+// if (process.platform === 'win32') {
+//     if (require('electron-squirrel-startup')) {
+//         app.quit();
+//     }
+// }
 
 const createWindow = () => {
     // Create the browser window.
