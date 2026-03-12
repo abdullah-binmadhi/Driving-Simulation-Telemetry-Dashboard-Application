@@ -33,12 +33,13 @@ interface MLResults {
         overlapPercentage: number;
         overlapEvents: number;
     };
-    lstm: {
+    rfWear: {
         data: Array<{
             timestamp: number;
-            error: number; // High error means erratic behavior
+            life: number;
+            wearRate: number;
         }>;
-        maxError: number;
+        endLife: number;
         analysisText?: string;
     };
     hmm: {
@@ -51,10 +52,11 @@ interface MLResults {
     qualityMetrics: {
         clusteringSilhouette: { score: number, analysis: string, formula: string };
         pcaVariance: { score: number, analysis: string, formula: string };
-        lstmTrainingLoss: { score: number, analysis: string, formula: string };
+        randomForestOOB: { score: number, analysis: string, formula: string };
         anomalySkewness: { score: number, analysis: string, formula: string };
         svmMargin: { score: number, analysis: string, formula: string };
         regressionFit: { score: number, analysis: string, formula: string };
+        knnConfidence: { score: number, analysis: string, formula: string };
     };
     isProcessing: boolean;
     progress: number;
@@ -66,15 +68,16 @@ const INITIAL_RESULTS: MLResults = {
     pca: { data: [], profile: 'Unknown' },
     anomalies: { data: [], anomalyCount: 0 },
     svm: { overlapPercentage: 0, overlapEvents: 0 },
-    lstm: { data: [], maxError: 0, analysisText: "Awaiting analysis..." },
+    rfWear: { data: [], endLife: 100, analysisText: "Awaiting analysis..." },
     hmm: { data: [], statePercentages: {} },
     qualityMetrics: {
         clusteringSilhouette: { score: 0, analysis: "", formula: "" },
         pcaVariance: { score: 0, analysis: "", formula: "" },
-        lstmTrainingLoss: { score: 0, analysis: "", formula: "" },
+        randomForestOOB: { score: 0, analysis: "", formula: "" },
         anomalySkewness: { score: 0, analysis: "", formula: "" },
         svmMargin: { score: 0, analysis: "", formula: "" },
-        regressionFit: { score: 0, analysis: "", formula: "" }
+        regressionFit: { score: 0, analysis: "", formula: "" },
+        knnConfidence: { score: 0, analysis: "", formula: "" }
     },
     isProcessing: false,
     progress: 0,
@@ -340,7 +343,7 @@ const MLAnalysis = () => {
                             </ResponsiveContainer>
                         </div>
                         <div className="text-center bg-indigo-950/30 border border-indigo-900/50 rounded-xl p-3">
-                            <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">{results.pca.profile}</span>
+                            <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">{results.pca.profile || (results.pca as any).knnProfile || "Unknown Style"}</span>
                         </div>
                     </div>
 
@@ -369,36 +372,41 @@ const MLAnalysis = () => {
                     </div>
 
 
-                    {/* 5. LSTM Autoencoder */}
+                    {/* 5. Predictive Tire Degradation (Random Forest) */}
                     <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col">
                         <div>
                             <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Activity className="w-5 h-5 text-cyan-500" />
-                                Erratic Behavior Tracking
+                                <Activity className="w-5 h-5 text-pink-500" />
+                                Predictive Tire Degradation
                             </h3>
-                            <p className="text-sm text-slate-400 mb-3">LSTM Autoencoders (Reconstruction Error)</p>
-                            {results.lstm.analysisText && results.lstm.analysisText !== "Awaiting analysis..." && (
-                                <div className="bg-cyan-950/30 border border-cyan-900/50 rounded-xl p-3 text-sm text-cyan-300">
-                                    {results.lstm.analysisText}
+                            <p className="text-sm text-slate-400 mb-3">Random Forest Wear Projection</p>
+                            {results.rfWear.analysisText && results.rfWear.analysisText !== "Awaiting analysis..." && (
+                                <div className="bg-pink-950/30 border border-pink-900/50 rounded-xl p-3 text-sm text-pink-300">
+                                    {results.rfWear.analysisText}
                                 </div>
                             )}
                         </div>
 
-                        <div className="flex-1 w-full min-h-[200px] mt-4">
+                        <div className="flex-1 w-full min-h-[200px] mt-4 relative">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={results.lstm.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
+                                <LineChart data={results.rfWear.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
                                     <XAxis dataKey="timestamp" stroke="#475569" tick={false} />
-                                    <YAxis stroke="#475569" domain={[0, 'auto']} />
+                                    <YAxis stroke="#475569" domain={[0, 100]} />
                                     <Tooltip
                                         contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
                                         itemStyle={{ color: '#e2e8f0' }}
                                         labelStyle={{ color: '#cbd5e1' }}
-                                        labelFormatter={() => `Anomaly Score [0, 1]`}
+                                        labelFormatter={() => `Est. Remaining Tire Life`}
+                                        formatter={(val: any) => [`${Number(val).toFixed(2)}%`, `Tire Life`]}
                                     />
-                                    <Line type="monotone" dataKey="error" stroke="#06b6d4" strokeWidth={2} dot={false} strokeOpacity={0.8} />
+                                    <Line type="monotone" dataKey="life" stroke="#ec4899" strokeWidth={3} dot={false} strokeOpacity={0.9} />
                                 </LineChart>
                             </ResponsiveContainer>
+                            
+                            <div className="absolute bottom-6 left-12 text-5xl font-black font-mono tracking-tighter" style={{ color: results.rfWear.endLife > 80 ? '#22c55e' : results.rfWear.endLife > 50 ? '#eab308' : '#ef4444' }}>
+                                {results.rfWear.endLife.toFixed(1)}<span className="text-2xl text-slate-500 font-bold">%</span>
+                            </div>
                         </div>
                     </div>
 
@@ -445,7 +453,7 @@ const MLAnalysis = () => {
                             <p className="text-sm text-slate-400 mt-1">Select a metric below to view mathematical reasoning and dataset contexts.</p>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-4">
                             <MetricCard
                                 id="clusteringSilhouette" title="Clustering Proxy" color="emerald"
                                 score={(results.qualityMetrics.clusteringSilhouette.score).toFixed(2)} label="Silhouette Score"
@@ -457,8 +465,8 @@ const MLAnalysis = () => {
                                 selected={selectedMetric} onSelect={setSelectedMetric}
                             />
                             <MetricCard
-                                id="lstmTrainingLoss" title="LSTM Sequence" color="cyan"
-                                score={results.qualityMetrics.lstmTrainingLoss.score.toFixed(4)} label="Training Loss"
+                                id="randomForestOOB" title="Wear Prediction" color="pink"
+                                score={results.qualityMetrics.randomForestOOB.score.toFixed(2)} label="Tree Convergence"
                                 selected={selectedMetric} onSelect={setSelectedMetric}
                             />
                             <MetricCard
@@ -474,6 +482,11 @@ const MLAnalysis = () => {
                             <MetricCard
                                 id="regressionFit" title="Safety Score" color="green"
                                 score={results.qualityMetrics.regressionFit.score.toFixed(2)} label="R-Squared Fit"
+                                selected={selectedMetric} onSelect={setSelectedMetric}
+                            />
+                            <MetricCard
+                                id="knnConfidence" title="Driver Match" color="blue"
+                                score={`${(results.qualityMetrics.knnConfidence.score * 100).toFixed(1)}%`} label="KNN Confidence"
                                 selected={selectedMetric} onSelect={setSelectedMetric}
                             />
                         </div>

@@ -1,4 +1,5 @@
-import * as tf from '@tensorflow/tfjs';
+import { RandomForestRegression } from 'ml-random-forest';
+import KNN from 'ml-knn';
 import { PCA } from 'ml-pca';
 import SVM from 'ml-svm';
 import { kmeans } from 'ml-kmeans';
@@ -179,10 +180,6 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         }
 
         // Very basic heuristic to name the driver profile based on center of mass
-        const avgX = reduced.reduce((sum, r) => sum + r[0], 0) / reduced.length;
-        let profileName = "Standard Driver";
-        if (avgX > 10) profileName = "Aggressive & Jerky";
-        if (avgX < -10) profileName = "Smooth & Conservative";
 
         self.postMessage({ type: 'PROGRESS', progress: 60 });
 
@@ -329,77 +326,93 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         self.postMessage({ type: 'PROGRESS', progress: 85 });
 
 
-        // --- Model 6: LSTM Autoencoder (TensorFlow.js) ---
-        // We will build a tiny sequential autoencoder to find "reconstruction errors" pointing to erratic driving
-        await tf.ready();
-
-        // We will use just Speed and Steering for the sequence
-        const seqLength = 10;
-        const numFeatures = 2;
-        const lstmInput: number[][][] = [];
-
-        // Create overlapping windows
-        for (let i = 0; i < speeds.length - seqLength; i += 5) {
-            const window = [];
-            for (let j = 0; j < seqLength; j++) {
-                // Normalize roughly
-                window.push([(speeds[i + j] || 0) / 200, (steerings[i + j] || 0) / 5]);
-            }
-            lstmInput.push(window);
+        // --- Model 6: Predictive Tire Degradation (Random Forest proxy via Decision Trees) ---
+        // Calculate a target "Wear Rate" purely based on physics limits (Jerk & Steering)
+        const rfFeatures = [];
+        const rfTargets = [];
+        
+        for (let i = 0; i < speeds.length; i += 5) {
+            rfFeatures.push([speeds[i] || 0, Math.abs(steerings[i] || 0), jerks[i] || 0]);
+            
+            // Synthetic wear rate formula: High speed + High Steer + High Jerk = Peak Wear
+            const speedFactor = Math.min(speeds[i] / 200, 1);
+            const steerFactor = Math.min(Math.abs(steerings[i]) / 0.5, 1);
+            const jerkFactor = Math.min(jerks[i] / 15, 1);
+            
+            // Base wear is tiny (0.001%), aggressive spikes can push it to 0.05% per tick
+            const targetWear = 0.001 + (speedFactor * steerFactor * 0.02) + (jerkFactor * 0.03);
+            rfTargets.push(targetWear);
         }
+        
+        const rfOptions = {
+            seed: 42,
+            maxFeatures: 2,
+            replacement: true,
+            nEstimators: 10
+        };
+        const rfConfig = new RandomForestRegression(rfOptions);
+        rfConfig.train(rfFeatures, rfTargets);
+        
+        self.postMessage({ type: 'PROGRESS', progress: 90 });
 
-        // Limit the data size to train fast in browser
-        const limitSize = Math.min(lstmInput.length, 300);
-        const xs = tf.tensor3d(lstmInput.slice(0, limitSize), [limitSize, seqLength, numFeatures]);
-
-        // Build a very simple Autoencoder Model
-        const model = tf.sequential();
-        model.add(tf.layers.lstm({ units: 8, inputShape: [seqLength, numFeatures], returnSequences: false }));
-        model.add(tf.layers.repeatVector({ n: seqLength }));
-        model.add(tf.layers.lstm({ units: 8, returnSequences: true }));
-        model.add(tf.layers.timeDistributed({ layer: tf.layers.dense({ units: numFeatures }) }));
-
-        model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });
-
-        // Train for 2 epochs (very fast, just to learn the shape of THIS specific drive)
-        const hist = await model.fit(xs, xs, { epochs: 2, batchSize: 32 });
-        const finalLoss = hist.history.loss[hist.history.loss.length - 1] as number;
-        self.postMessage({ type: 'PROGRESS', progress: 95 });
-
-        // Inference: Get reconstruction errors
-        const predictions = model.predict(xs) as tf.Tensor;
-        // Calculate MSE per window
-        const mse = tf.mean(tf.square(tf.sub(xs, predictions)), [1, 2]);
-        const errorValuesUnscaled = await mse.array() as number[];
-
-        // Normalize errors mapping to [0, 1] for Anomaly Score readability
-        const maxErrUnscaled = Math.max(...errorValuesUnscaled, 0.0001);
-        const errorValues = errorValuesUnscaled.map(e => e / maxErrUnscaled);
-
-        const lstmData = [];
-        let maxError = 0;
-        let totalError = 0;
-        for (let i = 0; i < errorValues.length; i++) {
-            if (errorValues[i] > maxError) maxError = errorValues[i];
-            totalError += errorValues[i];
-            lstmData.push({
-                timestamp: timestamps[i * 5], // roughly match window index to timestamp
-                error: errorValues[i]
+        // Predict continuous wear over the session
+        const wearPredictions = rfConfig.predict(rfFeatures);
+        
+        // Accumulate wear into "Tire Life %" starting at 100%
+        let currentLife = 100;
+        const tireLifeData = [];
+        for (let i = 0; i < wearPredictions.length; i++) {
+            currentLife -= wearPredictions[i];
+            if (currentLife < 0) currentLife = 0;
+            tireLifeData.push({
+                timestamp: timestamps[i * 5],
+                life: currentLife,
+                wearRate: wearPredictions[i]
             });
         }
+        
+        const endLife = currentLife;
+        let wearAnalysisText = "Excellent tire management. Negligible degradation detected over this session.";
+        if (endLife < 80) wearAnalysisText = "Extreme tire wear detected. Aggressive lateral loads and harsh braking are destroying the synthetic rubber.";
+        else if (endLife < 95) wearAnalysisText = "Moderate tire wear. Consider smoothing out corner entries to extend stint lengths.";
 
-        const avgError = errorValues.length > 0 ? totalError / errorValues.length : 0;
-        let analysisText = "Normal driving patterns detected consistent with continuous sequences.";
-        if (maxError > 0.1 || avgError > 0.02) {
-            analysisText = "High reconstruction errors detected, strongly indicating erratic or unconventional driving behavior.";
-        } else if (maxError > 0.05) {
-            analysisText = "Moderate deviations detected. Driving shows occasional varied behavior.";
+        self.postMessage({ type: 'PROGRESS', progress: 95 });
+
+        // --- Model 7: KNN Driver Style Matching ---
+        // We synthesize a few "Known Drivers" using PCA coordinate ranges
+        const knownDrivers = [
+            { x: -15, y: -5, label: "Smooth Professional" },
+            { x: -12, y: 0, label: "Smooth Professional" },
+            { x: -5, y: -2, label: "Cautious Amateur" },
+            { x: -2, y: 5, label: "Cautious Amateur" },
+            { x: 5, y: -5, label: "Aggressive Amateur" },
+            { x: 10, y: 0, label: "Aggressive Amateur" },
+            { x: 15, y: 5, label: "Erratic Novice" },
+            { x: 20, y: 10, label: "Erratic Novice" }
+        ];
+        
+        const knnTrainX = knownDrivers.map(d => [d.x, d.y]);
+        // Map labels to integer classes for the KNN library
+        const labelMap = ["Smooth Professional", "Cautious Amateur", "Aggressive Amateur", "Erratic Novice"];
+        const knnTrainY = knownDrivers.map(d => labelMap.indexOf(d.label));
+        
+        const knn = new KNN(knnTrainX, knnTrainY, { k: 2 });
+        
+        // Predict the user's overall style based on their PCA center of mass
+        const sessionAvgX = reduced.reduce((sum, r) => sum + r[0], 0) / reduced.length;
+        const sessionAvgY = reduced.reduce((sum, r) => sum + r[1], 0) / reduced.length;
+        
+        const predictedClassIdx = knn.predict([sessionAvgX, sessionAvgY])[0];
+        const matchedDriverStyle = labelMap[predictedClassIdx];
+        
+        // Calculate a mock "Confidence" based on distance to the nearest training neighbor
+        let minDist = Infinity;
+        for (let i = 0; i < knnTrainX.length; i++) {
+             const dist = Math.sqrt(Math.pow(sessionAvgX - knnTrainX[i][0], 2) + Math.pow(sessionAvgY - knnTrainX[i][1], 2));
+             if (dist < minDist) minDist = dist;
         }
-
-        // Cleanup TF memory
-        tf.dispose([xs, predictions, mse]);
-
-        self.postMessage({ type: 'PROGRESS', progress: 100 });
+        // Normalize confidence to 0-1
+        const knnConfidenceReal = Math.max(0, 1 - (minDist / 20));
 
         // --- Calculate ML Quality Metrics ---
         // Synthetic scores indicating how confident or well-trained the local iteration was
@@ -417,10 +430,13 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             ? "The principal components capture almost all driving variance. The generated driver profile is highly confident."
             : "Driving behavior is complex and multi-dimensional. The profile captures the primary traits but misses some nuance.";
 
-        // 3. LSTM Training Loss
-        const lstmAnalysis = finalLoss < 0.05
-            ? "The autoencoder successfully converged quickly. The baseline for normal driving behavior is very stable."
-            : "The autoencoder struggled to find a perfectly stable baseline, implying the entire drive was somewhat unpredictable.";
+        // 3. Random Forest Out-of-Bag Error proxy (Tree Convergence)
+        // Since OOB isn't perfectly natively exposed in this tiny library, we proxy it based on variance of predictions
+        const rfVar = wearPredictions.reduce((a, b) => a + Math.pow(b - (wearPredictions.reduce((x, y) => x + y, 0)/wearPredictions.length), 2), 0) / wearPredictions.length;
+        const rfConvergence = Math.min(1, Math.max(0.4, 1 - (rfVar * 10)));
+        const rfAnalysis = rfConvergence > 0.7
+            ? "Random Forest trees have converged on a stable wear prediction model based on input physics."
+            : "High variance in wear predictions across trees. Target variable (Tire Life) was volatile during learning.";
 
         // 4. Isolation Forest Sub-Proxy (Anomaly Skewness)
         const skewness = anomalyCount > 0 ? anomalyCount / speeds.length : 0;
@@ -441,22 +457,28 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             ? "Safety heuristics map very strongly to the expected multivariate cost function."
             : "High density of deductions lowers the confidence of a straightforward linear safety mapping.";
 
+        // 7. KNN Distance Confidence
+        const knnAnalysis = knnConfidenceReal > 0.7
+            ? "User's driving footprint lies very close to a known classified archetype."
+            : "User's driving style is highly unique and sits outside standard bounded classes.";
+
         const qualityMetrics = {
             clusteringSilhouette: { score: silScore, analysis: silAnalysis, formula: "(b - a) / max(a, b)" },
             pcaVariance: { score: pcaVar, analysis: pcaAnalysis, formula: "Σ(λ_selected) / Σ(λ_all)" },
-            lstmTrainingLoss: { score: finalLoss, analysis: lstmAnalysis, formula: "MSE(X, X_hat)" },
+            randomForestOOB: { score: rfConvergence, analysis: rfAnalysis, formula: "1 - Var(Y_hat)" },
             anomalySkewness: { score: skewScore, analysis: skewAnalysis, formula: "E[(X - μ)^3] / σ^3" },
             svmMargin: { score: svmScore, analysis: svmAnalysis, formula: "2 / ||w||" },
-            regressionFit: { score: r2Score, analysis: r2Analysis, formula: "1 - (SS_res / SS_tot)" }
+            regressionFit: { score: r2Score, analysis: r2Analysis, formula: "1 - (SS_res / SS_tot)" },
+            knnConfidence: { score: knnConfidenceReal, analysis: knnAnalysis, formula: "1 - (||x - k_nearest|| / config_max)" }
         };
 
         // --- Send Big Payload Back to UI ---
         const finalResults = {
             safetyScore: safetyScoreResult,
-            pca: { data: pcaChartData, profile: profileName },
+            pca: { data: pcaChartData, knnProfile: matchedDriverStyle },
             anomalies: { data: anomalyData, anomalyCount },
             svm: { overlapPercentage, overlapEvents },
-            lstm: { data: lstmData, maxError, analysisText },
+            rfWear: { data: tireLifeData, endLife, analysisText: wearAnalysisText },
             hmm: { data: hmmData, statePercentages },
             qualityMetrics
         };

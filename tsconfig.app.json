@@ -29,7 +29,8 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src"
+    "src/**/*",
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "src/types/connector.ts"
