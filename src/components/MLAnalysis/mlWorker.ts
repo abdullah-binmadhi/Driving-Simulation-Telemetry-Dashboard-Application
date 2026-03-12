@@ -2,6 +2,7 @@ import * as tf from '@tensorflow/tfjs';
 import { PCA } from 'ml-pca';
 import SVM from 'ml-svm';
 import { kmeans } from 'ml-kmeans';
+import MLR from 'ml-regression-multivariate-linear';
 
 export type IncomingMessage = {
     type: 'ANALYZE_SESSION';
@@ -102,6 +103,19 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             deductions: Array.from(deductionsDetail)
         };
 
+        // Train real multivariate regression to get R-squared quality metric
+        const mlr = new MLR(xSafety, yCost);
+        const yPredict = mlr.predict(xSafety);
+        // Calculate SS_res and SS_tot for R2
+        let ssRes = 0;
+        let ssTot = 0;
+        const yMean = yCost.reduce((sum, y) => sum + y[0], 0) / yCost.length;
+        for (let i = 0; i < yCost.length; i++) {
+            ssRes += Math.pow(yCost[i][0] - yPredict[i][0], 2);
+            ssTot += Math.pow(yCost[i][0] - yMean, 2);
+        }
+        const realR2Score = ssTot === 0 ? 1 : 1 - (ssRes / ssTot);
+
         self.postMessage({ type: 'PROGRESS', progress: 30 });
 
         // --- Model 2: Isolation Forest Anomaly Detection (Proxy via Z-Score/Statistical Outlier) ---
@@ -137,9 +151,22 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         // --- Model 3: PCA (Principal Component Analysis) ---
         // Reduce [Throttle, Brake, Steering, Speed, Jerk] to 2 dimensions
-        const pcaDataMatrix = xSafety;
+        // Z-Score Standardization
+        const means: number[] = [];
+        const stds: number[] = [];
+        for (let col = 0; col < 5; col++) {
+             const colVals = xSafety.map(row => row[col]);
+             const mean = colVals.reduce((a, b) => a + b, 0) / colVals.length;
+             const std = Math.sqrt(colVals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / colVals.length) || 1;
+             means.push(mean);
+             stds.push(std);
+        }
+        
+        const pcaDataMatrix = xSafety.map(row => row.map((val, col) => (val - means[col]) / stds[col]));
         const pca = new PCA(pcaDataMatrix);
         const reduced = pca.predict(pcaDataMatrix).to2DArray();
+        const explainedVariances = pca.getExplainedVariance();
+        const realPcaVariance = explainedVariances[0] + explainedVariances[1]; // Sum of variance explained by first 2 components
 
         const pcaChartData = [];
         for (let i = 0; i < reduced.length; i += 20) { // Downsample points
@@ -205,31 +232,82 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         const hmmData = [];
         const stateCounts: Record<string, number> = { 'Cruising': 0, 'Slow / Cautious': 0, 'Cornering': 0, 'Erratic': 0 };
 
-        const avgSpeed = speeds.reduce((a, b) => a + b, 0) / speeds.length;
-        const avgSteer = steerings.reduce((a, b) => a + Math.abs(b), 0) / steerings.length;
-        const avgJerk = jerks.reduce((a, b) => a + b, 0) / jerks.length;
 
-        // Map clusters to human names based on cluster centroids
-        const clusterNames = ans.centroids.map((c: any) => {
-            const [cSpeedNorm, cSteerNorm, cJerkNorm] = c;
 
-            // Re-scale back up to physical thresholds intuitively for the rules-engine mapper
-            const cSpeed = cSpeedNorm * maxSpeed;
-            const cSteer = cSteerNorm * maxSteerAbs;
-            const cJerk = cJerkNorm * maxJerk;
+        // Map clusters to human names based on relative centroids
+        // This prevents the "100% Erratic" bug when overall session averages are shifted.
+        let clusterProfiles = ans.centroids.map((c: any, index: number) => ({
+            index,
+            speed: c[0] * maxSpeed,
+            steer: c[1] * maxSteerAbs,
+            jerk: c[2] * maxJerk,
+            name: ''
+        }));
+        
+        // 1. Lowest speed -> Slow / Cautious
+        clusterProfiles.sort((a: any, b: any) => a.speed - b.speed);
+        clusterProfiles[0].name = 'Slow / Cautious';
+        
+        // 2. Of remaining 3, highest jerk -> Erratic
+        let remaining = clusterProfiles.slice(1);
+        remaining.sort((a: any, b: any) => b.jerk - a.jerk);
+        remaining[0].name = 'Erratic';
+        
+        // 3. Of remaining 2, highest steer -> Cornering
+        remaining = remaining.slice(1);
+        remaining.sort((a: any, b: any) => b.steer - a.steer);
+        remaining[0].name = 'Cornering';
+        
+        // 4. Last one -> Cruising
+        remaining[1].name = 'Cruising';
+        
+        // Re-sort back to original index order
+        clusterProfiles.sort((a: any, b: any) => a.index - b.index);
+        const clusterNames = clusterProfiles.map((c: any) => c.name);
 
-            // Erratic: Jerk is significantly above average baseline (e.g., 200%) OR steering is exceptionally high while moving
-            if (cJerk > Math.max(avgJerk * 2.0, 5) || (cSteer > Math.max(avgSteer * 2.5, 0.2) && cSpeed > 20)) return 'Erratic';
-
-            // Cornering: Steering is above average, but not violently erratic
-            if (cSteer > Math.max(avgSteer * 1.5, 0.1)) return 'Cornering';
-
-            // Slow/Cautious: Speed is significantly below average 
-            if (cSpeed < avgSpeed * 0.6 || cSpeed < 30) return 'Slow / Cautious';
-
-            // Default to normal cruising when inputs are standard
-            return 'Cruising';
-        });
+        // Calculate Mathematical Silhouette Score (approximation via downsampling for performance)
+        let sTotal = 0;
+        let silCount = 0;
+        const pts = kmeansData;
+        const step = Math.max(1, Math.floor(pts.length / 100)); // Sample ~100 points
+        
+        for(let i=0; i<pts.length; i+=step) {
+            const cIdx = ans.clusters[i];
+            
+            let aDist = 0;
+            let aCount = 0;
+            const bDists = Array(4).fill(0);
+            const bCounts = Array(4).fill(0);
+            
+            for(let j=0; j<pts.length; j+=step) {
+                if(i === j) continue;
+                const dist = Math.sqrt(Math.pow(pts[i][0]-pts[j][0], 2) + Math.pow(pts[i][1]-pts[j][1], 2) + Math.pow(pts[i][2]-pts[j][2], 2));
+                const oIdx = ans.clusters[j];
+                if(oIdx === cIdx) {
+                    aDist += dist;
+                    aCount++;
+                } else {
+                    bDists[oIdx] += dist;
+                    bCounts[oIdx]++;
+                }
+            }
+            
+            const a = aCount > 0 ? aDist / aCount : 0;
+            let b = Infinity;
+            for(let k=0; k<4; k++) {
+                if(k !== cIdx && bCounts[k] > 0) {
+                    const avgBDist = bDists[k] / bCounts[k];
+                    if(avgBDist < b) b = avgBDist;
+                }
+            }
+            if(b === Infinity) b = 0;
+            
+            const s = Math.max(a, b) > 0 ? (b - a) / Math.max(a, b) : 0;
+            sTotal += s;
+            silCount++;
+        }
+        
+        const realSilScore = silCount > 0 ? sTotal / silCount : 0.5;
 
         for (let i = 0; i < ans.clusters.length; i++) {
             const stateName = clusterNames[ans.clusters[i]];
@@ -328,13 +406,13 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         // Realistic implementations would compute exact math (Silhouette for K-Means, Explained Variance for PCA, etc)
 
         // 1. K-Means Silhouette proxy
-        const silScore = Math.max(0.4, Math.random() * 0.4 + 0.5);
+        const silScore = Math.max(0, realSilScore);
         const silAnalysis = silScore > 0.7
             ? "Clusters are well-separated. Driving states (Cruising vs Erratic) are highly distinct."
             : "Clusters have some overlap. Driving inputs blend between states fluidly.";
 
         // 2. PCA Explained Variance proxy
-        const pcaVar = Math.max(0.6, Math.random() * 0.3 + 0.65);
+        const pcaVar = Math.min(1, Math.max(0, realPcaVariance));
         const pcaAnalysis = pcaVar > 0.8
             ? "The principal components capture almost all driving variance. The generated driver profile is highly confident."
             : "Driving behavior is complex and multi-dimensional. The profile captures the primary traits but misses some nuance.";
@@ -358,8 +436,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             : "High percentage of pedal overlap creates a messy decision boundary. Driver frequently presses throttle and brake simultaneously.";
 
         // 6. Regression Fit (Safety Score R-Squared proxy)
-        const totalDeductionRatio = speeds.length > 0 ? (safetyScoreResult.deductions.length / speeds.length) : 0;
-        const r2Score = Math.max(0.4, 0.95 - (totalDeductionRatio * 0.1));
+        const r2Score = Math.max(0, Math.min(1, realR2Score));
         const r2Analysis = r2Score > 0.8
             ? "Safety heuristics map very strongly to the expected multivariate cost function."
             : "High density of deductions lowers the confidence of a straightforward linear safety mapping.";
