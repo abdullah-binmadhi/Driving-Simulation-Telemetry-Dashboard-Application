@@ -21,6 +21,8 @@
     "lucide-react": "^0.563.0",
     "ml-kmeans": "^7.0.0",
     "ml-knn": "^3.0.0",
+    "ml-logistic-regression": "^2.0.0",
+    "ml-naivebayes": "^4.0.0",
     "ml-pca": "^4.1.1",
     "ml-random-forest": "^2.1.0",
     "ml-regression-multivariate-linear": "^2.0.4",

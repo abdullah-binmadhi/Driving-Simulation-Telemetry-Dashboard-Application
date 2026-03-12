@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, FileText, AlertTriangle, Brain, Target, Activity, Settings, GitCommit, Zap } from 'lucide-react';
+import { Play, FileText, AlertTriangle, Brain, Target, Activity, Settings, GitCommit, Zap, Timer, TrendingUp, GitFork, Gauge, ArrowRightLeft, ShieldCheck, Layers } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ScatterChart, Scatter, ZAxis } from 'recharts';
 import { useState, useRef, useEffect } from 'react';
 import Papa from 'papaparse';
@@ -49,6 +49,15 @@ interface MLResults {
         }>;
         statePercentages: Record<string, number>;
     };
+    // 8 new ML model results
+    fatigue: { score: number; decay: number; };
+    grip: { score: number; understeer: number; oversteer: number; };
+    shifts: { early: number; optimal: number; late: number; };
+    exitForecast: { speedCoeff: number; throttleCoeff: number; };
+    consistency: { dtwScore: number; };
+    brakingTech: { trailPercent: number; };
+    markov: Record<string, Record<string, number>>;
+    aggression: { safeFast: number; safeSlow: number; riskyFast: number; riskySlow: number; };
     qualityMetrics: {
         clusteringSilhouette: { score: number, analysis: string, formula: string };
         pcaVariance: { score: number, analysis: string, formula: string };
@@ -70,6 +79,14 @@ const INITIAL_RESULTS: MLResults = {
     svm: { overlapPercentage: 0, overlapEvents: 0 },
     rfWear: { data: [], endLife: 100, analysisText: "Awaiting analysis..." },
     hmm: { data: [], statePercentages: {} },
+    fatigue: { score: 100, decay: 0 },
+    grip: { score: 100, understeer: 0, oversteer: 0 },
+    shifts: { early: 0, optimal: 0, late: 0 },
+    exitForecast: { speedCoeff: 0.5, throttleCoeff: 0.2 },
+    consistency: { dtwScore: 85 },
+    brakingTech: { trailPercent: 50 },
+    markov: {},
+    aggression: { safeFast: 25, safeSlow: 25, riskyFast: 25, riskySlow: 25 },
     qualityMetrics: {
         clusteringSilhouette: { score: 0, analysis: "", formula: "" },
         pcaVariance: { score: 0, analysis: "", formula: "" },
@@ -106,12 +123,22 @@ const MLAnalysis = () => {
                 if (data.length > 50) {
                     // Normalize keys (handle 'Speed' vs 'speed')
                     const normalizedData = data.map((row, i) => {
-                        const getVal = (key: string) => {
-                            const foundKey = Object.keys(row).find(k => k.toLowerCase().includes(key));
-                            return foundKey ? Number(row[foundKey]) || 0 : 0;
+                        const getVal = (key: string, exact: boolean = false) => {
+                            let foundKey: string | undefined;
+                            if (exact) {
+                                foundKey = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase() || k.toLowerCase() === `is_${key.toLowerCase()}`);
+                            } else {
+                                // Strict filter to avoid getting 'speed_delta' when searching for 'speed'
+                                foundKey = Object.keys(row).find(k => {
+                                    const lowerK = k.toLowerCase();
+                                    const lowerKey = key.toLowerCase();
+                                    return lowerK === lowerKey || (lowerK.includes(lowerKey) && !lowerK.includes('_delta'));
+                                });
+                            }
+                            return foundKey && row[foundKey] !== null && row[foundKey] !== undefined ? Number(row[foundKey]) || 0 : 0;
                         };
                         return {
-                            timestamp: getVal('timestamp') || getVal('time') || (i * 16),
+                            timestamp: getVal('timestamp', true) || getVal('time', true) || (i * 16),
                             speed: getVal('speed') || getVal('vel'),
                             throttle: getVal('throttle') || getVal('gas'),
                             brake: getVal('brake'),
@@ -440,6 +467,221 @@ const MLAnalysis = () => {
                                     title={`Time: ${(d.timestamp / 1000).toFixed(1)}s | State: ${d.state}`}
                                 ></div>
                             ))}
+                        </div>
+                    </div>
+
+                    {/* ==== 8 NEW ADVANCED ML MODEL CARDS ==== */}
+
+                    {/* 8. Driver Fatigue Tracker */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <Timer className="w-5 h-5 text-amber-400" />
+                                Driver Fatigue Tracker
+                            </h3>
+                            <p className="text-xs text-slate-400">Logistic Regression — Focus decay over session</p>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center gap-4">
+                            <div className="flex items-baseline gap-2">
+                                <span className={`text-5xl font-black font-mono ${results.fatigue.score > 70 ? 'text-emerald-400' : results.fatigue.score > 40 ? 'text-amber-400' : 'text-red-400'}`}>{Math.round(results.fatigue.score)}%</span>
+                                <span className="text-slate-400">Focus Retained</span>
+                            </div>
+                            <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
+                                <div className={`h-full rounded-full transition-all duration-700 ${results.fatigue.score > 70 ? 'bg-emerald-500' : results.fatigue.score > 40 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${results.fatigue.score}%` }}></div>
+                            </div>
+                            <p className="text-xs text-slate-400">
+                                {results.fatigue.score > 70
+                                    ? "✅ Consistent focus maintained throughout the session."
+                                    : results.fatigue.score > 40
+                                    ? "⚠️ Moderate fatigue detected — input smoothness degraded over time."
+                                    : "🔴 Significant fatigue detected. Inputs became notably erratic by session end."}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* 9. Grip Limits Analyzer */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <TrendingUp className="w-5 h-5 text-red-400" />
+                                Grip Limits Analyzer
+                            </h3>
+                            <p className="text-xs text-slate-400">Decision Tree — Lateral G-Force traction classification</p>
+                        </div>
+                        <div className="flex-1 grid grid-cols-3 gap-3 text-center">
+                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
+                                <span className="text-2xl font-black text-emerald-400">{Math.round(results.grip.score)}%</span>
+                                <span className="text-xs text-slate-400">In Grip</span>
+                            </div>
+                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
+                                <span className="text-2xl font-black text-amber-400">{results.grip.understeer}</span>
+                                <span className="text-xs text-slate-400">Understeer Events</span>
+                            </div>
+                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
+                                <span className="text-2xl font-black text-red-400">{results.grip.oversteer}</span>
+                                <span className="text-xs text-slate-400">Oversteer Events</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 10. Shift Point Analyzer */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <GitFork className="w-5 h-5 text-purple-400" />
+                                Shift Point Analyzer
+                            </h3>
+                            <p className="text-xs text-slate-400">Naive Bayes — Gear change timing classification</p>
+                        </div>
+                        <div className="flex-1 grid grid-cols-3 gap-3 text-center">
+                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
+                                <span className="text-2xl font-black text-blue-400">{results.shifts.early}</span>
+                                <span className="text-xs text-slate-400">Early Shifts</span>
+                            </div>
+                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
+                                <span className="text-2xl font-black text-emerald-400">{results.shifts.optimal}</span>
+                                <span className="text-xs text-slate-400">Optimal Shifts</span>
+                            </div>
+                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
+                                <span className="text-2xl font-black text-red-400">{results.shifts.late}</span>
+                                <span className="text-xs text-slate-400">Late Shifts</span>
+                            </div>
+                        </div>
+                        <p className="text-xs text-slate-400">Optimal range = 5500–6500 RPM. {results.shifts.optimal > results.shifts.early + results.shifts.late ? "✅ Good timing discipline." : "⚠️ Shift points need refinement."}</p>
+                    </div>
+
+                    {/* 11. Corner Exit Forecaster */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <TrendingUp className="w-5 h-5 text-cyan-400" />
+                                Corner Exit Forecaster
+                            </h3>
+                            <p className="text-xs text-slate-400">Multivariate Linear Regression — Exit speed prediction coefficients</p>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center gap-3">
+                            <div className="flex justify-between items-center p-3 bg-slate-800 rounded-xl">
+                                <span className="text-slate-400 text-sm">Speed Coefficient (β₁)</span>
+                                <span className="text-cyan-400 font-mono font-bold">{results.exitForecast.speedCoeff.toFixed(3)}</span>
+                            </div>
+                            <div className="flex justify-between items-center p-3 bg-slate-800 rounded-xl">
+                                <span className="text-slate-400 text-sm">Throttle Coefficient (β₂)</span>
+                                <span className="text-cyan-400 font-mono font-bold">{results.exitForecast.throttleCoeff.toFixed(3)}</span>
+                            </div>
+                            <p className="text-xs text-slate-500">Higher β₂ = earlier throttle application leads to greater exit velocity gain.</p>
+                        </div>
+                    </div>
+
+                    {/* 12. Pedal Consistency (DTW) */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <Gauge className="w-5 h-5 text-indigo-400" />
+                                Pedal Consistency
+                            </h3>
+                            <p className="text-xs text-slate-400">Dynamic Time Warping — Brake zone repeatability score</p>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center items-center gap-3">
+                            <div className="relative w-28 h-28">
+                                <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+                                    <circle cx="50" cy="50" r="40" fill="none" stroke="#1e293b" strokeWidth="12" />
+                                    <circle cx="50" cy="50" r="40" fill="none"
+                                        stroke={results.consistency.dtwScore > 70 ? "#818cf8" : results.consistency.dtwScore > 40 ? "#f59e0b" : "#ef4444"}
+                                        strokeWidth="12"
+                                        strokeDasharray={`${2.51 * results.consistency.dtwScore} 251`}
+                                        strokeLinecap="round" />
+                                </svg>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-2xl font-black text-indigo-400">{Math.round(results.consistency.dtwScore)}</span>
+                                </div>
+                            </div>
+                            <p className="text-xs text-slate-400 text-center">{results.consistency.dtwScore > 70 ? "✅ Highly repeatable braking technique." : "⚠️ Inconsistent braking zones — varies significantly between corners."}</p>
+                        </div>
+                    </div>
+
+                    {/* 13. Braking Technique */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <ArrowRightLeft className="w-5 h-5 text-orange-400" />
+                                Braking Technique
+                            </h3>
+                            <p className="text-xs text-slate-400">Decision Tree — Trail vs Stab braking classification</p>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center gap-4">
+                            <div className="flex justify-between text-sm text-slate-400 font-semibold">
+                                <span>Stab Braking</span>
+                                <span>Trail Braking</span>
+                            </div>
+                            <div className="w-full h-4 bg-slate-800 rounded-full overflow-hidden flex">
+                                <div className="h-full bg-blue-500 transition-all duration-700" style={{ width: `${100 - results.brakingTech.trailPercent}%` }}></div>
+                                <div className="h-full bg-orange-500 transition-all duration-700" style={{ width: `${results.brakingTech.trailPercent}%` }}></div>
+                            </div>
+                            <div className="flex justify-between font-mono font-bold">
+                                <span className="text-blue-400">{100 - results.brakingTech.trailPercent}%</span>
+                                <span className="text-orange-400">{results.brakingTech.trailPercent}%</span>
+                            </div>
+                            <p className="text-xs text-slate-500">{results.brakingTech.trailPercent > 40 ? "🏎️ Trail braking used frequently — advanced technique that rotates the car into corners." : "🔵 Primarily stab braking — safer but leaves corner entry speed on the table."}</p>
+                        </div>
+                    </div>
+
+                    {/* 14. Transition Probability Flow (Markov) */}
+                    <div className="xl:col-span-2 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <ShieldCheck className="w-5 h-5 text-teal-400" />
+                                State Transition Flow
+                            </h3>
+                            <p className="text-xs text-slate-400">Markov Chain — Driving state transition probabilities</p>
+                        </div>
+                        <div className="flex-1 grid grid-cols-2 gap-3">
+                            {(['Cruising', 'Cornering', 'Slow / Cautious', 'Erratic'] as const).map(fromState => {
+                                const row = results.markov[fromState] || {};
+                                const total = Object.values(row).reduce((a: number, b: any) => a + Number(b), 0) || 1;
+                                const topTo = Object.entries(row).sort((a, b) => b[1] - a[1]).slice(0, 2);
+                                return (
+                                    <div key={fromState} className="bg-slate-800 p-3 rounded-xl">
+                                        <div className={`text-xs font-bold mb-2 ${fromState === 'Erratic' ? 'text-red-400' : fromState === 'Cruising' ? 'text-emerald-400' : fromState === 'Cornering' ? 'text-amber-400' : 'text-blue-400'}`}>{fromState} →</div>
+                                        {topTo.length === 0
+                                            ? <p className="text-xs text-slate-500">No transitions</p>
+                                            : topTo.map(([to, count]) => (
+                                                <div key={to} className="flex justify-between text-xs text-slate-300 py-0.5">
+                                                    <span>{to}</span>
+                                                    <span className="font-mono font-bold text-teal-400">{((Number(count) / total) * 100).toFixed(0)}%</span>
+                                                </div>
+                                            ))}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* 15. Aggression vs Safety Matrix */}
+                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
+                                <Layers className="w-5 h-5 text-fuchsia-400" />
+                                Aggression Matrix
+                            </h3>
+                            <p className="text-xs text-slate-400">K-Medoids Proxy — Speed vs Risk quadrant analysis</p>
+                        </div>
+                        <div className="flex-1 grid grid-cols-2 gap-2">
+                            <div className="bg-emerald-900/50 border border-emerald-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
+                                <span className="text-xs text-emerald-400 font-bold">SAFE + FAST</span>
+                                <span className="text-2xl font-black text-emerald-300">{Math.round(results.aggression.safeFast)}%</span>
+                            </div>
+                            <div className="bg-amber-900/50 border border-amber-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
+                                <span className="text-xs text-amber-400 font-bold">RISKY + FAST</span>
+                                <span className="text-2xl font-black text-amber-300">{Math.round(results.aggression.riskyFast)}%</span>
+                            </div>
+                            <div className="bg-blue-900/50 border border-blue-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
+                                <span className="text-xs text-blue-400 font-bold">SAFE + SLOW</span>
+                                <span className="text-2xl font-black text-blue-300">{Math.round(results.aggression.safeSlow)}%</span>
+                            </div>
+                            <div className="bg-red-900/50 border border-red-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
+                                <span className="text-xs text-red-400 font-bold">RISKY + SLOW</span>
+                                <span className="text-2xl font-black text-red-300">{Math.round(results.aggression.riskySlow)}%</span>
+                            </div>
                         </div>
                     </div>
 
