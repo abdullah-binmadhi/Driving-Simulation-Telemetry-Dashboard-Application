@@ -95,7 +95,6 @@ const Dashboard = () => {
                         maxG={2.5}
                     />
                     <BehaviorAnalysis />
-                    <DataLogger />
                 </div>
 
                 {/* CENTER COLUMN (6 cols) */}
@@ -121,6 +120,7 @@ const Dashboard = () => {
                     <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
                     <TireStatus temps={data.tireTemp} wear={data.tireWear} />
                     <CarHealth damage={data.carDamage} />
+                    <DataLogger />
                 </div>
             </div>
         </div>

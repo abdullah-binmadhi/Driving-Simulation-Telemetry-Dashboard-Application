@@ -42,8 +42,8 @@ const SessionStats = () => {
     const avgThrottle = throttleCount > 0 ? (throttleSum / throttleCount) * 100 : 0;
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-grow shadow-lg">
-            <div className="flex justify-between items-center mb-3">
+        <div className="bg-slate-900 rounded-2xl p-2 border border-slate-800 flex-grow shadow-lg">
+            <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-semibold text-slate-300">Session Extremes</h2>
                 <button
                     onClick={resetStats}
@@ -53,40 +53,40 @@ const SessionStats = () => {
                 </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2">
 
                 {/* Max Speed */}
-                <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
-                    <span className="text-slate-500 text-xs uppercase tracking-wider mb-1">Max Speed</span>
+                <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
+                    <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Max Speed</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold font-mono text-blue-400">{maxSpeed.toFixed(0)}</span>
+                        <span className="text-xl font-bold font-mono text-blue-400">{maxSpeed.toFixed(0)}</span>
                         <span className="text-xs text-slate-500 font-mono">km/h</span>
                     </div>
                 </div>
 
                 {/* Avg Throttle */}
-                <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
-                    <span className="text-slate-500 text-xs uppercase tracking-wider mb-1">Avg Throttle</span>
+                <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
+                    <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Avg Throttle</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold font-mono text-green-400">{avgThrottle.toFixed(1)}</span>
+                        <span className="text-xl font-bold font-mono text-green-400">{avgThrottle.toFixed(1)}</span>
                         <span className="text-xs text-slate-500 font-mono">%</span>
                     </div>
                 </div>
 
                 {/* Max Lat G */}
-                <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
-                    <span className="text-slate-500 text-xs uppercase tracking-wider mb-1">Max Lat G</span>
+                <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
+                    <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Max Lat G</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold font-mono text-purple-400">{maxGForceLat.toFixed(2)}</span>
+                        <span className="text-xl font-bold font-mono text-purple-400">{maxGForceLat.toFixed(2)}</span>
                         <span className="text-xs text-slate-500 font-mono">G</span>
                     </div>
                 </div>
 
                 {/* Max Long G */}
-                <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
-                    <span className="text-slate-500 text-xs uppercase tracking-wider mb-1">Max Long G</span>
+                <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
+                    <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Max Long G</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold font-mono text-orange-400">{maxGForceLong.toFixed(2)}</span>
+                        <span className="text-xl font-bold font-mono text-orange-400">{maxGForceLong.toFixed(2)}</span>
                         <span className="text-xs text-slate-500 font-mono">G</span>
                     </div>
                 </div>
