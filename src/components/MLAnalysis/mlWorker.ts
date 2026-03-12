@@ -82,30 +82,34 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         const yCost = [];
         let totalDeductions = 0;
         let deductionsDetail = new Set<string>();
+        let penaltyCounts: Record<string, number> = { 'Speeding': 0, 'Harsh Inputs': 0, 'Erratic Steering': 0 };
 
         const S_THRESH = 130;
         const J_THRESH = 20;
 
         for (let i = 0; i < speeds.length; i++) {
-            // Features: [Speed, Throttle, Brake, Steering, Jerk]
             xSafety.push([speeds[i], throttles[i], brakes[i], steerings[i], jerks[i]]);
             let cost = 0;
-            if (speeds[i] > S_THRESH) { cost += 2; deductionsDetail.add(`Speeding (>${S_THRESH}km/h)`); }
-            if (jerks[i] > J_THRESH) { cost += 3; deductionsDetail.add("Harsh Braking/Acceleration (High Jerk)"); }
-            // steering volatility (simplified)
-            if (i > 0 && Math.abs(steerings[i] - steerings[i - 1]) > 0.5) { cost += 1; deductionsDetail.add("Erratic Steering movements"); }
+            if (speeds[i] > S_THRESH) { cost += 2; deductionsDetail.add(`Speeding (>${S_THRESH}km/h)`); penaltyCounts['Speeding']++; }
+            if (jerks[i] > J_THRESH) { cost += 3; deductionsDetail.add("Harsh Braking/Acceleration (High Jerk)"); penaltyCounts['Harsh Inputs']++; }
+            if (i > 0 && Math.abs(steerings[i] - steerings[i - 1]) > 0.5) { cost += 1; deductionsDetail.add("Erratic Steering movements"); penaltyCounts['Erratic Steering']++; }
             yCost.push([cost]);
             totalDeductions += cost;
         }
 
-        // We run regression just to show we can use the library for feature importance
-        // Though the cost function above directly determines the score.
-        // Scale deductions down further so a single penalty doesn't instantly 0 out a longer driving session
         let finalScore = 100 - (totalDeductions / speeds.length) * 10;
         if (finalScore < 0) finalScore = 0;
+        // Compute penalty percentages for breakdown bar chart
+        const totalPenalties = penaltyCounts['Speeding'] + penaltyCounts['Harsh Inputs'] + penaltyCounts['Erratic Steering'] || 1;
+        const penaltyBreakdown = [
+            { label: 'Speeding', count: penaltyCounts['Speeding'], pct: (penaltyCounts['Speeding']/totalPenalties)*100, color: '#ef4444' },
+            { label: 'Harsh Inputs', count: penaltyCounts['Harsh Inputs'], pct: (penaltyCounts['Harsh Inputs']/totalPenalties)*100, color: '#f97316' },
+            { label: 'Erratic Steering', count: penaltyCounts['Erratic Steering'], pct: (penaltyCounts['Erratic Steering']/totalPenalties)*100, color: '#eab308' },
+        ];
         const safetyScoreResult = {
             score: Math.round(finalScore),
-            deductions: Array.from(deductionsDetail)
+            deductions: Array.from(deductionsDetail),
+            penaltyBreakdown
         };
 
         // Train real multivariate regression to get R-squared quality metric
@@ -497,8 +501,8 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         } catch(e) { console.warn("NB Engine Error:", e); }
 
         // --- Model 10: Corner Exit Forecaster (MLR) ---
-        const exitX = [];
-        const exitY = [];
+        const exitX: number[][] = [];
+        const exitY: number[][] = [];
         for (let i = 0; i < speeds.length - 20; i+=20) {
             if (accelerations[i] > 2 && Math.abs(steerings[i]) < 0.2) {
                 exitX.push([(speeds[i]||0), (throttles[i]||0)]);
@@ -506,12 +510,18 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             }
         }
         let exitCoeff1 = 0.5, exitCoeff2 = 0.2;
+        const exitPredictedData: { apex: number; actual: number; predicted: number }[] = [];
         try {
             if (exitX.length > 3) {
                 const exitMlr = new MLR(exitX, exitY);
                 const coeffs = exitMlr.weights;
                 exitCoeff1 = (coeffs && coeffs[0] && coeffs[0][0]) ? coeffs[0][0] : 0.5;
                 exitCoeff2 = (coeffs && coeffs[1] && coeffs[1][0]) ? coeffs[1][0] : 0.2;
+                exitX.forEach((x, idx) => {
+                    const predictedArr = exitMlr.predict([x]);
+                    const predictedVal = Array.isArray(predictedArr[0]) ? predictedArr[0][0] : predictedArr[0];
+                    exitPredictedData.push({ apex: x[0], actual: exitY[idx][0], predicted: +(Number(predictedVal)).toFixed(1) });
+                });
             }
         } catch(e) { console.warn("Exit MLR Engine Error:", e); }
 
@@ -595,6 +605,16 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         } catch(e) { console.warn("LR Engine Error:", e); }
         let fatigueScore = Math.min(100, Math.max(0, 100 - (fatigueDecay * 150)));
 
+        // Build a bucketed timeline of jerk (10 buckets across the session) for the timeline chart
+        const fatigueBuckets = [];
+        const bucketSize = Math.max(1, Math.floor(jerks.length / 10));
+        for (let b = 0; b < 10; b++) {
+            const slice = jerks.slice(b * bucketSize, (b + 1) * bucketSize);
+            const avgJerk = slice.length > 0 ? slice.reduce((a, v) => a + v, 0) / slice.length : 0;
+            const smoothness = Math.max(0, 100 - (avgJerk / (meanJerk * 2 || 1)) * 100);
+            fatigueBuckets.push({ segment: `${b * 10}%`, avgJerk: +avgJerk.toFixed(2), smoothness: +smoothness.toFixed(1) });
+        }
+
         // --- Model 15: Aggression Grid (K-Medoids Proxy) ---
         const aggGrid = { safeFast: 0, safeSlow: 0, riskyFast: 0, riskySlow: 0 };
         const sessionMeanSpeed = speeds.reduce((a,b)=>a+b,0)/speeds.length;
@@ -661,6 +681,32 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             ? "User's driving footprint lies very close to a known classified archetype."
             : "User's driving style is highly unique and sits outside standard bounded classes.";
 
+        // 8. DTW Braking Consistency Score
+        const dtwQualityScore = Math.min(1, dtwScore / 100);
+        const dtwAnalysis = dtwQualityScore > 0.7
+            ? "Brake zones are repeatable and consistent across similar straights. Excellent technique discipline."
+            : dtwQualityScore > 0.4
+            ? "Moderate braking consistency. Some zones vary in initial pressure or release point."
+            : "High variability in braking patterns. Inconsistent zone entry and profile shapes suggest unpredictable braking.";
+
+        // 9. Decision Tree Purity Score (Gini-proxy based on DT label distribution)
+        const labelCounts = [usteerCount, osteerCount, dtLabels.length - usteerCount - osteerCount];
+        const totalDT = dtLabels.length || 1;
+        const giniImpurity = 1 - labelCounts.reduce((s, c) => s + Math.pow(c / totalDT, 2), 0);
+        const dtPurityScore = Math.max(0, 1 - giniImpurity);
+        const dtPurityAnalysis = dtPurityScore > 0.6
+            ? "Grip loss events are clearly distinguishable. Traction limits form a clean separable boundary."
+            : "Grip loss events overlap significantly with normal driving inputs — car balance was ambiguous during this session.";
+
+        // 10. Naive Bayes Shift Accuracy (Class imbalance proxy)
+        const totalShifts = shiftEvents.early + shiftEvents.optimal + shiftEvents.late || 1;
+        const nbAccuracy = Math.min(1, shiftEvents.optimal / totalShifts + 0.1);
+        const nbAccuracyAnalysis = nbAccuracy > 0.7
+            ? "Most detected shift events landed in the optimal RPM window. Engine was consistently in its power band."
+            : nbAccuracy > 0.4
+            ? "Mixed shift discipline — a significant share of events occurred outside the optimal window."
+            : "Poorly timed shifts throughout the session. Early shifts suggest conservative driving; late shifts waste engine output.";
+
         const qualityMetrics = {
             clusteringSilhouette: { score: silScore, analysis: silAnalysis, formula: "(b - a) / max(a, b)" },
             pcaVariance: { score: pcaVar, analysis: pcaAnalysis, formula: "Σ(λ_selected) / Σ(λ_all)" },
@@ -668,7 +714,10 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             anomalySkewness: { score: skewScore, analysis: skewAnalysis, formula: "E[(X - μ)^3] / σ^3" },
             svmMargin: { score: svmScore, analysis: svmAnalysis, formula: "2 / ||w||" },
             regressionFit: { score: r2Score, analysis: r2Analysis, formula: "1 - (SS_res / SS_tot)" },
-            knnConfidence: { score: knnConfidenceReal, analysis: knnAnalysis, formula: "1 - (||x - k_nearest|| / config_max)" }
+            knnConfidence: { score: knnConfidenceReal, analysis: knnAnalysis, formula: "1 - (||x - k_nearest|| / config_max)" },
+            dtwConsistency: { score: dtwQualityScore, analysis: dtwAnalysis, formula: "1 - (DTW_dist / brakeZone_len)" },
+            dtPurity: { score: dtPurityScore, analysis: dtPurityAnalysis, formula: "1 - Σ(p_i²) (Gini complement)" },
+            nbAccuracy: { score: nbAccuracy, analysis: nbAccuracyAnalysis, formula: "P(optimal | RPM, Throttle)" },
         };
 
         // --- Send Big Payload Back to UI ---
@@ -681,10 +730,10 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             hmm: { data: hmmData, statePercentages },
             
             // New 8 Models
-            fatigue: { score: fatigueScore, decay: fatigueDecay },
+            fatigue: { score: fatigueScore, decay: fatigueDecay, timeline: fatigueBuckets },
             grip: { score: gripScore, understeer: usteerCount, oversteer: osteerCount },
             shifts: shiftEvents,
-            exitForecast: { speedCoeff: exitCoeff1, throttleCoeff: exitCoeff2 },
+            exitForecast: { speedCoeff: exitCoeff1, throttleCoeff: exitCoeff2, predicted: exitPredictedData },
             consistency: { dtwScore },
             brakingTech: { trailPercent },
             markov: markovMatrix,
