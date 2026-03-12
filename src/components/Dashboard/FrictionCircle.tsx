@@ -27,8 +27,8 @@ const FrictionCircle = ({ gForceX, gForceY, maxG = 2.0 }: FrictionCircleProps) =
     const posY = 50 - (y / maxG) * 50;
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col items-center justify-center flex-grow">
-            <h2 className="text-lg font-semibold mb-4 text-slate-300 w-full text-left">Friction Circle</h2>
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex flex-col items-center justify-center flex-grow">
+            <h2 className="text-lg font-semibold mb-3 text-slate-300 w-full text-left">Friction Circle</h2>
 
             <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full border-2 border-slate-700 bg-slate-800 flex items-center justify-center shadow-inner overflow-hidden">
 

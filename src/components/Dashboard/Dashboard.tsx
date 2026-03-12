@@ -74,8 +74,8 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="p-4 min-h-full flex flex-col gap-4">
-            <div className="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800 shadow-sm">
+        <div className="p-2 min-h-full flex flex-col gap-2">
+            <div className="flex justify-between items-center bg-slate-900 p-3 rounded-xl border border-slate-800 shadow-sm">
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Research Telemetry</h1>
                 <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -83,10 +83,10 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-2">
 
                 {/* LEFT COLUMN (3 cols) */}
-                <div className="xl:col-span-3 flex flex-col gap-4 order-2 xl:order-1">
+                <div className="xl:col-span-3 flex flex-col gap-2 order-2 xl:order-1">
                     <DriverProfile />
                     <SessionInfo />
                     <FrictionCircle
@@ -99,10 +99,10 @@ const Dashboard = () => {
                 </div>
 
                 {/* CENTER COLUMN (6 cols) */}
-                <div className="xl:col-span-6 flex flex-col gap-4 order-1 xl:order-2">
+                <div className="xl:col-span-6 flex flex-col gap-2 order-1 xl:order-2">
                     <RPMGauge rpm={data.rpm} gear={data.gear} />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         <TrackMap />
                         <InputVisualizer
                             steering={data.steering}
@@ -116,7 +116,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* RIGHT COLUMN (3 cols) */}
-                <div className="xl:col-span-3 flex flex-col gap-4 order-3">
+                <div className="xl:col-span-3 flex flex-col gap-2 order-3">
                     <SessionStats />
                     <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
                     <TireStatus temps={data.tireTemp} wear={data.tireWear} />

@@ -42,8 +42,8 @@ const SessionStats = () => {
     const avgThrottle = throttleCount > 0 ? (throttleSum / throttleCount) * 100 : 0;
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow shadow-lg">
-            <div className="flex justify-between items-center mb-4">
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-grow shadow-lg">
+            <div className="flex justify-between items-center mb-3">
                 <h2 className="text-lg font-semibold text-slate-300">Session Extremes</h2>
                 <button
                     onClick={resetStats}
@@ -53,7 +53,7 @@ const SessionStats = () => {
                 </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
 
                 {/* Max Speed */}
                 <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">

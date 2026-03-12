@@ -47,8 +47,8 @@ const DataLogger = () => {
     };
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow shadow-lg">
-            <h2 className="text-lg font-semibold mb-4 text-slate-300 flex items-center justify-between">
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-grow shadow-lg">
+            <h2 className="text-lg font-semibold mb-3 text-slate-300 flex items-center justify-between">
                 <span>Data Logger (To DB)</span>
                 {isRecording && (
                     <span className="flex items-center gap-2 text-red-500 text-sm animate-pulse">
@@ -57,7 +57,7 @@ const DataLogger = () => {
                 )}
             </h2>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
                 <div className="flex justify-between items-center text-slate-400 text-sm">
                     <span>Frames Captured:</span>
                     <span className="font-mono text-white">{frameCount}</span>

@@ -33,7 +33,7 @@ const BehaviorAnalysis: React.FC = () => {
     const isUndersteer = data.understeerPlough === 1;
 
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex flex-col gap-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-3 shadow-sm flex flex-col gap-3">
             <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent flex items-center gap-2">
                 <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -41,7 +41,7 @@ const BehaviorAnalysis: React.FC = () => {
                 Behavioral Analysis
             </h2>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-3">
                 <ProgressBar label="Driver Smoothness" value={smoothnessScore} color="bg-cyan-500" />
                 <ProgressBar label="Brake Capacity Utilized" value={brakeUtil} color="bg-red-500" />
                 <ProgressBar label="Coasting Time (Off-Pedals)" value={coastingPct} color="bg-emerald-500" />

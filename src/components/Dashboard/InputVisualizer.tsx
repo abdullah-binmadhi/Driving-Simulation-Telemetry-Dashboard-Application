@@ -10,8 +10,8 @@ const InputVisualizer = ({ steering, throttle, brake, clutch }: InputVisualizerP
     const steeringDeg = steering * 180;
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow">
-            <h2 className="text-lg font-semibold mb-6 text-slate-300">Driver Inputs</h2>
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-grow">
+            <h2 className="text-lg font-semibold mb-4 text-slate-300">Driver Inputs</h2>
 
             <div className="flex flex-col md:flex-row items-center justify-around gap-8">
 

@@ -103,8 +103,8 @@ const TrackMap = () => {
     };
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex-grow shadow-lg flex flex-col items-center">
-            <div className="w-full flex justify-between items-center mb-4">
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-grow shadow-lg flex flex-col items-center">
+            <div className="w-full flex justify-between items-center mb-3">
                 <h2 className="text-lg font-semibold text-slate-300">Live Track Map</h2>
                 <button
                     onClick={handleClearMap}

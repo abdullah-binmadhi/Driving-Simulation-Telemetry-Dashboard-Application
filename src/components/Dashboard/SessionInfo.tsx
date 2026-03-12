@@ -6,7 +6,7 @@ const SessionInfo = () => {
     const { session, updateSessionSettings } = useSettingsStore();
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800">
             <h2 className="text-lg font-semibold mb-4 text-slate-300 flex items-center gap-2">
                 <Flag size={20} className="text-yellow-500" />
                 <span>Session Info</span>

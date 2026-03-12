@@ -31,7 +31,7 @@ const LiveMultiGraph = ({ data, title }: LiveMultiGraphProps) => {
     };
 
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 min-h-[24rem] flex-grow flex flex-col">
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-1 flex flex-col">
             <h2 className="text-lg font-semibold mb-2 text-slate-300">{title}</h2>
             <div style={{ width: '100%', height: '100%', minHeight: '300px' }} className="flex-grow">
                 <ResponsiveContainer width="100%" height="100%">

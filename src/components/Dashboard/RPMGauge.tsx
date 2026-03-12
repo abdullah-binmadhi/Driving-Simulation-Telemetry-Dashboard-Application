@@ -15,7 +15,7 @@ const RPMGauge: React.FC<RPMGaugeProps> = ({ rpm, maxRpm = 8000, redline = 7000,
     const gearText = gear === 0 ? 'N' : gear === -1 ? 'R' : gear.toString();
 
     return (
-        <div className="w-full bg-slate-800 rounded-xl p-4 border border-slate-700">
+        <div className="w-full bg-slate-800 rounded-xl p-3 border border-slate-700">
             <div className="flex justify-between items-end mb-2">
                 <div className="flex flex-col">
                     <span className="text-sm text-slate-400">RPM</span>

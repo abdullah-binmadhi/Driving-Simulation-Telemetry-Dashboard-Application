@@ -16,7 +16,7 @@ const formatTime = (ms: number) => {
 
 const LapTiming: React.FC<LapTimingProps> = ({ current, last, best }) => {
     return (
-        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+        <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex flex-col justify-between">
             <h2 className="text-lg font-semibold mb-2 text-slate-300">Timing</h2>
 
             <div className="space-y-4">
@@ -27,7 +27,7 @@ const LapTiming: React.FC<LapTimingProps> = ({ current, last, best }) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-800">
                     <div>
                         <div className="text-slate-500 text-[10px] uppercase">Last Lap</div>
                         <div className="text-lg font-mono text-slate-300">
