@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface RPMGaugeProps {
     rpm: number;
@@ -7,7 +7,7 @@ interface RPMGaugeProps {
     gear: number;
 }
 
-const RPMGauge: React.FC<RPMGaugeProps> = ({ rpm, maxRpm = 8000, redline = 7000, gear }) => {
+const RPMGauge: React.FC<RPMGaugeProps> = memo(({ rpm, maxRpm = 8000, redline = 7000, gear }) => {
     const percentage = Math.min(Math.max(rpm / maxRpm, 0), 1);
     const isRedline = rpm >= redline;
 
@@ -32,7 +32,7 @@ const RPMGauge: React.FC<RPMGaugeProps> = ({ rpm, maxRpm = 8000, redline = 7000,
             {/* RPM Bar */}
             <div className="h-4 bg-slate-900 rounded-full overflow-hidden relative">
                 <div
-                    className={`h-full transition-all duration-75 ease-out ${isRedline ? 'bg-red-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'}`}
+                    className={`h-full ${isRedline ? 'bg-red-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'}`}
                     style={{ width: `${percentage * 100}%` }}
                 />
                 {/* Redline Marker */}
@@ -43,6 +43,6 @@ const RPMGauge: React.FC<RPMGaugeProps> = ({ rpm, maxRpm = 8000, redline = 7000,
             </div>
         </div>
     );
-};
+});
 
 export default RPMGauge;

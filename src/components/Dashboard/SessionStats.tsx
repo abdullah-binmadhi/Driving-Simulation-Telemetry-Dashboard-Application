@@ -1,25 +1,41 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
 
-const SessionStats = () => {
+const SessionStats = memo(() => {
     const { data, isConnected } = useTelemetryStore();
 
     // Aggregation states
-    const [maxGForceLat, setMaxGForceLat] = useState(0);
-    const [maxGForceLong, setMaxGForceLong] = useState(0);
-    const [maxSpeed, setMaxSpeed] = useState(0);
+    const [stats, setStats] = useState({
+        maxGForceLat: 0,
+        maxGForceLong: 0,
+        maxSpeed: 0,
+        throttleSum: 0,
+        throttleCount: 0
+    });
 
-    // Throttle averaging variables
-    const [throttleSum, setThrottleSum] = useState(0);
-    const [throttleCount, setThrottleCount] = useState(0);
+    // Use a ref to store current values for high-frequency updates without re-rendering
+    const statsRef = useRef({
+        maxGForceLat: 0,
+        maxGForceLong: 0,
+        maxSpeed: 0,
+        throttleSum: 0,
+        throttleCount: 0
+    });
+
+    const lastUIUpdate = useRef(0);
+    const UI_UPDATE_INTERVAL = 500; // Update UI every 500ms for stats
 
     // Reset stats when connection drops or is manually cleared
     const resetStats = () => {
-        setMaxGForceLat(0);
-        setMaxGForceLong(0);
-        setMaxSpeed(0);
-        setThrottleSum(0);
-        setThrottleCount(0);
+        const fresh = {
+            maxGForceLat: 0,
+            maxGForceLong: 0,
+            maxSpeed: 0,
+            throttleSum: 0,
+            throttleCount: 0
+        };
+        statsRef.current = fresh;
+        setStats(fresh);
     };
 
     // Auto-reset if connection is lost
@@ -30,16 +46,22 @@ const SessionStats = () => {
     // Update aggregations when new data comes in
     useEffect(() => {
         if (data && isConnected) {
-            setMaxGForceLat(prev => Math.max(prev, Math.abs(data.gForceX)));
-            setMaxGForceLong(prev => Math.max(prev, Math.abs(data.gForceY)));
-            setMaxSpeed(prev => Math.max(prev, data.speed));
+            const current = statsRef.current;
+            current.maxGForceLat = Math.max(current.maxGForceLat, Math.abs(data.gForceX));
+            current.maxGForceLong = Math.max(current.maxGForceLong, Math.abs(data.gForceY));
+            current.maxSpeed = Math.max(current.maxSpeed, data.speed);
+            current.throttleSum += data.throttle;
+            current.throttleCount += 1;
 
-            setThrottleSum(prev => prev + data.throttle);
-            setThrottleCount(prev => prev + 1);
+            const now = Date.now();
+            if (now - lastUIUpdate.current >= UI_UPDATE_INTERVAL) {
+                setStats({ ...current });
+                lastUIUpdate.current = now;
+            }
         }
     }, [data, isConnected]);
 
-    const avgThrottle = throttleCount > 0 ? (throttleSum / throttleCount) * 100 : 0;
+    const avgThrottle = stats.throttleCount > 0 ? (stats.throttleSum / stats.throttleCount) * 100 : 0;
 
     return (
         <div className="bg-slate-900 rounded-2xl p-2 border border-slate-800 flex-grow shadow-lg">
@@ -59,7 +81,7 @@ const SessionStats = () => {
                 <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
                     <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Max Speed</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-xl font-bold font-mono text-blue-400">{maxSpeed.toFixed(0)}</span>
+                        <span className="text-xl font-bold font-mono text-blue-400">{stats.maxSpeed.toFixed(0)}</span>
                         <span className="text-xs text-slate-500 font-mono">km/h</span>
                     </div>
                 </div>
@@ -77,7 +99,7 @@ const SessionStats = () => {
                 <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
                     <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Max Lat G</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-xl font-bold font-mono text-purple-400">{maxGForceLat.toFixed(2)}</span>
+                        <span className="text-xl font-bold font-mono text-purple-400">{stats.maxGForceLat.toFixed(2)}</span>
                         <span className="text-xs text-slate-500 font-mono">G</span>
                     </div>
                 </div>
@@ -86,7 +108,7 @@ const SessionStats = () => {
                 <div className="bg-slate-800/50 p-2 rounded-xl border border-slate-700/50 flex flex-col items-center justify-center">
                     <span className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Max Long G</span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-xl font-bold font-mono text-orange-400">{maxGForceLong.toFixed(2)}</span>
+                        <span className="text-xl font-bold font-mono text-orange-400">{stats.maxGForceLong.toFixed(2)}</span>
                         <span className="text-xs text-slate-500 font-mono">G</span>
                     </div>
                 </div>
@@ -94,6 +116,6 @@ const SessionStats = () => {
             </div>
         </div>
     );
-};
+});
 
 export default SessionStats;

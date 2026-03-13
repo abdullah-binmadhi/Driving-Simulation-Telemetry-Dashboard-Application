@@ -6,10 +6,11 @@ import type { TelemetryData } from '../src/types/telemetry.js';
 export class SessionManager extends EventEmitter {
     private currentSessionId: number | null = null;
     private buffer: TelemetryData[] = [];
-    private readonly BATCH_SIZE = 60; // Insert every ~1 second if 60Hz
+    private readonly BATCH_SIZE = 120; // Insert every ~2 seconds if 60Hz
     private lastActivityTime: number = Date.now();
     private isRecording = false;
     private manualStartRequested = false;
+    private insertStatement: any = null;
 
 
     // Session Stats
@@ -23,6 +24,33 @@ export class SessionManager extends EventEmitter {
 
     constructor() {
         super();
+        this.initStatements();
+    }
+
+    private initStatements() {
+        try {
+            this.insertStatement = db.prepare(`
+                INSERT INTO telemetry (
+                    session_id, timestamp, speed, rpm, gear, throttle, brake, clutch, steering,
+                    gForceX, gForceY, gForceZ, fuel, engineTemp,
+                    pos_x, pos_y, pos_z,
+                    throttle_delta, brake_delta, steering_delta, speed_delta,
+                    gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
+                    jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
+                    oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization
+                ) VALUES (
+                    @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @clutch, @steering,
+                    @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
+                    @pos_x, @pos_y, @pos_z,
+                    @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
+                    @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
+                    @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
+                    @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization
+                )
+            `);
+        } catch (e) {
+            console.error('Failed to prepare telemetry insert statement:', e);
+        }
     }
 
     public processData(data: TelemetryData) {
@@ -68,8 +96,8 @@ export class SessionManager extends EventEmitter {
             data.isBraking = (data.brake > 0.05) ? 1 : 0;
             data.isTurning = (Math.abs(data.steering) > 0.05) ? 1 : 0;
 
-            this.lastData = { ...data }; // Copy for next frame comparison
-            this.buffer.push(data);
+            this.lastData = data; // Keep reference instead of clone to save GC
+            this.buffer.push({ ...data }); // Only clone once when pushing to buffer
 
             // Stats Calculation and Spatial Distance
             const now = data.timestamp;
@@ -213,29 +241,9 @@ export class SessionManager extends EventEmitter {
         // For high performance, we might want to do this in a worker or keep batch size small enough.
         // 60 rows is very fast.
 
-        const insert = db.prepare(`
-      INSERT INTO telemetry (
-        session_id, timestamp, speed, rpm, gear, throttle, brake, clutch, steering,
-        gForceX, gForceY, gForceZ, fuel, engineTemp,
-        pos_x, pos_y, pos_z,
-        throttle_delta, brake_delta, steering_delta, speed_delta,
-        gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
-        jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
-        oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization
-      ) VALUES (
-        @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @clutch, @steering,
-        @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
-        @pos_x, @pos_y, @pos_z,
-        @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
-        @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
-        @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
-        @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization
-      )
-    `);
-
         const insertMany = db.transaction((rows: TelemetryData[]) => {
             for (const row of rows) {
-                insert.run({
+                this.insertStatement.run({
                     session_id: this.currentSessionId,
                     timestamp: row.timestamp,
                     speed: row.speed,

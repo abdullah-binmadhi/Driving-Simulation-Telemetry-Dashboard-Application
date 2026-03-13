@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, memo } from 'react';
 
 interface FrictionCircleProps {
     gForceX: number; // Lateral (-left, +right)
@@ -6,7 +6,7 @@ interface FrictionCircleProps {
     maxG?: number;   // Max scale of the circle (e.g., 2G)
 }
 
-const FrictionCircle = ({ gForceX, gForceY, maxG = 2.0 }: FrictionCircleProps) => {
+const FrictionCircle = memo(({ gForceX, gForceY, maxG = 2.0 }: FrictionCircleProps) => {
     // Clamp the dot to the circle's maximum graphical bounds
     const clampDist = (x: number, y: number, max: number) => {
         const dist = Math.sqrt(x * x + y * y);
@@ -44,7 +44,7 @@ const FrictionCircle = ({ gForceX, gForceY, maxG = 2.0 }: FrictionCircleProps) =
 
                 {/* The dynamic Live G-Force Dot */}
                 <div
-                    className="absolute w-4 h-4 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.8)] transition-all duration-75 ease-out"
+                    className="absolute w-4 h-4 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.8)]"
                     style={{
                         left: `${posX}%`,
                         top: `${posY}%`,
@@ -66,6 +66,6 @@ const FrictionCircle = ({ gForceX, gForceY, maxG = 2.0 }: FrictionCircleProps) =
             </div>
         </div>
     );
-};
+});
 
 export default FrictionCircle;

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
 import { useSettingsStore } from '../../stores/settingsStore';
 import { useTelemetryListener } from '../../hooks/useTelemetry';
@@ -21,38 +20,11 @@ import SessionStats from './SessionStats';
 import DataLogger from './DataLogger';
 import BehaviorAnalysis from './BehaviorAnalysis';
 
-const MAX_HISTORY = 100; // Keep last 100 points for graphing
-
 const Dashboard = () => {
     // Activate listener
     useTelemetryListener();
 
-    const { data, isConnected, activeGame } = useTelemetryStore();
-
-    // Store history for the multi-trace graph
-    const [telemetryHistory, setTelemetryHistory] = useState<{
-        timestamp: number, speed: number, rpm: number, throttle: number, brake: number
-    }[]>([]);
-
-    // Update history when new data arrives
-    useEffect(() => {
-        if (data) {
-            setTelemetryHistory(prev => {
-                const newHistory = [...prev, {
-                    timestamp: data.timestamp,
-                    speed: data.speed,
-                    rpm: data.rpm,
-                    throttle: data.throttle * 100, // convert to %
-                    brake: data.brake * 100       // convert to %
-                }];
-                if (newHistory.length > MAX_HISTORY) {
-                    return newHistory.slice(newHistory.length - MAX_HISTORY);
-                }
-                return newHistory;
-            });
-        }
-    }, [data]);
-
+    const { data, isConnected, activeGame, history } = useTelemetryStore();
     const { game } = useSettingsStore();
     const isSimMode = game?.simulationEnabled;
 
@@ -94,7 +66,15 @@ const Dashboard = () => {
                         gForceY={data.gForceY}
                         maxG={2.5}
                     />
-                    <BehaviorAnalysis />
+                    <BehaviorAnalysis
+                        jerkX={data.jerkX || 0}
+                        jerkY={data.jerkY || 0}
+                        coastingTimePct={data.coastingTimePct || 0}
+                        brakeBiasUtilization={data.brakeBiasUtilization || 0}
+                        isTrailBraking={data.isTrailBraking === 1}
+                        isOversteer={data.oversteerCorrection === 1}
+                        isUndersteer={data.understeerPlough === 1}
+                    />
                 </div>
 
                 {/* CENTER COLUMN (6 cols) */}
@@ -111,7 +91,7 @@ const Dashboard = () => {
                         />
                     </div>
 
-                    <LiveMultiGraph data={telemetryHistory} title="Real-time Telemetry Traces" />
+                    <LiveMultiGraph data={history} title="Real-time Telemetry Traces" />
                 </div>
 
                 {/* RIGHT COLUMN (3 cols) */}

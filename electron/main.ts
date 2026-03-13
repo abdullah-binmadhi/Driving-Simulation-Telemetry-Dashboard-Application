@@ -162,13 +162,20 @@ app.on('ready', () => {
 
     connectionManager.start();
 
+    let lastEmitTime = 0;
+    const EMIT_INTERVAL = 50; // 20Hz in ms (Reduced from 33ms/30Hz for performance)
+
     connectionManager.on('data', (data) => {
         sessionManager.processData(data);
 
-        // Send to renderer
-        const windows = BrowserWindow.getAllWindows();
-        if (windows.length > 0) {
-            windows[0].webContents.send('telemetry-update', data);
+        // Send to renderer with throttling
+        const now = Date.now();
+        if (now - lastEmitTime >= EMIT_INTERVAL) {
+            const windows = BrowserWindow.getAllWindows();
+            if (windows.length > 0) {
+                windows[0].webContents.send('telemetry-update', data);
+            }
+            lastEmitTime = now;
         }
     });
 

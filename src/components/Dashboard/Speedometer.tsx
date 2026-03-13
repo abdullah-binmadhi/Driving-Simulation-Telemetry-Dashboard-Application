@@ -30,7 +30,6 @@ const Speedometer: React.FC<SpeedometerProps> = ({ speed, unit = 'km/h' }) => {
                     strokeLinecap="round"
                     strokeDasharray="251.2"
                     strokeDashoffset={251.2 * (1 - percentage)}
-                    className="transition-all duration-100 ease-out"
                 />
             </svg>
 

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import {
     LineChart,
     Line,
@@ -22,7 +23,7 @@ interface LiveMultiGraphProps {
     title: string;
 }
 
-const LiveMultiGraph = ({ data, title }: LiveMultiGraphProps) => {
+const LiveMultiGraph = memo(({ data, title }: LiveMultiGraphProps) => {
     // Format timestamp for X-axis (e.g., "12.3s")
     const formatTime = (timeMs: number) => {
         if (!data || data.length === 0) return '0s';
@@ -96,6 +97,6 @@ const LiveMultiGraph = ({ data, title }: LiveMultiGraphProps) => {
             </div>
         </div>
     );
-};
+});
 
 export default LiveMultiGraph;

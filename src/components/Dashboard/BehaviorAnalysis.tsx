@@ -1,7 +1,6 @@
-import React from 'react';
-import { useTelemetryStore } from '../../stores/telemetryStore';
+import React, { memo } from 'react';
 
-const ProgressBar = ({ label, value, color }: { label: string, value: number, color: string }) => (
+const ProgressBar = memo(({ label, value, color }: { label: string, value: number, color: string }) => (
     <div className="flex flex-col gap-1">
         <div className="flex justify-between text-xs font-semibold text-slate-300">
             <span>{label}</span>
@@ -9,28 +8,38 @@ const ProgressBar = ({ label, value, color }: { label: string, value: number, co
         </div>
         <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
             <div
-                className={`h-full ${color} transition-all duration-300`}
+                className={`h-full ${color}`}
                 style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
             />
         </div>
     </div>
-);
+));
 
-const BehaviorAnalysis: React.FC = () => {
-    const { data } = useTelemetryStore();
+interface BehaviorAnalysisProps {
+    jerkX: number;
+    jerkY: number;
+    coastingTimePct: number;
+    brakeBiasUtilization: number;
+    isTrailBraking: boolean;
+    isOversteer: boolean;
+    isUndersteer: boolean;
+}
 
-    if (!data) return null;
+const BehaviorAnalysis = memo(({
+    jerkX,
+    jerkY,
+    coastingTimePct,
+    brakeBiasUtilization,
+    isTrailBraking,
+    isOversteer,
+    isUndersteer
+}: BehaviorAnalysisProps) => {
 
     // Derived Visualizations
-    const jerkTotal = Math.sqrt(Math.pow(data.jerkX || 0, 2) + Math.pow(data.jerkY || 0, 2));
+    const jerkTotal = Math.sqrt(Math.pow(jerkX || 0, 2) + Math.pow(jerkY || 0, 2));
     const smoothnessScore = Math.max(0, 100 - (jerkTotal * 5)); // 100 is perfectly smooth
 
-    const coastingPct = data.coastingTimePct || 0;
-    const brakeUtil = (data.brakeBiasUtilization || 0) * 100;
-
-    const isTrailBraking = data.isTrailBraking === 1;
-    const isOversteer = data.oversteerCorrection === 1;
-    const isUndersteer = data.understeerPlough === 1;
+    const brakeUtil = (brakeBiasUtilization || 0) * 100;
 
     return (
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-3 shadow-sm flex flex-col gap-3">
@@ -44,7 +53,7 @@ const BehaviorAnalysis: React.FC = () => {
             <div className="grid grid-cols-1 gap-3">
                 <ProgressBar label="Driver Smoothness" value={smoothnessScore} color="bg-cyan-500" />
                 <ProgressBar label="Brake Capacity Utilized" value={brakeUtil} color="bg-red-500" />
-                <ProgressBar label="Coasting Time (Off-Pedals)" value={coastingPct} color="bg-emerald-500" />
+                <ProgressBar label="Coasting Time (Off-Pedals)" value={coastingTimePct} color="bg-emerald-500" />
 
                 <div className="flex flex-wrap gap-2 mt-2">
                     <span className={`px-3 py-1 text-xs font-bold rounded-full ${isTrailBraking ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/50' : 'bg-slate-800 text-slate-500 border border-slate-700'}`}>
@@ -60,6 +69,6 @@ const BehaviorAnalysis: React.FC = () => {
             </div>
         </div>
     );
-};
+});
 
 export default BehaviorAnalysis;
