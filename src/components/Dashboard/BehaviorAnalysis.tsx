@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 const ProgressBar = memo(({ label, value, color }: { label: string, value: number, color: string }) => (
     <div className="flex flex-col gap-1">
