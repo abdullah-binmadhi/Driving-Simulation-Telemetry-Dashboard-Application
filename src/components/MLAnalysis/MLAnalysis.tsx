@@ -127,27 +127,44 @@ const MLAnalysis = () => {
                 if (data.length > 50) {
                     // Normalize keys (handle 'Speed' vs 'speed')
                     const normalizedData = data.map((row, i) => {
-                        const getVal = (key: string, exact: boolean = false) => {
-                            let foundKey: string | undefined;
-                            if (exact) {
-                                foundKey = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase() || k.toLowerCase() === `is_${key.toLowerCase()}`);
-                            } else {
-                                // Strict filter to avoid getting 'speed_delta' when searching for 'speed'
-                                foundKey = Object.keys(row).find(k => {
-                                    const lowerK = k.toLowerCase();
-                                    const lowerKey = key.toLowerCase();
-                                    return lowerK === lowerKey || (lowerK.includes(lowerKey) && !lowerK.includes('_delta'));
-                                });
+                        const getExact = (keys: string[]): number => {
+                            for (const key of keys) {
+                                const found = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase());
+                                if (found !== undefined && row[found] !== null && row[found] !== undefined) return Number(row[found]) || 0;
                             }
-                            return foundKey && row[foundKey] !== null && row[foundKey] !== undefined ? Number(row[foundKey]) || 0 : 0;
+                            return 0;
                         };
                         return {
-                            timestamp: getVal('timestamp', true) || getVal('time', true) || (i * 16),
-                            speed: getVal('speed') || getVal('vel'),
-                            throttle: getVal('throttle') || getVal('gas'),
-                            brake: getVal('brake'),
-                            steering: getVal('steering') || getVal('steer')
+                            timestamp:  getExact(['timestamp', 'time']) || (i * 16),
+                            speed:      getExact(['speed']),
+                            throttle:   getExact(['throttle', 'gas']),
+                            brake:      getExact(['brake']),
+                            steering:   getExact(['steering', 'steer']),
+                            rpm:        getExact(['rpm']),
+                            gear:       getExact(['gear']),
+                            clutch:     getExact(['clutch']),
+                            gForceX:    getExact(['gforcex', 'gforce_x']),
+                            gForceY:    getExact(['gforcey', 'gforce_y']),
+                            gForceZ:    getExact(['gforcez', 'gforce_z']),
+                            gforceCombined:      getExact(['gforce_combined']),
+                            posX:                getExact(['pos_x']),
+                            posY:                getExact(['pos_y']),
+                            posZ:                getExact(['pos_z']),
+                            jerkX:               getExact(['jerk_x']),
+                            jerkY:               getExact(['jerk_y']),
+                            pedalOverlap:        getExact(['pedal_overlap']),
+                            turnRadius:          getExact(['turn_radius']),
+                            slipAngleEstimate:   getExact(['slip_angle_estimate']),
+                            isTrailBraking:      getExact(['is_trail_braking']),
+                            oversteerCorrection: getExact(['oversteer_correction']),
+                            understeerPlough:    getExact(['understeer_plough']),
+                            isCoasting: getExact(['is_coasting']),
+                            isBraking:  getExact(['is_braking']),
+                            isTurning:  getExact(['is_turning']),
+                            fuel:       getExact(['fuel']),
+                            engineTemp: getExact(['enginetemp', 'engine_temp']),
                         };
+
                     });
 
                     if (normalizedData[0].speed !== undefined || normalizedData[0].throttle !== undefined) {

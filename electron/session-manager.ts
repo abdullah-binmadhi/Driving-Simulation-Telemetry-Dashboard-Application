@@ -57,7 +57,12 @@ export class SessionManager extends EventEmitter {
             }
 
             data.gforceCombined = Math.sqrt(Math.pow(data.gForceX || 0, 2) + Math.pow(data.gForceY || 0, 2));
-            data.slipAngleEstimate = 0; // Requires complex vehicle dynamics, leaving 0 for now
+            // Slip angle proxy: atan(lateralG / (longitudinalG + ε)) in degrees
+            // Positive = understeer tendency, negative = oversteer tendency
+            data.slipAngleEstimate = Math.atan2(
+                Math.abs(data.gForceX || 0),
+                Math.abs(data.gForceY || 0) + 0.001
+            ) * (180 / Math.PI);
             data.isCoasting = (data.throttle < 0.05 && data.brake < 0.05 && data.speed > 5) ? 1 : 0;
             data.isWots = (data.throttle > 0.95) ? 1 : 0;
             data.isBraking = (data.brake > 0.05) ? 1 : 0;
@@ -210,21 +215,21 @@ export class SessionManager extends EventEmitter {
 
         const insert = db.prepare(`
       INSERT INTO telemetry (
-        session_id, timestamp, speed, rpm, gear, throttle, brake, steering, 
+        session_id, timestamp, speed, rpm, gear, throttle, brake, clutch, steering,
         gForceX, gForceY, gForceZ, fuel, engineTemp,
+        pos_x, pos_y, pos_z,
         throttle_delta, brake_delta, steering_delta, speed_delta,
         gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
         jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
-        oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization,
-        damage_engine, damage_transmission, damage_suspension, damage_brakes, damage_aero
+        oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization
       ) VALUES (
-        @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @steering,
+        @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @clutch, @steering,
         @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
+        @pos_x, @pos_y, @pos_z,
         @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
         @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
         @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
-        @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization,
-        @damage_engine, @damage_transmission, @damage_suspension, @damage_brakes, @damage_aero
+        @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization
       )
     `);
 
@@ -238,12 +243,16 @@ export class SessionManager extends EventEmitter {
                     gear: row.gear,
                     throttle: row.throttle,
                     brake: row.brake,
+                    clutch: row.clutch || 0,
                     steering: row.steering,
                     gForceX: row.gForceX || 0,
                     gForceY: row.gForceY || 0,
                     gForceZ: row.gForceZ || 0,
                     fuel: row.fuel || 0,
                     engineTemp: row.engineTemp || 0,
+                    pos_x: row.posX || 0,
+                    pos_y: row.posY || 0,
+                    pos_z: row.posZ || 0,
                     throttle_delta: row.throttleDelta || 0,
                     brake_delta: row.brakeDelta || 0,
                     steering_delta: row.steeringDelta || 0,
@@ -263,12 +272,7 @@ export class SessionManager extends EventEmitter {
                     oversteer_correction: row.oversteerCorrection || 0,
                     understeer_plough: row.understeerPlough || 0,
                     coasting_time_pct: row.coastingTimePct || 0,
-                    brake_bias_utilization: row.brakeBiasUtilization || 0,
-                    damage_engine: row.carDamage?.engine ?? 1,
-                    damage_transmission: row.carDamage?.transmission ?? 1,
-                    damage_suspension: row.carDamage?.suspension ?? 1,
-                    damage_brakes: row.carDamage?.brakes ?? 1,
-                    damage_aero: row.carDamage?.aero ?? 1
+                    brake_bias_utilization: row.brakeBiasUtilization || 0
                 });
             }
         });

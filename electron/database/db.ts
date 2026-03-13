@@ -56,6 +56,7 @@ export const initDatabase = () => {
       gForceZ REAL,
       fuel REAL,
       engineTemp REAL,
+      clutch REAL DEFAULT 0,
       throttle_delta REAL DEFAULT 0,
       brake_delta REAL DEFAULT 0,
       steering_delta REAL DEFAULT 0,
@@ -76,11 +77,6 @@ export const initDatabase = () => {
       understeer_plough INTEGER DEFAULT 0,
       coasting_time_pct REAL DEFAULT 0,
       brake_bias_utilization REAL DEFAULT 0,
-      damage_engine REAL DEFAULT 1,
-      damage_transmission REAL DEFAULT 1,
-      damage_suspension REAL DEFAULT 1,
-      damage_brakes REAL DEFAULT 1,
-      damage_aero REAL DEFAULT 1,
       FOREIGN KEY (session_id) REFERENCES sessions (id)
     );
 
@@ -120,12 +116,12 @@ export const initDatabase = () => {
   const telemetryColumns = telemetryTables.map(c => c.name);
 
   const mlColumns = [
+    'clutch',
     'throttle_delta', 'brake_delta', 'steering_delta', 'speed_delta',
     'gforce_combined', 'slip_angle_estimate', 'is_coasting', 'is_wots',
     'is_braking', 'is_turning', 'jerk_x', 'jerk_y', 'distance_traveled',
     'turn_radius', 'pedal_overlap', 'is_trail_braking',
-    'oversteer_correction', 'understeer_plough', 'coasting_time_pct', 'brake_bias_utilization',
-    'damage_engine', 'damage_transmission', 'damage_suspension', 'damage_brakes', 'damage_aero'
+    'oversteer_correction', 'understeer_plough', 'coasting_time_pct', 'brake_bias_utilization'
   ];
 
   for (const col of mlColumns) {

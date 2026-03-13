@@ -50,17 +50,25 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         const timestamps = validData.map(d => Number(d.timestamp) || 0);
         const speeds_unclamped = validData.map(d => Number(d.speed) || 0);
-        // Clamp speed at 300 km/h so unrealistic physics engine glitches don't ruin ML graphing ranges
         const speeds = speeds_unclamped.map(s => Math.min(Math.max(s, 0), 300));
 
         const throttles = validData.map(d => Number(d.throttle) || 0);
         const brakes = validData.map(d => Number(d.brake) || 0);
         const steerings_unclamped = validData.map(d => Number(d.steering) || 0);
-        // Normalizing steering range roughly to -1 to 1 based on common wheel formats
         const steerings = steerings_unclamped.map(s => {
-            if (s > 1 || s < -1) return s / 360; // Assuming degrees
-            return s; // Assuming normalized radians/percent
+            if (s > 1 || s < -1) return s / 360;
+            return s;
         });
+
+        // Real G-forces from BeamNG OutSim (via CSV columns gforce_x, gforce_y, gforce_combined)
+        const gForcesX  = validData.map(d => Number(d.gForceX)  || 0); // lateral
+        const gForcesY  = validData.map(d => Number(d.gForceY)  || 0); // longitudinal
+        const gForcesCombined = validData.map(d => Number(d.gforceCombined) ||
+            Math.sqrt(Math.pow(gForcesX[0] || 0, 2) + Math.pow(gForcesY[0] || 0, 2)) || 0);
+
+        // Derived fields — use pre-computed values from CSV when available
+        const pedalOverlaps = validData.map(d => Number(d.pedalOverlap) || (Number(d.throttle) * Number(d.brake)) || 0);
+
 
         // Calculate Jerk (derivative of acceleration)
         const jerks: number[] = [0];
@@ -76,46 +84,54 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         self.postMessage({ type: 'PROGRESS', progress: 15 });
 
         // --- Model 1: Safety Score (Multivariate Regression) ---
-        // For regression, we build a heuristic "Safety Cost" function and regress it to find the primary driver.
-        // Penalty for: Speeding > 120km/h, High Jerk > 15, High Steering Volatility
+        // Penalties: speed > 130, high jerk, erratic steering, AND real G-force exceedances
         const xSafety = [];
         const yCost = [];
         let totalDeductions = 0;
         let deductionsDetail = new Set<string>();
-        let penaltyCounts: Record<string, number> = { 'Speeding': 0, 'Harsh Inputs': 0, 'Erratic Steering': 0 };
+        let penaltyCounts: Record<string, number> = {
+            'Speeding': 0,
+            'Harsh Inputs': 0,
+            'Erratic Steering': 0,
+            'High Lateral G': 0,
+            'High Braking G': 0
+        };
 
-        const S_THRESH = 130;
-        const J_THRESH = 20;
+        const S_THRESH  = 130;
+        const J_THRESH  = 20;
+        const LAT_G_THRESH  = 1.5;  // > 1.5G lateral is aggressive cornering
+        const LONG_G_THRESH = 1.5;  // > 1.5G longitudinal is harsh braking/accel
 
         for (let i = 0; i < speeds.length; i++) {
-            xSafety.push([speeds[i], throttles[i], brakes[i], steerings[i], jerks[i]]);
+            xSafety.push([speeds[i], throttles[i], brakes[i], steerings[i], jerks[i], Math.abs(gForcesX[i]), Math.abs(gForcesY[i])]);
             let cost = 0;
             if (speeds[i] > S_THRESH) { cost += 2; deductionsDetail.add(`Speeding (>${S_THRESH}km/h)`); penaltyCounts['Speeding']++; }
             if (jerks[i] > J_THRESH) { cost += 3; deductionsDetail.add("Harsh Braking/Acceleration (High Jerk)"); penaltyCounts['Harsh Inputs']++; }
             if (i > 0 && Math.abs(steerings[i] - steerings[i - 1]) > 0.5) { cost += 1; deductionsDetail.add("Erratic Steering movements"); penaltyCounts['Erratic Steering']++; }
+            if (Math.abs(gForcesX[i]) > LAT_G_THRESH) { cost += 2; deductionsDetail.add(`High Lateral G (>${LAT_G_THRESH}G)`); penaltyCounts['High Lateral G']++; }
+            if (Math.abs(gForcesY[i]) > LONG_G_THRESH) { cost += 2; deductionsDetail.add(`High Longitudinal G (>${LONG_G_THRESH}G)`); penaltyCounts['High Braking G']++; }
             yCost.push([cost]);
             totalDeductions += cost;
         }
 
         let finalScore = 100 - (totalDeductions / speeds.length) * 10;
         if (finalScore < 0) finalScore = 0;
-        // Compute penalty percentages for breakdown bar chart
-        const totalPenalties = penaltyCounts['Speeding'] + penaltyCounts['Harsh Inputs'] + penaltyCounts['Erratic Steering'] || 1;
-        const penaltyBreakdown = [
-            { label: 'Speeding', count: penaltyCounts['Speeding'], pct: (penaltyCounts['Speeding']/totalPenalties)*100, color: '#ef4444' },
-            { label: 'Harsh Inputs', count: penaltyCounts['Harsh Inputs'], pct: (penaltyCounts['Harsh Inputs']/totalPenalties)*100, color: '#f97316' },
-            { label: 'Erratic Steering', count: penaltyCounts['Erratic Steering'], pct: (penaltyCounts['Erratic Steering']/totalPenalties)*100, color: '#eab308' },
-        ];
+        const totalPenalties = Object.values(penaltyCounts).reduce((a, b) => a + b, 0) || 1;
+        const penaltyBreakdown = Object.entries(penaltyCounts).map(([label, count]) => ({
+            label, count,
+            pct: (count / totalPenalties) * 100,
+            color: label === 'Speeding' ? '#ef4444' : label === 'Harsh Inputs' ? '#f97316' :
+                   label === 'Erratic Steering' ? '#eab308' : label === 'High Lateral G' ? '#a855f7' : '#3b82f6'
+        })).filter(p => p.count > 0);
         const safetyScoreResult = {
             score: Math.round(finalScore),
             deductions: Array.from(deductionsDetail),
             penaltyBreakdown
         };
 
-        // Train real multivariate regression to get R-squared quality metric
+        // Train real multivariate regression (7-feature now) to get R-squared quality metric
         const mlr = new MLR(xSafety, yCost);
         const yPredict = mlr.predict(xSafety);
-        // Calculate SS_res and SS_tot for R2
         let ssRes = 0;
         let ssTot = 0;
         const yMean = yCost.reduce((sum, y) => sum + y[0], 0) / yCost.length;
@@ -127,44 +143,44 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
 
         self.postMessage({ type: 'PROGRESS', progress: 30 });
 
-        // --- Model 2: Isolation Forest Anomaly Detection (Proxy via Z-Score/Statistical Outlier) ---
-        // Because ML.js doesn't have a direct Isolation Forest, we use standard deviation masking to find Smoothness Outliers
+        // --- Model 2: Isolation Forest Proxy (Anomaly Detection) ---
+        // Detect both high-jerk events AND high G-force events (real BeamNG physics)
         const meanJerk = jerks.reduce((a, b) => a + b, 0) / jerks.length;
         const stdJerk = Math.sqrt(jerks.map(x => Math.pow(x - meanJerk, 2)).reduce((a, b) => a + b, 0) / jerks.length);
-        const anomalyThreshold = meanJerk + (stdJerk * 4); // 4 standard deviations is a huge spike
+        const anomalyThreshold = meanJerk + (stdJerk * 4);
+        const meanGCombined = gForcesCombined.reduce((a, b) => a + b, 0) / (gForcesCombined.length || 1);
+        const G_ANOMALY_THRESH = Math.max(2.0, meanGCombined + 1.5); // > 2G combined or 1.5σ above mean
 
         const anomalyData = [];
         let anomalyCount = 0;
-        for (let i = 0; i < speeds.length; i += 10) { // Downsample chart drawing for performance
-            const isAnomaly = jerks[i] > anomalyThreshold;
+        for (let i = 0; i < speeds.length; i += 10) {
+            const isHighJerk = jerks[i] > anomalyThreshold;
+            const isHighG    = gForcesCombined[i] > G_ANOMALY_THRESH;
+            const isAnomaly  = isHighJerk || isHighG;
             let type = "Smooth Context";
 
             if (isAnomaly) {
                 anomalyCount++;
-                if (speeds[i] > 160) type = "Extreme Speed";
+                if (isHighG && Math.abs(gForcesX[i]) > Math.abs(gForcesY[i])) type = "High Lateral G";
+                else if (isHighG) type = "High Braking/Accel G";
+                else if (speeds[i] > 160) type = "Extreme Speed";
                 else if (accelerations[i] < -5) type = "Harsh Braking";
                 else if (accelerations[i] > 5) type = "Harsh Acceleration";
                 else type = "Severe Jerk";
             }
 
-            anomalyData.push({
-                timestamp: timestamps[i],
-                speed: speeds[i],
-                jerk: jerks[i],
-                isAnomaly,
-                type
-            });
+            anomalyData.push({ timestamp: timestamps[i], speed: speeds[i], jerk: jerks[i], isAnomaly, type });
         }
 
         self.postMessage({ type: 'PROGRESS', progress: 45 });
 
         // --- Model 3: PCA (Principal Component Analysis) ---
-        // Reduce [Throttle, Brake, Steering, Speed, Jerk] to 2 dimensions
-        // Z-Score Standardization
+        // 7-feature matrix: Throttle, Brake, |Steering|, Speed, Jerk, |gForceX| (lateral), |gForceY| (longitudinal)
         const means: number[] = [];
         const stds: number[] = [];
-        for (let col = 0; col < 5; col++) {
-             const colVals = xSafety.map(row => row[col]);
+        const pcaFeatures = xSafety; // already 7-wide now
+        for (let col = 0; col < 7; col++) {
+             const colVals = pcaFeatures.map(row => row[col]);
              const mean = colVals.reduce((a, b) => a + b, 0) / colVals.length;
              const std = Math.sqrt(colVals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / colVals.length) || 1;
              means.push(mean);
@@ -176,15 +192,14 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         let realPcaVariance = 0.5;
 
         try {
-            const pcaDataMatrix = xSafety.map(row => row.map((val, col) => (val - means[col]) / stds[col]));
+            const pcaDataMatrix = pcaFeatures.map(row => row.map((val, col) => (val - means[col]) / stds[col]));
             const pca = new PCA(pcaDataMatrix);
             reduced = pca.predict(pcaDataMatrix).to2DArray();
             const explainedVariances = pca.getExplainedVariance();
-            realPcaVariance = explainedVariances[0] + explainedVariances[1]; // Sum of variance explained by first 2 components
+            realPcaVariance = explainedVariances[0] + explainedVariances[1];
         } catch (e) {
             console.warn("PCA Engine Error:", e);
-            // Default flat PCA profile for completely linear tracking
-            reduced = xSafety.map(() => [0, 0]);
+            reduced = pcaFeatures.map(() => [0, 0]);
         }
 
         // Removed redeclaration of pcaChartData
@@ -228,26 +243,24 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         self.postMessage({ type: 'PROGRESS', progress: 75 });
 
 
-        // --- Model 5: Contextual State (K-Means Clustering serving as HMM) ---
-        // Group the data into 4 behavioral "States" (e.g. Stop&Go, Cruising, Cornering)
-        // Ensure no NaN or undefined values exist here
+        // --- Model 5: Contextual State (K-Means 4-cluster HMM proxy) ---
+        // 4 features: speed, |steering|, jerk, pedal_overlap (new BeamNG derived field)
         const kmeansData = [];
-
-        // Normalize K-Means inputs to Min-Max [0, 1] so bounds don't overwhelm each other
         const maxSpeed = Math.max(...speeds) || 1;
         const maxSteerAbs = Math.max(...steerings.map(Math.abs)) || 1;
         const maxJerk = Math.max(...jerks) || 1;
+        const maxPedalOverlap = Math.max(...pedalOverlaps) || 1;
 
         for (let i = 0; i < speeds.length; i += 10) {
-            // Speed [0, 1], Absolute Steering Magnitude [0, 1], Jerk [0, 1]
             kmeansData.push([
                 (speeds[i] || 0) / maxSpeed,
                 Math.abs(steerings[i] || 0) / maxSteerAbs,
-                (jerks[i] || 0) / maxJerk
+                (jerks[i] || 0) / maxJerk,
+                (pedalOverlaps[i] || 0) / maxPedalOverlap   // 4th dimension from BeamNG
             ]);
         }
 
-        let ans: any = { clusters: Array(kmeansData.length).fill(0), centroids: [[0,0,0], [1,1,1], [0.5,0.5,0.5], [0.2,0.2,0.2]] };
+        let ans: any = { clusters: Array(kmeansData.length).fill(0), centroids: [[0,0,0,0],[1,1,1,1],[0.5,0.5,0.5,0.5],[0.2,0.2,0.2,0.2]] };
         try {
             ans = kmeans(kmeansData, 4, { initialization: 'kmeans++' });
         } catch (e) {
@@ -457,17 +470,20 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         // --- Calculate ML Quality Metrics ---
         
         // --- Model 8: Grip Limits Analyzer (Decision Tree) ---
+        // Uses real gForceX from BeamNG OutSim instead of a synthetic proxy formula
         const dtFeatures = [];
         const dtLabels = [];
         let usteerCount = 0;
         let osteerCount = 0;
-        for (let i = 0; i < speeds.length; i+=5) {
+        for (let i = 0; i < speeds.length; i += 5) {
             const sAbs = Math.abs(steerings[i] || 0);
-            const latG = (Math.pow(speeds[i]||0, 2) * sAbs) / (3.6*3.6) * 0.01;
-            let label = 0; // 0: Grip
-            if (latG > 0.8 && sAbs > 0.5 && (throttles[i]||0) > 50) { label = 1; usteerCount++; } // Understeer
-            else if (latG > 0.8 && sAbs > 0.5 && (throttles[i]||0) < 20) { label = 2; osteerCount++; } // Oversteer
-            dtFeatures.push([sAbs, (throttles[i]||0)/100, (jerks[i]||0)]);
+            const latG = Math.abs(gForcesX[i] || 0); // real lateral G from BeamNG OutSim
+            let label = 0; // 0: In Grip
+            // Understeer: high steering angle + high lateral G + throttle (pushing out)
+            if (latG > 0.8 && sAbs > 0.4 && (throttles[i] || 0) > 0.5) { label = 1; usteerCount++; }
+            // Oversteer: high lateral G + high steering + off throttle (rotation)
+            else if (latG > 0.8 && sAbs > 0.4 && (throttles[i] || 0) < 0.2) { label = 2; osteerCount++; }
+            dtFeatures.push([sAbs, (throttles[i] || 0), latG, (jerks[i] || 0)]);
             dtLabels.push(label);
         }
         try {

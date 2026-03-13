@@ -94,25 +94,72 @@ const Settings = () => {
                             <p className="text-xs text-slate-500 col-span-full">Configure the virtual driver behavior before activating simulation mode.</p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
-                            <div className="space-y-2">
-                                <label className="text-sm text-slate-400">BeamNG.drive OutGauge Port</label>
-                                <input
-                                    type="number"
-                                    value={game.beamngPort}
-                                    onChange={(e) => updateGameSettings({ beamngPort: parseInt(e.target.value) || 4444 })}
-                                    className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors"
-                                />
-                                <p className="text-xs text-slate-500">Default: 4444. Ensure this matches your BeamNG 'hardware' settings.</p>
+                        <div className="pt-6 border-t border-slate-800 space-y-4">
+                            <h3 className="text-sm font-semibold text-slate-300">BeamNG.drive — UDP Ports</h3>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* OutGauge Port */}
+                                <div className="space-y-1">
+                                    <label className="text-xs text-slate-400">OutGauge Port <span className="text-slate-600">(instruments)</span></label>
+                                    <input
+                                        type="number"
+                                        value={game.beamngPort}
+                                        onChange={(e) => updateGameSettings({ beamngPort: parseInt(e.target.value) || 4444 })}
+                                        className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                                    />
+                                    <p className="text-xs text-slate-600">Speed, RPM, gear, pedals, fuel</p>
+                                </div>
+
+                                {/* OutSim Port (new) */}
+                                <div className="space-y-1">
+                                    <label className="text-xs text-slate-400">OutSim Port <span className="text-slate-600">(physics)</span></label>
+                                    <div className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-sm text-slate-400 select-all cursor-text">
+                                        4442
+                                    </div>
+                                    <p className="text-xs text-slate-600">G-Forces, position (X/Y/Z), steering</p>
+                                </div>
                             </div>
 
-                            <div className="space-y-2">
+                            {/* BeamNG Setup Guide */}
+                            <details className="group bg-slate-950 border border-slate-700 rounded-lg overflow-hidden">
+                                <summary className="flex items-center gap-2 px-4 py-2 cursor-pointer text-xs text-blue-400 hover:text-blue-300 transition-colors list-none">
+                                    <svg className="w-3 h-3 rotate-0 group-open:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                    How to configure BeamNG.drive
+                                </summary>
+                                <div className="px-4 pb-4 pt-2 space-y-3 text-xs text-slate-400 border-t border-slate-800">
+                                    <p>In BeamNG.drive, go to <span className="text-white font-semibold">Main Menu → Options → Gameplay</span> and scroll to the <span className="text-white font-semibold">OutGauge / OutSim</span> section:</p>
+                                    <ol className="space-y-2 list-decimal list-inside">
+                                        <li>
+                                            <span className="text-slate-300 font-medium">OutGauge</span> — Enable and set:
+                                            <ul className="ml-4 mt-1 space-y-0.5 text-slate-500">
+                                                <li>IP: <span className="text-green-400 font-mono">127.0.0.1</span></li>
+                                                <li>Port: <span className="text-green-400 font-mono">4444</span></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span className="text-slate-300 font-medium">OutSim</span> — Enable and set:
+                                            <ul className="ml-4 mt-1 space-y-0.5 text-slate-500">
+                                                <li>IP: <span className="text-green-400 font-mono">127.0.0.1</span></li>
+                                                <li>Port: <span className="text-green-400 font-mono">4442</span></li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    <p className="text-slate-500">Both must be active to receive G-forces, track position, and steering data alongside the instrument cluster readings.</p>
+                                </div>
+                            </details>
+                        </div>
+
+                        {/* Assetto Corsa */}
+                        <div className="pt-4 border-t border-slate-800">
+                            <div className="space-y-1">
                                 <label className="text-sm text-slate-400">Assetto Corsa Shared Memory</label>
                                 <div className="flex items-center justify-between bg-slate-950 border border-slate-700 rounded-lg px-4 py-2">
-                                    <span>Status</span>
+                                    <span className="text-sm">Status</span>
                                     <div className="flex items-center gap-2">
                                         <div className={`w-2 h-2 rounded-full ${game.assettoCorsaEnabled ? 'bg-green-500' : 'bg-slate-600'}`}></div>
-                                        <span className="text-sm">{game.assettoCorsaEnabled ? 'Enabled' : 'Disabled'}</span>
+                                        <span className="text-sm text-slate-400">{game.assettoCorsaEnabled ? 'Enabled' : 'Not yet implemented'}</span>
                                     </div>
                                 </div>
                             </div>
