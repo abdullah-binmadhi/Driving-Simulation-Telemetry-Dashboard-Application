@@ -27,6 +27,7 @@ const createWindow = () => {
             preload: path.join(__dirname, 'preload.cjs'),
             nodeIntegration: false,
             contextIsolation: true,
+            backgroundThrottling: false,
         },
         frame: false, // Frameless window for custom title bar
         titleBarStyle: 'hidden',
