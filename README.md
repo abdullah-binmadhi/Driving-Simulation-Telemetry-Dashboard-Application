@@ -45,6 +45,21 @@ The application control center.
 
 ---
 
+## 🏁 Game Support & Setup
+
+### BeamNG.drive (High-Fidelity)
+To enable detailed **Tire Thermals** and **Vehicle Health** in BeamNG:
+1. Copy `electron/game-connectors/beamng/telemetry.lua` from this project to your BeamNG user folder: 
+   `%USERPROFILE%\AppData\Local\BeamNG.drive\<version>\scripts\vehicle\extensions\telemetry.lua`
+2. In-game, open the console (`~`) and type: `v.extensions.load('telemetry')`
+3. The dashboard will automatically detect the high-fidelity stream on Port 4440.
+4. Ensure OutSim (Port 4442) and OutGauge (Port 4444) are also enabled in BeamNG Gameplay settings for full physics support.
+
+### Assetto Corsa
+Requires Shared Memory access (Windows only). Currently in development.
+
+---
+
 ## Installation & Setup
 
 Before starting, ensure you have [Node.js](https://nodejs.org/) (version 18+ recommended) and Git installed on your system.
