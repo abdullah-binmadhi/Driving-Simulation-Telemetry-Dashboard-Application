@@ -98,7 +98,12 @@ const Dashboard = () => {
                 <div className="xl:col-span-3 flex flex-col gap-2 order-3">
                     <SessionStats />
                     <LapTiming current={data.lapTime || 0} last={data.lastLap} best={data.bestLap} />
-                    <TireStatus temps={data.tireTemp} wear={data.tireWear} />
+                    <TireStatus 
+                        temps={data.tireTemp} 
+                        surfaceTemps={data.tireSurfaceTemp}
+                        wear={data.tireWear} 
+                        pressures={data.tirePressure}
+                    />
                     <CarHealth damage={data.carDamage} />
                     <DataLogger />
                 </div>
