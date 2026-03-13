@@ -250,22 +250,19 @@ export class MockConnector extends EventEmitter implements GameConnector {
             gForceX: gForceLat,
             gForceY: gForceLong,
             gForceZ: 1.0,
-            lapTime: this.lapTime,
-            bestLap: this.bestLap,
-            lastLap: this.lastLap,
-            carDamage,
             fuel: 50 - (this.distanceTraveled / 1000),
             engineTemp: this.engineTemp,
-            tireTemp: [this.tireTemp[0], this.tireTemp[1], this.tireTemp[2], this.tireTemp[3]],
-            tireWear: [100, 100, 100, 100],
             posX: this.posX,
             posY: 0,
             posZ: this.posZ,
             slipAngleEstimate,
+            pedalOverlap: (throttle * brake),
             oversteerCorrection,
             understeerPlough,
             coastingTimePct
         };
+
+
 
         this.emit('data', frame);
     }

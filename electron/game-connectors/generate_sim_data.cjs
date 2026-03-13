@@ -114,7 +114,7 @@ function updatePhysics() {
 
     return {
         game: 'Simulation',
-        timestamp: 0, // Will be offset at runtime
+        timestamp: 0,
         speed: speed,
         rpm: Math.floor(rpm),
         gear: gear,
@@ -125,16 +125,15 @@ function updatePhysics() {
         gForceX: gForceX,
         gForceY: gForceY,
         gForceZ: 0,
-        fuel: 45.5 - (data.length * 0.001), // Consuming fuel
+        fuel: 45.5 - (data.length * 0.001),
         engineTemp: 90 + (rpm / 7500) * 10,
-        oilTemp: 100 + (rpm / 7500) * 5,
-        tireTemp: [...tireTemps],
-        tireWear: [...tireWear],
-        lapTime: lapTime,
-        bestLap: 85400, // 1:25.400 static best
-        carDamage: { ...damageState }
+        posX: 0,
+        posY: 0,
+        posZ: 0,
+        pedalOverlap: throttle * brake
     };
 }
+
 
 // Damage State
 const damageState = {
