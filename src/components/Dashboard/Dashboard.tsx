@@ -28,6 +28,10 @@ const Dashboard = () => {
     const { game } = useSettingsStore();
     const isSimMode = game?.simulationEnabled;
 
+    // bridgeActive is true only when the Lua bridge (port 4440) is sending real data.
+    // We detect this by checking if tireTemp has been populated with non-zero values.
+    const bridgeActive = !!(data?.tireTemp && data.tireTemp.some(t => t > 0));
+
     if ((!isConnected && !isSimMode) || !data) {
         if (isSimMode && !data) {
             return (
@@ -103,8 +107,9 @@ const Dashboard = () => {
                         surfaceTemps={data.tireSurfaceTemp}
                         wear={data.tireWear} 
                         pressures={data.tirePressure}
+                        bridgeActive={bridgeActive}
                     />
-                    <CarHealth damage={data.carDamage} />
+                    <CarHealth damage={data.carDamage} bridgeActive={bridgeActive} />
                     <DataLogger />
                 </div>
             </div>

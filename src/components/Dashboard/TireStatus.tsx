@@ -5,6 +5,7 @@ interface TireStatusProps {
     surfaceTemps?: [number, number, number, number]; // Surface temperatures
     wear?: [number, number, number, number];         // 1.0 = New
     pressures?: [number, number, number, number];    // PSI
+    bridgeActive?: boolean; // True only when Lua bridge (port 4440) is sending data
 }
 
 const TireData = ({ label, temp, sTemp, wear, press, side }: { 
@@ -41,7 +42,8 @@ const TireStatus: React.FC<TireStatusProps> = ({
     temps = [0, 0, 0, 0], 
     surfaceTemps = [0, 0, 0, 0],
     wear = [1, 1, 1, 1],
-    pressures = [0, 0, 0, 0]
+    pressures = [0, 0, 0, 0],
+    bridgeActive = false
 }) => {
     return (
         <div className="bg-slate-900/80 backdrop-blur-md rounded-2xl p-4 border border-slate-800 shadow-xl relative overflow-hidden group">
@@ -62,20 +64,31 @@ const TireStatus: React.FC<TireStatusProps> = ({
                 {/* Simplified Car Silhouette */}
                 <div className="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20">
                     <div className="w-24 h-40 border-2 border-slate-600 rounded-xl relative">
-                        <div className="absolute top-4 left-[-4px] right-[-4px] h-12 border-y border-slate-600" /> {/* Cockpit area */}
+                        <div className="absolute top-4 left-[-4px] right-[-4px] h-12 border-y border-slate-600" />
                     </div>
                 </div>
 
-                {/* Tires Layout */}
-                <div className="w-full h-full grid grid-cols-2 gap-x-24 relative z-10">
-                    {/* Front Row */}
-                    <TireData label="FL" temp={temps[0]} sTemp={surfaceTemps[0]} wear={wear[0]} press={pressures[0]} side="left" />
-                    <TireData label="FR" temp={temps[1]} sTemp={surfaceTemps[1]} wear={wear[1]} press={pressures[1]} side="right" />
-                    
-                    {/* Rear Row */}
-                    <TireData label="RL" temp={temps[2]} sTemp={surfaceTemps[2]} wear={wear[2]} press={pressures[2]} side="left" />
-                    <TireData label="RR" temp={temps[3]} sTemp={surfaceTemps[3]} wear={wear[3]} press={pressures[3]} side="right" />
-                </div>
+                {!bridgeActive ? (
+                    /* Lua Bridge Inactive Overlay */
+                    <div className="absolute inset-0 flex flex-col items-center justify-center z-20 bg-slate-900/70 backdrop-blur-sm rounded-xl">
+                        <div className="text-amber-400 text-2xl mb-2">⚠️</div>
+                        <p className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">Lua Bridge Inactive</p>
+                        <p className="text-[10px] text-slate-500 text-center px-4 leading-relaxed">
+                            Load <span className="font-mono text-slate-300">telemetry.lua</span> in-game to enable live tire PVT data.
+                        </p>
+                        <p className="text-[9px] text-slate-600 mt-1 font-mono">port 4440</p>
+                    </div>
+                ) : (
+                    /* Tires Layout */
+                    <div className="w-full h-full grid grid-cols-2 gap-x-24 relative z-10">
+                        {/* Front Row */}
+                        <TireData label="FL" temp={temps[0]} sTemp={surfaceTemps[0]} wear={wear[0]} press={pressures[0]} side="left" />
+                        <TireData label="FR" temp={temps[1]} sTemp={surfaceTemps[1]} wear={wear[1]} press={pressures[1]} side="right" />
+                        {/* Rear Row */}
+                        <TireData label="RL" temp={temps[2]} sTemp={surfaceTemps[2]} wear={wear[2]} press={pressures[2]} side="left" />
+                        <TireData label="RR" temp={temps[3]} sTemp={surfaceTemps[3]} wear={wear[3]} press={pressures[3]} side="right" />
+                    </div>
+                )}
             </div>
 
             <div className="mt-4 flex justify-around text-[10px] text-slate-600 font-bold border-t border-slate-800 pt-3">

@@ -9,6 +9,7 @@ interface CarHealthProps {
         brakes: number;
         aero: number;
     };
+    bridgeActive?: boolean; // True only when Lua bridge (port 4440) is sending data
 }
 
 const HealthIndicator = ({ label, value, icon: Icon, position }: { 
@@ -43,7 +44,7 @@ const HealthIndicator = ({ label, value, icon: Icon, position }: {
     );
 };
 
-const CarHealth: React.FC<CarHealthProps> = ({ damage }) => {
+const CarHealth: React.FC<CarHealthProps> = ({ damage, bridgeActive = false }) => {
     const d = damage || { engine: 1, transmission: 1, suspension: 1, brakes: 1, aero: 1 };
 
     return (
@@ -65,22 +66,37 @@ const CarHealth: React.FC<CarHealthProps> = ({ damage }) => {
                 <div className="w-28 h-52 border-2 border-slate-700/50 rounded-2xl relative opacity-40">
                     <div className="absolute top-1/4 left-0 right-0 h-0.5 bg-slate-800" />
                     <div className="absolute top-3/4 left-0 right-0 h-0.5 bg-slate-800" />
-                    <div className="absolute inset-4 border border-slate-800 rounded-xl" /> {/* Interior */}
+                    <div className="absolute inset-4 border border-slate-800 rounded-xl" />
                 </div>
 
-                {/* Damage Hotspots - Positioned spatially */}
-                <HealthIndicator label="Engine" value={d.engine} icon={Zap} position="top-4" />
-                <HealthIndicator label="Transmission" value={d.transmission} icon={Settings} position="top-[35%]" />
-                <HealthIndicator label="Aero" value={d.aero} icon={Wind} position="top-2 right-4" />
-                <HealthIndicator label="Brakes" value={d.brakes} icon={Disc} position="bottom-12" />
-                <HealthIndicator label="Suspension" value={d.suspension} icon={Activity} position="bottom-2 left-4" />
+                {!bridgeActive ? (
+                    /* Lua Bridge Inactive Overlay */
+                    <div className="absolute inset-0 flex flex-col items-center justify-center z-20 bg-slate-900/70 backdrop-blur-sm rounded-xl">
+                        <div className="text-amber-400 text-2xl mb-2">⚠️</div>
+                        <p className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">Lua Bridge Inactive</p>
+                        <p className="text-[10px] text-slate-500 text-center px-4 leading-relaxed">
+                            Load <span className="font-mono text-slate-300">telemetry.lua</span> in-game to enable live JBeam damage data.
+                        </p>
+                        <p className="text-[9px] text-slate-600 mt-1 font-mono">port 4440</p>
+                    </div>
+                ) : (
+                    <>
+                        <HealthIndicator label="Engine" value={d.engine} icon={Zap} position="top-4" />
+                        <HealthIndicator label="Transmission" value={d.transmission} icon={Settings} position="top-[35%]" />
+                        <HealthIndicator label="Aero" value={d.aero} icon={Wind} position="top-2 right-4" />
+                        <HealthIndicator label="Brakes" value={d.brakes} icon={Disc} position="bottom-12" />
+                        <HealthIndicator label="Suspension" value={d.suspension} icon={Activity} position="bottom-2 left-4" />
+                    </>
+                )}
             </div>
 
             <div className="mt-2 text-center">
                 <p className="text-[10px] text-slate-600 font-bold uppercase tracking-tight italic">
-                    {Object.values(d).every(v => v >= 0.95) 
-                        ? "Systems nominal - Maximum structural integrity" 
-                        : "Structural degradation detected - Proceed with caution"}
+                    {!bridgeActive
+                        ? "Load telemetry.lua to enable damage tracking"
+                        : Object.values(d).every(v => v >= 0.95)
+                            ? "Systems nominal - Maximum structural integrity"
+                            : "Structural degradation detected - Proceed with caution"}
                 </p>
             </div>
         </div>
