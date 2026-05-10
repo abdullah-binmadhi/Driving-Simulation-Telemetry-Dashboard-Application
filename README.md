@@ -48,12 +48,19 @@ The application control center.
 ## 🏁 Game Support & Setup
 
 ### BeamNG.drive (High-Fidelity)
-To enable detailed **Tire Thermals** and **Vehicle Health** in BeamNG:
-1. Copy `electron/game-connectors/beamng/telemetry.lua` from this project to your BeamNG user folder: 
+To enable detailed **Tire PVT (Pressure/Volume/Temperature)** and **Damage Monitor** panels in BeamNG:
+
+1. **Locate the Bridge Script**: Find `electron/game-connectors/beamng/telemetry.lua` in the project files.
+2. **Install to BeamNG**: Copy this file to your BeamNG vehicle extensions folder: 
    `%USERPROFILE%\AppData\Local\BeamNG.drive\<version>\scripts\vehicle\extensions\telemetry.lua`
-2. In-game, open the console (`~`) and type: `v.extensions.load('telemetry')`
-3. The dashboard will automatically detect the high-fidelity stream on Port 4440.
-4. Ensure OutSim (Port 4442) and OutGauge (Port 4444) are also enabled in BeamNG Gameplay settings for full physics support.
+3. **Activate In-Game**: 
+   - Open the BeamNG console (`~`).
+   - Type: `v.extensions.load("telemetry")`
+4. **Connection**: The dashboard will automatically detect the high-fidelity stream on **Port 4440**.
+5. **Standard Physics**: Ensure **OutSim** (Port 4442) and **OutGauge** (Port 4444) are also enabled in BeamNG's Gameplay settings for full physics support.
+
+> [!TIP]
+> Once the Lua bridge is successfully active, the "Lua Bridge Inactive" overlays on the Tire PVT and Damage Monitor cards will automatically disappear and be replaced by live telemetry data.
 
 ### Assetto Corsa
 Requires Shared Memory access (Windows only). Currently in development.
