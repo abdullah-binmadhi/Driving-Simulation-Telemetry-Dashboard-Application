@@ -4,7 +4,7 @@ import { PCA } from 'ml-pca';
 import SVM from 'ml-svm';
 import { kmeans } from 'ml-kmeans';
 import MLR from 'ml-regression-multivariate-linear';
-import LogisticRegression from 'ml-logistic-regression';
+
 import { GaussianNB } from 'ml-naivebayes';
 import { DecisionTreeClassifier } from 'ml-cart';
 
@@ -389,7 +389,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
             const rfOptions = {
                 seed: 42,
                 maxFeatures: 2,
-                replacement: true,
+                replacement: false,
                 nEstimators: 10
             };
             const rfConfig = new RandomForestRegression(rfOptions);
@@ -601,22 +601,23 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
              if (prev !== curr && markovMatrix[prev]) markovMatrix[prev][curr]++;
         }
 
-        // --- Model 14: Fatigue Decay (Logistic Regression) ---
+        // --- Model 14: Fatigue Decay (Logistic Regression proxy via MLR) ---
         const lrX = [];
         const lrY = [];
         for(let i=0; i<jerks.length; i+=50) {
              const timePct = i / jerks.length;
              lrX.push([timePct]);
-             lrY.push(jerks[i] > meanJerk ? 1 : 0);
+             lrY.push([jerks[i] > meanJerk ? 1 : 0]);
         }
         let fatigueDecay = 0;
         try {
-            if (new Set(lrY).size > 1) {
-                const lr = new LogisticRegression({ numSteps: 100, learningRate: 0.01 });
-                lr.train(lrX, lrY);
-                const startF = lr.predict([[0.1]])[0];
-                const endF = lr.predict([[0.9]])[0];
-                fatigueDecay = endF - startF; 
+            if (lrX.length > 1) {
+                const lr = new MLR(lrX, lrY);
+                const pStart = lr.predict([[0.1]]);
+                const pEnd = lr.predict([[0.9]]);
+                const startF = Array.isArray(pStart[0]) ? pStart[0][0] : pStart[0];
+                const endF = Array.isArray(pEnd[0]) ? pEnd[0][0] : pEnd[0];
+                fatigueDecay = Number(endF) - Number(startF); 
             }
         } catch(e) { console.warn("LR Engine Error:", e); }
         let fatigueScore = Math.min(100, Math.max(0, 100 - (fatigueDecay * 150)));

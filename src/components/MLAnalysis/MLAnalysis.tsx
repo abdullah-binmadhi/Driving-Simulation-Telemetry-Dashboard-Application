@@ -355,7 +355,7 @@ const MLAnalysis = () => {
                             </div>
                         </div>
 
-                        <div className="flex-1 w-full min-h-[200px]">
+                        <div className="flex-1 w-full h-[200px] min-h-[200px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <LineChart data={results.anomalies.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
@@ -402,7 +402,7 @@ const MLAnalysis = () => {
                             <p className="text-sm text-slate-400">Principal Component Analysis (PCA)</p>
                         </div>
 
-                        <div className="flex-1 w-full min-h-[250px] -ml-6">
+                        <div className="flex-1 w-full h-[250px] min-h-[250px] -ml-6">
                             <ResponsiveContainer width="100%" height="100%">
                                 <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                                     <XAxis type="number" dataKey="x" name="Component 1" stroke="#475569" hide />
@@ -472,7 +472,7 @@ const MLAnalysis = () => {
                             </div>
                         </div>
 
-                        <div className="flex-1 w-full min-h-[180px] relative">
+                        <div className="flex-1 w-full h-[180px] min-h-[180px] relative">
                             <ResponsiveContainer width="100%" height="100%">
                                 <LineChart data={results.rfWear.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
@@ -657,70 +657,7 @@ const MLAnalysis = () => {
                         <p className="text-xs text-slate-400">Optimal range = 5500–6500 RPM. {results.shifts.optimal > results.shifts.early + results.shifts.late ? "✅ Good timing discipline." : "⚠️ Shift points need refinement."}</p>
                     </div>
 
-                    {/* 11. Corner Exit Forecaster */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <TrendingUp className="w-5 h-5 text-cyan-400" />
-                                Corner Exit Forecaster
-                            </h3>
-                            <p className="text-xs text-slate-400">Multivariate Linear Regression — Exit speed prediction</p>
-                        </div>
 
-                        {/* Coefficient Breakdown */}
-                        <div className="flex flex-col gap-2">
-                            {[{ label: 'Speed at Apex (β₁)', val: results.exitForecast.speedCoeff, color: '#22d3ee', note: 'Inertia carried through apex' }, { label: 'Throttle Application (β₂)', val: results.exitForecast.throttleCoeff, color: '#f0abfc', note: 'Early throttle = higher exit V' }].map((c, i) => (
-                                <div key={i}>
-                                    <div className="flex justify-between text-xs mb-1">
-                                        <span className="text-slate-400">{c.label}</span>
-                                        <span className="font-mono font-bold" style={{ color: c.color }}>{c.val.toFixed(3)}</span>
-                                    </div>
-                                    <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                                        <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.abs(c.val) * 60)}%`, backgroundColor: c.color }} />
-                                    </div>
-                                    <div className="text-[10px] text-slate-600 mt-0.5">{c.note}</div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Residuals preview if predicted data exists */}
-                        {results.exitForecast.predicted && results.exitForecast.predicted.length > 0 && (
-                            <div>
-                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Predicted vs Actual Exit Speeds</div>
-                                <div className="flex items-end gap-0.5 h-12 overflow-hidden">
-                                    {results.exitForecast.predicted.slice(0, 20).map((p, i) => {
-                                        const err = Math.abs(p.predicted - p.actual);
-                                        const errPct = Math.min(100, (err / Math.max(1, p.actual)) * 100);
-                                        return (
-                                            <div key={i} className="flex-1 flex flex-col gap-0.5 items-center h-full justify-end">
-                                                <div title={`Actual: ${p.actual} | Pred: ${p.predicted} | Err: ${err.toFixed(1)}`}
-                                                    className="w-full rounded-t"
-                                                    style={{
-                                                        height: `${100 - errPct}%`,
-                                                        backgroundColor: errPct < 5 ? '#22c55e' : errPct < 15 ? '#f59e0b' : '#ef4444',
-                                                        opacity: 0.8
-                                                    }}
-                                                />
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                                <div className="flex justify-between text-[10px] text-slate-600 mt-1"><span>Low Error ✅</span><span>High Error 🔴</span></div>
-                            </div>
-                        )}
-
-                        {/* Interpretation */}
-                        <div className="bg-slate-950 rounded-xl p-3 border border-slate-800">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
-                            <p className="text-xs text-slate-300 leading-relaxed">
-                                {Math.abs(results.exitForecast.throttleCoeff) > 0.3
-                                    ? "The model identifies throttle application timing as a high-leverage predictor of corner exit velocity. A strong positive β₂ confirms that earlier throttle application after apex significantly increases straight-line speed — a hallmark of mechanically sympathetic, fast driving."
-                                    : Math.abs(results.exitForecast.speedCoeff) > 0.5
-                                    ? "Apex carry speed (β₁) dominates the regression — exit speed is primarily determined by how much speed the driver preserves through the corner, not by early throttle. This suggests the driver is not fully utilizing the throttle window post-apex."
-                                    : "Both regression coefficients are low, indicating limited statistical correlation between apex inputs and exit velocity. This may reflect inconsistent cornering lines or insufficient data points captured during corner exits."}
-                            </p>
-                        </div>
-                    </div>
 
                     {/* 12. Pedal Consistency (DTW) */}
                     <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
