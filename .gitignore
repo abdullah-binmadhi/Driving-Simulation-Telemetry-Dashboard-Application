@@ -1,4 +1,4 @@
-# Logs
+# ── Logs ────────────────────────────────────────────────────────────────────
 logs
 *.log
 npm-debug.log*
@@ -7,12 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# ── Build outputs ────────────────────────────────────────────────────────────
 node_modules
 dist
 dist-ssr
+dist-electron
+dist-app
+
+# ── Local env ────────────────────────────────────────────────────────────────
 *.local
 
-# Editor directories and files
+# ── Editor & OS junk ─────────────────────────────────────────────────────────
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,5 +27,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-dist-electron
-dist-app/
+
+# ── Dev scratch / test files ─────────────────────────────────────────────────
+test-*.js
+test-*.ts
+test-*.csv
+test-*.json
+mlWorkerTest*.js
+
+# ── Python (ml-pipeline) ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+ml-pipeline/dataset/
