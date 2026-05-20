@@ -10,7 +10,12 @@ const Analysis = () => {
 
     const handleExport = async (sessionId: number) => {
         setIsExporting(true);
-        await exportSession(sessionId);
+        const result = await exportSession(sessionId);
+        if (!result.success && result.message !== 'Cancelled') {
+            alert('Export failed: ' + result.message);
+        } else if (result.success) {
+            alert('Export successful!');
+        }
         setIsExporting(false);
     };
 

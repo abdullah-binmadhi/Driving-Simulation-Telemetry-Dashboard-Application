@@ -38,7 +38,12 @@ const DataLogger = () => {
 
     const handleExportCSV = async () => {
         if (!lastSessionId || !window.electronAPI) return;
-        await window.electronAPI.exportSessionCSV(lastSessionId);
+        const result = await window.electronAPI.exportSessionCSV(lastSessionId);
+        if (!result.success && result.message !== 'Cancelled') {
+            alert('Export failed: ' + result.message);
+        } else if (result.success) {
+            alert('Export successful!');
+        }
     };
 
     const handleClearData = () => {

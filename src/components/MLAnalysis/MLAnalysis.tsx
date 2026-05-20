@@ -356,7 +356,7 @@ const MLAnalysis = () => {
                         </div>
 
                         <div className="flex-1 w-full h-[200px] min-h-[200px]">
-                            <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                            <ResponsiveContainer width="99%" height={250}>
                                 <LineChart data={results.anomalies.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
                                     <XAxis dataKey="timestamp" stroke="#475569" tickFormatter={(t) => `${(t / 1000).toFixed(1)}s`} />
@@ -403,7 +403,7 @@ const MLAnalysis = () => {
                         </div>
 
                         <div className="flex-1 w-full h-[250px] min-h-[250px] -ml-6">
-                            <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                            <ResponsiveContainer width="99%" height={250}>
                                 <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                                     <XAxis type="number" dataKey="x" name="Component 1" stroke="#475569" hide />
                                     <YAxis type="number" dataKey="y" name="Component 2" stroke="#475569" hide />
@@ -473,7 +473,7 @@ const MLAnalysis = () => {
                         </div>
 
                         <div className="flex-1 w-full h-[180px] min-h-[180px] relative">
-                            <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                            <ResponsiveContainer width="99%" height={250}>
                                 <LineChart data={results.rfWear.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
                                     <XAxis dataKey="timestamp" stroke="#475569" tick={false} />

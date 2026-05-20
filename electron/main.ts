@@ -56,8 +56,8 @@ const createWindow = () => {
     });
 
     ipcMain.handle('export-session-csv', async (event, sessionId: number) => {
-        const win = BrowserWindow.fromWebContents(event.sender);
-        const { canceled, filePath } = await dialog.showSaveDialog(win!, {
+        
+        const { canceled, filePath } = await dialog.showSaveDialog({
             title: 'Export Session CSV',
             defaultPath: `session-${sessionId}.csv`,
             filters: [{ name: 'CSV Files', extensions: ['csv'] }]

@@ -40,7 +40,7 @@ const SessionGraphs: React.FC<SessionGraphsProps> = ({ data }) => {
             <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
                 <h3 className="text-slate-300 font-semibold mb-4">Speed & RPM</h3>
                 <div className="h-64">
-                    <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                    <ResponsiveContainer width="99%" height={250}>
                         <LineChart data={formattedData}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                             <XAxis dataKey="relativeTime" label={{ value: 'Time (s)', position: 'insideBottomRight', offset: -5 }} stroke="#94a3b8" />
@@ -59,7 +59,7 @@ const SessionGraphs: React.FC<SessionGraphsProps> = ({ data }) => {
             <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
                 <h3 className="text-slate-300 font-semibold mb-4">Pedal Inputs</h3>
                 <div className="h-64">
-                    <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                    <ResponsiveContainer width="99%" height={250}>
                         <LineChart data={formattedData}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                             <XAxis dataKey="relativeTime" stroke="#94a3b8" />
@@ -78,7 +78,7 @@ const SessionGraphs: React.FC<SessionGraphsProps> = ({ data }) => {
             <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
                 <h3 className="text-slate-300 font-semibold mb-4">G-Forces</h3>
                 <div className="h-64">
-                    <ResponsiveContainer width="99%" height="100%" minHeight={1}>
+                    <ResponsiveContainer width="99%" height={250}>
                         <LineChart data={formattedData}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                             <XAxis dataKey="relativeTime" stroke="#94a3b8" />
