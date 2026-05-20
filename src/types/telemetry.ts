@@ -74,4 +74,11 @@ export interface TelemetryData {
     understeerPlough?: number;
     coastingTimePct?: number;
     brakeBiasUtilization?: number;
+
+    // Ground Truth Data (For ML Training)
+    trueTireWearFL?: number;
+    trueTireWearFR?: number;
+    trueTireWearRL?: number;
+    trueTireWearRR?: number;
+    actualSlipRatio?: number;
 }

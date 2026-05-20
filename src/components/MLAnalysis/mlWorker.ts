@@ -1,4 +1,4 @@
-import { RandomForestRegression } from 'ml-random-forest';
+import * as ort from 'onnxruntime-web';
 import KNN from 'ml-knn';
 import { PCA } from 'ml-pca';
 import SVM from 'ml-svm';
@@ -366,52 +366,63 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         self.postMessage({ type: 'PROGRESS', progress: 85 });
 
 
-        // --- Model 6: Predictive Tire Degradation (Random Forest proxy via Decision Trees) ---
-        // Calculate a target "Wear Rate" purely based on physics limits (Jerk & Steering)
+        // --- Model 6: Predictive Tire Degradation (Pre-trained ONNX Model) ---
+        // We will load the ONNX model we trained offline instead of fitting a fake random forest on the fly
         const rfFeatures = [];
-        const rfTargets = [];
-        
-        for (let i = 0; i < speeds.length; i += 5) {
-            rfFeatures.push([speeds[i] || 0, Math.abs(steerings[i] || 0), jerks[i] || 0]);
-            
-            // Synthetic wear rate formula: High speed + High Steer + High Jerk = Peak Wear
-            const speedFactor = Math.min(speeds[i] / 200, 1);
-            const steerFactor = Math.min(Math.abs(steerings[i]) / 0.5, 1);
-            const jerkFactor = Math.min(jerks[i] / 15, 1);
-            
-            // Base wear is tiny (0.001%), aggressive spikes can push it to 0.05% per tick
-            const targetWear = 0.001 + (speedFactor * steerFactor * 0.02) + (jerkFactor * 0.03);
-            rfTargets.push(targetWear);
+        for (let i = 0; i < speeds.length; i++) {
+             // Matching the features Python expects:
+             // ['speed', 'throttle', 'brake', 'steering', 'gForceX', 'gForceY', 'jerk_x', 'jerk_y', 'pedal_overlap']
+             rfFeatures.push([
+                 speeds[i] || 0,
+                 throttles[i] || 0,
+                 brakes[i] || 0,
+                 steerings[i] || 0,
+                 gForcesX[i] || 0,
+                 gForcesY[i] || 0,
+                 jerks[i] || 0,
+                 0, // jerk_y (we don't have this fully in old arrays, pad with 0 or calculate it properly if available)
+                 pedalOverlaps[i] || 0
+             ]);
         }
         
-        let wearPredictions = rfTargets.slice(); // Default to raw simulated targets
+        let wearPredictions = new Array(speeds.length).fill(0.0001); // Default tiny wear
         try {
-            const rfOptions = {
-                seed: 42,
-                maxFeatures: 2,
-                replacement: false,
-                nEstimators: 10
-            };
-            const rfConfig = new RandomForestRegression(rfOptions);
-            rfConfig.train(rfFeatures, rfTargets);
+            // NOTE: Must set wasm paths if not bundled properly, but vite usually handles it 
+            // or we load it from public folder
+            ort.env.wasm.wasmPaths = '/';
+            const session = await ort.InferenceSession.create('/models/tire_wear_model.onnx');
+            
+            // Flatten features for Float32Array
+            const flatFeatures = Float32Array.from(rfFeatures.flat());
+            const tensor = new ort.Tensor('float32', flatFeatures, [rfFeatures.length, 9]);
             
             self.postMessage({ type: 'PROGRESS', progress: 90 });
 
             // Predict continuous wear over the session
-            wearPredictions = rfConfig.predict(rfFeatures);
+            const feeds: Record<string, ort.Tensor> = {};
+            feeds[session.inputNames[0]] = tensor;
+            const outputData = await session.run(feeds);
+            const outputTensor = outputData[session.outputNames[0]];
+            
+            // The output is a Float32Array of predictions
+            if (outputTensor && outputTensor.data) {
+                // Convert predictions to an array of numbers. Cap them to ensure they make physical sense.
+                wearPredictions = Array.from(outputTensor.data as Float32Array).map(w => Math.max(0, w));
+            }
         } catch (e) {
-            console.warn("RF Engine Error:", e);
+            console.warn("ONNX Engine Error (make sure tire_wear_model.onnx is built and in public/models):", e);
             self.postMessage({ type: 'PROGRESS', progress: 90 });
         }
         
         // Accumulate wear into "Tire Life %" starting at 100%
         let currentLife = 100;
         const tireLifeData = [];
-        for (let i = 0; i < wearPredictions.length; i++) {
+        // Downsample for the UI graph to prevent locking up Recharts
+        for (let i = 0; i < wearPredictions.length; i += 5) {
             currentLife -= wearPredictions[i];
             if (currentLife < 0) currentLife = 0;
             tireLifeData.push({
-                timestamp: timestamps[i * 5],
+                timestamp: timestamps[i],
                 life: currentLife,
                 wearRate: wearPredictions[i]
             });

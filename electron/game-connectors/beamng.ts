@@ -73,6 +73,7 @@ export class BeamNGConnector extends EventEmitter {
     // High Fidelity State (from Lua bridge)
     private bridgeState: Partial<TelemetryData> | null = null;
     private lastBridgeUpdate = 0;
+    private emitInterval: NodeJS.Timeout | null = null;
 
     constructor(outGaugePort = 4444, outSimPort = 4442, bridgePort = 4440) {
         super();
@@ -85,12 +86,25 @@ export class BeamNGConnector extends EventEmitter {
         this.startSocket('outGauge', this.outGaugePort);
         this.startSocket('outSim', this.outSimPort);
         this.startSocket('bridge', this.bridgePort);
+
+        // Start ML synchronized emitter (60Hz = ~16ms) to ensure perfectly timestamped frames
+        this.emitInterval = setInterval(() => {
+            if (this.isConnected) {
+                this.emit('data', this.buildFrame());
+            }
+        }, 16);
     }
 
     stop() {
         this.closeSocket('outGauge');
         this.closeSocket('outSim');
         this.closeSocket('bridge');
+
+        if (this.emitInterval) {
+            clearInterval(this.emitInterval);
+            this.emitInterval = null;
+        }
+
         this.isConnected = false;
         this.emit('status', 'disconnected');
     }
@@ -122,13 +136,10 @@ export class BeamNGConnector extends EventEmitter {
             try {
                 if (type === 'outGauge') {
                     this.parseOutGauge(msg);
-                    this.emit('data', this.buildFrame());
                 } else if (type === 'outSim') {
                     this.parseOutSim(msg);
                 } else if (type === 'bridge') {
                     this.parseBridge(msg);
-                    // Bridge also triggers an emit for high-res updates
-                    this.emit('data', this.buildFrame());
                 }
             } catch (e) {
                 console.error(`Error parsing BeamNG ${type} packet:`, e);

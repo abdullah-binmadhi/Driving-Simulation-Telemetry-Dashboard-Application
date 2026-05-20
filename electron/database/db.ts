@@ -77,6 +77,11 @@ export const initDatabase = () => {
       understeer_plough INTEGER DEFAULT 0,
       coasting_time_pct REAL DEFAULT 0,
       brake_bias_utilization REAL DEFAULT 0,
+      true_tire_wear_fl REAL DEFAULT 1,
+      true_tire_wear_fr REAL DEFAULT 1,
+      true_tire_wear_rl REAL DEFAULT 1,
+      true_tire_wear_rr REAL DEFAULT 1,
+      actual_slip_ratio REAL DEFAULT 0,
       FOREIGN KEY (session_id) REFERENCES sessions (id)
     );
 
@@ -121,7 +126,8 @@ export const initDatabase = () => {
     'gforce_combined', 'slip_angle_estimate', 'is_coasting', 'is_wots',
     'is_braking', 'is_turning', 'jerk_x', 'jerk_y', 'distance_traveled',
     'turn_radius', 'pedal_overlap', 'is_trail_braking',
-    'oversteer_correction', 'understeer_plough', 'coasting_time_pct', 'brake_bias_utilization'
+    'oversteer_correction', 'understeer_plough', 'coasting_time_pct', 'brake_bias_utilization',
+    'true_tire_wear_fl', 'true_tire_wear_fr', 'true_tire_wear_rl', 'true_tire_wear_rr', 'actual_slip_ratio'
   ];
 
   for (const col of mlColumns) {

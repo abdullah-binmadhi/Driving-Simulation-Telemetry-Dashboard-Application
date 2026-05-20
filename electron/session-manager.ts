@@ -37,7 +37,8 @@ export class SessionManager extends EventEmitter {
                     throttle_delta, brake_delta, steering_delta, speed_delta,
                     gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
                     jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
-                    oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization
+                    oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization,
+                    true_tire_wear_fl, true_tire_wear_fr, true_tire_wear_rl, true_tire_wear_rr, actual_slip_ratio
                 ) VALUES (
                     @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @clutch, @steering,
                     @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
@@ -45,7 +46,8 @@ export class SessionManager extends EventEmitter {
                     @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
                     @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
                     @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
-                    @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization
+                    @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization,
+                    @trueTireWearFL, @trueTireWearFR, @trueTireWearRL, @trueTireWearRR, @actualSlipRatio
                 )
             `);
         } catch (e) {
@@ -95,6 +97,15 @@ export class SessionManager extends EventEmitter {
             data.isWots = (data.throttle > 0.95) ? 1 : 0;
             data.isBraking = (data.brake > 0.05) ? 1 : 0;
             data.isTurning = (Math.abs(data.steering) > 0.05) ? 1 : 0;
+
+            // Extract Ground Truth ML Labels from incoming payload
+            data.trueTireWearFL = data.tireWear ? data.tireWear[0] : 1;
+            data.trueTireWearFR = data.tireWear ? data.tireWear[1] : 1;
+            data.trueTireWearRL = data.tireWear ? data.tireWear[2] : 1;
+            data.trueTireWearRR = data.tireWear ? data.tireWear[3] : 1;
+            // The actual slip ratio might not be perfectly provided by the game yet,
+            // but we can set up the DB flow and calculate it natively when the Lua script exports slip nodes.
+            data.actualSlipRatio = data.actualSlipRatio || 0;
 
             this.lastData = data; // Keep reference instead of clone to save GC
             this.buffer.push({ ...data }); // Only clone once when pushing to buffer

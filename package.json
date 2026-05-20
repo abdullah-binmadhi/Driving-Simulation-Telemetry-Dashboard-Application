@@ -27,6 +27,7 @@
     "ml-random-forest": "^2.1.0",
     "ml-regression-multivariate-linear": "^2.0.4",
     "ml-svm": "^2.1.2",
+    "onnxruntime-web": "^1.26.0",
     "papaparse": "^5.5.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

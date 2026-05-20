@@ -70,22 +70,14 @@ const createWindow = () => {
 
             if (data.length === 0) return { success: false, message: 'No data found' };
 
-            // Track timestamps to remove identical ms collisions
-            const seenTimestamps = new Set<string>();
-
-            // Clean columns and ensure max 2 decimals for bloat reduction
+            // Export raw, unrounded data for Machine Learning accuracy.
+            // We preserve the raw numeric timestamp for precise time-series modeling.
             const formattedData = data.reduce((acc, row) => {
-                const date = new Date(Number(row.timestamp));
-                const timeStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}.${date.getMilliseconds().toString().padStart(3, '0')}`;
-
-                if (seenTimestamps.has(timeStr)) return acc;
-                seenTimestamps.add(timeStr);
-
                 // Remove unwieldy db keys
                 const { session_id, id, ...cleanRow } = row;
 
-                // Rename columns to matching telemetry syntax
-                const renamedRow: Record<string, any> = { ...cleanRow, timestamp: timeStr };
+                // Rename columns to matching telemetry syntax while preserving raw values
+                const renamedRow: Record<string, any> = { ...cleanRow };
                 const renameMap: Record<string, string> = {
                     'pos_x': 'x', 'pos_y': 'y', 'pos_z': 'z',
                     'is_coasting': 'coasting', 'is_wots': 'wots',
@@ -100,27 +92,11 @@ const createWindow = () => {
                     }
                 }
 
-                // Scale known percentages to 100
-                if ('throttle' in renamedRow) renamedRow.throttle *= 100;
-                if ('brake' in renamedRow) renamedRow.brake *= 100;
-                if ('clutch' in renamedRow) renamedRow.clutch *= 100;
-
-                // Fix all floating geometries/telemetry variables to max 2 decimals
-                for (const key of Object.keys(renamedRow)) {
-                    if (typeof renamedRow[key] === 'number') {
-                        // We check if it's a float by seeing if it has fractions
-                        if (!Number.isInteger(renamedRow[key])) {
-                            renamedRow[key] = parseFloat((renamedRow[key] as number).toFixed(2));
-                        }
-                    }
-                }
-
+                // All values left at maximum float precision.
+                // No `.toFixed(2)` truncations or arbitrary time deduplication!
                 acc.push(renamedRow);
                 return acc;
             }, [] as any[]);
-
-            // Fallback check in case the deduplication deletes the whole array
-            if (formattedData.length === 0) return { success: false, message: 'All data points were duplicates' };
 
             // Generate CSV manually
             const headers = Object.keys(formattedData[0]).join(',');
