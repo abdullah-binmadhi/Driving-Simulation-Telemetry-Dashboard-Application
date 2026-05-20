@@ -341,7 +341,7 @@ const ReactionTest = () => {
                             <span className="text-sm font-mono text-green-400">Best: {displayBest ? `${displayBest}ms` : '--'}</span>
                         </div>
                         {chartData.length > 0 ? (
-                            <ResponsiveContainer width="100%" height="100%">
+                            <ResponsiveContainer width="99%" height="100%" minHeight={1}>
                                 <LineChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                                     <XAxis dataKey="attempt" stroke="#64748b" tick={{ fill: '#64748b' }} />

@@ -31,7 +31,7 @@ const LiveGraph: React.FC<LiveGraphProps> = ({
         <div className="w-full h-64 bg-slate-800 rounded-xl p-4 border border-slate-700">
             <h3 className="text-sm font-semibold text-slate-400 mb-4">{title}</h3>
             <div className="w-full h-full pb-6">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="99%" height="100%" minHeight={1}>
                     <LineChart data={data}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                         <XAxis

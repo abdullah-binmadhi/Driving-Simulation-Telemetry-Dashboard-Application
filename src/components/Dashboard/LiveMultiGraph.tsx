@@ -35,7 +35,7 @@ const LiveMultiGraph = memo(({ data, title }: LiveMultiGraphProps) => {
         <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-1 flex flex-col">
             <h2 className="text-lg font-semibold mb-2 text-slate-300">{title}</h2>
             <div style={{ width: '100%', height: '100%', minHeight: '200px' }} className="flex-grow">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="99%" height="100%" minHeight={1}>
                     <LineChart
                         data={data}
                         margin={{ top: 10, right: 30, left: 10, bottom: 5 }}
