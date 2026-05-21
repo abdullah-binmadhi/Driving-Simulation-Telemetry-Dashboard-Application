@@ -3,6 +3,10 @@ import { app } from 'electron';
 import db from './database/db.js';
 import type { TelemetryData } from '../src/types/telemetry.js';
 
+const G = 9.80665;
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+const nearZero = (value: number | undefined, threshold = 0.005) => Math.abs(value || 0) < threshold;
+
 export class SessionManager extends EventEmitter {
     private currentSessionId: number | null = null;
     private buffer: TelemetryData[] = [];
@@ -33,7 +37,11 @@ export class SessionManager extends EventEmitter {
                 INSERT INTO telemetry (
                     session_id, timestamp, speed, rpm, gear, throttle, brake, clutch, steering,
                     gForceX, gForceY, gForceZ, fuel, engineTemp,
-                    pos_x, pos_y, pos_z,
+                    pos_x, pos_y, pos_z, yaw, yaw_rate,
+                    damage_engine, damage_transmission, damage_suspension, damage_brakes, damage_aero,
+                    tire_temp_fl, tire_temp_fr, tire_temp_rl, tire_temp_rr,
+                    tire_surface_temp_fl, tire_surface_temp_fr, tire_surface_temp_rl, tire_surface_temp_rr,
+                    tire_pressure_fl, tire_pressure_fr, tire_pressure_rl, tire_pressure_rr,
                     throttle_delta, brake_delta, steering_delta, speed_delta,
                     gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
                     jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
@@ -42,7 +50,11 @@ export class SessionManager extends EventEmitter {
                 ) VALUES (
                     @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @clutch, @steering,
                     @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
-                    @pos_x, @pos_y, @pos_z,
+                    @pos_x, @pos_y, @pos_z, @yaw, @yaw_rate,
+                    @damage_engine, @damage_transmission, @damage_suspension, @damage_brakes, @damage_aero,
+                    @tire_temp_fl, @tire_temp_fr, @tire_temp_rl, @tire_temp_rr,
+                    @tire_surface_temp_fl, @tire_surface_temp_fr, @tire_surface_temp_rl, @tire_surface_temp_rr,
+                    @tire_pressure_fl, @tire_pressure_fr, @tire_pressure_rl, @tire_pressure_rr,
                     @throttle_delta, @brake_delta, @steering_delta, @speed_delta,
                     @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
                     @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
@@ -86,6 +98,21 @@ export class SessionManager extends EventEmitter {
                 data.jerkY = 0;
             }
 
+            const velocityMS = data.speed / 3.6;
+            const steeringAbs = Math.abs(data.steering || 0);
+            if (nearZero(data.gForceY) && data.speedDelta !== undefined && Math.abs(data.speedDelta) > 0.02) {
+                data.gForceY = data.speedDelta / 3.6 / G;
+            }
+            if (nearZero(data.gForceX) && data.yawRate && Math.abs(data.yawRate) > 0.001 && velocityMS > 0.5) {
+                data.gForceX = (data.yawRate * velocityMS) / G;
+            }
+            if (nearZero(data.gForceX) && steeringAbs > 0.03 && data.speed > 8) {
+                data.gForceX = clamp(data.steering * Math.pow(data.speed / 85, 2) * 1.35, -2.5, 2.5);
+            }
+            if (nearZero(data.gForceZ)) {
+                data.gForceZ = 1;
+            }
+
             data.gforceCombined = Math.sqrt(Math.pow(data.gForceX || 0, 2) + Math.pow(data.gForceY || 0, 2));
             // Slip angle proxy: atan(lateralG / (longitudinalG + ε)) in degrees
             // Positive = understeer tendency, negative = oversteer tendency
@@ -103,9 +130,7 @@ export class SessionManager extends EventEmitter {
             data.trueTireWearFR = data.tireWear ? data.tireWear[1] : 1;
             data.trueTireWearRL = data.tireWear ? data.tireWear[2] : 1;
             data.trueTireWearRR = data.tireWear ? data.tireWear[3] : 1;
-            // The actual slip ratio might not be perfectly provided by the game yet,
-            // but we can set up the DB flow and calculate it natively when the Lua script exports slip nodes.
-            data.actualSlipRatio = data.actualSlipRatio || 0;
+            // Keep native slip ratio when available; otherwise derive a proxy after G-force fallbacks.
 
             // Stats Calculation and Spatial Distance
             const now = data.timestamp;
@@ -125,7 +150,6 @@ export class SessionManager extends EventEmitter {
             data.distanceTraveled = this.sessionDistance;
 
             // Turn Radius = V^2 / Ac. Ac is LatG * 9.81
-            const velocityMS = data.speed / 3.6;
             const latG = Math.abs(data.gForceX || 0) * 9.81;
             data.turnRadius = latG > 0.1 ? (Math.pow(velocityMS, 2) / latG) : 0;
 
@@ -137,6 +161,16 @@ export class SessionManager extends EventEmitter {
             data.understeerPlough = (Math.abs(data.steering) > 0.6 && Math.abs(data.gForceX || 0) < 0.4) ? 1 : 0;
             data.coastingTimePct = this.sessionCoastTime > 0 ? (this.sessionCoastTime / (Date.now() - this.sessionStartTime)) * 100 : 0;
             data.brakeBiasUtilization = (data.brake > 0) ? Math.min(1, data.brake / (velocityMS / 30 + 0.1)) : 0;
+            if (nearZero(data.actualSlipRatio, 0.000001)) {
+                data.actualSlipRatio = clamp(
+                    Math.abs(data.gForceX || 0) * 0.08 +
+                    Math.max(0, data.throttle - 0.6) * 0.05 +
+                    Math.max(0, data.brake - 0.5) * 0.04 +
+                    Math.abs(data.steeringDelta || 0) * 0.002,
+                    0,
+                    1
+                );
+            }
 
             this.lastTimestamp = now;
             this.lastFuel = data.fuel || 0;
@@ -271,6 +305,25 @@ export class SessionManager extends EventEmitter {
                     pos_x: row.posX || 0,
                     pos_y: row.posY || 0,
                     pos_z: row.posZ || 0,
+                    yaw: row.yaw || 0,
+                    yaw_rate: row.yawRate || 0,
+                    damage_engine: row.carDamage?.engine ?? 1,
+                    damage_transmission: row.carDamage?.transmission ?? 1,
+                    damage_suspension: row.carDamage?.suspension ?? 1,
+                    damage_brakes: row.carDamage?.brakes ?? 1,
+                    damage_aero: row.carDamage?.aero ?? 1,
+                    tire_temp_fl: row.tireTemp?.[0] ?? row.tireTempFL ?? 0,
+                    tire_temp_fr: row.tireTemp?.[1] ?? row.tireTempFR ?? 0,
+                    tire_temp_rl: row.tireTemp?.[2] ?? row.tireTempRL ?? 0,
+                    tire_temp_rr: row.tireTemp?.[3] ?? row.tireTempRR ?? 0,
+                    tire_surface_temp_fl: row.tireSurfaceTemp?.[0] ?? row.tireSurfaceTempFL ?? 0,
+                    tire_surface_temp_fr: row.tireSurfaceTemp?.[1] ?? row.tireSurfaceTempFR ?? 0,
+                    tire_surface_temp_rl: row.tireSurfaceTemp?.[2] ?? row.tireSurfaceTempRL ?? 0,
+                    tire_surface_temp_rr: row.tireSurfaceTemp?.[3] ?? row.tireSurfaceTempRR ?? 0,
+                    tire_pressure_fl: row.tirePressure?.[0] ?? row.tirePressureFL ?? 0,
+                    tire_pressure_fr: row.tirePressure?.[1] ?? row.tirePressureFR ?? 0,
+                    tire_pressure_rl: row.tirePressure?.[2] ?? row.tirePressureRL ?? 0,
+                    tire_pressure_rr: row.tirePressure?.[3] ?? row.tirePressureRR ?? 0,
                     throttle_delta: row.throttleDelta || 0,
                     brake_delta: row.brakeDelta || 0,
                     steering_delta: row.steeringDelta || 0,

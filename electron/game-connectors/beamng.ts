@@ -108,6 +108,7 @@ export class BeamNGConnector extends EventEmitter {
     private bridgeState: Partial<TelemetryData> | null = null;
     private lastBridgeUpdate = 0;
     private emitInterval: NodeJS.Timeout | null = null;
+    private lastMotionFrame: TelemetryData | null = null;
 
     constructor(outGaugePort = 4444, outSimPort = 4442, bridgePort = 4440) {
         super();
@@ -315,6 +316,62 @@ export class BeamNGConnector extends EventEmitter {
             frame.timestamp = Date.now();
         }
 
+        this.enrichMotion(frame);
         return frame;
+    }
+
+    private enrichMotion(frame: TelemetryData) {
+        const previous = this.lastMotionFrame;
+        const dt = previous ? (frame.timestamp - previous.timestamp) / 1000 : 0;
+        const speedMS = Math.max(0, frame.speed || 0) / 3.6;
+
+        let longitudinalG = frame.gForceY || 0;
+        let lateralG = frame.gForceX || 0;
+        let verticalG = frame.gForceZ || 0;
+        let yawRate = frame.yawRate || 0;
+
+        if (previous && dt > 0 && dt < 1) {
+            const previousSpeedMS = Math.max(0, previous.speed || 0) / 3.6;
+            const speedDerivedLongG = (speedMS - previousSpeedMS) / dt / G;
+            if (Math.abs(longitudinalG) < 0.005 && Math.abs(speedDerivedLongG) > 0.005) {
+                longitudinalG = speedDerivedLongG;
+            }
+
+            if (Math.abs(yawRate) < 0.001 && frame.yaw !== undefined && previous.yaw !== undefined) {
+                let yawDelta = frame.yaw - previous.yaw;
+                if (yawDelta > Math.PI) yawDelta -= Math.PI * 2;
+                if (yawDelta < -Math.PI) yawDelta += Math.PI * 2;
+                yawRate = yawDelta / dt;
+                frame.yawRate = yawRate;
+            }
+        }
+
+        const yawDerivedLatG = yawRate * speedMS / G;
+        if (Math.abs(lateralG) < 0.005 && Math.abs(yawDerivedLatG) > 0.005) {
+            lateralG = yawDerivedLatG;
+        }
+
+        if (Math.abs(lateralG) < 0.005 && Math.abs(frame.steering) > 0.03 && frame.speed > 8) {
+            lateralG = clamp(frame.steering * Math.pow(frame.speed / 85, 2) * 1.35, -2.5, 2.5);
+        }
+
+        if (Math.abs(verticalG) < 0.005) {
+            verticalG = 1;
+        }
+
+        frame.gForceX = lateralG;
+        frame.gForceY = longitudinalG;
+        frame.gForceZ = verticalG;
+        frame.gforceCombined = Math.sqrt(lateralG ** 2 + longitudinalG ** 2);
+        frame.slipAngleEstimate = clamp(Math.atan2(Math.abs(lateralG), Math.abs(longitudinalG) + 0.001) * (180 / Math.PI), 0, 90);
+        frame.actualSlipRatio = frame.actualSlipRatio ?? clamp(
+            Math.abs(lateralG) * 0.08 +
+            Math.max(0, frame.throttle - 0.6) * 0.05 +
+            Math.max(0, frame.brake - 0.5) * 0.04,
+            0,
+            1
+        );
+
+        this.lastMotionFrame = { ...frame };
     }
 }

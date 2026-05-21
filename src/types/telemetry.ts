@@ -49,6 +49,18 @@ export interface TelemetryData {
     posZ?: number;
     yaw?: number;
     yawRate?: number;
+    tireTempFL?: number;
+    tireTempFR?: number;
+    tireTempRL?: number;
+    tireTempRR?: number;
+    tireSurfaceTempFL?: number;
+    tireSurfaceTempFR?: number;
+    tireSurfaceTempRL?: number;
+    tireSurfaceTempRR?: number;
+    tirePressureFL?: number;
+    tirePressureFR?: number;
+    tirePressureRL?: number;
+    tirePressureRR?: number;
 
     // Derived Machine Learning Features (Calculated in backend)
     throttleDelta?: number;
