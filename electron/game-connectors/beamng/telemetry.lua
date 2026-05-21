@@ -13,7 +13,7 @@ local send_interval = 1/60 -- 60Hz
 -- Helper to find wheel by name
 local function getWheelData(name)
     for _, wd in pairs(wheels.wheels) do
-        if wd.name == name then return wd end
+        if wd.name == name or string.find(string.upper(wd.name), name) then return wd end
     end
     return nil
 end
@@ -38,17 +38,16 @@ local function update(dt)
         local wd = getWheelData(name)
         if wd then
             -- Temperature (Tread/Core)
-            tire_temps[i] = wd.tireThermalCoreTemperature or 70
+            tire_temps[i] = wd.tireCoreTemperature or wd.coreTemperature or 70
             
-            -- Surface Temp (using treadTemp as proxy for surface)
-            if wd.tire then
-                tire_surface[i] = wd.tire.treadTemp or 70
-                -- Pressure (convert bar to PSI: 1 bar = 14.5038 PSI)
-                tire_pressures[i] = (wd.tire.pressure or 0) * 14.5038
-            end
+            -- Surface Temp 
+            tire_surface[i] = wd.treadTemperature or 70
+
+            -- Pressure (convert internal pascals to PSI: / 6894.757)
+            tire_pressures[i] = (wd.pressure or 0) / 6894.757
 
             -- Wear / Integrity
-            if wd.isBroken then
+            if wd.isBroken or wd.isTireDeflated then
                 tire_wear[i] = 0.0
             end
         end
@@ -67,13 +66,24 @@ local function update(dt)
     if powertrain then
         local engine = powertrain.getDevice("mainEngine")
         if engine then
-            damage.engine = 1.0 - (engine.damageLevel or 0)
+            damage.engine = 1.0 - (engine.damageLevel or engine.wearLevel or 0)
         end
         
-        local trans = powertrain.getDevice("gearbox")
+        local trans = powertrain.getDevice("gearbox") or powertrain.getDevice("automaticGearbox") or powertrain.getDevice("manualGearbox")
         if trans then
             damage.transmission = 1.0 - (trans.damageLevel or 0)
         end
+    end
+
+    -- Brakes (Thermal Fade/Damage)
+    local brake_efficiency = 0
+    local brake_count = 0
+    for _, wd in pairs(wheels.wheels) do
+        brake_efficiency = brake_efficiency + (wd.brakeThermalEfficiency or 1.0)
+        brake_count = brake_count + 1
+    end
+    if brake_count > 0 then
+        damage.brakes = brake_efficiency / brake_count
     end
 
     -- JBeam / Structural
