@@ -129,6 +129,7 @@ local function update(dt)
     udp:sendto(packet, target_ip, target_port)
 end
 
-M.update = update
+M.updateGFX = update
+M.onUpdate = update -- Adding this just in case for backward compatibility
 
 return M
