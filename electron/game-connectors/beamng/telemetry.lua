@@ -104,7 +104,7 @@ local function update(dt)
         throttle = electrics.values.throttle or 0,
         brake = electrics.values.brake or 0,
         clutch = electrics.values.clutch or 0,
-        steering = (electrics.values.steering or 0) / 450,
+        steering = electrics.values.steering or 0,
         
         -- G-Forces
         gForceX = (electrics.values.gx or 0) / 9.81,
