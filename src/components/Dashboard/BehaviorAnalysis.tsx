@@ -23,6 +23,9 @@ interface BehaviorAnalysisProps {
     isTrailBraking: boolean;
     isOversteer: boolean;
     isUndersteer: boolean;
+    oversteerScore: number;
+    understeerScore: number;
+    slipAngle: number;
 }
 
 const BehaviorAnalysis = memo(({
@@ -32,7 +35,10 @@ const BehaviorAnalysis = memo(({
     brakeBiasUtilization,
     isTrailBraking,
     isOversteer,
-    isUndersteer
+    isUndersteer,
+    oversteerScore,
+    understeerScore,
+    slipAngle
 }: BehaviorAnalysisProps) => {
 
     // Derived Visualizations
@@ -54,6 +60,8 @@ const BehaviorAnalysis = memo(({
                 <ProgressBar label="Driver Smoothness" value={smoothnessScore} color="bg-cyan-500" />
                 <ProgressBar label="Brake Capacity Utilized" value={brakeUtil} color="bg-red-500" />
                 <ProgressBar label="Coasting Time (Off-Pedals)" value={coastingTimePct} color="bg-emerald-500" />
+                <ProgressBar label="Oversteer Risk" value={oversteerScore} color="bg-orange-500" />
+                <ProgressBar label="Understeer Risk" value={understeerScore} color="bg-yellow-500" />
 
                 <div className="flex flex-wrap gap-2 mt-2">
                     <span className={`px-3 py-1 text-xs font-bold rounded-full ${isTrailBraking ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/50' : 'bg-slate-800 text-slate-500 border border-slate-700'}`}>
@@ -64,6 +72,9 @@ const BehaviorAnalysis = memo(({
                     </span>
                     <span className={`px-3 py-1 text-xs font-bold rounded-full ${isUndersteer ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 animate-pulse' : 'bg-slate-800 text-slate-500 border border-slate-700'}`}>
                         Understeer / Plough
+                    </span>
+                    <span className="px-3 py-1 text-xs font-bold rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+                        Slip {slipAngle.toFixed(0)}deg
                     </span>
                 </div>
             </div>

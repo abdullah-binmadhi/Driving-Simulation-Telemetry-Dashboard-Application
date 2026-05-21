@@ -1,56 +1,86 @@
 import { useRef, useEffect } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
 
-const TrackMap = () => {
-    const { data, isConnected } = useTelemetryStore();
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const pathRef = useRef<{ x: number, y: number }[]>([]);
+type TrackPoint = { x: number; y: number; gap?: boolean };
 
-    // Canvas scaling and offset state (simplified auto-centering)
+const MAX_POINTS = 5000;
+const MIN_POINT_SPACING = 0.75;
+const MAX_CONNECTED_JUMP = 120;
+
+const TrackMap = () => {
+    const { data, isConnected, activeGame } = useTelemetryStore();
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const pathRef = useRef<TrackPoint[]>([]);
+    const activeGameRef = useRef<string | null>(null);
+
     const boundsRef = useRef({
         minX: 0, maxX: 0,
-        minY: 0, maxY: 0
+        minY: 0, maxY: 0,
+        initialized: false
     });
 
     useEffect(() => {
         if (!data || !isConnected) return;
 
-        // In many games, Y is up (elevation), and X/Z are the flat 2D plane. 
-        // We'll assume X and Y from the store are the 2D plane for now. 
-        // If the game uses X/Z, you might need to swap data.posY for data.posZ here.
-        const currentPos = {
-            x: data.posX || 0,
-            y: data.posZ || data.posY || 0 // Default to Z for longitudinal distance in most 3D engines
-        };
-
-        // Only add point if car has moved significantly (e.g., > 1 meter) to save memory
-        const lastPos = pathRef.current[pathRef.current.length - 1];
-        if (!lastPos || Math.hypot(currentPos.x - lastPos.x, currentPos.y - lastPos.y) > 1.0) {
-            pathRef.current.push(currentPos);
-
-            // Update bounds for auto-scaling
-            boundsRef.current.minX = Math.min(boundsRef.current.minX, currentPos.x);
-            boundsRef.current.maxX = Math.max(boundsRef.current.maxX, currentPos.x);
-            boundsRef.current.minY = Math.min(boundsRef.current.minY, currentPos.y);
-            boundsRef.current.maxY = Math.max(boundsRef.current.maxY, currentPos.y);
+        if (activeGameRef.current !== activeGame) {
+            pathRef.current = [];
+            boundsRef.current = { minX: 0, maxX: 0, minY: 0, maxY: 0, initialized: false };
+            activeGameRef.current = activeGame;
         }
 
-        // --- Draw Loop ---
+        const currentPos = {
+            x: Number(data.posX),
+            y: Number(data.posZ ?? data.posY)
+        };
+
+        if (!Number.isFinite(currentPos.x) || !Number.isFinite(currentPos.y)) return;
+
+        const lastPos = pathRef.current[pathRef.current.length - 1];
+        const moved = lastPos ? Math.hypot(currentPos.x - lastPos.x, currentPos.y - lastPos.y) : Infinity;
+        const isLargeJump = lastPos && moved > MAX_CONNECTED_JUMP;
+
+        if (!lastPos || moved > MIN_POINT_SPACING) {
+            pathRef.current.push({ ...currentPos, gap: isLargeJump });
+            if (pathRef.current.length > MAX_POINTS) {
+                pathRef.current = pathRef.current.slice(pathRef.current.length - MAX_POINTS);
+                boundsRef.current.initialized = false;
+            }
+
+            if (!boundsRef.current.initialized) {
+                boundsRef.current = {
+                    minX: currentPos.x,
+                    maxX: currentPos.x,
+                    minY: currentPos.y,
+                    maxY: currentPos.y,
+                    initialized: true
+                };
+            } else {
+                boundsRef.current.minX = Math.min(boundsRef.current.minX, currentPos.x);
+                boundsRef.current.maxX = Math.max(boundsRef.current.maxX, currentPos.x);
+                boundsRef.current.minY = Math.min(boundsRef.current.minY, currentPos.y);
+                boundsRef.current.maxY = Math.max(boundsRef.current.maxY, currentPos.y);
+            }
+        }
+
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const width = canvas.width;
-        const height = canvas.height;
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        const width = Math.max(1, Math.floor(rect.width * dpr));
+        const height = Math.max(1, Math.floor(rect.height * dpr));
+        if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+        }
 
-        // Clear canvas
         ctx.clearRect(0, 0, width, height);
 
         if (pathRef.current.length < 2) return;
 
-        // Calculate scale to fit the entire track inside the canvas with padding
-        const padding = 20;
+        const padding = 24 * dpr;
         const trackWidth = Math.max(boundsRef.current.maxX - boundsRef.current.minX, 1);
         const trackHeight = Math.max(boundsRef.current.maxY - boundsRef.current.minY, 1);
 
@@ -62,40 +92,57 @@ const TrackMap = () => {
         const offsetX = (width - trackWidth * scale) / 2 - boundsRef.current.minX * scale;
         const offsetY = (height - trackHeight * scale) / 2 - boundsRef.current.minY * scale;
 
-        // Helper to convert real world coordinates to canvas coordinates
         const toCanvasX = (x: number) => x * scale + offsetX;
-        const toCanvasY = (y: number) => y * scale + offsetY;
+        const toCanvasY = (y: number) => height - (y * scale + offsetY);
 
-        // Draw the path (Racing Line)
         ctx.beginPath();
-        ctx.strokeStyle = '#475569'; // Slate-600
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 2 * dpr;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
-        ctx.moveTo(toCanvasX(pathRef.current[0].x), toCanvasY(pathRef.current[0].y));
-        for (let i = 1; i < pathRef.current.length; i++) {
-            ctx.lineTo(toCanvasX(pathRef.current[i].x), toCanvasY(pathRef.current[i].y));
+        for (let i = 0; i < pathRef.current.length; i++) {
+            const point = pathRef.current[i];
+            if (i === 0 || point.gap) {
+                ctx.moveTo(toCanvasX(point.x), toCanvasY(point.y));
+            } else {
+                ctx.lineTo(toCanvasX(point.x), toCanvasY(point.y));
+            }
         }
         ctx.stroke();
 
-        // Draw Current Position Dot
+        if (lastPos) {
+            const heading = Math.atan2(currentPos.y - lastPos.y, currentPos.x - lastPos.x);
+            const cx = toCanvasX(currentPos.x);
+            const cy = toCanvasY(currentPos.y);
+            const size = 8 * dpr;
+
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(-heading);
+            ctx.fillStyle = '#38bdf8';
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 10 * dpr;
+            ctx.beginPath();
+            ctx.moveTo(size, 0);
+            ctx.lineTo(-size * 0.65, -size * 0.55);
+            ctx.lineTo(-size * 0.35, 0);
+            ctx.lineTo(-size * 0.65, size * 0.55);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
         ctx.beginPath();
-        ctx.fillStyle = '#38bdf8'; // Sky blue
-        ctx.arc(toCanvasX(currentPos.x), toCanvasY(currentPos.y), 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#e0f2fe';
+        ctx.arc(toCanvasX(currentPos.x), toCanvasY(currentPos.y), 3 * dpr, 0, Math.PI * 2);
         ctx.fill();
 
-        // Add a subtle glow
-        ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 10;
-        ctx.stroke();
-        ctx.shadowBlur = 0; // reset
-
-    }, [data, isConnected]);
+    }, [data, isConnected, activeGame]);
 
     const handleClearMap = () => {
         pathRef.current = [];
-        boundsRef.current = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
+        boundsRef.current = { minX: 0, maxX: 0, minY: 0, maxY: 0, initialized: false };
         const canvas = canvasRef.current;
         if (canvas) {
             canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
@@ -117,8 +164,6 @@ const TrackMap = () => {
             <div className="w-full aspect-square rounded-xl border-2 border-slate-800 bg-slate-950 flex items-center justify-center overflow-hidden">
                 <canvas
                     ref={canvasRef}
-                    width={400}
-                    height={400}
                     className="w-full h-full object-contain"
                 />
             </div>

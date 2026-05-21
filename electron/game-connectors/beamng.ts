@@ -71,7 +71,8 @@ interface OutSimState {
     accX: number;
     accY: number;
     accZ: number;
-    heading: number;
+    yaw: number;
+    yawRate: number;
     pitch: number;
     roll: number;
 }
@@ -100,7 +101,7 @@ export class BeamNGConnector extends EventEmitter {
         posX: 0, posY: 0, posZ: 0,
         velX: 0, velY: 0, velZ: 0,
         accX: 0, accY: 0, accZ: 0,
-        heading: 0, pitch: 0, roll: 0,
+        yaw: 0, yawRate: 0, pitch: 0, roll: 0,
     };
 
     // High Fidelity State (from Lua bridge)
@@ -218,9 +219,8 @@ export class BeamNGConnector extends EventEmitter {
     }
 
     private parseOutSim(buffer: Buffer): void {
-        if (buffer.length < 60) return;
-        let offset = 0;
-        if (buffer.readUInt32LE(0) < 10_000_000 && buffer.length >= 64) offset = 4;
+        if (buffer.length < 64) return;
+        const offset = buffer.subarray(0, 4).toString('ascii') === 'BNG1' ? 4 : 0;
 
         const posX = buffer.readFloatLE(offset + 0);
         const posY = buffer.readFloatLE(offset + 4);
@@ -228,14 +228,15 @@ export class BeamNGConnector extends EventEmitter {
         const velX = buffer.readFloatLE(offset + 12);
         const velY = buffer.readFloatLE(offset + 16);
         const velZ = buffer.readFloatLE(offset + 20);
-        const accX = buffer.readFloatLE(offset + 36);
-        const accY = buffer.readFloatLE(offset + 40);
-        const accZ = buffer.readFloatLE(offset + 44);
-        const heading = buffer.length >= offset + 52 ? buffer.readFloatLE(offset + 48) : 0;
+        const accX = buffer.readFloatLE(offset + 24);
+        const accY = buffer.readFloatLE(offset + 28);
+        const accZ = buffer.readFloatLE(offset + 32);
+        const roll = buffer.length >= offset + 52 ? buffer.readFloatLE(offset + 48) : 0;
         const pitch = buffer.length >= offset + 56 ? buffer.readFloatLE(offset + 52) : 0;
-        const roll = buffer.length >= offset + 60 ? buffer.readFloatLE(offset + 56) : 0;
+        const yaw = buffer.length >= offset + 60 ? buffer.readFloatLE(offset + 56) : 0;
+        const yawRate = buffer.length >= offset + 72 ? buffer.readFloatLE(offset + 68) : 0;
 
-        this.simState = { posX, posY, posZ, velX, velY, velZ, accX, accY, accZ, heading, pitch, roll };
+        this.simState = { posX, posY, posZ, velX, velY, velZ, accX, accY, accZ, yaw, yawRate, pitch, roll };
     }
 
     private parseBridge(buffer: Buffer): void {
@@ -281,7 +282,7 @@ export class BeamNGConnector extends EventEmitter {
 
     private buildFrame(): TelemetryData {
         const { speed, rpm, gear, throttle, brake, clutch, fuel, engineTemp } = this.gaugeState;
-        const { posX, posY, posZ, velX, velZ, accX, accY, accZ } = this.simState;
+        const { posX, posY, posZ, velX, velZ, accX, accY, accZ, yaw, yawRate } = this.simState;
 
         // Base Frame
         const frame: TelemetryData = {
@@ -303,6 +304,8 @@ export class BeamNGConnector extends EventEmitter {
             posX,
             posY,
             posZ,
+            yaw,
+            yawRate,
         };
 
         // If high-fidelity bridge is active (within 1 second), override/enrich data

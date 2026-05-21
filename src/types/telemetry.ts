@@ -47,6 +47,8 @@ export interface TelemetryData {
     posX?: number;
     posY?: number;
     posZ?: number;
+    yaw?: number;
+    yawRate?: number;
 
     // Derived Machine Learning Features (Calculated in backend)
     throttleDelta?: number;

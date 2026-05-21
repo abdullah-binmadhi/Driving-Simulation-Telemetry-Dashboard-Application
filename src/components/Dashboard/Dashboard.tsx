@@ -80,8 +80,11 @@ const Dashboard = () => {
                         coastingTimePct={data.coastingTimePct || 0}
                         brakeBiasUtilization={data.brakeBiasUtilization || 0}
                         isTrailBraking={data.isTrailBraking === 1}
-                        isOversteer={data.oversteerCorrection === 1}
-                        isUndersteer={data.understeerPlough === 1}
+                        isOversteer={(data.oversteerCorrection || 0) > 0.5}
+                        isUndersteer={(data.understeerPlough || 0) > 0.5}
+                        oversteerScore={(data.oversteerCorrection || 0) * 100}
+                        understeerScore={(data.understeerPlough || 0) * 100}
+                        slipAngle={data.slipAngleEstimate || 0}
                     />
                 </div>
 
