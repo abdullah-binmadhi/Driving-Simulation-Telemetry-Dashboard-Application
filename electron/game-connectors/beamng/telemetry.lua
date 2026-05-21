@@ -64,14 +64,27 @@ local function update(dt)
 
     -- Engine & Powertrain
     if powertrain then
-        local engine = powertrain.getDevice("mainEngine")
-        if engine then
-            damage.engine = 1.0 - (engine.damageLevel or engine.wearLevel or 0)
+        local engines = powertrain.getDevicesByType("combustionEngine")
+        if not engines or #engines == 0 then
+            engines = powertrain.getDevicesByType("electricMotor")
+        end
+        if engines and #engines > 0 then
+            local engine = engines[1]
+            if engine.isCatastrophicallyFailed or engine.isLockedUp then
+                damage.engine = 0.0
+            else
+                damage.engine = 1.0 - (engine.damageLevel or engine.wearLevel or 0.0)
+            end
         end
         
-        local trans = powertrain.getDevice("gearbox") or powertrain.getDevice("automaticGearbox") or powertrain.getDevice("manualGearbox")
-        if trans then
-            damage.transmission = 1.0 - (trans.damageLevel or 0)
+        local gearboxes = powertrain.getDevicesByCategory("gearbox")
+        if gearboxes and #gearboxes > 0 then
+            local gb = gearboxes[1]
+            if gb.isCatastrophicallyFailed then
+                damage.transmission = 0.0
+            else
+                damage.transmission = 1.0 - (gb.damageLevel or gb.wearLevel or 0.0)
+            end
         end
     end
 
