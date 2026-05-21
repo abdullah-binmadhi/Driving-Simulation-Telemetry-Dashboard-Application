@@ -1,6 +1,7 @@
 export interface TelemetryData {
     game: string;
     timestamp: number;
+    bridgeActive?: boolean;
 
     // Physics
     speed: number;       // km/h

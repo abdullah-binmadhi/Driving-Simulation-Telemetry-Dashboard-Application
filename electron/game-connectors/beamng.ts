@@ -17,6 +17,39 @@ import { TelemetryData } from '../../src/types/telemetry.js';
 
 const G = 9.80665; // m/s² per G
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+const numberOrUndefined = (value: unknown): number | undefined => {
+    const numberValue = Number(value);
+    return Number.isFinite(numberValue) ? numberValue : undefined;
+};
+
+const normalizeArray = (value: unknown, fallback: [number, number, number, number]): [number, number, number, number] => {
+    if (!Array.isArray(value)) return fallback;
+
+    return [0, 1, 2, 3].map((index) => {
+        const numberValue = numberOrUndefined(value[index]);
+        return numberValue ?? fallback[index];
+    }) as [number, number, number, number];
+};
+
+const normalizeHealth = (value: unknown, fallback = 1): number => {
+    const numberValue = numberOrUndefined(value) ?? fallback;
+    return clamp(numberValue > 1 ? numberValue / 100 : numberValue, 0, 1);
+};
+
+const normalizeSteering = (value: unknown): number | undefined => {
+    const numberValue = numberOrUndefined(value);
+    if (numberValue === undefined) return undefined;
+
+    // Bridge v1 used BeamNG's steering-wheel degrees. The app expects -1..1.
+    if (Math.abs(numberValue) > 1) {
+        return clamp(numberValue / 450, -1, 1);
+    }
+
+    return clamp(numberValue, -1, 1);
+};
+
 interface OutGaugeState {
     speed: number;       // km/h
     rpm: number;
@@ -208,11 +241,42 @@ export class BeamNGConnector extends EventEmitter {
     private parseBridge(buffer: Buffer): void {
         try {
             const data = JSON.parse(buffer.toString());
-            this.bridgeState = data;
+            this.bridgeState = this.normalizeBridgeData(data);
             this.lastBridgeUpdate = Date.now();
         } catch (e) {
             // Silently fail if JSON is malformed
         }
+    }
+
+    private normalizeBridgeData(data: Record<string, unknown>): Partial<TelemetryData> {
+        const normalized: Partial<TelemetryData> = { ...data, bridgeActive: true } as Partial<TelemetryData>;
+
+        const steering = normalizeSteering(data.steering ?? data.steeringInput ?? data.steering_input);
+        if (steering !== undefined) normalized.steering = steering;
+
+        normalized.throttle = clamp(numberOrUndefined(data.throttle ?? data.throttleInput ?? data.throttle_input) ?? this.gaugeState.throttle, 0, 1);
+        normalized.brake = clamp(numberOrUndefined(data.brake ?? data.brakeInput ?? data.brake_input) ?? this.gaugeState.brake, 0, 1);
+        normalized.clutch = clamp(numberOrUndefined(data.clutch ?? data.clutchInput ?? data.clutch_input) ?? this.gaugeState.clutch, 0, 1);
+
+        normalized.tireTemp = normalizeArray(data.tireTemp ?? data.tireTemps ?? data.tire_temps, [0, 0, 0, 0]);
+        normalized.tireSurfaceTemp = normalizeArray(data.tireSurfaceTemp ?? data.tireSurfaceTemps ?? data.tire_surface, [0, 0, 0, 0]);
+        normalized.tireWear = normalizeArray(data.tireWear ?? data.tire_wear, [1, 1, 1, 1])
+            .map((value) => normalizeHealth(value)) as [number, number, number, number];
+        normalized.tirePressure = normalizeArray(data.tirePressure ?? data.tirePressures ?? data.tire_pressures, [0, 0, 0, 0])
+            .map((value) => clamp(value, 0, 200)) as [number, number, number, number];
+
+        const damage = data.carDamage as Partial<NonNullable<TelemetryData['carDamage']>> | undefined;
+        if (damage) {
+            normalized.carDamage = {
+                engine: normalizeHealth(damage.engine),
+                transmission: normalizeHealth(damage.transmission),
+                suspension: normalizeHealth(damage.suspension),
+                brakes: normalizeHealth(damage.brakes),
+                aero: normalizeHealth(damage.aero),
+            };
+        }
+
+        return normalized;
     }
 
     private buildFrame(): TelemetryData {
@@ -223,13 +287,14 @@ export class BeamNGConnector extends EventEmitter {
         const frame: TelemetryData = {
             game: 'BeamNG.drive',
             timestamp: Date.now(),
+            bridgeActive: false,
             speed,
             rpm,
             gear,
             throttle,
             brake,
             clutch,
-            steering: Math.max(-1, Math.min(1, velX / (Math.abs(velZ) + 0.1))), // fallback estimate
+            steering: clamp(velX / (Math.abs(velZ) + 0.1), -1, 1), // fallback estimate
             gForceX: accX / G,
             gForceY: -accZ / G,
             gForceZ: (accY + G) / G,

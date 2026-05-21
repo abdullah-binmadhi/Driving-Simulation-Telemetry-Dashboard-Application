@@ -210,6 +210,7 @@ class BrowserSimulator {
 
         const frame: TelemetryData = {
             timestamp: Date.now(),
+            bridgeActive: true,
             game: 'Simulation Mode',
             speed: Math.max(0, this.speed * 3.6),
             rpm: Math.max(0, this.rpm),
@@ -228,7 +229,9 @@ class BrowserSimulator {
             fuel: 50 - (this.distanceTraveled / 1000),
             engineTemp: this.engineTemp,
             tireTemp: [this.tireTemp[0], this.tireTemp[1], this.tireTemp[2], this.tireTemp[3]],
+            tireSurfaceTemp: this.tireTemp.map((temp, index) => temp + (brake * 8) + (this.brakeTemp[index] - 100) * 0.02) as [number, number, number, number],
             tireWear: [100, 100, 100, 100],
+            tirePressure: this.tireTemp.map((temp, index) => 30 + (temp - 70) * 0.035 + Math.sin(this.time + index) * 0.15) as [number, number, number, number],
             posX: this.posX,
             posY: 0,
             posZ: this.posZ,

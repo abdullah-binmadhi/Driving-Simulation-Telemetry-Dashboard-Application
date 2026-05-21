@@ -8,8 +8,9 @@ interface InputVisualizerProps {
 }
 
 const InputVisualizer = memo(({ steering, throttle, brake, clutch }: InputVisualizerProps) => {
+    const normalizedSteering = Math.max(-1, Math.min(1, Math.abs(steering) > 1 ? steering / 450 : steering));
     // Map steering (-1 to 1) to degrees (-450 to 450 for accurate Logitech G29 900-degree rotation)
-    const steeringDeg = steering * 450;
+    const steeringDeg = normalizedSteering * 450;
 
     return (
         <div className="bg-slate-900 rounded-2xl p-3 border border-slate-800 flex-grow min-w-0 overflow-hidden">
@@ -36,7 +37,7 @@ const InputVisualizer = memo(({ steering, throttle, brake, clutch }: InputVisual
                         </div>
                     </div>
                     <span className="text-xs font-mono text-slate-400 whitespace-nowrap">
-                        Steering: {(steering * 100).toFixed(0)}%
+                        Steering: {(normalizedSteering * 100).toFixed(0)}%
                     </span>
                 </div>
 
