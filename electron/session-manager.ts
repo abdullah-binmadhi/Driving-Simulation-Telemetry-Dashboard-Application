@@ -107,9 +107,6 @@ export class SessionManager extends EventEmitter {
             // but we can set up the DB flow and calculate it natively when the Lua script exports slip nodes.
             data.actualSlipRatio = data.actualSlipRatio || 0;
 
-            this.lastData = data; // Keep reference instead of clone to save GC
-            this.buffer.push({ ...data }); // Only clone once when pushing to buffer
-
             // Stats Calculation and Spatial Distance
             const now = data.timestamp;
             if (this.lastTimestamp > 0) {
@@ -144,6 +141,8 @@ export class SessionManager extends EventEmitter {
             this.lastTimestamp = now;
             this.lastFuel = data.fuel || 0;
             this.lastActivityTime = Date.now();
+            this.lastData = data; // Keep reference instead of clone to save GC
+            this.buffer.push({ ...data }); // Only clone once after derived fields are populated
 
             if (this.buffer.length >= this.BATCH_SIZE) {
                 this.flushBuffer();
@@ -191,7 +190,7 @@ export class SessionManager extends EventEmitter {
 
         const id = this.currentSessionId;
         console.log('Stopping session...');
-        this.flushBuffer();
+        const flushed = this.flushBuffer();
 
         // Get final fuel
         // We don't have the *last* data point here easily unless we store it. 
@@ -234,7 +233,7 @@ export class SessionManager extends EventEmitter {
                 this.currentSessionId
             );
 
-            this.emit('session-stopped', { id: this.currentSessionId, score });
+            this.emit('session-stopped', { id: this.currentSessionId, score, flushed });
         } catch (e) {
             console.error('Failed to stop session:', e);
         }
@@ -245,7 +244,7 @@ export class SessionManager extends EventEmitter {
     }
 
     private flushBuffer() {
-        if (!this.currentSessionId || this.buffer.length === 0) return;
+        if (!this.currentSessionId || this.buffer.length === 0) return true;
 
         // Bulk insert
         // better-sqlite3 is synchronous, so this blocks. 
@@ -291,7 +290,12 @@ export class SessionManager extends EventEmitter {
                     oversteer_correction: row.oversteerCorrection || 0,
                     understeer_plough: row.understeerPlough || 0,
                     coasting_time_pct: row.coastingTimePct || 0,
-                    brake_bias_utilization: row.brakeBiasUtilization || 0
+                    brake_bias_utilization: row.brakeBiasUtilization || 0,
+                    trueTireWearFL: row.trueTireWearFL ?? 1,
+                    trueTireWearFR: row.trueTireWearFR ?? 1,
+                    trueTireWearRL: row.trueTireWearRL ?? 1,
+                    trueTireWearRR: row.trueTireWearRR ?? 1,
+                    actualSlipRatio: row.actualSlipRatio ?? 0
                 });
             }
         });
@@ -299,8 +303,10 @@ export class SessionManager extends EventEmitter {
         try {
             insertMany(this.buffer);
             this.buffer = [];
+            return true;
         } catch (e) {
             console.error('Failed to flush telemetry buffer:', e);
+            return false;
         }
     }
 }

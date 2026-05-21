@@ -56,7 +56,6 @@ export const initDatabase = () => {
       gForceZ REAL,
       fuel REAL,
       engineTemp REAL,
-      clutch REAL DEFAULT 0,
       throttle_delta REAL DEFAULT 0,
       brake_delta REAL DEFAULT 0,
       steering_delta REAL DEFAULT 0,
