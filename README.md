@@ -54,8 +54,8 @@ To enable detailed **Tire PVT (Pressure/Volume/Temperature)** and **Damage Monit
 2. **Install to BeamNG**: Copy this file to your BeamNG vehicle extensions folder: 
    `%USERPROFILE%\AppData\Local\BeamNG.drive\<version>\scripts\vehicle\extensions\telemetry.lua`
 3. **Activate In-Game**: 
-   - Open the BeamNG console (`~`).
-   - Type: `v.extensions.load("telemetry")`
+   - Open the BeamNG console (`~`).`n   - Switch the console environment to "Vehicle Lua" (using the dropdown at the bottom left of the screen).
+   - Type: `extensions.load("telemetry")`
 4. **Connection**: The dashboard will automatically detect the high-fidelity stream on **Port 4440**.
 5. **Standard Physics**: Ensure **OutSim** (Port 4442) and **OutGauge** (Port 4444) are also enabled in BeamNG's Gameplay settings for full physics support.
 
