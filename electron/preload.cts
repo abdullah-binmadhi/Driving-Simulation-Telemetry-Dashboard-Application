@@ -18,7 +18,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getSessionTelemetry: (sessionId: number) => ipcRenderer.invoke('get-session-telemetry', sessionId),
     exportSessionCSV: (sessionId: number) => ipcRenderer.invoke('export-session-csv', sessionId),
     toggleSimulationMode: (enabled: boolean) => ipcRenderer.invoke('toggle-simulation-mode', enabled),
-    startSession: () => ipcRenderer.invoke('start-session'),
+    startSession: (params?: { track?: string; vehicle?: string }) => ipcRenderer.invoke('start-session', params),
     stopSession: () => ipcRenderer.invoke('stop-session'),
     updateSimulationTransmission: (type: 'automatic' | 'manual') => ipcRenderer.invoke('update-simulation-transmission', type),
     updateSimulationBehavior: (behavior: string) => ipcRenderer.invoke('update-simulation-behavior', behavior),

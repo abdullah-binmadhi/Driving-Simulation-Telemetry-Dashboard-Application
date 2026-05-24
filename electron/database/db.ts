@@ -100,6 +100,10 @@ export const initDatabase = () => {
       true_tire_wear_rl REAL DEFAULT 1,
       true_tire_wear_rr REAL DEFAULT 1,
       actual_slip_ratio REAL DEFAULT 0,
+      oil_temp REAL DEFAULT 0,
+      lap_time REAL DEFAULT 0,
+      last_lap REAL DEFAULT 0,
+      best_lap REAL DEFAULT 0,
       FOREIGN KEY (session_id) REFERENCES sessions (id)
     );
 
@@ -132,6 +136,23 @@ export const initDatabase = () => {
   }
   if (!columns.includes('efficiency')) {
     db.exec('ALTER TABLE sessions ADD COLUMN efficiency REAL DEFAULT 0');
+  }
+
+  // Migrations: Add new ML-critical columns to telemetry if missing
+  const telColumns = db.prepare("PRAGMA table_info(telemetry)").all() as any[];
+  const telColNames = telColumns.map((c: any) => c.name);
+
+  if (!telColNames.includes('oil_temp')) {
+    db.exec('ALTER TABLE telemetry ADD COLUMN oil_temp REAL DEFAULT 0');
+  }
+  if (!telColNames.includes('lap_time')) {
+    db.exec('ALTER TABLE telemetry ADD COLUMN lap_time REAL DEFAULT 0');
+  }
+  if (!telColNames.includes('last_lap')) {
+    db.exec('ALTER TABLE telemetry ADD COLUMN last_lap REAL DEFAULT 0');
+  }
+  if (!telColNames.includes('best_lap')) {
+    db.exec('ALTER TABLE telemetry ADD COLUMN best_lap REAL DEFAULT 0');
   }
 
   // Migrations for Telemetry table

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useTelemetryStore } from '../../stores/telemetryStore';
+import { useSettingsStore } from '../../stores/settingsStore';
 
 const DataLogger = () => {
     const { data, isConnected } = useTelemetryStore();
+    const { driver, session } = useSettingsStore();
     const [isRecording, setIsRecording] = useState(false);
 
     // UI state
@@ -19,7 +21,10 @@ const DataLogger = () => {
         if (window.electronAPI) {
             setFrameCount(0);
             setLastSessionId(null);
-            const res = await window.electronAPI.startSession();
+            const res = await window.electronAPI.startSession({
+                track: session.trackName,
+                vehicle: driver.carModel,
+            });
             if (res.success) {
                 setIsRecording(true);
             }

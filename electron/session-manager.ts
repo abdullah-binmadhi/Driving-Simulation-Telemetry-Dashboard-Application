@@ -46,7 +46,8 @@ export class SessionManager extends EventEmitter {
                     gforce_combined, slip_angle_estimate, is_coasting, is_wots, is_braking, is_turning,
                     jerk_x, jerk_y, distance_traveled, turn_radius, pedal_overlap, is_trail_braking,
                     oversteer_correction, understeer_plough, coasting_time_pct, brake_bias_utilization,
-                    true_tire_wear_fl, true_tire_wear_fr, true_tire_wear_rl, true_tire_wear_rr, actual_slip_ratio
+                    true_tire_wear_fl, true_tire_wear_fr, true_tire_wear_rl, true_tire_wear_rr, actual_slip_ratio,
+                    oil_temp, lap_time, last_lap, best_lap
                 ) VALUES (
                     @session_id, @timestamp, @speed, @rpm, @gear, @throttle, @brake, @clutch, @steering,
                     @gForceX, @gForceY, @gForceZ, @fuel, @engineTemp,
@@ -59,7 +60,8 @@ export class SessionManager extends EventEmitter {
                     @gforce_combined, @slip_angle_estimate, @is_coasting, @is_wots, @is_braking, @is_turning,
                     @jerk_x, @jerk_y, @distance_traveled, @turn_radius, @pedal_overlap, @is_trail_braking,
                     @oversteer_correction, @understeer_plough, @coasting_time_pct, @brake_bias_utilization,
-                    @trueTireWearFL, @trueTireWearFR, @trueTireWearRL, @trueTireWearRR, @actualSlipRatio
+                    @trueTireWearFL, @trueTireWearFR, @trueTireWearRL, @trueTireWearRR, @actualSlipRatio,
+                    @oilTemp, @lapTime, @lastLap, @bestLap
                 )
             `);
         } catch (e) {
@@ -186,9 +188,12 @@ export class SessionManager extends EventEmitter {
         }
     }
 
-    public beginManualSession() {
+    public beginManualSession(track?: string, vehicle?: string) {
         if (!this.isRecording) {
             this.manualStartRequested = true;
+            // Store metadata for when session actually starts
+            (this as any)._pendingTrack = track || null;
+            (this as any)._pendingVehicle = vehicle || null;
         }
     }
 
@@ -204,12 +209,18 @@ export class SessionManager extends EventEmitter {
         this.lastData = null; // Reset starting data
 
         try {
+            const pendingTrack = (this as any)._pendingTrack || null;
+            const pendingVehicle = (this as any)._pendingVehicle || 'Unknown';
+            (this as any)._pendingTrack = null;
+            (this as any)._pendingVehicle = null;
+
             const stmt = db.prepare(`
-        INSERT INTO sessions (game, vehicle, start_time, notes)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO sessions (game, track, vehicle, start_time, notes)
+        VALUES (?, ?, ?, ?, ?)
       `);
-            const vehicle = 'Unknown';
-            const result = stmt.run(data.game, vehicle, Date.now(), 'Auto-started session');
+            const track = pendingTrack || 'Unknown';
+            const vehicle = pendingVehicle || 'Unknown';
+            const result = stmt.run(data.game, track, vehicle, Date.now(), 'Auto-started session');
             this.currentSessionId = result.lastInsertRowid as number;
 
             this.emit('session-started', { id: this.currentSessionId });
@@ -348,7 +359,11 @@ export class SessionManager extends EventEmitter {
                     trueTireWearFR: row.trueTireWearFR ?? 1,
                     trueTireWearRL: row.trueTireWearRL ?? 1,
                     trueTireWearRR: row.trueTireWearRR ?? 1,
-                    actualSlipRatio: row.actualSlipRatio ?? 0
+                    actualSlipRatio: row.actualSlipRatio ?? 0,
+                    oilTemp: row.oilTemp ?? 0,
+                    lapTime: row.lapTime ?? 0,
+                    lastLap: row.lastLap ?? 0,
+                    bestLap: row.bestLap ?? 0
                 });
             }
         });

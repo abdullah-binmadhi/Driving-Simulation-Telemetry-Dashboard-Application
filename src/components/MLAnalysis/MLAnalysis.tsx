@@ -125,12 +125,13 @@ const MLAnalysis = () => {
             complete: (results) => {
                 const data = results.data as any[];
                 if (data.length > 50) {
-                    // Normalize keys (handle 'Speed' vs 'speed')
+                    // Normalize keys — CSV uses snake_case (DB names), worker expects camelCase
                     const normalizedData = data.map((row, i) => {
                         const getExact = (keys: string[]): number => {
                             for (const key of keys) {
                                 const found = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase());
-                                if (found !== undefined && row[found] !== null && row[found] !== undefined) return Number(row[found]) || 0;
+                                if (found !== undefined && row[found] !== null && row[found] !== undefined)
+                                    return Number(row[found]) || 0;
                             }
                             return 0;
                         };
@@ -143,28 +144,57 @@ const MLAnalysis = () => {
                             rpm:        getExact(['rpm']),
                             gear:       getExact(['gear']),
                             clutch:     getExact(['clutch']),
-                            gForceX:    getExact(['gforcex', 'gforce_x']),
-                            gForceY:    getExact(['gforcey', 'gforce_y']),
-                            gForceZ:    getExact(['gforcez', 'gforce_z']),
-                            gforceCombined:      getExact(['gforce_combined']),
+                            fuel:       getExact(['fuel']),
+                            engineTemp: getExact(['engine_temp', 'enginetemp']),
+
+                            // G-Forces
+                            gForceX:    getExact(['gforcex', 'gforce_x', 'g_force_x']),
+                            gForceY:    getExact(['gforcey', 'gforce_y', 'g_force_y']),
+                            gForceZ:    getExact(['gforcez', 'gforce_z', 'g_force_z']),
+                            gforceCombined: getExact(['gforce_combined']),
+
+                            // Jerk & deltas (ML features)
+                            jerkX:               getExact(['jerk_x']),
+                            jerkY:               getExact(['jerk_y']),
+                            throttleDelta:       getExact(['throttle_delta']),
+                            brakeDelta:          getExact(['brake_delta']),
+                            steeringDelta:       getExact(['steering_delta']),
+                            speedDelta:          getExact(['speed_delta']),
+
+                            // Tire data
+                            tireTempFL:       getExact(['tire_temp_fl']),
+                            tireTempFR:       getExact(['tire_temp_fr']),
+                            tireTempRL:       getExact(['tire_temp_rl']),
+                            tireTempRR:       getExact(['tire_temp_rr']),
+                            tirePressureFL:   getExact(['tire_pressure_fl']),
+                            tirePressureFR:   getExact(['tire_pressure_fr']),
+                            tirePressureRL:   getExact(['tire_pressure_rl']),
+                            tirePressureRR:   getExact(['tire_pressure_rr']),
+
+                            // Position & orientation
                             posX:                getExact(['pos_x']),
                             posY:                getExact(['pos_y']),
                             posZ:                getExact(['pos_z']),
-                            jerkX:               getExact(['jerk_x']),
-                            jerkY:               getExact(['jerk_y']),
+                            yawRate:             getExact(['yaw_rate']),
+
+                            // Derived ML features
                             pedalOverlap:        getExact(['pedal_overlap']),
                             turnRadius:          getExact(['turn_radius']),
                             slipAngleEstimate:   getExact(['slip_angle_estimate']),
+
+                            // Categorical flags
                             isTrailBraking:      getExact(['is_trail_braking']),
+                            isCoasting:          getExact(['is_coasting']),
+                            isWots:              getExact(['is_wots']),
+                            isBraking:           getExact(['is_braking']),
+                            isTurning:           getExact(['is_turning']),
+
+                            // Behavioral states
                             oversteerCorrection: getExact(['oversteer_correction']),
                             understeerPlough:    getExact(['understeer_plough']),
-                            isCoasting: getExact(['is_coasting']),
-                            isBraking:  getExact(['is_braking']),
-                            isTurning:  getExact(['is_turning']),
-                            fuel:       getExact(['fuel']),
-                            engineTemp: getExact(['enginetemp', 'engine_temp']),
+                            brakeBiasUtilization: getExact(['brake_bias_utilization']),
+                            coastingTimePct:     getExact(['coasting_time_pct']),
                         };
-
                     });
 
                     if (normalizedData[0].speed !== undefined || normalizedData[0].throttle !== undefined) {
