@@ -1,0 +1,4783 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "db.ts",
+      "file_type": "code",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L1",
+      "id": "electron_database_db_ts",
+      "community": 2,
+      "norm_label": "db.ts"
+    },
+    {
+      "label": "__dirname",
+      "file_type": "code",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L7",
+      "id": "database_db_dirname",
+      "community": 2,
+      "norm_label": "__dirname"
+    },
+    {
+      "label": "db",
+      "file_type": "code",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L15",
+      "id": "database_db_db",
+      "community": 2,
+      "norm_label": "db"
+    },
+    {
+      "label": "initDatabase()",
+      "file_type": "code",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L17",
+      "id": "database_db_initdatabase",
+      "community": 2,
+      "norm_label": "initdatabase()"
+    },
+    {
+      "label": "main.ts",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L1",
+      "id": "electron_main_ts",
+      "community": 2,
+      "norm_label": "main.ts"
+    },
+    {
+      "label": "require",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L10",
+      "id": "electron_main_require",
+      "community": 2,
+      "norm_label": "require"
+    },
+    {
+      "label": "__dirname",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L11",
+      "id": "electron_main_dirname",
+      "community": 2,
+      "norm_label": "__dirname"
+    },
+    {
+      "label": "createWindow()",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L21",
+      "id": "electron_main_createwindow",
+      "community": 2,
+      "norm_label": "createwindow()"
+    },
+    {
+      "label": "now",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L175",
+      "id": "electron_main_now",
+      "community": 2,
+      "norm_label": "now"
+    },
+    {
+      "label": "windows",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L177",
+      "id": "electron_main_windows",
+      "community": 2,
+      "norm_label": "windows"
+    },
+    {
+      "label": "id",
+      "file_type": "code",
+      "source_file": "electron/main.ts",
+      "source_location": "L244",
+      "id": "electron_main_id",
+      "community": 2,
+      "norm_label": "id"
+    },
+    {
+      "label": "session-manager.ts",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L1",
+      "id": "electron_session_manager_ts",
+      "community": 2,
+      "norm_label": "session-manager.ts"
+    },
+    {
+      "label": "clamp()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L7",
+      "id": "electron_session_manager_clamp",
+      "community": 2,
+      "norm_label": "clamp()"
+    },
+    {
+      "label": "nearZero()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L8",
+      "id": "electron_session_manager_nearzero",
+      "community": 2,
+      "norm_label": "nearzero()"
+    },
+    {
+      "label": "SessionManager",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L10",
+      "id": "electron_session_manager_sessionmanager",
+      "community": 2,
+      "norm_label": "sessionmanager"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L29",
+      "id": "electron_session_manager_sessionmanager_constructor",
+      "community": 2,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".initStatements()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L34",
+      "id": "electron_session_manager_sessionmanager_initstatements",
+      "community": 2,
+      "norm_label": ".initstatements()"
+    },
+    {
+      "label": ".processData()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L72",
+      "id": "electron_session_manager_sessionmanager_processdata",
+      "community": 2,
+      "norm_label": ".processdata()"
+    },
+    {
+      "label": ".beginManualSession()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L191",
+      "id": "electron_session_manager_sessionmanager_beginmanualsession",
+      "community": 2,
+      "norm_label": ".beginmanualsession()"
+    },
+    {
+      "label": ".startSession()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L200",
+      "id": "electron_session_manager_sessionmanager_startsession",
+      "community": 2,
+      "norm_label": ".startsession()"
+    },
+    {
+      "label": ".stopSession()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L233",
+      "id": "electron_session_manager_sessionmanager_stopsession",
+      "community": 2,
+      "norm_label": ".stopsession()"
+    },
+    {
+      "label": ".flushBuffer()",
+      "file_type": "code",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L291",
+      "id": "electron_session_manager_sessionmanager_flushbuffer",
+      "community": 2,
+      "norm_label": ".flushbuffer()"
+    },
+    {
+      "label": "config.py",
+      "file_type": "code",
+      "source_file": "ml-pipeline/config.py",
+      "source_location": "L1",
+      "id": "ml_pipeline_config_py",
+      "community": 11,
+      "norm_label": "config.py"
+    },
+    {
+      "label": "Comprehensive ML Pipeline Configuration for Driving Telemetry All feature sets,",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/config.py",
+      "source_location": "L1",
+      "id": "ml_pipeline_config_rationale_1",
+      "community": 11,
+      "norm_label": "comprehensive ml pipeline configuration for driving telemetry all feature sets,"
+    },
+    {
+      "label": "train_model.py",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L1",
+      "id": "ml_pipeline_train_model_py",
+      "community": 3,
+      "norm_label": "train_model.py"
+    },
+    {
+      "label": "load_all_csvs()",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L51",
+      "id": "ml_pipeline_train_model_load_all_csvs",
+      "community": 3,
+      "norm_label": "load_all_csvs()"
+    },
+    {
+      "label": "validate_columns()",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L78",
+      "id": "ml_pipeline_train_model_validate_columns",
+      "community": 3,
+      "norm_label": "validate_columns()"
+    },
+    {
+      "label": "derive_labels()",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L91",
+      "id": "ml_pipeline_train_model_derive_labels",
+      "community": 3,
+      "norm_label": "derive_labels()"
+    },
+    {
+      "label": "save_onnx()",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L134",
+      "id": "ml_pipeline_train_model_save_onnx",
+      "community": 3,
+      "norm_label": "save_onnx()"
+    },
+    {
+      "label": "train_all()",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L149",
+      "id": "ml_pipeline_train_model_train_all",
+      "community": 3,
+      "norm_label": "train_all()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L395",
+      "id": "ml_pipeline_train_model_main",
+      "community": 3,
+      "norm_label": "main()"
+    },
+    {
+      "label": "Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L1",
+      "id": "ml_pipeline_train_model_rationale_1",
+      "community": 3,
+      "norm_label": "multi-model ml training pipeline for driving telemetry dashboard. trains 8 model"
+    },
+    {
+      "label": "Load all CSV files from dataset/, skipping # comment headers.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L52",
+      "id": "ml_pipeline_train_model_rationale_52",
+      "community": 3,
+      "norm_label": "load all csv files from dataset/, skipping # comment headers."
+    },
+    {
+      "label": "Check which expected columns are missing from the dataset.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L79",
+      "id": "ml_pipeline_train_model_rationale_79",
+      "community": 3,
+      "norm_label": "check which expected columns are missing from the dataset."
+    },
+    {
+      "label": "Derive supervised labels that aren't directly in the raw telemetry.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L92",
+      "id": "ml_pipeline_train_model_rationale_92",
+      "community": 3,
+      "norm_label": "derive supervised labels that aren't directly in the raw telemetry."
+    },
+    {
+      "label": "Convert sklearn model to ONNX and save.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L135",
+      "id": "ml_pipeline_train_model_rationale_135",
+      "community": 3,
+      "norm_label": "convert sklearn model to onnx and save."
+    },
+    {
+      "label": "Train all 8 models and return metrics.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L150",
+      "id": "ml_pipeline_train_model_rationale_150",
+      "community": 3,
+      "norm_label": "train all 8 models and return metrics."
+    },
+    {
+      "label": "model_metrics.json",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L1",
+      "id": "public_models_model_metrics_json",
+      "community": 1,
+      "norm_label": "model_metrics.json"
+    },
+    {
+      "label": "trained_at",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L2",
+      "id": "models_model_metrics_trained_at",
+      "community": 1,
+      "norm_label": "trained_at"
+    },
+    {
+      "label": "dataset_rows",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L3",
+      "id": "models_model_metrics_dataset_rows",
+      "community": 1,
+      "norm_label": "dataset_rows"
+    },
+    {
+      "label": "dataset_files",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L4",
+      "id": "models_model_metrics_dataset_files",
+      "community": 1,
+      "norm_label": "dataset_files"
+    },
+    {
+      "label": "models",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L5",
+      "id": "models_model_metrics_models",
+      "community": 1,
+      "norm_label": "models"
+    },
+    {
+      "label": "tire_wear_rf",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L6",
+      "id": "models_model_metrics_models_tire_wear_rf",
+      "community": 1,
+      "norm_label": "tire_wear_rf"
+    },
+    {
+      "label": "mse",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L7",
+      "id": "models_model_metrics_tire_wear_rf_mse",
+      "community": 1,
+      "norm_label": "mse"
+    },
+    {
+      "label": "r2",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L8",
+      "id": "models_model_metrics_tire_wear_rf_r2",
+      "community": 1,
+      "norm_label": "r2"
+    },
+    {
+      "label": "convergence",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L9",
+      "id": "models_model_metrics_tire_wear_rf_convergence",
+      "community": 1,
+      "norm_label": "convergence"
+    },
+    {
+      "label": "features",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L10",
+      "id": "models_model_metrics_tire_wear_rf_features",
+      "community": 1,
+      "norm_label": "features"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L32",
+      "id": "models_model_metrics_tire_wear_rf_feature_count",
+      "community": 1,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "fatigue_lr",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L34",
+      "id": "models_model_metrics_models_fatigue_lr",
+      "community": 1,
+      "norm_label": "fatigue_lr"
+    },
+    {
+      "label": "error",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L35",
+      "id": "models_model_metrics_fatigue_lr_error",
+      "community": 1,
+      "norm_label": "error"
+    },
+    {
+      "label": "grip_dt",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L37",
+      "id": "models_model_metrics_models_grip_dt",
+      "community": 1,
+      "norm_label": "grip_dt"
+    },
+    {
+      "label": "accuracy",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L38",
+      "id": "models_model_metrics_grip_dt_accuracy",
+      "community": 1,
+      "norm_label": "accuracy"
+    },
+    {
+      "label": "f1",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L39",
+      "id": "models_model_metrics_grip_dt_f1",
+      "community": 1,
+      "norm_label": "f1"
+    },
+    {
+      "label": "node_purity",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L40",
+      "id": "models_model_metrics_grip_dt_node_purity",
+      "community": 1,
+      "norm_label": "node_purity"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L41",
+      "id": "models_model_metrics_grip_dt_feature_count",
+      "community": 1,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "safety_rf",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L43",
+      "id": "models_model_metrics_models_safety_rf",
+      "community": 1,
+      "norm_label": "safety_rf"
+    },
+    {
+      "label": "r2",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L44",
+      "id": "models_model_metrics_safety_rf_r2",
+      "community": 1,
+      "norm_label": "r2"
+    },
+    {
+      "label": "mse",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L45",
+      "id": "models_model_metrics_safety_rf_mse",
+      "community": 1,
+      "norm_label": "mse"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L46",
+      "id": "models_model_metrics_safety_rf_feature_count",
+      "community": 1,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "states_kmeans",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L48",
+      "id": "models_model_metrics_models_states_kmeans",
+      "community": 1,
+      "norm_label": "states_kmeans"
+    },
+    {
+      "label": "silhouette",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L49",
+      "id": "models_model_metrics_states_kmeans_silhouette",
+      "community": 1,
+      "norm_label": "silhouette"
+    },
+    {
+      "label": "n_clusters",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L50",
+      "id": "models_model_metrics_states_kmeans_n_clusters",
+      "community": 1,
+      "norm_label": "n_clusters"
+    },
+    {
+      "label": "centroids",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L51",
+      "id": "models_model_metrics_states_kmeans_centroids",
+      "community": 1,
+      "norm_label": "centroids"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L105",
+      "id": "models_model_metrics_states_kmeans_feature_count",
+      "community": 1,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "driver_pca",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L107",
+      "id": "models_model_metrics_models_driver_pca",
+      "community": 8,
+      "norm_label": "driver_pca"
+    },
+    {
+      "label": "explained_variance",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L108",
+      "id": "models_model_metrics_driver_pca_explained_variance",
+      "community": 8,
+      "norm_label": "explained_variance"
+    },
+    {
+      "label": "pca_variance_pct",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L109",
+      "id": "models_model_metrics_driver_pca_pca_variance_pct",
+      "community": 8,
+      "norm_label": "pca_variance_pct"
+    },
+    {
+      "label": "components",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L110",
+      "id": "models_model_metrics_driver_pca_components",
+      "community": 8,
+      "norm_label": "components"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L150",
+      "id": "models_model_metrics_driver_pca_feature_count",
+      "community": 8,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "shift_nb",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L152",
+      "id": "models_model_metrics_models_shift_nb",
+      "community": 1,
+      "norm_label": "shift_nb"
+    },
+    {
+      "label": "accuracy",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L153",
+      "id": "models_model_metrics_shift_nb_accuracy",
+      "community": 1,
+      "norm_label": "accuracy"
+    },
+    {
+      "label": "f1",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L154",
+      "id": "models_model_metrics_shift_nb_f1",
+      "community": 1,
+      "norm_label": "f1"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L155",
+      "id": "models_model_metrics_shift_nb_feature_count",
+      "community": 1,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "pedal_svm",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L157",
+      "id": "models_model_metrics_models_pedal_svm",
+      "community": 1,
+      "norm_label": "pedal_svm"
+    },
+    {
+      "label": "accuracy",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L158",
+      "id": "models_model_metrics_pedal_svm_accuracy",
+      "community": 1,
+      "norm_label": "accuracy"
+    },
+    {
+      "label": "f1",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L159",
+      "id": "models_model_metrics_pedal_svm_f1",
+      "community": 1,
+      "norm_label": "f1"
+    },
+    {
+      "label": "margin_width",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L160",
+      "id": "models_model_metrics_pedal_svm_margin_width",
+      "community": 1,
+      "norm_label": "margin_width"
+    },
+    {
+      "label": "feature_count",
+      "file_type": "code",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L161",
+      "id": "models_model_metrics_pedal_svm_feature_count",
+      "community": 1,
+      "norm_label": "feature_count"
+    },
+    {
+      "label": "pca_profile.json",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L1",
+      "id": "public_models_pca_profile_json",
+      "community": 4,
+      "norm_label": "pca_profile.json"
+    },
+    {
+      "label": "components",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L2",
+      "id": "models_pca_profile_components",
+      "community": 4,
+      "norm_label": "components"
+    },
+    {
+      "label": "mean",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L42",
+      "id": "models_pca_profile_mean",
+      "community": 4,
+      "norm_label": "mean"
+    },
+    {
+      "label": "explained_variance_ratio",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L61",
+      "id": "models_pca_profile_explained_variance_ratio",
+      "community": 4,
+      "norm_label": "explained_variance_ratio"
+    },
+    {
+      "label": "features",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L65",
+      "id": "models_pca_profile_features",
+      "community": 4,
+      "norm_label": "features"
+    },
+    {
+      "label": "scaler_mean",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L84",
+      "id": "models_pca_profile_scaler_mean",
+      "community": 4,
+      "norm_label": "scaler_mean"
+    },
+    {
+      "label": "scaler_scale",
+      "file_type": "code",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L103",
+      "id": "models_pca_profile_scaler_scale",
+      "community": 4,
+      "norm_label": "scaler_scale"
+    },
+    {
+      "label": "state_clusters.json",
+      "file_type": "code",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L1",
+      "id": "public_models_state_clusters_json",
+      "community": 7,
+      "norm_label": "state_clusters.json"
+    },
+    {
+      "label": "centroids",
+      "file_type": "code",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L2",
+      "id": "models_state_clusters_centroids",
+      "community": 7,
+      "norm_label": "centroids"
+    },
+    {
+      "label": "features",
+      "file_type": "code",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L56",
+      "id": "models_state_clusters_features",
+      "community": 7,
+      "norm_label": "features"
+    },
+    {
+      "label": "n_clusters",
+      "file_type": "code",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L69",
+      "id": "models_state_clusters_n_clusters",
+      "community": 7,
+      "norm_label": "n_clusters"
+    },
+    {
+      "label": "scaler_mean",
+      "file_type": "code",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L70",
+      "id": "models_state_clusters_scaler_mean",
+      "community": 7,
+      "norm_label": "scaler_mean"
+    },
+    {
+      "label": "scaler_scale",
+      "file_type": "code",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L83",
+      "id": "models_state_clusters_scaler_scale",
+      "community": 7,
+      "norm_label": "scaler_scale"
+    },
+    {
+      "label": "DataLogger.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Dashboard/DataLogger.tsx",
+      "source_location": "L1",
+      "id": "src_components_dashboard_datalogger_tsx",
+      "community": 12,
+      "norm_label": "datalogger.tsx"
+    },
+    {
+      "label": "DataLogger()",
+      "file_type": "code",
+      "source_file": "src/components/Dashboard/DataLogger.tsx",
+      "source_location": "L5",
+      "id": "dashboard_datalogger_datalogger",
+      "community": 12,
+      "norm_label": "datalogger()"
+    },
+    {
+      "label": "MLAnalysis.tsx",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1",
+      "id": "src_components_mlanalysis_mlanalysis_tsx",
+      "community": 5,
+      "norm_label": "mlanalysis.tsx"
+    },
+    {
+      "label": "MLResults",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L8",
+      "id": "mlanalysis_mlanalysis_mlresults",
+      "community": 5,
+      "norm_label": "mlresults"
+    },
+    {
+      "label": "INITIAL_RESULTS",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L79",
+      "id": "mlanalysis_mlanalysis_initial_results",
+      "community": 5,
+      "norm_label": "initial_results"
+    },
+    {
+      "label": "MLAnalysis()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L109",
+      "id": "mlanalysis_mlanalysis_mlanalysis",
+      "community": 5,
+      "norm_label": "mlanalysis()"
+    },
+    {
+      "label": "CustomReferenceLines()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L977",
+      "id": "mlanalysis_mlanalysis_customreferencelines",
+      "community": 5,
+      "norm_label": "customreferencelines()"
+    },
+    {
+      "label": "MetricCard()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L988",
+      "id": "mlanalysis_mlanalysis_metriccard",
+      "community": 5,
+      "norm_label": "metriccard()"
+    },
+    {
+      "label": "getStateColor()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1007",
+      "id": "mlanalysis_mlanalysis_getstatecolor",
+      "community": 5,
+      "norm_label": "getstatecolor()"
+    },
+    {
+      "label": "mlWorker.ts",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1",
+      "id": "src_components_mlanalysis_mlworker_ts",
+      "community": 0,
+      "norm_label": "mlworker.ts"
+    },
+    {
+      "label": "TIRE_WEAR_FEATURES",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L15",
+      "id": "mlanalysis_mlworker_tire_wear_features",
+      "community": 0,
+      "norm_label": "tire_wear_features"
+    },
+    {
+      "label": "GRIP_FEATURES",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L24",
+      "id": "mlanalysis_mlworker_grip_features",
+      "community": 0,
+      "norm_label": "grip_features"
+    },
+    {
+      "label": "HMM_FEATURES",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L32",
+      "id": "mlanalysis_mlworker_hmm_features",
+      "community": 0,
+      "norm_label": "hmm_features"
+    },
+    {
+      "label": "PCA_FEATURES",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L38",
+      "id": "mlanalysis_mlworker_pca_features",
+      "community": 0,
+      "norm_label": "pca_features"
+    },
+    {
+      "label": "SHIFT_FEATURES",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L46",
+      "id": "mlanalysis_mlworker_shift_features",
+      "community": 0,
+      "norm_label": "shift_features"
+    },
+    {
+      "label": "PEDAL_FEATURES",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L48",
+      "id": "mlanalysis_mlworker_pedal_features",
+      "community": 0,
+      "norm_label": "pedal_features"
+    },
+    {
+      "label": "extractFeatures()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L52",
+      "id": "mlanalysis_mlworker_extractfeatures",
+      "community": 6,
+      "norm_label": "extractfeatures()"
+    },
+    {
+      "label": "safeMean()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L59",
+      "id": "mlanalysis_mlworker_safemean",
+      "community": 9,
+      "norm_label": "safemean()"
+    },
+    {
+      "label": "safeStd()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L64",
+      "id": "mlanalysis_mlworker_safestd",
+      "community": 9,
+      "norm_label": "safestd()"
+    },
+    {
+      "label": "predictTireWear()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L74",
+      "id": "mlanalysis_mlworker_predicttirewear",
+      "community": 0,
+      "norm_label": "predicttirewear()"
+    },
+    {
+      "label": "detectFatigue()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L126",
+      "id": "mlanalysis_mlworker_detectfatigue",
+      "community": 9,
+      "norm_label": "detectfatigue()"
+    },
+    {
+      "label": "classifyGrip()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L158",
+      "id": "mlanalysis_mlworker_classifygrip",
+      "community": 6,
+      "norm_label": "classifygrip()"
+    },
+    {
+      "label": "computeSafetyScore()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L191",
+      "id": "mlanalysis_mlworker_computesafetyscore",
+      "community": 0,
+      "norm_label": "computesafetyscore()"
+    },
+    {
+      "label": "clusterStates()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L232",
+      "id": "mlanalysis_mlworker_clusterstates",
+      "community": 6,
+      "norm_label": "clusterstates()"
+    },
+    {
+      "label": "projectPCA()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L289",
+      "id": "mlanalysis_mlworker_projectpca",
+      "community": 6,
+      "norm_label": "projectpca()"
+    },
+    {
+      "label": "classifyShifts()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L326",
+      "id": "mlanalysis_mlworker_classifyshifts",
+      "community": 6,
+      "norm_label": "classifyshifts()"
+    },
+    {
+      "label": "classifyPedalOverlap()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L370",
+      "id": "mlanalysis_mlworker_classifypedaloverlap",
+      "community": 6,
+      "norm_label": "classifypedaloverlap()"
+    },
+    {
+      "label": "loadModels()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L412",
+      "id": "mlanalysis_mlworker_loadmodels",
+      "community": 0,
+      "norm_label": "loadmodels()"
+    },
+    {
+      "label": "reportProgress()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L477",
+      "id": "mlanalysis_mlworker_reportprogress",
+      "community": 0,
+      "norm_label": "reportprogress()"
+    },
+    {
+      "label": "anomalyData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L484",
+      "id": "mlanalysis_mlworker_anomalydata",
+      "community": 0,
+      "norm_label": "anomalydata"
+    },
+    {
+      "label": "jerkValues",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L485",
+      "id": "mlanalysis_mlworker_jerkvalues",
+      "community": 0,
+      "norm_label": "jerkvalues"
+    },
+    {
+      "label": "jerkMean",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L486",
+      "id": "mlanalysis_mlworker_jerkmean",
+      "community": 0,
+      "norm_label": "jerkmean"
+    },
+    {
+      "label": "jerkStd",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L487",
+      "id": "mlanalysis_mlworker_jerkstd",
+      "community": 0,
+      "norm_label": "jerkstd"
+    },
+    {
+      "label": "fatigue",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L509",
+      "id": "mlanalysis_mlworker_fatigue",
+      "community": 0,
+      "norm_label": "fatigue"
+    },
+    {
+      "label": "safetyScore",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L517",
+      "id": "mlanalysis_mlworker_safetyscore",
+      "community": 0,
+      "norm_label": "safetyscore"
+    },
+    {
+      "label": "hmm",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L521",
+      "id": "mlanalysis_mlworker_hmm",
+      "community": 0,
+      "norm_label": "hmm"
+    },
+    {
+      "label": "pca",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L525",
+      "id": "mlanalysis_mlworker_pca",
+      "community": 3,
+      "norm_label": "pca"
+    },
+    {
+      "label": "xs",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L528",
+      "id": "mlanalysis_mlworker_xs",
+      "community": 0,
+      "norm_label": "xs"
+    },
+    {
+      "label": "ys",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L529",
+      "id": "mlanalysis_mlworker_ys",
+      "community": 0,
+      "norm_label": "ys"
+    },
+    {
+      "label": "meanX",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L530",
+      "id": "mlanalysis_mlworker_meanx",
+      "community": 0,
+      "norm_label": "meanx"
+    },
+    {
+      "label": "meanY",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L531",
+      "id": "mlanalysis_mlworker_meany",
+      "community": 0,
+      "norm_label": "meany"
+    },
+    {
+      "label": "qualityMetrics",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L549",
+      "id": "mlanalysis_mlworker_qualitymetrics",
+      "community": 0,
+      "norm_label": "qualitymetrics"
+    },
+    {
+      "label": "results",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L595",
+      "id": "mlanalysis_mlworker_results",
+      "community": 0,
+      "norm_label": "results"
+    },
+    {
+      "label": "buildMarkovChain()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L624",
+      "id": "mlanalysis_mlworker_buildmarkovchain",
+      "community": 0,
+      "norm_label": "buildmarkovchain()"
+    },
+    {
+      "label": "buildAggressionMatrix()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L642",
+      "id": "mlanalysis_mlworker_buildaggressionmatrix",
+      "community": 0,
+      "norm_label": "buildaggressionmatrix()"
+    },
+    {
+      "label": "IncomingMessage",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L671",
+      "id": "mlanalysis_mlworker_incomingmessage",
+      "community": 0,
+      "norm_label": "incomingmessage"
+    },
+    {
+      "label": "OutgoingMessage",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L678",
+      "id": "mlanalysis_mlworker_outgoingmessage",
+      "community": 0,
+      "norm_label": "outgoingmessage"
+    },
+    {
+      "label": "validData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L699",
+      "id": "mlanalysis_mlworker_validdata",
+      "community": 0,
+      "norm_label": "validdata"
+    },
+    {
+      "label": "timestamps",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L710",
+      "id": "mlanalysis_mlworker_timestamps",
+      "community": 0,
+      "norm_label": "timestamps"
+    },
+    {
+      "label": "speeds_unclamped",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L711",
+      "id": "mlanalysis_mlworker_speeds_unclamped",
+      "community": 0,
+      "norm_label": "speeds_unclamped"
+    },
+    {
+      "label": "speeds",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L712",
+      "id": "mlanalysis_mlworker_speeds",
+      "community": 0,
+      "norm_label": "speeds"
+    },
+    {
+      "label": "throttles",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L714",
+      "id": "mlanalysis_mlworker_throttles",
+      "community": 0,
+      "norm_label": "throttles"
+    },
+    {
+      "label": "brakes",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L715",
+      "id": "mlanalysis_mlworker_brakes",
+      "community": 0,
+      "norm_label": "brakes"
+    },
+    {
+      "label": "steerings_unclamped",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L716",
+      "id": "mlanalysis_mlworker_steerings_unclamped",
+      "community": 0,
+      "norm_label": "steerings_unclamped"
+    },
+    {
+      "label": "steerings",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L717",
+      "id": "mlanalysis_mlworker_steerings",
+      "community": 0,
+      "norm_label": "steerings"
+    },
+    {
+      "label": "gForcesX",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L723",
+      "id": "mlanalysis_mlworker_gforcesx",
+      "community": 0,
+      "norm_label": "gforcesx"
+    },
+    {
+      "label": "gForcesY",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L724",
+      "id": "mlanalysis_mlworker_gforcesy",
+      "community": 0,
+      "norm_label": "gforcesy"
+    },
+    {
+      "label": "gForcesCombined",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L725",
+      "id": "mlanalysis_mlworker_gforcescombined",
+      "community": 0,
+      "norm_label": "gforcescombined"
+    },
+    {
+      "label": "pedalOverlaps",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L729",
+      "id": "mlanalysis_mlworker_pedaloverlaps",
+      "community": 0,
+      "norm_label": "pedaloverlaps"
+    },
+    {
+      "label": "jerks",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L733",
+      "id": "mlanalysis_mlworker_jerks",
+      "community": 0,
+      "norm_label": "jerks"
+    },
+    {
+      "label": "accelerations",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L734",
+      "id": "mlanalysis_mlworker_accelerations",
+      "community": 0,
+      "norm_label": "accelerations"
+    },
+    {
+      "label": "xSafety",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L747",
+      "id": "mlanalysis_mlworker_xsafety",
+      "community": 0,
+      "norm_label": "xsafety"
+    },
+    {
+      "label": "yCost",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L748",
+      "id": "mlanalysis_mlworker_ycost",
+      "community": 0,
+      "norm_label": "ycost"
+    },
+    {
+      "label": "deductionsDetail",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L750",
+      "id": "mlanalysis_mlworker_deductionsdetail",
+      "community": 0,
+      "norm_label": "deductionsdetail"
+    },
+    {
+      "label": "penaltyCounts",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L751",
+      "id": "mlanalysis_mlworker_penaltycounts",
+      "community": 0,
+      "norm_label": "penaltycounts"
+    },
+    {
+      "label": "penaltyBreakdown",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L779",
+      "id": "mlanalysis_mlworker_penaltybreakdown",
+      "community": 0,
+      "norm_label": "penaltybreakdown"
+    },
+    {
+      "label": "safetyScoreResult",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L785",
+      "id": "mlanalysis_mlworker_safetyscoreresult",
+      "community": 0,
+      "norm_label": "safetyscoreresult"
+    },
+    {
+      "label": "mlr",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L792",
+      "id": "mlanalysis_mlworker_mlr",
+      "community": 0,
+      "norm_label": "mlr"
+    },
+    {
+      "label": "yPredict",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L793",
+      "id": "mlanalysis_mlworker_ypredict",
+      "community": 0,
+      "norm_label": "ypredict"
+    },
+    {
+      "label": "stdJerk",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L808",
+      "id": "mlanalysis_mlworker_stdjerk",
+      "community": 0,
+      "norm_label": "stdjerk"
+    },
+    {
+      "label": "G_ANOMALY_THRESH",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L811",
+      "id": "mlanalysis_mlworker_g_anomaly_thresh",
+      "community": 0,
+      "norm_label": "g_anomaly_thresh"
+    },
+    {
+      "label": "means",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L838",
+      "id": "mlanalysis_mlworker_means",
+      "community": 0,
+      "norm_label": "means"
+    },
+    {
+      "label": "stds",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L839",
+      "id": "mlanalysis_mlworker_stds",
+      "community": 0,
+      "norm_label": "stds"
+    },
+    {
+      "label": "colVals",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L842",
+      "id": "mlanalysis_mlworker_colvals",
+      "community": 0,
+      "norm_label": "colvals"
+    },
+    {
+      "label": "pcaChartData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L849",
+      "id": "mlanalysis_mlworker_pcachartdata",
+      "community": 0,
+      "norm_label": "pcachartdata"
+    },
+    {
+      "label": "reduced",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L850",
+      "id": "mlanalysis_mlworker_reduced",
+      "community": 0,
+      "norm_label": "reduced"
+    },
+    {
+      "label": "pcaDataMatrix",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L854",
+      "id": "mlanalysis_mlworker_pcadatamatrix",
+      "community": 0,
+      "norm_label": "pcadatamatrix"
+    },
+    {
+      "label": "explainedVariances",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L857",
+      "id": "mlanalysis_mlworker_explainedvariances",
+      "community": 0,
+      "norm_label": "explainedvariances"
+    },
+    {
+      "label": "svmX",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L881",
+      "id": "mlanalysis_mlworker_svmx",
+      "community": 0,
+      "norm_label": "svmx"
+    },
+    {
+      "label": "svmY",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L882",
+      "id": "mlanalysis_mlworker_svmy",
+      "community": 0,
+      "norm_label": "svmy"
+    },
+    {
+      "label": "svm",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L892",
+      "id": "mlanalysis_mlworker_svm",
+      "community": 0,
+      "norm_label": "svm"
+    },
+    {
+      "label": "kmeansData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L907",
+      "id": "mlanalysis_mlworker_kmeansdata",
+      "community": 0,
+      "norm_label": "kmeansdata"
+    },
+    {
+      "label": "ans",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L922",
+      "id": "mlanalysis_mlworker_ans",
+      "community": 0,
+      "norm_label": "ans"
+    },
+    {
+      "label": "hmmData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L928",
+      "id": "mlanalysis_mlworker_hmmdata",
+      "community": 0,
+      "norm_label": "hmmdata"
+    },
+    {
+      "label": "stateCounts",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L929",
+      "id": "mlanalysis_mlworker_statecounts",
+      "community": 0,
+      "norm_label": "statecounts"
+    },
+    {
+      "label": "clusterProfiles",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L935",
+      "id": "mlanalysis_mlworker_clusterprofiles",
+      "community": 0,
+      "norm_label": "clusterprofiles"
+    },
+    {
+      "label": "remaining",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L948",
+      "id": "mlanalysis_mlworker_remaining",
+      "community": 0,
+      "norm_label": "remaining"
+    },
+    {
+      "label": "clusterNames",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L962",
+      "id": "mlanalysis_mlworker_clusternames",
+      "community": 0,
+      "norm_label": "clusternames"
+    },
+    {
+      "label": "step",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L968",
+      "id": "mlanalysis_mlworker_step",
+      "community": 0,
+      "norm_label": "step"
+    },
+    {
+      "label": "bDists",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L975",
+      "id": "mlanalysis_mlworker_bdists",
+      "community": 0,
+      "norm_label": "bdists"
+    },
+    {
+      "label": "bCounts",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L976",
+      "id": "mlanalysis_mlworker_bcounts",
+      "community": 0,
+      "norm_label": "bcounts"
+    },
+    {
+      "label": "dist",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L980",
+      "id": "mlanalysis_mlworker_dist",
+      "community": 0,
+      "norm_label": "dist"
+    },
+    {
+      "label": "statePercentages",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1018",
+      "id": "mlanalysis_mlworker_statepercentages",
+      "community": 0,
+      "norm_label": "statepercentages"
+    },
+    {
+      "label": "rfFeatures",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1030",
+      "id": "mlanalysis_mlworker_rffeatures",
+      "community": 0,
+      "norm_label": "rffeatures"
+    },
+    {
+      "label": "wearPredictions",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1047",
+      "id": "mlanalysis_mlworker_wearpredictions",
+      "community": 0,
+      "norm_label": "wearpredictions"
+    },
+    {
+      "label": "flatFeatures",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1055",
+      "id": "mlanalysis_mlworker_flatfeatures",
+      "community": 0,
+      "norm_label": "flatfeatures"
+    },
+    {
+      "label": "tensor",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1056",
+      "id": "mlanalysis_mlworker_tensor",
+      "community": 0,
+      "norm_label": "tensor"
+    },
+    {
+      "label": "feeds",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1061",
+      "id": "mlanalysis_mlworker_feeds",
+      "community": 0,
+      "norm_label": "feeds"
+    },
+    {
+      "label": "tireLifeData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1078",
+      "id": "mlanalysis_mlworker_tirelifedata",
+      "community": 0,
+      "norm_label": "tirelifedata"
+    },
+    {
+      "label": "knownDrivers",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1099",
+      "id": "mlanalysis_mlworker_knowndrivers",
+      "community": 0,
+      "norm_label": "knowndrivers"
+    },
+    {
+      "label": "knnTrainX",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1110",
+      "id": "mlanalysis_mlworker_knntrainx",
+      "community": 0,
+      "norm_label": "knntrainx"
+    },
+    {
+      "label": "labelMap",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1112",
+      "id": "mlanalysis_mlworker_labelmap",
+      "community": 0,
+      "norm_label": "labelmap"
+    },
+    {
+      "label": "knnTrainY",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1113",
+      "id": "mlanalysis_mlworker_knntrainy",
+      "community": 0,
+      "norm_label": "knntrainy"
+    },
+    {
+      "label": "knn",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1121",
+      "id": "mlanalysis_mlworker_knn",
+      "community": 0,
+      "norm_label": "knn"
+    },
+    {
+      "label": "knnPred",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1122",
+      "id": "mlanalysis_mlworker_knnpred",
+      "community": 0,
+      "norm_label": "knnpred"
+    },
+    {
+      "label": "knnConfidenceReal",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1138",
+      "id": "mlanalysis_mlworker_knnconfidencereal",
+      "community": 0,
+      "norm_label": "knnconfidencereal"
+    },
+    {
+      "label": "dtFeatures",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1144",
+      "id": "mlanalysis_mlworker_dtfeatures",
+      "community": 0,
+      "norm_label": "dtfeatures"
+    },
+    {
+      "label": "dtLabels",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1145",
+      "id": "mlanalysis_mlworker_dtlabels",
+      "community": 0,
+      "norm_label": "dtlabels"
+    },
+    {
+      "label": "sAbs",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1149",
+      "id": "mlanalysis_mlworker_sabs",
+      "community": 0,
+      "norm_label": "sabs"
+    },
+    {
+      "label": "latG",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1150",
+      "id": "mlanalysis_mlworker_latg",
+      "community": 0,
+      "norm_label": "latg"
+    },
+    {
+      "label": "dt",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1161",
+      "id": "mlanalysis_mlworker_dt",
+      "community": 0,
+      "norm_label": "dt"
+    },
+    {
+      "label": "nbFeatures",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1168",
+      "id": "mlanalysis_mlworker_nbfeatures",
+      "community": 0,
+      "norm_label": "nbfeatures"
+    },
+    {
+      "label": "nbLabels",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1169",
+      "id": "mlanalysis_mlworker_nblabels",
+      "community": 0,
+      "norm_label": "nblabels"
+    },
+    {
+      "label": "shiftEvents",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1170",
+      "id": "mlanalysis_mlworker_shiftevents",
+      "community": 0,
+      "norm_label": "shiftevents"
+    },
+    {
+      "label": "nb",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1184",
+      "id": "mlanalysis_mlworker_nb",
+      "community": 0,
+      "norm_label": "nb"
+    },
+    {
+      "label": "exitX",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1190",
+      "id": "mlanalysis_mlworker_exitx",
+      "community": 0,
+      "norm_label": "exitx"
+    },
+    {
+      "label": "exitY",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1191",
+      "id": "mlanalysis_mlworker_exity",
+      "community": 0,
+      "norm_label": "exity"
+    },
+    {
+      "label": "exitPredictedData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1199",
+      "id": "mlanalysis_mlworker_exitpredicteddata",
+      "community": 0,
+      "norm_label": "exitpredicteddata"
+    },
+    {
+      "label": "exitMlr",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1202",
+      "id": "mlanalysis_mlworker_exitmlr",
+      "community": 0,
+      "norm_label": "exitmlr"
+    },
+    {
+      "label": "predictedArr",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1207",
+      "id": "mlanalysis_mlworker_predictedarr",
+      "community": 0,
+      "norm_label": "predictedarr"
+    },
+    {
+      "label": "brakeZones",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1215",
+      "id": "mlanalysis_mlworker_brakezones",
+      "community": 0,
+      "norm_label": "brakezones"
+    },
+    {
+      "label": "currZone",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1217",
+      "id": "mlanalysis_mlworker_currzone",
+      "community": 0,
+      "norm_label": "currzone"
+    },
+    {
+      "label": "minLen",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1234",
+      "id": "mlanalysis_mlworker_minlen",
+      "community": 0,
+      "norm_label": "minlen"
+    },
+    {
+      "label": "brakeDtFeatures",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1242",
+      "id": "mlanalysis_mlworker_brakedtfeatures",
+      "community": 0,
+      "norm_label": "brakedtfeatures"
+    },
+    {
+      "label": "brakeDtLabels",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1243",
+      "id": "mlanalysis_mlworker_brakedtlabels",
+      "community": 0,
+      "norm_label": "brakedtlabels"
+    },
+    {
+      "label": "bdt",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1255",
+      "id": "mlanalysis_mlworker_bdt",
+      "community": 0,
+      "norm_label": "bdt"
+    },
+    {
+      "label": "trailPercent",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1259",
+      "id": "mlanalysis_mlworker_trailpercent",
+      "community": 0,
+      "norm_label": "trailpercent"
+    },
+    {
+      "label": "markovMatrix",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1262",
+      "id": "mlanalysis_mlworker_markovmatrix",
+      "community": 0,
+      "norm_label": "markovmatrix"
+    },
+    {
+      "label": "lrX",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1275",
+      "id": "mlanalysis_mlworker_lrx",
+      "community": 0,
+      "norm_label": "lrx"
+    },
+    {
+      "label": "lrY",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1276",
+      "id": "mlanalysis_mlworker_lry",
+      "community": 0,
+      "norm_label": "lry"
+    },
+    {
+      "label": "lr",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1285",
+      "id": "mlanalysis_mlworker_lr",
+      "community": 0,
+      "norm_label": "lr"
+    },
+    {
+      "label": "pStart",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1286",
+      "id": "mlanalysis_mlworker_pstart",
+      "community": 0,
+      "norm_label": "pstart"
+    },
+    {
+      "label": "pEnd",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1287",
+      "id": "mlanalysis_mlworker_pend",
+      "community": 0,
+      "norm_label": "pend"
+    },
+    {
+      "label": "fatigueScore",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1293",
+      "id": "mlanalysis_mlworker_fatiguescore",
+      "community": 0,
+      "norm_label": "fatiguescore"
+    },
+    {
+      "label": "fatigueBuckets",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1296",
+      "id": "mlanalysis_mlworker_fatiguebuckets",
+      "community": 0,
+      "norm_label": "fatiguebuckets"
+    },
+    {
+      "label": "bucketSize",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1297",
+      "id": "mlanalysis_mlworker_bucketsize",
+      "community": 0,
+      "norm_label": "bucketsize"
+    },
+    {
+      "label": "slice",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1299",
+      "id": "mlanalysis_mlworker_slice",
+      "community": 9,
+      "norm_label": "slice"
+    },
+    {
+      "label": "smoothness",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1301",
+      "id": "mlanalysis_mlworker_smoothness",
+      "community": 0,
+      "norm_label": "smoothness"
+    },
+    {
+      "label": "aggGrid",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1306",
+      "id": "mlanalysis_mlworker_agggrid",
+      "community": 0,
+      "norm_label": "agggrid"
+    },
+    {
+      "label": "aggMatrix",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1317",
+      "id": "mlanalysis_mlworker_aggmatrix",
+      "community": 0,
+      "norm_label": "aggmatrix"
+    },
+    {
+      "label": "silScore",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1328",
+      "id": "mlanalysis_mlworker_silscore",
+      "community": 0,
+      "norm_label": "silscore"
+    },
+    {
+      "label": "pcaVar",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1334",
+      "id": "mlanalysis_mlworker_pcavar",
+      "community": 0,
+      "norm_label": "pcavar"
+    },
+    {
+      "label": "rfConvergence",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1342",
+      "id": "mlanalysis_mlworker_rfconvergence",
+      "community": 0,
+      "norm_label": "rfconvergence"
+    },
+    {
+      "label": "r2Score",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1361",
+      "id": "mlanalysis_mlworker_r2score",
+      "community": 0,
+      "norm_label": "r2score"
+    },
+    {
+      "label": "dtwQualityScore",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1372",
+      "id": "mlanalysis_mlworker_dtwqualityscore",
+      "community": 0,
+      "norm_label": "dtwqualityscore"
+    },
+    {
+      "label": "labelCounts",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1380",
+      "id": "mlanalysis_mlworker_labelcounts",
+      "community": 0,
+      "norm_label": "labelcounts"
+    },
+    {
+      "label": "dtPurityScore",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1383",
+      "id": "mlanalysis_mlworker_dtpurityscore",
+      "community": 0,
+      "norm_label": "dtpurityscore"
+    },
+    {
+      "label": "nbAccuracy",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1390",
+      "id": "mlanalysis_mlworker_nbaccuracy",
+      "community": 0,
+      "norm_label": "nbaccuracy"
+    },
+    {
+      "label": "finalResults",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1411",
+      "id": "mlanalysis_mlworker_finalresults",
+      "community": 0,
+      "norm_label": "finalresults"
+    },
+    {
+      "label": "electron.d.ts",
+      "file_type": "code",
+      "source_file": "src/types/electron.d.ts",
+      "source_location": "L1",
+      "id": "src_types_electron_d_ts",
+      "community": 10,
+      "norm_label": "electron.d.ts"
+    },
+    {
+      "label": "IElectronAPI",
+      "file_type": "code",
+      "source_file": "src/types/electron.d.ts",
+      "source_location": "L1",
+      "id": "types_electron_d_ielectronapi",
+      "community": 10,
+      "norm_label": "ielectronapi"
+    },
+    {
+      "label": "Window",
+      "file_type": "code",
+      "source_file": "src/types/electron.d.ts",
+      "source_location": "L18",
+      "id": "types_electron_d_window",
+      "community": 10,
+      "norm_label": "window"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "electron_database_db_ts",
+      "target": "database_db_dirname",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "electron_database_db_ts",
+      "target": "database_db_db",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/database/db.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "electron_database_db_ts",
+      "target": "database_db_initdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_database_db_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "electron_session_manager_ts",
+      "target": "electron_database_db_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "database_db_initdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_session_manager_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_session_manager_sessionmanager",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_main_require",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_main_dirname",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_main_createwindow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L175",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_main_now",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L177",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_main_windows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/main.ts",
+      "source_location": "L244",
+      "weight": 1.0,
+      "source": "electron_main_ts",
+      "target": "electron_main_id",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "electron_session_manager_ts",
+      "target": "electron_session_manager_clamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "electron_session_manager_ts",
+      "target": "electron_session_manager_nearzero",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "electron_session_manager_ts",
+      "target": "electron_session_manager_sessionmanager",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager_processdata",
+      "target": "electron_session_manager_clamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager_processdata",
+      "target": "electron_session_manager_nearzero",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_initstatements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_processdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_beginmanualsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L200",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_startsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L233",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_stopsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L291",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager",
+      "target": "electron_session_manager_sessionmanager_flushbuffer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager_constructor",
+      "target": "electron_session_manager_sessionmanager_initstatements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager_processdata",
+      "target": "electron_session_manager_sessionmanager_startsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L184",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager_processdata",
+      "target": "electron_session_manager_sessionmanager_flushbuffer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/session-manager.ts",
+      "source_location": "L238",
+      "weight": 1.0,
+      "source": "electron_session_manager_sessionmanager_stopsession",
+      "target": "electron_session_manager_sessionmanager_flushbuffer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/config.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ml_pipeline_config_rationale_1",
+      "target": "ml_pipeline_config_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_py",
+      "target": "ml_pipeline_train_model_load_all_csvs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_py",
+      "target": "ml_pipeline_train_model_validate_columns",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_py",
+      "target": "ml_pipeline_train_model_derive_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_py",
+      "target": "ml_pipeline_train_model_save_onnx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_py",
+      "target": "ml_pipeline_train_model_train_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L395",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_py",
+      "target": "ml_pipeline_train_model_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_rationale_1",
+      "target": "ml_pipeline_train_model_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L405",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_main",
+      "target": "ml_pipeline_train_model_load_all_csvs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_rationale_52",
+      "target": "ml_pipeline_train_model_load_all_csvs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L411",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_main",
+      "target": "ml_pipeline_train_model_validate_columns",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_rationale_79",
+      "target": "ml_pipeline_train_model_validate_columns",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L417",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_main",
+      "target": "ml_pipeline_train_model_derive_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_rationale_92",
+      "target": "ml_pipeline_train_model_derive_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_train_all",
+      "target": "ml_pipeline_train_model_save_onnx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_rationale_135",
+      "target": "ml_pipeline_train_model_save_onnx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L420",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_main",
+      "target": "ml_pipeline_train_model_train_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L150",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_rationale_150",
+      "target": "ml_pipeline_train_model_train_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L313",
+      "weight": 1.0,
+      "source": "ml_pipeline_train_model_train_all",
+      "target": "mlanalysis_mlworker_pca"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "public_models_model_metrics_json",
+      "target": "models_model_metrics_trained_at",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "public_models_model_metrics_json",
+      "target": "models_model_metrics_dataset_rows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "public_models_model_metrics_json",
+      "target": "models_model_metrics_dataset_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "public_models_model_metrics_json",
+      "target": "models_model_metrics_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_tire_wear_rf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_fatigue_lr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_grip_dt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_safety_rf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_states_kmeans",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_driver_pca",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L152",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_shift_nb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "models_model_metrics_models",
+      "target": "models_model_metrics_models_pedal_svm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_tire_wear_rf",
+      "target": "models_model_metrics_tire_wear_rf_mse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_tire_wear_rf",
+      "target": "models_model_metrics_tire_wear_rf_r2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_tire_wear_rf",
+      "target": "models_model_metrics_tire_wear_rf_convergence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_tire_wear_rf",
+      "target": "models_model_metrics_tire_wear_rf_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_tire_wear_rf",
+      "target": "models_model_metrics_tire_wear_rf_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_fatigue_lr",
+      "target": "models_model_metrics_fatigue_lr_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_grip_dt",
+      "target": "models_model_metrics_grip_dt_accuracy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_grip_dt",
+      "target": "models_model_metrics_grip_dt_f1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_grip_dt",
+      "target": "models_model_metrics_grip_dt_node_purity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_grip_dt",
+      "target": "models_model_metrics_grip_dt_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_safety_rf",
+      "target": "models_model_metrics_safety_rf_r2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_safety_rf",
+      "target": "models_model_metrics_safety_rf_mse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_safety_rf",
+      "target": "models_model_metrics_safety_rf_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_states_kmeans",
+      "target": "models_model_metrics_states_kmeans_silhouette",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_states_kmeans",
+      "target": "models_model_metrics_states_kmeans_n_clusters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_states_kmeans",
+      "target": "models_model_metrics_states_kmeans_centroids",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_states_kmeans",
+      "target": "models_model_metrics_states_kmeans_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_driver_pca",
+      "target": "models_model_metrics_driver_pca_explained_variance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_driver_pca",
+      "target": "models_model_metrics_driver_pca_pca_variance_pct",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L110",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_driver_pca",
+      "target": "models_model_metrics_driver_pca_components",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L150",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_driver_pca",
+      "target": "models_model_metrics_driver_pca_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_shift_nb",
+      "target": "models_model_metrics_shift_nb_accuracy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_shift_nb",
+      "target": "models_model_metrics_shift_nb_f1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_shift_nb",
+      "target": "models_model_metrics_shift_nb_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_pedal_svm",
+      "target": "models_model_metrics_pedal_svm_accuracy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_pedal_svm",
+      "target": "models_model_metrics_pedal_svm_f1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L160",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_pedal_svm",
+      "target": "models_model_metrics_pedal_svm_margin_width",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/model_metrics.json",
+      "source_location": "L161",
+      "weight": 1.0,
+      "source": "models_model_metrics_models_pedal_svm",
+      "target": "models_model_metrics_pedal_svm_feature_count",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "public_models_pca_profile_json",
+      "target": "models_pca_profile_components",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "public_models_pca_profile_json",
+      "target": "models_pca_profile_mean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "public_models_pca_profile_json",
+      "target": "models_pca_profile_explained_variance_ratio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "public_models_pca_profile_json",
+      "target": "models_pca_profile_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "public_models_pca_profile_json",
+      "target": "models_pca_profile_scaler_mean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/pca_profile.json",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "public_models_pca_profile_json",
+      "target": "models_pca_profile_scaler_scale",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "public_models_state_clusters_json",
+      "target": "models_state_clusters_centroids",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "public_models_state_clusters_json",
+      "target": "models_state_clusters_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "public_models_state_clusters_json",
+      "target": "models_state_clusters_n_clusters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "public_models_state_clusters_json",
+      "target": "models_state_clusters_scaler_mean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/models/state_clusters.json",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "public_models_state_clusters_json",
+      "target": "models_state_clusters_scaler_scale",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Dashboard/DataLogger.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_dashboard_datalogger_tsx",
+      "target": "dashboard_datalogger_datalogger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_mlresults",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_initial_results",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_mlanalysis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L977",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_customreferencelines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L988",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_metriccard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1007",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_getstatecolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_tire_wear_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_grip_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_hmm_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pca_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_shift_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pedal_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_extractfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_safemean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_safestd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_predicttirewear",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L126",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_detectfatigue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifygrip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_computesafetyscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L232",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_clusterstates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L289",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_projectpca",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L326",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifyshifts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L370",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifypedaloverlap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L412",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_loadmodels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L477",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_reportprogress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L813",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_anomalydata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L485",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_jerkvalues",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L486",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_jerkmean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L487",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_jerkstd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L509",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_fatigue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L517",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_safetyscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L521",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_hmm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L855",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pca",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L528",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_xs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L529",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_ys",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L530",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_meanx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L531",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_meany",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1397",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_qualitymetrics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L595",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_results",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L624",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_buildmarkovchain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L642",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_buildaggressionmatrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L671",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_incomingmessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L678",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_outgoingmessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L699",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_validdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L710",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_timestamps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L711",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_speeds_unclamped",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L712",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_speeds",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L714",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_throttles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L715",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_brakes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L716",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_steerings_unclamped",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L717",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_steerings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L723",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_gforcesx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L724",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_gforcesy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L725",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_gforcescombined",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L729",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pedaloverlaps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L733",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_jerks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L734",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_accelerations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L747",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_xsafety",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L748",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_ycost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L750",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_deductionsdetail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L751",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_penaltycounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L779",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_penaltybreakdown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L785",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_safetyscoreresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L792",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_mlr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L793",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_ypredict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L808",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_stdjerk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L811",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_g_anomaly_thresh",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L838",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_means",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L839",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_stds",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L842",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_colvals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L849",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pcachartdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L850",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_reduced",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L854",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pcadatamatrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L857",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_explainedvariances",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L881",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_svmx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L882",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_svmy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L892",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_svm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L907",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_kmeansdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L922",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_ans",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L928",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_hmmdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L929",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_statecounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L935",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_clusterprofiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L948",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_remaining",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L962",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_clusternames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L968",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L975",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_bdists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L976",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_bcounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1134",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1018",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_statepercentages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1030",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_rffeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1047",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_wearpredictions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1055",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_flatfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1056",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_tensor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1061",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_feeds",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1078",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_tirelifedata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1099",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knowndrivers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1110",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knntrainx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1112",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_labelmap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1113",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knntrainy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1121",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1122",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knnpred",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1138",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knnconfidencereal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1144",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dtfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1145",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dtlabels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1149",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_sabs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1150",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_latg",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1161",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1168",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_nbfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1169",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_nblabels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1170",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_shiftevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1184",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_nb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1190",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_exitx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1191",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_exity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1199",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_exitpredicteddata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1202",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_exitmlr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1207",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_predictedarr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1215",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_brakezones",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1217",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_currzone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1234",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_minlen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1242",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_brakedtfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1243",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_brakedtlabels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1255",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_bdt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1259",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_trailpercent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1262",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_markovmatrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1275",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_lrx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1276",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_lry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1285",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_lr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1286",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pstart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1287",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pend",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1293",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_fatiguescore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1296",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_fatiguebuckets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1297",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_bucketsize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1299",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_slice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1301",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_smoothness",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1306",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_agggrid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1317",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_aggmatrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1328",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_silscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1334",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pcavar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1342",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_rfconvergence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1361",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_r2score",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1372",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dtwqualityscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1380",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_labelcounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1383",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dtpurityscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1390",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_nbaccuracy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1411",
+      "weight": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_finalresults",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L167",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_classifygrip",
+      "target": "mlanalysis_mlworker_extractfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L243",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_clusterstates",
+      "target": "mlanalysis_mlworker_extractfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L297",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_projectpca",
+      "target": "mlanalysis_mlworker_extractfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L342",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_classifyshifts",
+      "target": "mlanalysis_mlworker_extractfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L378",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_classifypedaloverlap",
+      "target": "mlanalysis_mlworker_extractfeatures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_safestd",
+      "target": "mlanalysis_mlworker_safemean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_detectfatigue",
+      "target": "mlanalysis_mlworker_safemean",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "mlanalysis_mlworker_detectfatigue",
+      "target": "mlanalysis_mlworker_slice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/electron.d.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "src_types_electron_d_ts",
+      "target": "types_electron_d_ielectronapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/electron.d.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "src_types_electron_d_ts",
+      "target": "types_electron_d_window",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "6804e940a8c77b795dd1e3f572998b337288a4d6"
+}
