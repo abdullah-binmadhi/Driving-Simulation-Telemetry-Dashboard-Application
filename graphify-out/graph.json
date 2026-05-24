@@ -4,2203 +4,2345 @@
   "graph": {},
   "nodes": [
     {
+      "label": "mock.ts",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L1",
+      "id": "electron_game_connectors_mock_ts",
+      "community": 8,
+      "norm_label": "mock.ts"
+    },
+    {
+      "label": "MockConnector",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L5",
+      "id": "game_connectors_mock_mockconnector",
+      "community": 8,
+      "norm_label": "mockconnector"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L35",
+      "id": "game_connectors_mock_mockconnector_constructor",
+      "community": 8,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".start()",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L39",
+      "id": "game_connectors_mock_mockconnector_start",
+      "community": 8,
+      "norm_label": ".start()"
+    },
+    {
+      "label": ".stop()",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L74",
+      "id": "game_connectors_mock_mockconnector_stop",
+      "community": 8,
+      "norm_label": ".stop()"
+    },
+    {
+      "label": ".setTransmissionType()",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L84",
+      "id": "game_connectors_mock_mockconnector_settransmissiontype",
+      "community": 8,
+      "norm_label": ".settransmissiontype()"
+    },
+    {
+      "label": ".setDrivingBehavior()",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L89",
+      "id": "game_connectors_mock_mockconnector_setdrivingbehavior",
+      "community": 8,
+      "norm_label": ".setdrivingbehavior()"
+    },
+    {
+      "label": ".emitNextFrame()",
+      "file_type": "code",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L94",
+      "id": "game_connectors_mock_mockconnector_emitnextframe",
+      "community": 8,
+      "norm_label": ".emitnextframe()"
+    },
+    {
       "label": "db.ts",
       "file_type": "code",
       "source_file": "electron/database/db.ts",
       "source_location": "L1",
-      "id": "electron_database_db_ts",
       "community": 2,
-      "norm_label": "db.ts"
+      "norm_label": "db.ts",
+      "id": "electron_database_db_ts"
     },
     {
       "label": "__dirname",
       "file_type": "code",
       "source_file": "electron/database/db.ts",
       "source_location": "L7",
-      "id": "database_db_dirname",
       "community": 2,
-      "norm_label": "__dirname"
+      "norm_label": "__dirname",
+      "id": "database_db_dirname"
     },
     {
       "label": "db",
       "file_type": "code",
       "source_file": "electron/database/db.ts",
       "source_location": "L15",
-      "id": "database_db_db",
       "community": 2,
-      "norm_label": "db"
+      "norm_label": "db",
+      "id": "database_db_db"
     },
     {
       "label": "initDatabase()",
       "file_type": "code",
       "source_file": "electron/database/db.ts",
       "source_location": "L17",
-      "id": "database_db_initdatabase",
       "community": 2,
-      "norm_label": "initdatabase()"
+      "norm_label": "initdatabase()",
+      "id": "database_db_initdatabase"
     },
     {
       "label": "main.ts",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L1",
-      "id": "electron_main_ts",
       "community": 2,
-      "norm_label": "main.ts"
+      "norm_label": "main.ts",
+      "id": "electron_main_ts"
     },
     {
       "label": "require",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L10",
-      "id": "electron_main_require",
       "community": 2,
-      "norm_label": "require"
+      "norm_label": "require",
+      "id": "electron_main_require"
     },
     {
       "label": "__dirname",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L11",
-      "id": "electron_main_dirname",
       "community": 2,
-      "norm_label": "__dirname"
+      "norm_label": "__dirname",
+      "id": "electron_main_dirname"
     },
     {
       "label": "createWindow()",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L21",
-      "id": "electron_main_createwindow",
       "community": 2,
-      "norm_label": "createwindow()"
+      "norm_label": "createwindow()",
+      "id": "electron_main_createwindow"
     },
     {
       "label": "now",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L175",
-      "id": "electron_main_now",
       "community": 2,
-      "norm_label": "now"
+      "norm_label": "now",
+      "id": "electron_main_now"
     },
     {
       "label": "windows",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L177",
-      "id": "electron_main_windows",
       "community": 2,
-      "norm_label": "windows"
+      "norm_label": "windows",
+      "id": "electron_main_windows"
     },
     {
       "label": "id",
       "file_type": "code",
       "source_file": "electron/main.ts",
       "source_location": "L244",
-      "id": "electron_main_id",
       "community": 2,
-      "norm_label": "id"
+      "norm_label": "id",
+      "id": "electron_main_id"
     },
     {
       "label": "session-manager.ts",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L1",
-      "id": "electron_session_manager_ts",
       "community": 2,
-      "norm_label": "session-manager.ts"
+      "norm_label": "session-manager.ts",
+      "id": "electron_session_manager_ts"
     },
     {
       "label": "clamp()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L7",
-      "id": "electron_session_manager_clamp",
       "community": 2,
-      "norm_label": "clamp()"
+      "norm_label": "clamp()",
+      "id": "electron_session_manager_clamp"
     },
     {
       "label": "nearZero()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L8",
-      "id": "electron_session_manager_nearzero",
       "community": 2,
-      "norm_label": "nearzero()"
+      "norm_label": "nearzero()",
+      "id": "electron_session_manager_nearzero"
     },
     {
       "label": "SessionManager",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L10",
-      "id": "electron_session_manager_sessionmanager",
       "community": 2,
-      "norm_label": "sessionmanager"
+      "norm_label": "sessionmanager",
+      "id": "electron_session_manager_sessionmanager"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L29",
-      "id": "electron_session_manager_sessionmanager_constructor",
       "community": 2,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "electron_session_manager_sessionmanager_constructor"
     },
     {
       "label": ".initStatements()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L34",
-      "id": "electron_session_manager_sessionmanager_initstatements",
       "community": 2,
-      "norm_label": ".initstatements()"
+      "norm_label": ".initstatements()",
+      "id": "electron_session_manager_sessionmanager_initstatements"
     },
     {
       "label": ".processData()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L72",
-      "id": "electron_session_manager_sessionmanager_processdata",
       "community": 2,
-      "norm_label": ".processdata()"
+      "norm_label": ".processdata()",
+      "id": "electron_session_manager_sessionmanager_processdata"
     },
     {
       "label": ".beginManualSession()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L191",
-      "id": "electron_session_manager_sessionmanager_beginmanualsession",
       "community": 2,
-      "norm_label": ".beginmanualsession()"
+      "norm_label": ".beginmanualsession()",
+      "id": "electron_session_manager_sessionmanager_beginmanualsession"
     },
     {
       "label": ".startSession()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L200",
-      "id": "electron_session_manager_sessionmanager_startsession",
       "community": 2,
-      "norm_label": ".startsession()"
+      "norm_label": ".startsession()",
+      "id": "electron_session_manager_sessionmanager_startsession"
     },
     {
       "label": ".stopSession()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L233",
-      "id": "electron_session_manager_sessionmanager_stopsession",
       "community": 2,
-      "norm_label": ".stopsession()"
+      "norm_label": ".stopsession()",
+      "id": "electron_session_manager_sessionmanager_stopsession"
     },
     {
       "label": ".flushBuffer()",
       "file_type": "code",
       "source_file": "electron/session-manager.ts",
       "source_location": "L291",
-      "id": "electron_session_manager_sessionmanager_flushbuffer",
       "community": 2,
-      "norm_label": ".flushbuffer()"
+      "norm_label": ".flushbuffer()",
+      "id": "electron_session_manager_sessionmanager_flushbuffer"
     },
     {
       "label": "config.py",
       "file_type": "code",
       "source_file": "ml-pipeline/config.py",
       "source_location": "L1",
-      "id": "ml_pipeline_config_py",
       "community": 11,
-      "norm_label": "config.py"
+      "norm_label": "config.py",
+      "id": "ml_pipeline_config_py"
     },
     {
       "label": "Comprehensive ML Pipeline Configuration for Driving Telemetry All feature sets,",
       "file_type": "rationale",
       "source_file": "ml-pipeline/config.py",
       "source_location": "L1",
-      "id": "ml_pipeline_config_rationale_1",
       "community": 11,
-      "norm_label": "comprehensive ml pipeline configuration for driving telemetry all feature sets,"
+      "norm_label": "comprehensive ml pipeline configuration for driving telemetry all feature sets,",
+      "id": "ml_pipeline_config_rationale_1"
     },
     {
       "label": "train_model.py",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L1",
-      "id": "ml_pipeline_train_model_py",
       "community": 3,
-      "norm_label": "train_model.py"
+      "norm_label": "train_model.py",
+      "id": "ml_pipeline_train_model_py"
     },
     {
       "label": "load_all_csvs()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L51",
-      "id": "ml_pipeline_train_model_load_all_csvs",
       "community": 3,
-      "norm_label": "load_all_csvs()"
+      "norm_label": "load_all_csvs()",
+      "id": "ml_pipeline_train_model_load_all_csvs"
     },
     {
       "label": "validate_columns()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L78",
-      "id": "ml_pipeline_train_model_validate_columns",
       "community": 3,
-      "norm_label": "validate_columns()"
+      "norm_label": "validate_columns()",
+      "id": "ml_pipeline_train_model_validate_columns"
     },
     {
       "label": "derive_labels()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L91",
-      "id": "ml_pipeline_train_model_derive_labels",
       "community": 3,
-      "norm_label": "derive_labels()"
+      "norm_label": "derive_labels()",
+      "id": "ml_pipeline_train_model_derive_labels"
     },
     {
       "label": "save_onnx()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L134",
-      "id": "ml_pipeline_train_model_save_onnx",
       "community": 3,
-      "norm_label": "save_onnx()"
+      "norm_label": "save_onnx()",
+      "id": "ml_pipeline_train_model_save_onnx"
     },
     {
       "label": "train_all()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L149",
-      "id": "ml_pipeline_train_model_train_all",
       "community": 3,
-      "norm_label": "train_all()"
+      "norm_label": "train_all()",
+      "id": "ml_pipeline_train_model_train_all"
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L395",
-      "id": "ml_pipeline_train_model_main",
       "community": 3,
-      "norm_label": "main()"
+      "norm_label": "main()",
+      "id": "ml_pipeline_train_model_main"
     },
     {
       "label": "Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L1",
-      "id": "ml_pipeline_train_model_rationale_1",
       "community": 3,
-      "norm_label": "multi-model ml training pipeline for driving telemetry dashboard. trains 8 model"
+      "norm_label": "multi-model ml training pipeline for driving telemetry dashboard. trains 8 model",
+      "id": "ml_pipeline_train_model_rationale_1"
     },
     {
       "label": "Load all CSV files from dataset/, skipping # comment headers.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L52",
-      "id": "ml_pipeline_train_model_rationale_52",
       "community": 3,
-      "norm_label": "load all csv files from dataset/, skipping # comment headers."
+      "norm_label": "load all csv files from dataset/, skipping # comment headers.",
+      "id": "ml_pipeline_train_model_rationale_52"
     },
     {
       "label": "Check which expected columns are missing from the dataset.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L79",
-      "id": "ml_pipeline_train_model_rationale_79",
       "community": 3,
-      "norm_label": "check which expected columns are missing from the dataset."
+      "norm_label": "check which expected columns are missing from the dataset.",
+      "id": "ml_pipeline_train_model_rationale_79"
     },
     {
       "label": "Derive supervised labels that aren't directly in the raw telemetry.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L92",
-      "id": "ml_pipeline_train_model_rationale_92",
       "community": 3,
-      "norm_label": "derive supervised labels that aren't directly in the raw telemetry."
+      "norm_label": "derive supervised labels that aren't directly in the raw telemetry.",
+      "id": "ml_pipeline_train_model_rationale_92"
     },
     {
       "label": "Convert sklearn model to ONNX and save.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L135",
-      "id": "ml_pipeline_train_model_rationale_135",
       "community": 3,
-      "norm_label": "convert sklearn model to onnx and save."
+      "norm_label": "convert sklearn model to onnx and save.",
+      "id": "ml_pipeline_train_model_rationale_135"
     },
     {
       "label": "Train all 8 models and return metrics.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L150",
-      "id": "ml_pipeline_train_model_rationale_150",
       "community": 3,
-      "norm_label": "train all 8 models and return metrics."
+      "norm_label": "train all 8 models and return metrics.",
+      "id": "ml_pipeline_train_model_rationale_150"
     },
     {
       "label": "model_metrics.json",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L1",
-      "id": "public_models_model_metrics_json",
       "community": 1,
-      "norm_label": "model_metrics.json"
+      "norm_label": "model_metrics.json",
+      "id": "public_models_model_metrics_json"
     },
     {
       "label": "trained_at",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L2",
-      "id": "models_model_metrics_trained_at",
       "community": 1,
-      "norm_label": "trained_at"
+      "norm_label": "trained_at",
+      "id": "models_model_metrics_trained_at"
     },
     {
       "label": "dataset_rows",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L3",
-      "id": "models_model_metrics_dataset_rows",
       "community": 1,
-      "norm_label": "dataset_rows"
+      "norm_label": "dataset_rows",
+      "id": "models_model_metrics_dataset_rows"
     },
     {
       "label": "dataset_files",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L4",
-      "id": "models_model_metrics_dataset_files",
       "community": 1,
-      "norm_label": "dataset_files"
+      "norm_label": "dataset_files",
+      "id": "models_model_metrics_dataset_files"
     },
     {
       "label": "models",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L5",
-      "id": "models_model_metrics_models",
       "community": 1,
-      "norm_label": "models"
+      "norm_label": "models",
+      "id": "models_model_metrics_models"
     },
     {
       "label": "tire_wear_rf",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L6",
-      "id": "models_model_metrics_models_tire_wear_rf",
-      "community": 1,
-      "norm_label": "tire_wear_rf"
+      "community": 13,
+      "norm_label": "tire_wear_rf",
+      "id": "models_model_metrics_models_tire_wear_rf"
     },
     {
       "label": "mse",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L7",
-      "id": "models_model_metrics_tire_wear_rf_mse",
-      "community": 1,
-      "norm_label": "mse"
+      "community": 13,
+      "norm_label": "mse",
+      "id": "models_model_metrics_tire_wear_rf_mse"
     },
     {
       "label": "r2",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L8",
-      "id": "models_model_metrics_tire_wear_rf_r2",
-      "community": 1,
-      "norm_label": "r2"
+      "community": 13,
+      "norm_label": "r2",
+      "id": "models_model_metrics_tire_wear_rf_r2"
     },
     {
       "label": "convergence",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L9",
-      "id": "models_model_metrics_tire_wear_rf_convergence",
-      "community": 1,
-      "norm_label": "convergence"
+      "community": 13,
+      "norm_label": "convergence",
+      "id": "models_model_metrics_tire_wear_rf_convergence"
     },
     {
       "label": "features",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L10",
-      "id": "models_model_metrics_tire_wear_rf_features",
-      "community": 1,
-      "norm_label": "features"
+      "community": 13,
+      "norm_label": "features",
+      "id": "models_model_metrics_tire_wear_rf_features"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L32",
-      "id": "models_model_metrics_tire_wear_rf_feature_count",
-      "community": 1,
-      "norm_label": "feature_count"
+      "community": 13,
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_tire_wear_rf_feature_count"
     },
     {
       "label": "fatigue_lr",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L34",
-      "id": "models_model_metrics_models_fatigue_lr",
       "community": 1,
-      "norm_label": "fatigue_lr"
+      "norm_label": "fatigue_lr",
+      "id": "models_model_metrics_models_fatigue_lr"
     },
     {
       "label": "error",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L35",
-      "id": "models_model_metrics_fatigue_lr_error",
       "community": 1,
-      "norm_label": "error"
+      "norm_label": "error",
+      "id": "models_model_metrics_fatigue_lr_error"
     },
     {
       "label": "grip_dt",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L37",
-      "id": "models_model_metrics_models_grip_dt",
       "community": 1,
-      "norm_label": "grip_dt"
+      "norm_label": "grip_dt",
+      "id": "models_model_metrics_models_grip_dt"
     },
     {
       "label": "accuracy",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L38",
-      "id": "models_model_metrics_grip_dt_accuracy",
       "community": 1,
-      "norm_label": "accuracy"
+      "norm_label": "accuracy",
+      "id": "models_model_metrics_grip_dt_accuracy"
     },
     {
       "label": "f1",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L39",
-      "id": "models_model_metrics_grip_dt_f1",
       "community": 1,
-      "norm_label": "f1"
+      "norm_label": "f1",
+      "id": "models_model_metrics_grip_dt_f1"
     },
     {
       "label": "node_purity",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L40",
-      "id": "models_model_metrics_grip_dt_node_purity",
       "community": 1,
-      "norm_label": "node_purity"
+      "norm_label": "node_purity",
+      "id": "models_model_metrics_grip_dt_node_purity"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L41",
-      "id": "models_model_metrics_grip_dt_feature_count",
       "community": 1,
-      "norm_label": "feature_count"
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_grip_dt_feature_count"
     },
     {
       "label": "safety_rf",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L43",
-      "id": "models_model_metrics_models_safety_rf",
       "community": 1,
-      "norm_label": "safety_rf"
+      "norm_label": "safety_rf",
+      "id": "models_model_metrics_models_safety_rf"
     },
     {
       "label": "r2",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L44",
-      "id": "models_model_metrics_safety_rf_r2",
       "community": 1,
-      "norm_label": "r2"
+      "norm_label": "r2",
+      "id": "models_model_metrics_safety_rf_r2"
     },
     {
       "label": "mse",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L45",
-      "id": "models_model_metrics_safety_rf_mse",
       "community": 1,
-      "norm_label": "mse"
+      "norm_label": "mse",
+      "id": "models_model_metrics_safety_rf_mse"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L46",
-      "id": "models_model_metrics_safety_rf_feature_count",
       "community": 1,
-      "norm_label": "feature_count"
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_safety_rf_feature_count"
     },
     {
       "label": "states_kmeans",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L48",
-      "id": "models_model_metrics_models_states_kmeans",
       "community": 1,
-      "norm_label": "states_kmeans"
+      "norm_label": "states_kmeans",
+      "id": "models_model_metrics_models_states_kmeans"
     },
     {
       "label": "silhouette",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L49",
-      "id": "models_model_metrics_states_kmeans_silhouette",
       "community": 1,
-      "norm_label": "silhouette"
+      "norm_label": "silhouette",
+      "id": "models_model_metrics_states_kmeans_silhouette"
     },
     {
       "label": "n_clusters",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L50",
-      "id": "models_model_metrics_states_kmeans_n_clusters",
       "community": 1,
-      "norm_label": "n_clusters"
+      "norm_label": "n_clusters",
+      "id": "models_model_metrics_states_kmeans_n_clusters"
     },
     {
       "label": "centroids",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L51",
-      "id": "models_model_metrics_states_kmeans_centroids",
       "community": 1,
-      "norm_label": "centroids"
+      "norm_label": "centroids",
+      "id": "models_model_metrics_states_kmeans_centroids"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L105",
-      "id": "models_model_metrics_states_kmeans_feature_count",
       "community": 1,
-      "norm_label": "feature_count"
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_states_kmeans_feature_count"
     },
     {
       "label": "driver_pca",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L107",
-      "id": "models_model_metrics_models_driver_pca",
-      "community": 8,
-      "norm_label": "driver_pca"
+      "community": 1,
+      "norm_label": "driver_pca",
+      "id": "models_model_metrics_models_driver_pca"
     },
     {
       "label": "explained_variance",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L108",
-      "id": "models_model_metrics_driver_pca_explained_variance",
-      "community": 8,
-      "norm_label": "explained_variance"
+      "community": 1,
+      "norm_label": "explained_variance",
+      "id": "models_model_metrics_driver_pca_explained_variance"
     },
     {
       "label": "pca_variance_pct",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L109",
-      "id": "models_model_metrics_driver_pca_pca_variance_pct",
-      "community": 8,
-      "norm_label": "pca_variance_pct"
+      "community": 1,
+      "norm_label": "pca_variance_pct",
+      "id": "models_model_metrics_driver_pca_pca_variance_pct"
     },
     {
       "label": "components",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L110",
-      "id": "models_model_metrics_driver_pca_components",
-      "community": 8,
-      "norm_label": "components"
+      "community": 1,
+      "norm_label": "components",
+      "id": "models_model_metrics_driver_pca_components"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L150",
-      "id": "models_model_metrics_driver_pca_feature_count",
-      "community": 8,
-      "norm_label": "feature_count"
+      "community": 1,
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_driver_pca_feature_count"
     },
     {
       "label": "shift_nb",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L152",
-      "id": "models_model_metrics_models_shift_nb",
       "community": 1,
-      "norm_label": "shift_nb"
+      "norm_label": "shift_nb",
+      "id": "models_model_metrics_models_shift_nb"
     },
     {
       "label": "accuracy",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L153",
-      "id": "models_model_metrics_shift_nb_accuracy",
       "community": 1,
-      "norm_label": "accuracy"
+      "norm_label": "accuracy",
+      "id": "models_model_metrics_shift_nb_accuracy"
     },
     {
       "label": "f1",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L154",
-      "id": "models_model_metrics_shift_nb_f1",
       "community": 1,
-      "norm_label": "f1"
+      "norm_label": "f1",
+      "id": "models_model_metrics_shift_nb_f1"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L155",
-      "id": "models_model_metrics_shift_nb_feature_count",
       "community": 1,
-      "norm_label": "feature_count"
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_shift_nb_feature_count"
     },
     {
       "label": "pedal_svm",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L157",
-      "id": "models_model_metrics_models_pedal_svm",
       "community": 1,
-      "norm_label": "pedal_svm"
+      "norm_label": "pedal_svm",
+      "id": "models_model_metrics_models_pedal_svm"
     },
     {
       "label": "accuracy",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L158",
-      "id": "models_model_metrics_pedal_svm_accuracy",
       "community": 1,
-      "norm_label": "accuracy"
+      "norm_label": "accuracy",
+      "id": "models_model_metrics_pedal_svm_accuracy"
     },
     {
       "label": "f1",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L159",
-      "id": "models_model_metrics_pedal_svm_f1",
       "community": 1,
-      "norm_label": "f1"
+      "norm_label": "f1",
+      "id": "models_model_metrics_pedal_svm_f1"
     },
     {
       "label": "margin_width",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L160",
-      "id": "models_model_metrics_pedal_svm_margin_width",
       "community": 1,
-      "norm_label": "margin_width"
+      "norm_label": "margin_width",
+      "id": "models_model_metrics_pedal_svm_margin_width"
     },
     {
       "label": "feature_count",
       "file_type": "code",
       "source_file": "public/models/model_metrics.json",
       "source_location": "L161",
-      "id": "models_model_metrics_pedal_svm_feature_count",
       "community": 1,
-      "norm_label": "feature_count"
+      "norm_label": "feature_count",
+      "id": "models_model_metrics_pedal_svm_feature_count"
     },
     {
       "label": "pca_profile.json",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L1",
-      "id": "public_models_pca_profile_json",
       "community": 4,
-      "norm_label": "pca_profile.json"
+      "norm_label": "pca_profile.json",
+      "id": "public_models_pca_profile_json"
     },
     {
       "label": "components",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L2",
-      "id": "models_pca_profile_components",
       "community": 4,
-      "norm_label": "components"
+      "norm_label": "components",
+      "id": "models_pca_profile_components"
     },
     {
       "label": "mean",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L42",
-      "id": "models_pca_profile_mean",
       "community": 4,
-      "norm_label": "mean"
+      "norm_label": "mean",
+      "id": "models_pca_profile_mean"
     },
     {
       "label": "explained_variance_ratio",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L61",
-      "id": "models_pca_profile_explained_variance_ratio",
       "community": 4,
-      "norm_label": "explained_variance_ratio"
+      "norm_label": "explained_variance_ratio",
+      "id": "models_pca_profile_explained_variance_ratio"
     },
     {
       "label": "features",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L65",
-      "id": "models_pca_profile_features",
       "community": 4,
-      "norm_label": "features"
+      "norm_label": "features",
+      "id": "models_pca_profile_features"
     },
     {
       "label": "scaler_mean",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L84",
-      "id": "models_pca_profile_scaler_mean",
       "community": 4,
-      "norm_label": "scaler_mean"
+      "norm_label": "scaler_mean",
+      "id": "models_pca_profile_scaler_mean"
     },
     {
       "label": "scaler_scale",
       "file_type": "code",
       "source_file": "public/models/pca_profile.json",
       "source_location": "L103",
-      "id": "models_pca_profile_scaler_scale",
       "community": 4,
-      "norm_label": "scaler_scale"
+      "norm_label": "scaler_scale",
+      "id": "models_pca_profile_scaler_scale"
     },
     {
       "label": "state_clusters.json",
       "file_type": "code",
       "source_file": "public/models/state_clusters.json",
       "source_location": "L1",
-      "id": "public_models_state_clusters_json",
       "community": 7,
-      "norm_label": "state_clusters.json"
+      "norm_label": "state_clusters.json",
+      "id": "public_models_state_clusters_json"
     },
     {
       "label": "centroids",
       "file_type": "code",
       "source_file": "public/models/state_clusters.json",
       "source_location": "L2",
-      "id": "models_state_clusters_centroids",
       "community": 7,
-      "norm_label": "centroids"
+      "norm_label": "centroids",
+      "id": "models_state_clusters_centroids"
     },
     {
       "label": "features",
       "file_type": "code",
       "source_file": "public/models/state_clusters.json",
       "source_location": "L56",
-      "id": "models_state_clusters_features",
       "community": 7,
-      "norm_label": "features"
+      "norm_label": "features",
+      "id": "models_state_clusters_features"
     },
     {
       "label": "n_clusters",
       "file_type": "code",
       "source_file": "public/models/state_clusters.json",
       "source_location": "L69",
-      "id": "models_state_clusters_n_clusters",
       "community": 7,
-      "norm_label": "n_clusters"
+      "norm_label": "n_clusters",
+      "id": "models_state_clusters_n_clusters"
     },
     {
       "label": "scaler_mean",
       "file_type": "code",
       "source_file": "public/models/state_clusters.json",
       "source_location": "L70",
-      "id": "models_state_clusters_scaler_mean",
       "community": 7,
-      "norm_label": "scaler_mean"
+      "norm_label": "scaler_mean",
+      "id": "models_state_clusters_scaler_mean"
     },
     {
       "label": "scaler_scale",
       "file_type": "code",
       "source_file": "public/models/state_clusters.json",
       "source_location": "L83",
-      "id": "models_state_clusters_scaler_scale",
       "community": 7,
-      "norm_label": "scaler_scale"
+      "norm_label": "scaler_scale",
+      "id": "models_state_clusters_scaler_scale"
     },
     {
       "label": "DataLogger.tsx",
       "file_type": "code",
       "source_file": "src/components/Dashboard/DataLogger.tsx",
       "source_location": "L1",
-      "id": "src_components_dashboard_datalogger_tsx",
       "community": 12,
-      "norm_label": "datalogger.tsx"
+      "norm_label": "datalogger.tsx",
+      "id": "src_components_dashboard_datalogger_tsx"
     },
     {
       "label": "DataLogger()",
       "file_type": "code",
       "source_file": "src/components/Dashboard/DataLogger.tsx",
       "source_location": "L5",
-      "id": "dashboard_datalogger_datalogger",
       "community": 12,
-      "norm_label": "datalogger()"
+      "norm_label": "datalogger()",
+      "id": "dashboard_datalogger_datalogger"
     },
     {
       "label": "MLAnalysis.tsx",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L1",
-      "id": "src_components_mlanalysis_mlanalysis_tsx",
       "community": 5,
-      "norm_label": "mlanalysis.tsx"
+      "norm_label": "mlanalysis.tsx",
+      "id": "src_components_mlanalysis_mlanalysis_tsx"
     },
     {
       "label": "MLResults",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L8",
-      "id": "mlanalysis_mlanalysis_mlresults",
       "community": 5,
-      "norm_label": "mlresults"
+      "norm_label": "mlresults",
+      "id": "mlanalysis_mlanalysis_mlresults"
     },
     {
       "label": "INITIAL_RESULTS",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L79",
-      "id": "mlanalysis_mlanalysis_initial_results",
       "community": 5,
-      "norm_label": "initial_results"
+      "norm_label": "initial_results",
+      "id": "mlanalysis_mlanalysis_initial_results"
     },
     {
       "label": "MLAnalysis()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L109",
-      "id": "mlanalysis_mlanalysis_mlanalysis",
       "community": 5,
-      "norm_label": "mlanalysis()"
+      "norm_label": "mlanalysis()",
+      "id": "mlanalysis_mlanalysis_mlanalysis"
     },
     {
       "label": "CustomReferenceLines()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L977",
-      "id": "mlanalysis_mlanalysis_customreferencelines",
       "community": 5,
-      "norm_label": "customreferencelines()"
+      "norm_label": "customreferencelines()",
+      "id": "mlanalysis_mlanalysis_customreferencelines"
     },
     {
       "label": "MetricCard()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L988",
-      "id": "mlanalysis_mlanalysis_metriccard",
       "community": 5,
-      "norm_label": "metriccard()"
+      "norm_label": "metriccard()",
+      "id": "mlanalysis_mlanalysis_metriccard"
     },
     {
       "label": "getStateColor()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L1007",
-      "id": "mlanalysis_mlanalysis_getstatecolor",
       "community": 5,
-      "norm_label": "getstatecolor()"
+      "norm_label": "getstatecolor()",
+      "id": "mlanalysis_mlanalysis_getstatecolor"
     },
     {
       "label": "mlWorker.ts",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1",
-      "id": "src_components_mlanalysis_mlworker_ts",
       "community": 0,
-      "norm_label": "mlworker.ts"
+      "norm_label": "mlworker.ts",
+      "id": "src_components_mlanalysis_mlworker_ts"
     },
     {
       "label": "TIRE_WEAR_FEATURES",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L15",
-      "id": "mlanalysis_mlworker_tire_wear_features",
       "community": 0,
-      "norm_label": "tire_wear_features"
+      "norm_label": "tire_wear_features",
+      "id": "mlanalysis_mlworker_tire_wear_features"
     },
     {
       "label": "GRIP_FEATURES",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L24",
-      "id": "mlanalysis_mlworker_grip_features",
       "community": 0,
-      "norm_label": "grip_features"
+      "norm_label": "grip_features",
+      "id": "mlanalysis_mlworker_grip_features"
     },
     {
       "label": "HMM_FEATURES",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L32",
-      "id": "mlanalysis_mlworker_hmm_features",
       "community": 0,
-      "norm_label": "hmm_features"
+      "norm_label": "hmm_features",
+      "id": "mlanalysis_mlworker_hmm_features"
     },
     {
       "label": "PCA_FEATURES",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L38",
-      "id": "mlanalysis_mlworker_pca_features",
       "community": 0,
-      "norm_label": "pca_features"
+      "norm_label": "pca_features",
+      "id": "mlanalysis_mlworker_pca_features"
     },
     {
       "label": "SHIFT_FEATURES",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L46",
-      "id": "mlanalysis_mlworker_shift_features",
       "community": 0,
-      "norm_label": "shift_features"
+      "norm_label": "shift_features",
+      "id": "mlanalysis_mlworker_shift_features"
     },
     {
       "label": "PEDAL_FEATURES",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L48",
-      "id": "mlanalysis_mlworker_pedal_features",
       "community": 0,
-      "norm_label": "pedal_features"
+      "norm_label": "pedal_features",
+      "id": "mlanalysis_mlworker_pedal_features"
     },
     {
       "label": "extractFeatures()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L52",
-      "id": "mlanalysis_mlworker_extractfeatures",
       "community": 6,
-      "norm_label": "extractfeatures()"
+      "norm_label": "extractfeatures()",
+      "id": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "label": "safeMean()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L59",
-      "id": "mlanalysis_mlworker_safemean",
       "community": 9,
-      "norm_label": "safemean()"
+      "norm_label": "safemean()",
+      "id": "mlanalysis_mlworker_safemean"
     },
     {
       "label": "safeStd()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L64",
-      "id": "mlanalysis_mlworker_safestd",
       "community": 9,
-      "norm_label": "safestd()"
+      "norm_label": "safestd()",
+      "id": "mlanalysis_mlworker_safestd"
     },
     {
       "label": "predictTireWear()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L74",
-      "id": "mlanalysis_mlworker_predicttirewear",
       "community": 0,
-      "norm_label": "predicttirewear()"
+      "norm_label": "predicttirewear()",
+      "id": "mlanalysis_mlworker_predicttirewear"
     },
     {
       "label": "detectFatigue()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L126",
-      "id": "mlanalysis_mlworker_detectfatigue",
       "community": 9,
-      "norm_label": "detectfatigue()"
+      "norm_label": "detectfatigue()",
+      "id": "mlanalysis_mlworker_detectfatigue"
     },
     {
       "label": "classifyGrip()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L158",
-      "id": "mlanalysis_mlworker_classifygrip",
       "community": 6,
-      "norm_label": "classifygrip()"
+      "norm_label": "classifygrip()",
+      "id": "mlanalysis_mlworker_classifygrip"
     },
     {
       "label": "computeSafetyScore()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L191",
-      "id": "mlanalysis_mlworker_computesafetyscore",
       "community": 0,
-      "norm_label": "computesafetyscore()"
+      "norm_label": "computesafetyscore()",
+      "id": "mlanalysis_mlworker_computesafetyscore"
     },
     {
       "label": "clusterStates()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L232",
-      "id": "mlanalysis_mlworker_clusterstates",
       "community": 6,
-      "norm_label": "clusterstates()"
+      "norm_label": "clusterstates()",
+      "id": "mlanalysis_mlworker_clusterstates"
     },
     {
       "label": "projectPCA()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L289",
-      "id": "mlanalysis_mlworker_projectpca",
       "community": 6,
-      "norm_label": "projectpca()"
+      "norm_label": "projectpca()",
+      "id": "mlanalysis_mlworker_projectpca"
     },
     {
       "label": "classifyShifts()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L326",
-      "id": "mlanalysis_mlworker_classifyshifts",
       "community": 6,
-      "norm_label": "classifyshifts()"
+      "norm_label": "classifyshifts()",
+      "id": "mlanalysis_mlworker_classifyshifts"
     },
     {
       "label": "classifyPedalOverlap()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L370",
-      "id": "mlanalysis_mlworker_classifypedaloverlap",
       "community": 6,
-      "norm_label": "classifypedaloverlap()"
+      "norm_label": "classifypedaloverlap()",
+      "id": "mlanalysis_mlworker_classifypedaloverlap"
     },
     {
       "label": "loadModels()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L412",
-      "id": "mlanalysis_mlworker_loadmodels",
       "community": 0,
-      "norm_label": "loadmodels()"
+      "norm_label": "loadmodels()",
+      "id": "mlanalysis_mlworker_loadmodels"
     },
     {
       "label": "reportProgress()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L477",
-      "id": "mlanalysis_mlworker_reportprogress",
       "community": 0,
-      "norm_label": "reportprogress()"
+      "norm_label": "reportprogress()",
+      "id": "mlanalysis_mlworker_reportprogress"
     },
     {
       "label": "anomalyData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L484",
-      "id": "mlanalysis_mlworker_anomalydata",
       "community": 0,
-      "norm_label": "anomalydata"
+      "norm_label": "anomalydata",
+      "id": "mlanalysis_mlworker_anomalydata"
     },
     {
       "label": "jerkValues",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L485",
-      "id": "mlanalysis_mlworker_jerkvalues",
       "community": 0,
-      "norm_label": "jerkvalues"
+      "norm_label": "jerkvalues",
+      "id": "mlanalysis_mlworker_jerkvalues"
     },
     {
       "label": "jerkMean",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L486",
-      "id": "mlanalysis_mlworker_jerkmean",
       "community": 0,
-      "norm_label": "jerkmean"
+      "norm_label": "jerkmean",
+      "id": "mlanalysis_mlworker_jerkmean"
     },
     {
       "label": "jerkStd",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L487",
-      "id": "mlanalysis_mlworker_jerkstd",
       "community": 0,
-      "norm_label": "jerkstd"
+      "norm_label": "jerkstd",
+      "id": "mlanalysis_mlworker_jerkstd"
     },
     {
       "label": "fatigue",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L509",
-      "id": "mlanalysis_mlworker_fatigue",
       "community": 0,
-      "norm_label": "fatigue"
+      "norm_label": "fatigue",
+      "id": "mlanalysis_mlworker_fatigue"
     },
     {
       "label": "safetyScore",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L517",
-      "id": "mlanalysis_mlworker_safetyscore",
       "community": 0,
-      "norm_label": "safetyscore"
+      "norm_label": "safetyscore",
+      "id": "mlanalysis_mlworker_safetyscore"
     },
     {
       "label": "hmm",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L521",
-      "id": "mlanalysis_mlworker_hmm",
       "community": 0,
-      "norm_label": "hmm"
+      "norm_label": "hmm",
+      "id": "mlanalysis_mlworker_hmm"
     },
     {
       "label": "pca",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L525",
-      "id": "mlanalysis_mlworker_pca",
       "community": 3,
-      "norm_label": "pca"
+      "norm_label": "pca",
+      "id": "mlanalysis_mlworker_pca"
     },
     {
       "label": "xs",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L528",
-      "id": "mlanalysis_mlworker_xs",
       "community": 0,
-      "norm_label": "xs"
+      "norm_label": "xs",
+      "id": "mlanalysis_mlworker_xs"
     },
     {
       "label": "ys",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L529",
-      "id": "mlanalysis_mlworker_ys",
       "community": 0,
-      "norm_label": "ys"
+      "norm_label": "ys",
+      "id": "mlanalysis_mlworker_ys"
     },
     {
       "label": "meanX",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L530",
-      "id": "mlanalysis_mlworker_meanx",
       "community": 0,
-      "norm_label": "meanx"
+      "norm_label": "meanx",
+      "id": "mlanalysis_mlworker_meanx"
     },
     {
       "label": "meanY",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L531",
-      "id": "mlanalysis_mlworker_meany",
       "community": 0,
-      "norm_label": "meany"
+      "norm_label": "meany",
+      "id": "mlanalysis_mlworker_meany"
     },
     {
       "label": "qualityMetrics",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L549",
-      "id": "mlanalysis_mlworker_qualitymetrics",
       "community": 0,
-      "norm_label": "qualitymetrics"
+      "norm_label": "qualitymetrics",
+      "id": "mlanalysis_mlworker_qualitymetrics"
     },
     {
       "label": "results",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L595",
-      "id": "mlanalysis_mlworker_results",
       "community": 0,
-      "norm_label": "results"
+      "norm_label": "results",
+      "id": "mlanalysis_mlworker_results"
     },
     {
       "label": "buildMarkovChain()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L624",
-      "id": "mlanalysis_mlworker_buildmarkovchain",
       "community": 0,
-      "norm_label": "buildmarkovchain()"
+      "norm_label": "buildmarkovchain()",
+      "id": "mlanalysis_mlworker_buildmarkovchain"
     },
     {
       "label": "buildAggressionMatrix()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L642",
-      "id": "mlanalysis_mlworker_buildaggressionmatrix",
       "community": 0,
-      "norm_label": "buildaggressionmatrix()"
+      "norm_label": "buildaggressionmatrix()",
+      "id": "mlanalysis_mlworker_buildaggressionmatrix"
     },
     {
       "label": "IncomingMessage",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L671",
-      "id": "mlanalysis_mlworker_incomingmessage",
       "community": 0,
-      "norm_label": "incomingmessage"
+      "norm_label": "incomingmessage",
+      "id": "mlanalysis_mlworker_incomingmessage"
     },
     {
       "label": "OutgoingMessage",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L678",
-      "id": "mlanalysis_mlworker_outgoingmessage",
       "community": 0,
-      "norm_label": "outgoingmessage"
+      "norm_label": "outgoingmessage",
+      "id": "mlanalysis_mlworker_outgoingmessage"
     },
     {
       "label": "validData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L699",
-      "id": "mlanalysis_mlworker_validdata",
       "community": 0,
-      "norm_label": "validdata"
+      "norm_label": "validdata",
+      "id": "mlanalysis_mlworker_validdata"
     },
     {
       "label": "timestamps",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L710",
-      "id": "mlanalysis_mlworker_timestamps",
       "community": 0,
-      "norm_label": "timestamps"
+      "norm_label": "timestamps",
+      "id": "mlanalysis_mlworker_timestamps"
     },
     {
       "label": "speeds_unclamped",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L711",
-      "id": "mlanalysis_mlworker_speeds_unclamped",
       "community": 0,
-      "norm_label": "speeds_unclamped"
+      "norm_label": "speeds_unclamped",
+      "id": "mlanalysis_mlworker_speeds_unclamped"
     },
     {
       "label": "speeds",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L712",
-      "id": "mlanalysis_mlworker_speeds",
       "community": 0,
-      "norm_label": "speeds"
+      "norm_label": "speeds",
+      "id": "mlanalysis_mlworker_speeds"
     },
     {
       "label": "throttles",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L714",
-      "id": "mlanalysis_mlworker_throttles",
       "community": 0,
-      "norm_label": "throttles"
+      "norm_label": "throttles",
+      "id": "mlanalysis_mlworker_throttles"
     },
     {
       "label": "brakes",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L715",
-      "id": "mlanalysis_mlworker_brakes",
       "community": 0,
-      "norm_label": "brakes"
+      "norm_label": "brakes",
+      "id": "mlanalysis_mlworker_brakes"
     },
     {
       "label": "steerings_unclamped",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L716",
-      "id": "mlanalysis_mlworker_steerings_unclamped",
       "community": 0,
-      "norm_label": "steerings_unclamped"
+      "norm_label": "steerings_unclamped",
+      "id": "mlanalysis_mlworker_steerings_unclamped"
     },
     {
       "label": "steerings",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L717",
-      "id": "mlanalysis_mlworker_steerings",
       "community": 0,
-      "norm_label": "steerings"
+      "norm_label": "steerings",
+      "id": "mlanalysis_mlworker_steerings"
     },
     {
       "label": "gForcesX",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L723",
-      "id": "mlanalysis_mlworker_gforcesx",
       "community": 0,
-      "norm_label": "gforcesx"
+      "norm_label": "gforcesx",
+      "id": "mlanalysis_mlworker_gforcesx"
     },
     {
       "label": "gForcesY",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L724",
-      "id": "mlanalysis_mlworker_gforcesy",
       "community": 0,
-      "norm_label": "gforcesy"
+      "norm_label": "gforcesy",
+      "id": "mlanalysis_mlworker_gforcesy"
     },
     {
       "label": "gForcesCombined",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L725",
-      "id": "mlanalysis_mlworker_gforcescombined",
       "community": 0,
-      "norm_label": "gforcescombined"
+      "norm_label": "gforcescombined",
+      "id": "mlanalysis_mlworker_gforcescombined"
     },
     {
       "label": "pedalOverlaps",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L729",
-      "id": "mlanalysis_mlworker_pedaloverlaps",
       "community": 0,
-      "norm_label": "pedaloverlaps"
+      "norm_label": "pedaloverlaps",
+      "id": "mlanalysis_mlworker_pedaloverlaps"
     },
     {
       "label": "jerks",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L733",
-      "id": "mlanalysis_mlworker_jerks",
       "community": 0,
-      "norm_label": "jerks"
+      "norm_label": "jerks",
+      "id": "mlanalysis_mlworker_jerks"
     },
     {
       "label": "accelerations",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L734",
-      "id": "mlanalysis_mlworker_accelerations",
       "community": 0,
-      "norm_label": "accelerations"
+      "norm_label": "accelerations",
+      "id": "mlanalysis_mlworker_accelerations"
     },
     {
       "label": "xSafety",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L747",
-      "id": "mlanalysis_mlworker_xsafety",
       "community": 0,
-      "norm_label": "xsafety"
+      "norm_label": "xsafety",
+      "id": "mlanalysis_mlworker_xsafety"
     },
     {
       "label": "yCost",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L748",
-      "id": "mlanalysis_mlworker_ycost",
       "community": 0,
-      "norm_label": "ycost"
+      "norm_label": "ycost",
+      "id": "mlanalysis_mlworker_ycost"
     },
     {
       "label": "deductionsDetail",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L750",
-      "id": "mlanalysis_mlworker_deductionsdetail",
       "community": 0,
-      "norm_label": "deductionsdetail"
+      "norm_label": "deductionsdetail",
+      "id": "mlanalysis_mlworker_deductionsdetail"
     },
     {
       "label": "penaltyCounts",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L751",
-      "id": "mlanalysis_mlworker_penaltycounts",
       "community": 0,
-      "norm_label": "penaltycounts"
+      "norm_label": "penaltycounts",
+      "id": "mlanalysis_mlworker_penaltycounts"
     },
     {
       "label": "penaltyBreakdown",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L779",
-      "id": "mlanalysis_mlworker_penaltybreakdown",
       "community": 0,
-      "norm_label": "penaltybreakdown"
+      "norm_label": "penaltybreakdown",
+      "id": "mlanalysis_mlworker_penaltybreakdown"
     },
     {
       "label": "safetyScoreResult",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L785",
-      "id": "mlanalysis_mlworker_safetyscoreresult",
       "community": 0,
-      "norm_label": "safetyscoreresult"
+      "norm_label": "safetyscoreresult",
+      "id": "mlanalysis_mlworker_safetyscoreresult"
     },
     {
       "label": "mlr",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L792",
-      "id": "mlanalysis_mlworker_mlr",
       "community": 0,
-      "norm_label": "mlr"
+      "norm_label": "mlr",
+      "id": "mlanalysis_mlworker_mlr"
     },
     {
       "label": "yPredict",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L793",
-      "id": "mlanalysis_mlworker_ypredict",
       "community": 0,
-      "norm_label": "ypredict"
+      "norm_label": "ypredict",
+      "id": "mlanalysis_mlworker_ypredict"
     },
     {
       "label": "stdJerk",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L808",
-      "id": "mlanalysis_mlworker_stdjerk",
       "community": 0,
-      "norm_label": "stdjerk"
+      "norm_label": "stdjerk",
+      "id": "mlanalysis_mlworker_stdjerk"
     },
     {
       "label": "G_ANOMALY_THRESH",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L811",
-      "id": "mlanalysis_mlworker_g_anomaly_thresh",
       "community": 0,
-      "norm_label": "g_anomaly_thresh"
+      "norm_label": "g_anomaly_thresh",
+      "id": "mlanalysis_mlworker_g_anomaly_thresh"
     },
     {
       "label": "means",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L838",
-      "id": "mlanalysis_mlworker_means",
       "community": 0,
-      "norm_label": "means"
+      "norm_label": "means",
+      "id": "mlanalysis_mlworker_means"
     },
     {
       "label": "stds",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L839",
-      "id": "mlanalysis_mlworker_stds",
       "community": 0,
-      "norm_label": "stds"
+      "norm_label": "stds",
+      "id": "mlanalysis_mlworker_stds"
     },
     {
       "label": "colVals",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L842",
-      "id": "mlanalysis_mlworker_colvals",
       "community": 0,
-      "norm_label": "colvals"
+      "norm_label": "colvals",
+      "id": "mlanalysis_mlworker_colvals"
     },
     {
       "label": "pcaChartData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L849",
-      "id": "mlanalysis_mlworker_pcachartdata",
       "community": 0,
-      "norm_label": "pcachartdata"
+      "norm_label": "pcachartdata",
+      "id": "mlanalysis_mlworker_pcachartdata"
     },
     {
       "label": "reduced",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L850",
-      "id": "mlanalysis_mlworker_reduced",
       "community": 0,
-      "norm_label": "reduced"
+      "norm_label": "reduced",
+      "id": "mlanalysis_mlworker_reduced"
     },
     {
       "label": "pcaDataMatrix",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L854",
-      "id": "mlanalysis_mlworker_pcadatamatrix",
       "community": 0,
-      "norm_label": "pcadatamatrix"
+      "norm_label": "pcadatamatrix",
+      "id": "mlanalysis_mlworker_pcadatamatrix"
     },
     {
       "label": "explainedVariances",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L857",
-      "id": "mlanalysis_mlworker_explainedvariances",
       "community": 0,
-      "norm_label": "explainedvariances"
+      "norm_label": "explainedvariances",
+      "id": "mlanalysis_mlworker_explainedvariances"
     },
     {
       "label": "svmX",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L881",
-      "id": "mlanalysis_mlworker_svmx",
       "community": 0,
-      "norm_label": "svmx"
+      "norm_label": "svmx",
+      "id": "mlanalysis_mlworker_svmx"
     },
     {
       "label": "svmY",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L882",
-      "id": "mlanalysis_mlworker_svmy",
       "community": 0,
-      "norm_label": "svmy"
+      "norm_label": "svmy",
+      "id": "mlanalysis_mlworker_svmy"
     },
     {
       "label": "svm",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L892",
-      "id": "mlanalysis_mlworker_svm",
       "community": 0,
-      "norm_label": "svm"
+      "norm_label": "svm",
+      "id": "mlanalysis_mlworker_svm"
     },
     {
       "label": "kmeansData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L907",
-      "id": "mlanalysis_mlworker_kmeansdata",
       "community": 0,
-      "norm_label": "kmeansdata"
+      "norm_label": "kmeansdata",
+      "id": "mlanalysis_mlworker_kmeansdata"
     },
     {
       "label": "ans",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L922",
-      "id": "mlanalysis_mlworker_ans",
       "community": 0,
-      "norm_label": "ans"
+      "norm_label": "ans",
+      "id": "mlanalysis_mlworker_ans"
     },
     {
       "label": "hmmData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L928",
-      "id": "mlanalysis_mlworker_hmmdata",
       "community": 0,
-      "norm_label": "hmmdata"
+      "norm_label": "hmmdata",
+      "id": "mlanalysis_mlworker_hmmdata"
     },
     {
       "label": "stateCounts",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L929",
-      "id": "mlanalysis_mlworker_statecounts",
       "community": 0,
-      "norm_label": "statecounts"
+      "norm_label": "statecounts",
+      "id": "mlanalysis_mlworker_statecounts"
     },
     {
       "label": "clusterProfiles",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L935",
-      "id": "mlanalysis_mlworker_clusterprofiles",
       "community": 0,
-      "norm_label": "clusterprofiles"
+      "norm_label": "clusterprofiles",
+      "id": "mlanalysis_mlworker_clusterprofiles"
     },
     {
       "label": "remaining",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L948",
-      "id": "mlanalysis_mlworker_remaining",
       "community": 0,
-      "norm_label": "remaining"
+      "norm_label": "remaining",
+      "id": "mlanalysis_mlworker_remaining"
     },
     {
       "label": "clusterNames",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L962",
-      "id": "mlanalysis_mlworker_clusternames",
       "community": 0,
-      "norm_label": "clusternames"
+      "norm_label": "clusternames",
+      "id": "mlanalysis_mlworker_clusternames"
     },
     {
       "label": "step",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L968",
-      "id": "mlanalysis_mlworker_step",
       "community": 0,
-      "norm_label": "step"
+      "norm_label": "step",
+      "id": "mlanalysis_mlworker_step"
     },
     {
       "label": "bDists",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L975",
-      "id": "mlanalysis_mlworker_bdists",
       "community": 0,
-      "norm_label": "bdists"
+      "norm_label": "bdists",
+      "id": "mlanalysis_mlworker_bdists"
     },
     {
       "label": "bCounts",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L976",
-      "id": "mlanalysis_mlworker_bcounts",
       "community": 0,
-      "norm_label": "bcounts"
+      "norm_label": "bcounts",
+      "id": "mlanalysis_mlworker_bcounts"
     },
     {
       "label": "dist",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L980",
-      "id": "mlanalysis_mlworker_dist",
       "community": 0,
-      "norm_label": "dist"
+      "norm_label": "dist",
+      "id": "mlanalysis_mlworker_dist"
     },
     {
       "label": "statePercentages",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1018",
-      "id": "mlanalysis_mlworker_statepercentages",
       "community": 0,
-      "norm_label": "statepercentages"
+      "norm_label": "statepercentages",
+      "id": "mlanalysis_mlworker_statepercentages"
     },
     {
       "label": "rfFeatures",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1030",
-      "id": "mlanalysis_mlworker_rffeatures",
       "community": 0,
-      "norm_label": "rffeatures"
+      "norm_label": "rffeatures",
+      "id": "mlanalysis_mlworker_rffeatures"
     },
     {
       "label": "wearPredictions",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1047",
-      "id": "mlanalysis_mlworker_wearpredictions",
       "community": 0,
-      "norm_label": "wearpredictions"
+      "norm_label": "wearpredictions",
+      "id": "mlanalysis_mlworker_wearpredictions"
     },
     {
       "label": "flatFeatures",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1055",
-      "id": "mlanalysis_mlworker_flatfeatures",
       "community": 0,
-      "norm_label": "flatfeatures"
+      "norm_label": "flatfeatures",
+      "id": "mlanalysis_mlworker_flatfeatures"
     },
     {
       "label": "tensor",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1056",
-      "id": "mlanalysis_mlworker_tensor",
       "community": 0,
-      "norm_label": "tensor"
+      "norm_label": "tensor",
+      "id": "mlanalysis_mlworker_tensor"
     },
     {
       "label": "feeds",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1061",
-      "id": "mlanalysis_mlworker_feeds",
       "community": 0,
-      "norm_label": "feeds"
+      "norm_label": "feeds",
+      "id": "mlanalysis_mlworker_feeds"
     },
     {
       "label": "tireLifeData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1078",
-      "id": "mlanalysis_mlworker_tirelifedata",
       "community": 0,
-      "norm_label": "tirelifedata"
+      "norm_label": "tirelifedata",
+      "id": "mlanalysis_mlworker_tirelifedata"
     },
     {
       "label": "knownDrivers",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1099",
-      "id": "mlanalysis_mlworker_knowndrivers",
       "community": 0,
-      "norm_label": "knowndrivers"
+      "norm_label": "knowndrivers",
+      "id": "mlanalysis_mlworker_knowndrivers"
     },
     {
       "label": "knnTrainX",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1110",
-      "id": "mlanalysis_mlworker_knntrainx",
       "community": 0,
-      "norm_label": "knntrainx"
+      "norm_label": "knntrainx",
+      "id": "mlanalysis_mlworker_knntrainx"
     },
     {
       "label": "labelMap",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1112",
-      "id": "mlanalysis_mlworker_labelmap",
       "community": 0,
-      "norm_label": "labelmap"
+      "norm_label": "labelmap",
+      "id": "mlanalysis_mlworker_labelmap"
     },
     {
       "label": "knnTrainY",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1113",
-      "id": "mlanalysis_mlworker_knntrainy",
       "community": 0,
-      "norm_label": "knntrainy"
+      "norm_label": "knntrainy",
+      "id": "mlanalysis_mlworker_knntrainy"
     },
     {
       "label": "knn",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1121",
-      "id": "mlanalysis_mlworker_knn",
       "community": 0,
-      "norm_label": "knn"
+      "norm_label": "knn",
+      "id": "mlanalysis_mlworker_knn"
     },
     {
       "label": "knnPred",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1122",
-      "id": "mlanalysis_mlworker_knnpred",
       "community": 0,
-      "norm_label": "knnpred"
+      "norm_label": "knnpred",
+      "id": "mlanalysis_mlworker_knnpred"
     },
     {
       "label": "knnConfidenceReal",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1138",
-      "id": "mlanalysis_mlworker_knnconfidencereal",
       "community": 0,
-      "norm_label": "knnconfidencereal"
+      "norm_label": "knnconfidencereal",
+      "id": "mlanalysis_mlworker_knnconfidencereal"
     },
     {
       "label": "dtFeatures",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1144",
-      "id": "mlanalysis_mlworker_dtfeatures",
       "community": 0,
-      "norm_label": "dtfeatures"
+      "norm_label": "dtfeatures",
+      "id": "mlanalysis_mlworker_dtfeatures"
     },
     {
       "label": "dtLabels",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1145",
-      "id": "mlanalysis_mlworker_dtlabels",
       "community": 0,
-      "norm_label": "dtlabels"
+      "norm_label": "dtlabels",
+      "id": "mlanalysis_mlworker_dtlabels"
     },
     {
       "label": "sAbs",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1149",
-      "id": "mlanalysis_mlworker_sabs",
       "community": 0,
-      "norm_label": "sabs"
+      "norm_label": "sabs",
+      "id": "mlanalysis_mlworker_sabs"
     },
     {
       "label": "latG",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1150",
-      "id": "mlanalysis_mlworker_latg",
       "community": 0,
-      "norm_label": "latg"
+      "norm_label": "latg",
+      "id": "mlanalysis_mlworker_latg"
     },
     {
       "label": "dt",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1161",
-      "id": "mlanalysis_mlworker_dt",
       "community": 0,
-      "norm_label": "dt"
+      "norm_label": "dt",
+      "id": "mlanalysis_mlworker_dt"
     },
     {
       "label": "nbFeatures",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1168",
-      "id": "mlanalysis_mlworker_nbfeatures",
       "community": 0,
-      "norm_label": "nbfeatures"
+      "norm_label": "nbfeatures",
+      "id": "mlanalysis_mlworker_nbfeatures"
     },
     {
       "label": "nbLabels",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1169",
-      "id": "mlanalysis_mlworker_nblabels",
       "community": 0,
-      "norm_label": "nblabels"
+      "norm_label": "nblabels",
+      "id": "mlanalysis_mlworker_nblabels"
     },
     {
       "label": "shiftEvents",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1170",
-      "id": "mlanalysis_mlworker_shiftevents",
       "community": 0,
-      "norm_label": "shiftevents"
+      "norm_label": "shiftevents",
+      "id": "mlanalysis_mlworker_shiftevents"
     },
     {
       "label": "nb",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1184",
-      "id": "mlanalysis_mlworker_nb",
       "community": 0,
-      "norm_label": "nb"
+      "norm_label": "nb",
+      "id": "mlanalysis_mlworker_nb"
     },
     {
       "label": "exitX",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1190",
-      "id": "mlanalysis_mlworker_exitx",
       "community": 0,
-      "norm_label": "exitx"
+      "norm_label": "exitx",
+      "id": "mlanalysis_mlworker_exitx"
     },
     {
       "label": "exitY",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1191",
-      "id": "mlanalysis_mlworker_exity",
       "community": 0,
-      "norm_label": "exity"
+      "norm_label": "exity",
+      "id": "mlanalysis_mlworker_exity"
     },
     {
       "label": "exitPredictedData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1199",
-      "id": "mlanalysis_mlworker_exitpredicteddata",
       "community": 0,
-      "norm_label": "exitpredicteddata"
+      "norm_label": "exitpredicteddata",
+      "id": "mlanalysis_mlworker_exitpredicteddata"
     },
     {
       "label": "exitMlr",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1202",
-      "id": "mlanalysis_mlworker_exitmlr",
       "community": 0,
-      "norm_label": "exitmlr"
+      "norm_label": "exitmlr",
+      "id": "mlanalysis_mlworker_exitmlr"
     },
     {
       "label": "predictedArr",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1207",
-      "id": "mlanalysis_mlworker_predictedarr",
       "community": 0,
-      "norm_label": "predictedarr"
+      "norm_label": "predictedarr",
+      "id": "mlanalysis_mlworker_predictedarr"
     },
     {
       "label": "brakeZones",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1215",
-      "id": "mlanalysis_mlworker_brakezones",
       "community": 0,
-      "norm_label": "brakezones"
+      "norm_label": "brakezones",
+      "id": "mlanalysis_mlworker_brakezones"
     },
     {
       "label": "currZone",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1217",
-      "id": "mlanalysis_mlworker_currzone",
       "community": 0,
-      "norm_label": "currzone"
+      "norm_label": "currzone",
+      "id": "mlanalysis_mlworker_currzone"
     },
     {
       "label": "minLen",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1234",
-      "id": "mlanalysis_mlworker_minlen",
       "community": 0,
-      "norm_label": "minlen"
+      "norm_label": "minlen",
+      "id": "mlanalysis_mlworker_minlen"
     },
     {
       "label": "brakeDtFeatures",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1242",
-      "id": "mlanalysis_mlworker_brakedtfeatures",
       "community": 0,
-      "norm_label": "brakedtfeatures"
+      "norm_label": "brakedtfeatures",
+      "id": "mlanalysis_mlworker_brakedtfeatures"
     },
     {
       "label": "brakeDtLabels",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1243",
-      "id": "mlanalysis_mlworker_brakedtlabels",
       "community": 0,
-      "norm_label": "brakedtlabels"
+      "norm_label": "brakedtlabels",
+      "id": "mlanalysis_mlworker_brakedtlabels"
     },
     {
       "label": "bdt",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1255",
-      "id": "mlanalysis_mlworker_bdt",
       "community": 0,
-      "norm_label": "bdt"
+      "norm_label": "bdt",
+      "id": "mlanalysis_mlworker_bdt"
     },
     {
       "label": "trailPercent",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1259",
-      "id": "mlanalysis_mlworker_trailpercent",
       "community": 0,
-      "norm_label": "trailpercent"
+      "norm_label": "trailpercent",
+      "id": "mlanalysis_mlworker_trailpercent"
     },
     {
       "label": "markovMatrix",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1262",
-      "id": "mlanalysis_mlworker_markovmatrix",
       "community": 0,
-      "norm_label": "markovmatrix"
+      "norm_label": "markovmatrix",
+      "id": "mlanalysis_mlworker_markovmatrix"
     },
     {
       "label": "lrX",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1275",
-      "id": "mlanalysis_mlworker_lrx",
       "community": 0,
-      "norm_label": "lrx"
+      "norm_label": "lrx",
+      "id": "mlanalysis_mlworker_lrx"
     },
     {
       "label": "lrY",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1276",
-      "id": "mlanalysis_mlworker_lry",
       "community": 0,
-      "norm_label": "lry"
+      "norm_label": "lry",
+      "id": "mlanalysis_mlworker_lry"
     },
     {
       "label": "lr",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1285",
-      "id": "mlanalysis_mlworker_lr",
       "community": 0,
-      "norm_label": "lr"
+      "norm_label": "lr",
+      "id": "mlanalysis_mlworker_lr"
     },
     {
       "label": "pStart",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1286",
-      "id": "mlanalysis_mlworker_pstart",
       "community": 0,
-      "norm_label": "pstart"
+      "norm_label": "pstart",
+      "id": "mlanalysis_mlworker_pstart"
     },
     {
       "label": "pEnd",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1287",
-      "id": "mlanalysis_mlworker_pend",
       "community": 0,
-      "norm_label": "pend"
+      "norm_label": "pend",
+      "id": "mlanalysis_mlworker_pend"
     },
     {
       "label": "fatigueScore",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1293",
-      "id": "mlanalysis_mlworker_fatiguescore",
       "community": 0,
-      "norm_label": "fatiguescore"
+      "norm_label": "fatiguescore",
+      "id": "mlanalysis_mlworker_fatiguescore"
     },
     {
       "label": "fatigueBuckets",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1296",
-      "id": "mlanalysis_mlworker_fatiguebuckets",
       "community": 0,
-      "norm_label": "fatiguebuckets"
+      "norm_label": "fatiguebuckets",
+      "id": "mlanalysis_mlworker_fatiguebuckets"
     },
     {
       "label": "bucketSize",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1297",
-      "id": "mlanalysis_mlworker_bucketsize",
       "community": 0,
-      "norm_label": "bucketsize"
+      "norm_label": "bucketsize",
+      "id": "mlanalysis_mlworker_bucketsize"
     },
     {
       "label": "slice",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1299",
-      "id": "mlanalysis_mlworker_slice",
       "community": 9,
-      "norm_label": "slice"
+      "norm_label": "slice",
+      "id": "mlanalysis_mlworker_slice"
     },
     {
       "label": "smoothness",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1301",
-      "id": "mlanalysis_mlworker_smoothness",
       "community": 0,
-      "norm_label": "smoothness"
+      "norm_label": "smoothness",
+      "id": "mlanalysis_mlworker_smoothness"
     },
     {
       "label": "aggGrid",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1306",
-      "id": "mlanalysis_mlworker_agggrid",
       "community": 0,
-      "norm_label": "agggrid"
+      "norm_label": "agggrid",
+      "id": "mlanalysis_mlworker_agggrid"
     },
     {
       "label": "aggMatrix",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1317",
-      "id": "mlanalysis_mlworker_aggmatrix",
       "community": 0,
-      "norm_label": "aggmatrix"
+      "norm_label": "aggmatrix",
+      "id": "mlanalysis_mlworker_aggmatrix"
     },
     {
       "label": "silScore",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1328",
-      "id": "mlanalysis_mlworker_silscore",
       "community": 0,
-      "norm_label": "silscore"
+      "norm_label": "silscore",
+      "id": "mlanalysis_mlworker_silscore"
     },
     {
       "label": "pcaVar",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1334",
-      "id": "mlanalysis_mlworker_pcavar",
       "community": 0,
-      "norm_label": "pcavar"
+      "norm_label": "pcavar",
+      "id": "mlanalysis_mlworker_pcavar"
     },
     {
       "label": "rfConvergence",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1342",
-      "id": "mlanalysis_mlworker_rfconvergence",
       "community": 0,
-      "norm_label": "rfconvergence"
+      "norm_label": "rfconvergence",
+      "id": "mlanalysis_mlworker_rfconvergence"
     },
     {
       "label": "r2Score",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1361",
-      "id": "mlanalysis_mlworker_r2score",
       "community": 0,
-      "norm_label": "r2score"
+      "norm_label": "r2score",
+      "id": "mlanalysis_mlworker_r2score"
     },
     {
       "label": "dtwQualityScore",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1372",
-      "id": "mlanalysis_mlworker_dtwqualityscore",
       "community": 0,
-      "norm_label": "dtwqualityscore"
+      "norm_label": "dtwqualityscore",
+      "id": "mlanalysis_mlworker_dtwqualityscore"
     },
     {
       "label": "labelCounts",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1380",
-      "id": "mlanalysis_mlworker_labelcounts",
       "community": 0,
-      "norm_label": "labelcounts"
+      "norm_label": "labelcounts",
+      "id": "mlanalysis_mlworker_labelcounts"
     },
     {
       "label": "dtPurityScore",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1383",
-      "id": "mlanalysis_mlworker_dtpurityscore",
       "community": 0,
-      "norm_label": "dtpurityscore"
+      "norm_label": "dtpurityscore",
+      "id": "mlanalysis_mlworker_dtpurityscore"
     },
     {
       "label": "nbAccuracy",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1390",
-      "id": "mlanalysis_mlworker_nbaccuracy",
       "community": 0,
-      "norm_label": "nbaccuracy"
+      "norm_label": "nbaccuracy",
+      "id": "mlanalysis_mlworker_nbaccuracy"
     },
     {
       "label": "finalResults",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1411",
-      "id": "mlanalysis_mlworker_finalresults",
       "community": 0,
-      "norm_label": "finalresults"
+      "norm_label": "finalresults",
+      "id": "mlanalysis_mlworker_finalresults"
     },
     {
       "label": "electron.d.ts",
       "file_type": "code",
       "source_file": "src/types/electron.d.ts",
       "source_location": "L1",
-      "id": "src_types_electron_d_ts",
       "community": 10,
-      "norm_label": "electron.d.ts"
+      "norm_label": "electron.d.ts",
+      "id": "src_types_electron_d_ts"
     },
     {
       "label": "IElectronAPI",
       "file_type": "code",
       "source_file": "src/types/electron.d.ts",
       "source_location": "L1",
-      "id": "types_electron_d_ielectronapi",
       "community": 10,
-      "norm_label": "ielectronapi"
+      "norm_label": "ielectronapi",
+      "id": "types_electron_d_ielectronapi"
     },
     {
       "label": "Window",
       "file_type": "code",
       "source_file": "src/types/electron.d.ts",
       "source_location": "L18",
-      "id": "types_electron_d_window",
       "community": 10,
-      "norm_label": "window"
+      "norm_label": "window",
+      "id": "types_electron_d_window"
     }
   ],
   "links": [
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "electron_game_connectors_mock_ts",
+      "target": "game_connectors_mock_mockconnector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "game_connectors_mock_mockconnector",
+      "target": "game_connectors_mock_mockconnector_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "game_connectors_mock_mockconnector",
+      "target": "game_connectors_mock_mockconnector_start",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "game_connectors_mock_mockconnector",
+      "target": "game_connectors_mock_mockconnector_stop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "game_connectors_mock_mockconnector",
+      "target": "game_connectors_mock_mockconnector_settransmissiontype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L89",
+      "weight": 1.0,
+      "source": "game_connectors_mock_mockconnector",
+      "target": "game_connectors_mock_mockconnector_setdrivingbehavior",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "electron/game-connectors/mock.ts",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "game_connectors_mock_mockconnector",
+      "target": "game_connectors_mock_mockconnector_emitnextframe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "electron/database/db.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_database_db_ts",
-      "target": "database_db_dirname",
-      "confidence_score": 1.0
+      "target": "database_db_dirname"
     },
     {
       "relation": "contains",
@@ -2208,9 +2350,9 @@
       "source_file": "electron/database/db.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_database_db_ts",
-      "target": "database_db_db",
-      "confidence_score": 1.0
+      "target": "database_db_db"
     },
     {
       "relation": "contains",
@@ -2218,9 +2360,9 @@
       "source_file": "electron/database/db.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_database_db_ts",
-      "target": "database_db_initdatabase",
-      "confidence_score": 1.0
+      "target": "database_db_initdatabase"
     },
     {
       "relation": "imports_from",
@@ -2229,9 +2371,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_database_db_ts",
-      "confidence_score": 1.0
+      "target": "electron_database_db_ts"
     },
     {
       "relation": "imports_from",
@@ -2240,9 +2382,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_ts",
-      "target": "electron_database_db_ts",
-      "confidence_score": 1.0
+      "target": "electron_database_db_ts"
     },
     {
       "relation": "imports",
@@ -2251,9 +2393,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "database_db_initdatabase",
-      "confidence_score": 1.0
+      "target": "database_db_initdatabase"
     },
     {
       "relation": "imports_from",
@@ -2262,9 +2404,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_session_manager_ts",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_ts"
     },
     {
       "relation": "imports",
@@ -2273,9 +2415,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_session_manager_sessionmanager",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager"
     },
     {
       "relation": "contains",
@@ -2283,9 +2425,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_main_require",
-      "confidence_score": 1.0
+      "target": "electron_main_require"
     },
     {
       "relation": "contains",
@@ -2293,9 +2435,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_main_dirname",
-      "confidence_score": 1.0
+      "target": "electron_main_dirname"
     },
     {
       "relation": "contains",
@@ -2303,9 +2445,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_main_createwindow",
-      "confidence_score": 1.0
+      "target": "electron_main_createwindow"
     },
     {
       "relation": "contains",
@@ -2313,9 +2455,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L175",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_main_now",
-      "confidence_score": 1.0
+      "target": "electron_main_now"
     },
     {
       "relation": "contains",
@@ -2323,9 +2465,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L177",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_main_windows",
-      "confidence_score": 1.0
+      "target": "electron_main_windows"
     },
     {
       "relation": "contains",
@@ -2333,9 +2475,9 @@
       "source_file": "electron/main.ts",
       "source_location": "L244",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_main_ts",
-      "target": "electron_main_id",
-      "confidence_score": 1.0
+      "target": "electron_main_id"
     },
     {
       "relation": "contains",
@@ -2343,9 +2485,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_ts",
-      "target": "electron_session_manager_clamp",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_clamp"
     },
     {
       "relation": "contains",
@@ -2353,9 +2495,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_ts",
-      "target": "electron_session_manager_nearzero",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_nearzero"
     },
     {
       "relation": "contains",
@@ -2363,9 +2505,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_ts",
-      "target": "electron_session_manager_sessionmanager",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager"
     },
     {
       "relation": "calls",
@@ -2374,9 +2516,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_processdata",
-      "target": "electron_session_manager_clamp",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_clamp"
     },
     {
       "relation": "calls",
@@ -2385,9 +2527,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_processdata",
-      "target": "electron_session_manager_nearzero",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_nearzero"
     },
     {
       "relation": "method",
@@ -2395,9 +2537,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_constructor",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_constructor"
     },
     {
       "relation": "method",
@@ -2405,9 +2547,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_initstatements",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_initstatements"
     },
     {
       "relation": "method",
@@ -2415,9 +2557,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_processdata",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_processdata"
     },
     {
       "relation": "method",
@@ -2425,9 +2567,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_beginmanualsession",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_beginmanualsession"
     },
     {
       "relation": "method",
@@ -2435,9 +2577,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L200",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_startsession",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_startsession"
     },
     {
       "relation": "method",
@@ -2445,9 +2587,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L233",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_stopsession",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_stopsession"
     },
     {
       "relation": "method",
@@ -2455,9 +2597,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L291",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager",
-      "target": "electron_session_manager_sessionmanager_flushbuffer",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_flushbuffer"
     },
     {
       "relation": "calls",
@@ -2466,9 +2608,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_constructor",
-      "target": "electron_session_manager_sessionmanager_initstatements",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_initstatements"
     },
     {
       "relation": "calls",
@@ -2477,9 +2619,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_processdata",
-      "target": "electron_session_manager_sessionmanager_startsession",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_startsession"
     },
     {
       "relation": "calls",
@@ -2488,9 +2630,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_processdata",
-      "target": "electron_session_manager_sessionmanager_flushbuffer",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_flushbuffer"
     },
     {
       "relation": "calls",
@@ -2499,9 +2641,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L238",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_stopsession",
-      "target": "electron_session_manager_sessionmanager_flushbuffer",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_sessionmanager_flushbuffer"
     },
     {
       "relation": "rationale_for",
@@ -2509,9 +2651,9 @@
       "source_file": "ml-pipeline/config.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_config_rationale_1",
-      "target": "ml_pipeline_config_py",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_config_py"
     },
     {
       "relation": "contains",
@@ -2519,9 +2661,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_py",
-      "target": "ml_pipeline_train_model_load_all_csvs",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_load_all_csvs"
     },
     {
       "relation": "contains",
@@ -2529,9 +2671,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_py",
-      "target": "ml_pipeline_train_model_validate_columns",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_validate_columns"
     },
     {
       "relation": "contains",
@@ -2539,9 +2681,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_py",
-      "target": "ml_pipeline_train_model_derive_labels",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_derive_labels"
     },
     {
       "relation": "contains",
@@ -2549,9 +2691,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_py",
-      "target": "ml_pipeline_train_model_save_onnx",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_save_onnx"
     },
     {
       "relation": "contains",
@@ -2559,9 +2701,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_py",
-      "target": "ml_pipeline_train_model_train_all",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_train_all"
     },
     {
       "relation": "contains",
@@ -2569,9 +2711,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L395",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_py",
-      "target": "ml_pipeline_train_model_main",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_main"
     },
     {
       "relation": "rationale_for",
@@ -2579,9 +2721,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_rationale_1",
-      "target": "ml_pipeline_train_model_py",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_py"
     },
     {
       "relation": "calls",
@@ -2590,9 +2732,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L405",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_main",
-      "target": "ml_pipeline_train_model_load_all_csvs",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_load_all_csvs"
     },
     {
       "relation": "rationale_for",
@@ -2600,9 +2742,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_rationale_52",
-      "target": "ml_pipeline_train_model_load_all_csvs",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_load_all_csvs"
     },
     {
       "relation": "calls",
@@ -2611,9 +2753,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L411",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_main",
-      "target": "ml_pipeline_train_model_validate_columns",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_validate_columns"
     },
     {
       "relation": "rationale_for",
@@ -2621,9 +2763,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_rationale_79",
-      "target": "ml_pipeline_train_model_validate_columns",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_validate_columns"
     },
     {
       "relation": "calls",
@@ -2632,9 +2774,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L417",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_main",
-      "target": "ml_pipeline_train_model_derive_labels",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_derive_labels"
     },
     {
       "relation": "rationale_for",
@@ -2642,9 +2784,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_rationale_92",
-      "target": "ml_pipeline_train_model_derive_labels",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_derive_labels"
     },
     {
       "relation": "calls",
@@ -2653,9 +2795,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L183",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_train_all",
-      "target": "ml_pipeline_train_model_save_onnx",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_save_onnx"
     },
     {
       "relation": "rationale_for",
@@ -2663,9 +2805,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L135",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_rationale_135",
-      "target": "ml_pipeline_train_model_save_onnx",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_save_onnx"
     },
     {
       "relation": "calls",
@@ -2674,9 +2816,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L420",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_main",
-      "target": "ml_pipeline_train_model_train_all",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_train_all"
     },
     {
       "relation": "rationale_for",
@@ -2684,9 +2826,9 @@
       "source_file": "ml-pipeline/train_model.py",
       "source_location": "L150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_rationale_150",
-      "target": "ml_pipeline_train_model_train_all",
-      "confidence_score": 1.0
+      "target": "ml_pipeline_train_model_train_all"
     },
     {
       "relation": "calls",
@@ -2705,9 +2847,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_model_metrics_json",
-      "target": "models_model_metrics_trained_at",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_trained_at"
     },
     {
       "relation": "contains",
@@ -2715,9 +2857,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_model_metrics_json",
-      "target": "models_model_metrics_dataset_rows",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_dataset_rows"
     },
     {
       "relation": "contains",
@@ -2725,9 +2867,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_model_metrics_json",
-      "target": "models_model_metrics_dataset_files",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_dataset_files"
     },
     {
       "relation": "contains",
@@ -2735,9 +2877,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_model_metrics_json",
-      "target": "models_model_metrics_models",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models"
     },
     {
       "relation": "contains",
@@ -2745,9 +2887,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_tire_wear_rf",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_tire_wear_rf"
     },
     {
       "relation": "contains",
@@ -2755,9 +2897,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_fatigue_lr",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_fatigue_lr"
     },
     {
       "relation": "contains",
@@ -2765,9 +2907,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_grip_dt",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_grip_dt"
     },
     {
       "relation": "contains",
@@ -2775,9 +2917,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_safety_rf",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_safety_rf"
     },
     {
       "relation": "contains",
@@ -2785,9 +2927,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_states_kmeans",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_states_kmeans"
     },
     {
       "relation": "contains",
@@ -2795,9 +2937,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L107",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_driver_pca",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_driver_pca"
     },
     {
       "relation": "contains",
@@ -2805,9 +2947,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L152",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_shift_nb",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_shift_nb"
     },
     {
       "relation": "contains",
@@ -2815,9 +2957,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models",
-      "target": "models_model_metrics_models_pedal_svm",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_models_pedal_svm"
     },
     {
       "relation": "contains",
@@ -2825,9 +2967,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_tire_wear_rf",
-      "target": "models_model_metrics_tire_wear_rf_mse",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_tire_wear_rf_mse"
     },
     {
       "relation": "contains",
@@ -2835,9 +2977,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_tire_wear_rf",
-      "target": "models_model_metrics_tire_wear_rf_r2",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_tire_wear_rf_r2"
     },
     {
       "relation": "contains",
@@ -2845,9 +2987,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_tire_wear_rf",
-      "target": "models_model_metrics_tire_wear_rf_convergence",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_tire_wear_rf_convergence"
     },
     {
       "relation": "contains",
@@ -2855,9 +2997,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_tire_wear_rf",
-      "target": "models_model_metrics_tire_wear_rf_features",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_tire_wear_rf_features"
     },
     {
       "relation": "contains",
@@ -2865,9 +3007,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_tire_wear_rf",
-      "target": "models_model_metrics_tire_wear_rf_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_tire_wear_rf_feature_count"
     },
     {
       "relation": "contains",
@@ -2875,9 +3017,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_fatigue_lr",
-      "target": "models_model_metrics_fatigue_lr_error",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_fatigue_lr_error"
     },
     {
       "relation": "contains",
@@ -2885,9 +3027,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_grip_dt",
-      "target": "models_model_metrics_grip_dt_accuracy",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_grip_dt_accuracy"
     },
     {
       "relation": "contains",
@@ -2895,9 +3037,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_grip_dt",
-      "target": "models_model_metrics_grip_dt_f1",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_grip_dt_f1"
     },
     {
       "relation": "contains",
@@ -2905,9 +3047,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_grip_dt",
-      "target": "models_model_metrics_grip_dt_node_purity",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_grip_dt_node_purity"
     },
     {
       "relation": "contains",
@@ -2915,9 +3057,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_grip_dt",
-      "target": "models_model_metrics_grip_dt_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_grip_dt_feature_count"
     },
     {
       "relation": "contains",
@@ -2925,9 +3067,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_safety_rf",
-      "target": "models_model_metrics_safety_rf_r2",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_safety_rf_r2"
     },
     {
       "relation": "contains",
@@ -2935,9 +3077,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L45",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_safety_rf",
-      "target": "models_model_metrics_safety_rf_mse",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_safety_rf_mse"
     },
     {
       "relation": "contains",
@@ -2945,9 +3087,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_safety_rf",
-      "target": "models_model_metrics_safety_rf_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_safety_rf_feature_count"
     },
     {
       "relation": "contains",
@@ -2955,9 +3097,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_states_kmeans",
-      "target": "models_model_metrics_states_kmeans_silhouette",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_states_kmeans_silhouette"
     },
     {
       "relation": "contains",
@@ -2965,9 +3107,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_states_kmeans",
-      "target": "models_model_metrics_states_kmeans_n_clusters",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_states_kmeans_n_clusters"
     },
     {
       "relation": "contains",
@@ -2975,9 +3117,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_states_kmeans",
-      "target": "models_model_metrics_states_kmeans_centroids",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_states_kmeans_centroids"
     },
     {
       "relation": "contains",
@@ -2985,9 +3127,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_states_kmeans",
-      "target": "models_model_metrics_states_kmeans_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_states_kmeans_feature_count"
     },
     {
       "relation": "contains",
@@ -2995,9 +3137,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_driver_pca",
-      "target": "models_model_metrics_driver_pca_explained_variance",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_driver_pca_explained_variance"
     },
     {
       "relation": "contains",
@@ -3005,9 +3147,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_driver_pca",
-      "target": "models_model_metrics_driver_pca_pca_variance_pct",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_driver_pca_pca_variance_pct"
     },
     {
       "relation": "contains",
@@ -3015,9 +3157,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_driver_pca",
-      "target": "models_model_metrics_driver_pca_components",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_driver_pca_components"
     },
     {
       "relation": "contains",
@@ -3025,9 +3167,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_driver_pca",
-      "target": "models_model_metrics_driver_pca_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_driver_pca_feature_count"
     },
     {
       "relation": "contains",
@@ -3035,9 +3177,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L153",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_shift_nb",
-      "target": "models_model_metrics_shift_nb_accuracy",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_shift_nb_accuracy"
     },
     {
       "relation": "contains",
@@ -3045,9 +3187,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_shift_nb",
-      "target": "models_model_metrics_shift_nb_f1",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_shift_nb_f1"
     },
     {
       "relation": "contains",
@@ -3055,9 +3197,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L155",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_shift_nb",
-      "target": "models_model_metrics_shift_nb_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_shift_nb_feature_count"
     },
     {
       "relation": "contains",
@@ -3065,9 +3207,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L158",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_pedal_svm",
-      "target": "models_model_metrics_pedal_svm_accuracy",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_pedal_svm_accuracy"
     },
     {
       "relation": "contains",
@@ -3075,9 +3217,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L159",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_pedal_svm",
-      "target": "models_model_metrics_pedal_svm_f1",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_pedal_svm_f1"
     },
     {
       "relation": "contains",
@@ -3085,9 +3227,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L160",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_pedal_svm",
-      "target": "models_model_metrics_pedal_svm_margin_width",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_pedal_svm_margin_width"
     },
     {
       "relation": "contains",
@@ -3095,9 +3237,9 @@
       "source_file": "public/models/model_metrics.json",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "models_model_metrics_models_pedal_svm",
-      "target": "models_model_metrics_pedal_svm_feature_count",
-      "confidence_score": 1.0
+      "target": "models_model_metrics_pedal_svm_feature_count"
     },
     {
       "relation": "contains",
@@ -3105,9 +3247,9 @@
       "source_file": "public/models/pca_profile.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_pca_profile_json",
-      "target": "models_pca_profile_components",
-      "confidence_score": 1.0
+      "target": "models_pca_profile_components"
     },
     {
       "relation": "contains",
@@ -3115,9 +3257,9 @@
       "source_file": "public/models/pca_profile.json",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_pca_profile_json",
-      "target": "models_pca_profile_mean",
-      "confidence_score": 1.0
+      "target": "models_pca_profile_mean"
     },
     {
       "relation": "contains",
@@ -3125,9 +3267,9 @@
       "source_file": "public/models/pca_profile.json",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_pca_profile_json",
-      "target": "models_pca_profile_explained_variance_ratio",
-      "confidence_score": 1.0
+      "target": "models_pca_profile_explained_variance_ratio"
     },
     {
       "relation": "contains",
@@ -3135,9 +3277,9 @@
       "source_file": "public/models/pca_profile.json",
       "source_location": "L65",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_pca_profile_json",
-      "target": "models_pca_profile_features",
-      "confidence_score": 1.0
+      "target": "models_pca_profile_features"
     },
     {
       "relation": "contains",
@@ -3145,9 +3287,9 @@
       "source_file": "public/models/pca_profile.json",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_pca_profile_json",
-      "target": "models_pca_profile_scaler_mean",
-      "confidence_score": 1.0
+      "target": "models_pca_profile_scaler_mean"
     },
     {
       "relation": "contains",
@@ -3155,9 +3297,9 @@
       "source_file": "public/models/pca_profile.json",
       "source_location": "L103",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_pca_profile_json",
-      "target": "models_pca_profile_scaler_scale",
-      "confidence_score": 1.0
+      "target": "models_pca_profile_scaler_scale"
     },
     {
       "relation": "contains",
@@ -3165,9 +3307,9 @@
       "source_file": "public/models/state_clusters.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_state_clusters_json",
-      "target": "models_state_clusters_centroids",
-      "confidence_score": 1.0
+      "target": "models_state_clusters_centroids"
     },
     {
       "relation": "contains",
@@ -3175,9 +3317,9 @@
       "source_file": "public/models/state_clusters.json",
       "source_location": "L56",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_state_clusters_json",
-      "target": "models_state_clusters_features",
-      "confidence_score": 1.0
+      "target": "models_state_clusters_features"
     },
     {
       "relation": "contains",
@@ -3185,9 +3327,9 @@
       "source_file": "public/models/state_clusters.json",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_state_clusters_json",
-      "target": "models_state_clusters_n_clusters",
-      "confidence_score": 1.0
+      "target": "models_state_clusters_n_clusters"
     },
     {
       "relation": "contains",
@@ -3195,9 +3337,9 @@
       "source_file": "public/models/state_clusters.json",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_state_clusters_json",
-      "target": "models_state_clusters_scaler_mean",
-      "confidence_score": 1.0
+      "target": "models_state_clusters_scaler_mean"
     },
     {
       "relation": "contains",
@@ -3205,9 +3347,9 @@
       "source_file": "public/models/state_clusters.json",
       "source_location": "L83",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_models_state_clusters_json",
-      "target": "models_state_clusters_scaler_scale",
-      "confidence_score": 1.0
+      "target": "models_state_clusters_scaler_scale"
     },
     {
       "relation": "contains",
@@ -3215,9 +3357,9 @@
       "source_file": "src/components/Dashboard/DataLogger.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_dashboard_datalogger_tsx",
-      "target": "dashboard_datalogger_datalogger",
-      "confidence_score": 1.0
+      "target": "dashboard_datalogger_datalogger"
     },
     {
       "relation": "contains",
@@ -3225,9 +3367,9 @@
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_mlresults",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlanalysis_mlresults"
     },
     {
       "relation": "contains",
@@ -3235,9 +3377,9 @@
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_initial_results",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlanalysis_initial_results"
     },
     {
       "relation": "contains",
@@ -3245,9 +3387,9 @@
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_mlanalysis",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlanalysis_mlanalysis"
     },
     {
       "relation": "contains",
@@ -3255,9 +3397,9 @@
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L977",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_customreferencelines",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlanalysis_customreferencelines"
     },
     {
       "relation": "contains",
@@ -3265,9 +3407,9 @@
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L988",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_metriccard",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlanalysis_metriccard"
     },
     {
       "relation": "contains",
@@ -3275,9 +3417,9 @@
       "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
       "source_location": "L1007",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_getstatecolor",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlanalysis_getstatecolor"
     },
     {
       "relation": "contains",
@@ -3285,9 +3427,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_tire_wear_features",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_tire_wear_features"
     },
     {
       "relation": "contains",
@@ -3295,9 +3437,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_grip_features",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_grip_features"
     },
     {
       "relation": "contains",
@@ -3305,9 +3447,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_hmm_features",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_hmm_features"
     },
     {
       "relation": "contains",
@@ -3315,9 +3457,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pca_features",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pca_features"
     },
     {
       "relation": "contains",
@@ -3325,9 +3467,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_shift_features",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_shift_features"
     },
     {
       "relation": "contains",
@@ -3335,9 +3477,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pedal_features",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pedal_features"
     },
     {
       "relation": "contains",
@@ -3345,9 +3487,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_extractfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "relation": "contains",
@@ -3355,9 +3497,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_safemean",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_safemean"
     },
     {
       "relation": "contains",
@@ -3365,9 +3507,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_safestd",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_safestd"
     },
     {
       "relation": "contains",
@@ -3375,9 +3517,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L74",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_predicttirewear",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_predicttirewear"
     },
     {
       "relation": "contains",
@@ -3385,9 +3527,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_detectfatigue",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_detectfatigue"
     },
     {
       "relation": "contains",
@@ -3395,9 +3537,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L158",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifygrip",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_classifygrip"
     },
     {
       "relation": "contains",
@@ -3405,9 +3547,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_computesafetyscore",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_computesafetyscore"
     },
     {
       "relation": "contains",
@@ -3415,9 +3557,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L232",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_clusterstates",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_clusterstates"
     },
     {
       "relation": "contains",
@@ -3425,9 +3567,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L289",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_projectpca",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_projectpca"
     },
     {
       "relation": "contains",
@@ -3435,9 +3577,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L326",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifyshifts",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_classifyshifts"
     },
     {
       "relation": "contains",
@@ -3445,9 +3587,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L370",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifypedaloverlap",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_classifypedaloverlap"
     },
     {
       "relation": "contains",
@@ -3455,9 +3597,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L412",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_loadmodels",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_loadmodels"
     },
     {
       "relation": "contains",
@@ -3465,9 +3607,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L477",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_reportprogress",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_reportprogress"
     },
     {
       "relation": "contains",
@@ -3475,9 +3617,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L813",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_anomalydata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_anomalydata"
     },
     {
       "relation": "contains",
@@ -3485,9 +3627,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L485",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_jerkvalues",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_jerkvalues"
     },
     {
       "relation": "contains",
@@ -3495,9 +3637,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L486",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_jerkmean",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_jerkmean"
     },
     {
       "relation": "contains",
@@ -3505,9 +3647,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L487",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_jerkstd",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_jerkstd"
     },
     {
       "relation": "contains",
@@ -3515,9 +3657,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L509",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_fatigue",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_fatigue"
     },
     {
       "relation": "contains",
@@ -3525,9 +3667,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L517",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_safetyscore",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_safetyscore"
     },
     {
       "relation": "contains",
@@ -3535,9 +3677,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L521",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_hmm",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_hmm"
     },
     {
       "relation": "contains",
@@ -3545,9 +3687,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L855",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pca",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pca"
     },
     {
       "relation": "contains",
@@ -3555,9 +3697,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L528",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_xs",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_xs"
     },
     {
       "relation": "contains",
@@ -3565,9 +3707,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L529",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_ys",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_ys"
     },
     {
       "relation": "contains",
@@ -3575,9 +3717,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L530",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_meanx",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_meanx"
     },
     {
       "relation": "contains",
@@ -3585,9 +3727,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L531",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_meany",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_meany"
     },
     {
       "relation": "contains",
@@ -3595,9 +3737,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1397",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_qualitymetrics",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_qualitymetrics"
     },
     {
       "relation": "contains",
@@ -3605,9 +3747,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L595",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_results",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_results"
     },
     {
       "relation": "contains",
@@ -3615,9 +3757,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L624",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_buildmarkovchain",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_buildmarkovchain"
     },
     {
       "relation": "contains",
@@ -3625,9 +3767,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L642",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_buildaggressionmatrix",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_buildaggressionmatrix"
     },
     {
       "relation": "contains",
@@ -3635,9 +3777,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L671",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_incomingmessage",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_incomingmessage"
     },
     {
       "relation": "contains",
@@ -3645,9 +3787,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L678",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_outgoingmessage",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_outgoingmessage"
     },
     {
       "relation": "contains",
@@ -3655,9 +3797,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L699",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_validdata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_validdata"
     },
     {
       "relation": "contains",
@@ -3665,9 +3807,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L710",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_timestamps",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_timestamps"
     },
     {
       "relation": "contains",
@@ -3675,9 +3817,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L711",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_speeds_unclamped",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_speeds_unclamped"
     },
     {
       "relation": "contains",
@@ -3685,9 +3827,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L712",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_speeds",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_speeds"
     },
     {
       "relation": "contains",
@@ -3695,9 +3837,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L714",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_throttles",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_throttles"
     },
     {
       "relation": "contains",
@@ -3705,9 +3847,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L715",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_brakes",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_brakes"
     },
     {
       "relation": "contains",
@@ -3715,9 +3857,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L716",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_steerings_unclamped",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_steerings_unclamped"
     },
     {
       "relation": "contains",
@@ -3725,9 +3867,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L717",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_steerings",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_steerings"
     },
     {
       "relation": "contains",
@@ -3735,9 +3877,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L723",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_gforcesx",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_gforcesx"
     },
     {
       "relation": "contains",
@@ -3745,9 +3887,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L724",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_gforcesy",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_gforcesy"
     },
     {
       "relation": "contains",
@@ -3755,9 +3897,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L725",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_gforcescombined",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_gforcescombined"
     },
     {
       "relation": "contains",
@@ -3765,9 +3907,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L729",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pedaloverlaps",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pedaloverlaps"
     },
     {
       "relation": "contains",
@@ -3775,9 +3917,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L733",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_jerks",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_jerks"
     },
     {
       "relation": "contains",
@@ -3785,9 +3927,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L734",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_accelerations",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_accelerations"
     },
     {
       "relation": "contains",
@@ -3795,9 +3937,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L747",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_xsafety",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_xsafety"
     },
     {
       "relation": "contains",
@@ -3805,9 +3947,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L748",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_ycost",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_ycost"
     },
     {
       "relation": "contains",
@@ -3815,9 +3957,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L750",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_deductionsdetail",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_deductionsdetail"
     },
     {
       "relation": "contains",
@@ -3825,9 +3967,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L751",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_penaltycounts",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_penaltycounts"
     },
     {
       "relation": "contains",
@@ -3835,9 +3977,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L779",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_penaltybreakdown",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_penaltybreakdown"
     },
     {
       "relation": "contains",
@@ -3845,9 +3987,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L785",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_safetyscoreresult",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_safetyscoreresult"
     },
     {
       "relation": "contains",
@@ -3855,9 +3997,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L792",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_mlr",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_mlr"
     },
     {
       "relation": "contains",
@@ -3865,9 +4007,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L793",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_ypredict",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_ypredict"
     },
     {
       "relation": "contains",
@@ -3875,9 +4017,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L808",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_stdjerk",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_stdjerk"
     },
     {
       "relation": "contains",
@@ -3885,9 +4027,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L811",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_g_anomaly_thresh",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_g_anomaly_thresh"
     },
     {
       "relation": "contains",
@@ -3895,9 +4037,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L838",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_means",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_means"
     },
     {
       "relation": "contains",
@@ -3905,9 +4047,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L839",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_stds",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_stds"
     },
     {
       "relation": "contains",
@@ -3915,9 +4057,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L842",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_colvals",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_colvals"
     },
     {
       "relation": "contains",
@@ -3925,9 +4067,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L849",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pcachartdata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pcachartdata"
     },
     {
       "relation": "contains",
@@ -3935,9 +4077,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L850",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_reduced",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_reduced"
     },
     {
       "relation": "contains",
@@ -3945,9 +4087,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L854",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pcadatamatrix",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pcadatamatrix"
     },
     {
       "relation": "contains",
@@ -3955,9 +4097,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L857",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_explainedvariances",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_explainedvariances"
     },
     {
       "relation": "contains",
@@ -3965,9 +4107,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L881",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_svmx",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_svmx"
     },
     {
       "relation": "contains",
@@ -3975,9 +4117,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L882",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_svmy",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_svmy"
     },
     {
       "relation": "contains",
@@ -3985,9 +4127,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L892",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_svm",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_svm"
     },
     {
       "relation": "contains",
@@ -3995,9 +4137,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L907",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_kmeansdata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_kmeansdata"
     },
     {
       "relation": "contains",
@@ -4005,9 +4147,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L922",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_ans",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_ans"
     },
     {
       "relation": "contains",
@@ -4015,9 +4157,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L928",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_hmmdata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_hmmdata"
     },
     {
       "relation": "contains",
@@ -4025,9 +4167,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L929",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_statecounts",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_statecounts"
     },
     {
       "relation": "contains",
@@ -4035,9 +4177,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L935",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_clusterprofiles",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_clusterprofiles"
     },
     {
       "relation": "contains",
@@ -4045,9 +4187,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L948",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_remaining",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_remaining"
     },
     {
       "relation": "contains",
@@ -4055,9 +4197,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L962",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_clusternames",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_clusternames"
     },
     {
       "relation": "contains",
@@ -4065,9 +4207,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L968",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_step",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_step"
     },
     {
       "relation": "contains",
@@ -4075,9 +4217,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L975",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_bdists",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_bdists"
     },
     {
       "relation": "contains",
@@ -4085,9 +4227,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L976",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_bcounts",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_bcounts"
     },
     {
       "relation": "contains",
@@ -4095,9 +4237,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dist",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_dist"
     },
     {
       "relation": "contains",
@@ -4105,9 +4247,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1018",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_statepercentages",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_statepercentages"
     },
     {
       "relation": "contains",
@@ -4115,9 +4257,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1030",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_rffeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_rffeatures"
     },
     {
       "relation": "contains",
@@ -4125,9 +4267,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1047",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_wearpredictions",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_wearpredictions"
     },
     {
       "relation": "contains",
@@ -4135,9 +4277,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1055",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_flatfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_flatfeatures"
     },
     {
       "relation": "contains",
@@ -4145,9 +4287,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1056",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_tensor",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_tensor"
     },
     {
       "relation": "contains",
@@ -4155,9 +4297,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1061",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_feeds",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_feeds"
     },
     {
       "relation": "contains",
@@ -4165,9 +4307,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1078",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_tirelifedata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_tirelifedata"
     },
     {
       "relation": "contains",
@@ -4175,9 +4317,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1099",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knowndrivers",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_knowndrivers"
     },
     {
       "relation": "contains",
@@ -4185,9 +4327,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knntrainx",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_knntrainx"
     },
     {
       "relation": "contains",
@@ -4195,9 +4337,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_labelmap",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_labelmap"
     },
     {
       "relation": "contains",
@@ -4205,9 +4347,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1113",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knntrainy",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_knntrainy"
     },
     {
       "relation": "contains",
@@ -4215,9 +4357,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1121",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knn",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_knn"
     },
     {
       "relation": "contains",
@@ -4225,9 +4367,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knnpred",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_knnpred"
     },
     {
       "relation": "contains",
@@ -4235,9 +4377,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1138",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knnconfidencereal",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_knnconfidencereal"
     },
     {
       "relation": "contains",
@@ -4245,9 +4387,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dtfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_dtfeatures"
     },
     {
       "relation": "contains",
@@ -4255,9 +4397,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1145",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dtlabels",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_dtlabels"
     },
     {
       "relation": "contains",
@@ -4265,9 +4407,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_sabs",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_sabs"
     },
     {
       "relation": "contains",
@@ -4275,9 +4417,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_latg",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_latg"
     },
     {
       "relation": "contains",
@@ -4285,9 +4427,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dt",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_dt"
     },
     {
       "relation": "contains",
@@ -4295,9 +4437,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_nbfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_nbfeatures"
     },
     {
       "relation": "contains",
@@ -4305,9 +4447,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1169",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_nblabels",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_nblabels"
     },
     {
       "relation": "contains",
@@ -4315,9 +4457,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1170",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_shiftevents",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_shiftevents"
     },
     {
       "relation": "contains",
@@ -4325,9 +4467,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_nb",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_nb"
     },
     {
       "relation": "contains",
@@ -4335,9 +4477,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1190",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_exitx",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_exitx"
     },
     {
       "relation": "contains",
@@ -4345,9 +4487,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_exity",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_exity"
     },
     {
       "relation": "contains",
@@ -4355,9 +4497,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1199",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_exitpredicteddata",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_exitpredicteddata"
     },
     {
       "relation": "contains",
@@ -4365,9 +4507,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1202",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_exitmlr",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_exitmlr"
     },
     {
       "relation": "contains",
@@ -4375,9 +4517,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1207",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_predictedarr",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_predictedarr"
     },
     {
       "relation": "contains",
@@ -4385,9 +4527,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1215",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_brakezones",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_brakezones"
     },
     {
       "relation": "contains",
@@ -4395,9 +4537,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_currzone",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_currzone"
     },
     {
       "relation": "contains",
@@ -4405,9 +4547,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1234",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_minlen",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_minlen"
     },
     {
       "relation": "contains",
@@ -4415,9 +4557,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1242",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_brakedtfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_brakedtfeatures"
     },
     {
       "relation": "contains",
@@ -4425,9 +4567,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1243",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_brakedtlabels",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_brakedtlabels"
     },
     {
       "relation": "contains",
@@ -4435,9 +4577,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1255",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_bdt",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_bdt"
     },
     {
       "relation": "contains",
@@ -4445,9 +4587,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1259",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_trailpercent",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_trailpercent"
     },
     {
       "relation": "contains",
@@ -4455,9 +4597,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1262",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_markovmatrix",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_markovmatrix"
     },
     {
       "relation": "contains",
@@ -4465,9 +4607,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1275",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_lrx",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_lrx"
     },
     {
       "relation": "contains",
@@ -4475,9 +4617,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1276",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_lry",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_lry"
     },
     {
       "relation": "contains",
@@ -4485,9 +4627,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1285",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_lr",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_lr"
     },
     {
       "relation": "contains",
@@ -4495,9 +4637,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1286",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pstart",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pstart"
     },
     {
       "relation": "contains",
@@ -4505,9 +4647,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1287",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pend",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pend"
     },
     {
       "relation": "contains",
@@ -4515,9 +4657,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1293",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_fatiguescore",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_fatiguescore"
     },
     {
       "relation": "contains",
@@ -4525,9 +4667,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1296",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_fatiguebuckets",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_fatiguebuckets"
     },
     {
       "relation": "contains",
@@ -4535,9 +4677,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1297",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_bucketsize",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_bucketsize"
     },
     {
       "relation": "contains",
@@ -4545,9 +4687,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1299",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_slice",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_slice"
     },
     {
       "relation": "contains",
@@ -4555,9 +4697,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1301",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_smoothness",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_smoothness"
     },
     {
       "relation": "contains",
@@ -4565,9 +4707,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1306",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_agggrid",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_agggrid"
     },
     {
       "relation": "contains",
@@ -4575,9 +4717,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1317",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_aggmatrix",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_aggmatrix"
     },
     {
       "relation": "contains",
@@ -4585,9 +4727,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1328",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_silscore",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_silscore"
     },
     {
       "relation": "contains",
@@ -4595,9 +4737,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1334",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pcavar",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_pcavar"
     },
     {
       "relation": "contains",
@@ -4605,9 +4747,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1342",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_rfconvergence",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_rfconvergence"
     },
     {
       "relation": "contains",
@@ -4615,9 +4757,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1361",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_r2score",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_r2score"
     },
     {
       "relation": "contains",
@@ -4625,9 +4767,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1372",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dtwqualityscore",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_dtwqualityscore"
     },
     {
       "relation": "contains",
@@ -4635,9 +4777,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1380",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_labelcounts",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_labelcounts"
     },
     {
       "relation": "contains",
@@ -4645,9 +4787,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1383",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dtpurityscore",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_dtpurityscore"
     },
     {
       "relation": "contains",
@@ -4655,9 +4797,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1390",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_nbaccuracy",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_nbaccuracy"
     },
     {
       "relation": "contains",
@@ -4665,9 +4807,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L1411",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_finalresults",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_finalresults"
     },
     {
       "relation": "calls",
@@ -4676,9 +4818,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L167",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_classifygrip",
-      "target": "mlanalysis_mlworker_extractfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "relation": "calls",
@@ -4687,9 +4829,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L243",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_clusterstates",
-      "target": "mlanalysis_mlworker_extractfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "relation": "calls",
@@ -4698,9 +4840,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L297",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_projectpca",
-      "target": "mlanalysis_mlworker_extractfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "relation": "calls",
@@ -4709,9 +4851,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L342",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_classifyshifts",
-      "target": "mlanalysis_mlworker_extractfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "relation": "calls",
@@ -4720,9 +4862,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L378",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_classifypedaloverlap",
-      "target": "mlanalysis_mlworker_extractfeatures",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_extractfeatures"
     },
     {
       "relation": "calls",
@@ -4731,9 +4873,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_safestd",
-      "target": "mlanalysis_mlworker_safemean",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_safemean"
     },
     {
       "relation": "calls",
@@ -4742,9 +4884,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_detectfatigue",
-      "target": "mlanalysis_mlworker_safemean",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_safemean"
     },
     {
       "relation": "calls",
@@ -4753,9 +4895,9 @@
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_detectfatigue",
-      "target": "mlanalysis_mlworker_slice",
-      "confidence_score": 1.0
+      "target": "mlanalysis_mlworker_slice"
     },
     {
       "relation": "contains",
@@ -4763,9 +4905,9 @@
       "source_file": "src/types/electron.d.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_types_electron_d_ts",
-      "target": "types_electron_d_ielectronapi",
-      "confidence_score": 1.0
+      "target": "types_electron_d_ielectronapi"
     },
     {
       "relation": "contains",
@@ -4773,11 +4915,11 @@
       "source_file": "src/types/electron.d.ts",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_types_electron_d_ts",
-      "target": "types_electron_d_window",
-      "confidence_score": 1.0
+      "target": "types_electron_d_window"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6804e940a8c77b795dd1e3f572998b337288a4d6"
+  "built_at_commit": "22920a8ebf392615d13137cbe1164a1c4ce335a0"
 }
