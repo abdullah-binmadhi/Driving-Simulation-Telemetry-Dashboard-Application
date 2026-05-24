@@ -4,76 +4,139 @@
   "graph": {},
   "nodes": [
     {
+      "label": "MLAnalysis.tsx",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1",
+      "id": "src_components_mlanalysis_mlanalysis_tsx",
+      "community": 5,
+      "norm_label": "mlanalysis.tsx"
+    },
+    {
+      "label": "MLResults",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L8",
+      "id": "mlanalysis_mlanalysis_mlresults",
+      "community": 5,
+      "norm_label": "mlresults"
+    },
+    {
+      "label": "INITIAL_RESULTS",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L79",
+      "id": "mlanalysis_mlanalysis_initial_results",
+      "community": 5,
+      "norm_label": "initial_results"
+    },
+    {
+      "label": "MLAnalysis()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L109",
+      "id": "mlanalysis_mlanalysis_mlanalysis",
+      "community": 5,
+      "norm_label": "mlanalysis()"
+    },
+    {
+      "label": "CustomReferenceLines()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L992",
+      "id": "mlanalysis_mlanalysis_customreferencelines",
+      "community": 5,
+      "norm_label": "customreferencelines()"
+    },
+    {
+      "label": "MetricCard()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1003",
+      "id": "mlanalysis_mlanalysis_metriccard",
+      "community": 5,
+      "norm_label": "metriccard()"
+    },
+    {
+      "label": "getStateColor()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1022",
+      "id": "mlanalysis_mlanalysis_getstatecolor",
+      "community": 5,
+      "norm_label": "getstatecolor()"
+    },
+    {
       "label": "mock.ts",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L1",
-      "id": "electron_game_connectors_mock_ts",
       "community": 8,
-      "norm_label": "mock.ts"
+      "norm_label": "mock.ts",
+      "id": "electron_game_connectors_mock_ts"
     },
     {
       "label": "MockConnector",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L5",
-      "id": "game_connectors_mock_mockconnector",
       "community": 8,
-      "norm_label": "mockconnector"
+      "norm_label": "mockconnector",
+      "id": "game_connectors_mock_mockconnector"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L35",
-      "id": "game_connectors_mock_mockconnector_constructor",
       "community": 8,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "game_connectors_mock_mockconnector_constructor"
     },
     {
       "label": ".start()",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L39",
-      "id": "game_connectors_mock_mockconnector_start",
       "community": 8,
-      "norm_label": ".start()"
+      "norm_label": ".start()",
+      "id": "game_connectors_mock_mockconnector_start"
     },
     {
       "label": ".stop()",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L74",
-      "id": "game_connectors_mock_mockconnector_stop",
       "community": 8,
-      "norm_label": ".stop()"
+      "norm_label": ".stop()",
+      "id": "game_connectors_mock_mockconnector_stop"
     },
     {
       "label": ".setTransmissionType()",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L84",
-      "id": "game_connectors_mock_mockconnector_settransmissiontype",
       "community": 8,
-      "norm_label": ".settransmissiontype()"
+      "norm_label": ".settransmissiontype()",
+      "id": "game_connectors_mock_mockconnector_settransmissiontype"
     },
     {
       "label": ".setDrivingBehavior()",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L89",
-      "id": "game_connectors_mock_mockconnector_setdrivingbehavior",
       "community": 8,
-      "norm_label": ".setdrivingbehavior()"
+      "norm_label": ".setdrivingbehavior()",
+      "id": "game_connectors_mock_mockconnector_setdrivingbehavior"
     },
     {
       "label": ".emitNextFrame()",
       "file_type": "code",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L94",
-      "id": "game_connectors_mock_mockconnector_emitnextframe",
       "community": 8,
-      "norm_label": ".emitnextframe()"
+      "norm_label": ".emitnextframe()",
+      "id": "game_connectors_mock_mockconnector_emitnextframe"
     },
     {
       "label": "db.ts",
@@ -911,69 +974,6 @@
       "community": 12,
       "norm_label": "datalogger()",
       "id": "dashboard_datalogger_datalogger"
-    },
-    {
-      "label": "MLAnalysis.tsx",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1",
-      "community": 5,
-      "norm_label": "mlanalysis.tsx",
-      "id": "src_components_mlanalysis_mlanalysis_tsx"
-    },
-    {
-      "label": "MLResults",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L8",
-      "community": 5,
-      "norm_label": "mlresults",
-      "id": "mlanalysis_mlanalysis_mlresults"
-    },
-    {
-      "label": "INITIAL_RESULTS",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L79",
-      "community": 5,
-      "norm_label": "initial_results",
-      "id": "mlanalysis_mlanalysis_initial_results"
-    },
-    {
-      "label": "MLAnalysis()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L109",
-      "community": 5,
-      "norm_label": "mlanalysis()",
-      "id": "mlanalysis_mlanalysis_mlanalysis"
-    },
-    {
-      "label": "CustomReferenceLines()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L977",
-      "community": 5,
-      "norm_label": "customreferencelines()",
-      "id": "mlanalysis_mlanalysis_customreferencelines"
-    },
-    {
-      "label": "MetricCard()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L988",
-      "community": 5,
-      "norm_label": "metriccard()",
-      "id": "mlanalysis_mlanalysis_metriccard"
-    },
-    {
-      "label": "getStateColor()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1007",
-      "community": 5,
-      "norm_label": "getstatecolor()",
-      "id": "mlanalysis_mlanalysis_getstatecolor"
     },
     {
       "label": "mlWorker.ts",
@@ -2267,12 +2267,72 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_mlresults"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L79",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_initial_results"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_mlanalysis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L977",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_customreferencelines"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L988",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_metriccard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1007",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_getstatecolor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_game_connectors_mock_ts",
-      "target": "game_connectors_mock_mockconnector",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector"
     },
     {
       "relation": "method",
@@ -2280,9 +2340,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector",
-      "target": "game_connectors_mock_mockconnector_constructor",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector_constructor"
     },
     {
       "relation": "method",
@@ -2290,9 +2350,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector",
-      "target": "game_connectors_mock_mockconnector_start",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector_start"
     },
     {
       "relation": "method",
@@ -2300,9 +2360,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L74",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector",
-      "target": "game_connectors_mock_mockconnector_stop",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector_stop"
     },
     {
       "relation": "method",
@@ -2310,9 +2370,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector",
-      "target": "game_connectors_mock_mockconnector_settransmissiontype",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector_settransmissiontype"
     },
     {
       "relation": "method",
@@ -2320,9 +2380,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector",
-      "target": "game_connectors_mock_mockconnector_setdrivingbehavior",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector_setdrivingbehavior"
     },
     {
       "relation": "method",
@@ -2330,9 +2390,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L94",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector",
-      "target": "game_connectors_mock_mockconnector_emitnextframe",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_mockconnector_emitnextframe"
     },
     {
       "relation": "contains",
@@ -3360,66 +3420,6 @@
       "confidence_score": 1.0,
       "source": "src_components_dashboard_datalogger_tsx",
       "target": "dashboard_datalogger_datalogger"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_mlresults"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L79",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_initial_results"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L109",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_mlanalysis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L977",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_customreferencelines"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L988",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_metriccard"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1007",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_getstatecolor"
     },
     {
       "relation": "contains",
@@ -4921,5 +4921,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "22920a8ebf392615d13137cbe1164a1c4ce335a0"
+  "built_at_commit": "ef8fe39f775786cb6405e591a0160c87a4db8c32"
 }
