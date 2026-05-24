@@ -1,16 +1,16 @@
 # Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-24)
 
 ## Corpus Check
-- 65 files · ~51,919 words
+- 67 files · ~54,356 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 251 nodes · 263 edges · 14 communities (10 shown, 4 thin omitted)
+- 331 nodes · 341 edges · 19 communities (14 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ef8fe39f`
+- Built from commit: `55181480`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -28,32 +28,35 @@
 - [[_COMMUNITY_Community 10|Community 10]]
 - [[_COMMUNITY_Community 11|Community 11]]
 - [[_COMMUNITY_Community 13|Community 13]]
+- [[_COMMUNITY_Community 14|Community 14]]
+- [[_COMMUNITY_Community 15|Community 15]]
+- [[_COMMUNITY_Community 18|Community 18]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `SessionManager` - 9 edges
-2. `models` - 9 edges
-3. `MockConnector` - 7 edges
-4. `tire_wear_rf` - 6 edges
-5. `extractFeatures()` - 6 edges
-6. `train_all()` - 5 edges
-7. `main()` - 5 edges
-8. `grip_dt` - 5 edges
-9. `states_kmeans` - 5 edges
-10. `driver_pca` - 5 edges
+1. `scripts` - 10 edges
+2. `SessionManager` - 9 edges
+3. `models` - 9 edges
+4. `build` - 8 edges
+5. `MockConnector` - 7 edges
+6. `extractFeatures()` - 6 edges
+7. `tire_wear_rf` - 6 edges
+8. `train_all()` - 5 edges
+9. `main()` - 5 edges
+10. `grip_dt` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `train_all()` --calls--> `pca`  [INFERRED]
   ml-pipeline/train_model.py → src/components/MLAnalysis/mlWorker.ts
 
-## Communities (14 total, 4 thin omitted)
+## Communities (19 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.02
-Nodes (122): accelerations, aggGrid, aggMatrix, anomalyData, ans, bCounts, bDists, bdt (+114 more)
+Nodes (123): accelerations, aggGrid, aggMatrix, anomalyData, ans, bCounts, bDists, bdt (+115 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (34): dataset_files, dataset_rows, components, explained_variance, feature_count, pca_variance_pct, error, accuracy (+26 more)
+Cohesion: 0.05
+Nodes (40): dataset_files, dataset_rows, components, explained_variance, feature_count, pca_variance_pct, error, accuracy (+32 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.13
@@ -80,26 +83,36 @@ Cohesion: 0.50
 Nodes (4): detectFatigue(), safeMean(), safeStd(), slice
 
 ### Community 13 - "Community 13"
-Cohesion: 0.33
-Nodes (6): tire_wear_rf, convergence, feature_count, features, mse, r2
+Cohesion: 0.07
+Nodes (26): build, appId, directories, extraResources, files, mac, productName, win (+18 more)
+
+### Community 14 - "Community 14"
+Cohesion: 0.08
+Nodes (25): devDependencies, autoprefixer, concurrently, cross-env, electron, electron-builder, eslint, @eslint/js (+17 more)
+
+### Community 15 - "Community 15"
+Cohesion: 0.09
+Nodes (22): dependencies, better-sqlite3, clsx, express, lucide-react, ml-kmeans, ml-knn, ml-logistic-regression (+14 more)
 
 ## Knowledge Gaps
-- **175 isolated node(s):** `MLResults`, `INITIAL_RESULTS`, `__dirname`, `db`, `require` (+170 more)
+- **242 isolated node(s):** `name`, `private`, `version`, `type`, `main` (+237 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `pca` connect `Community 3` to `Community 0`?**
-  _High betweenness centrality (0.058) - this node is a cross-community bridge._
-- **Why does `models` connect `Community 1` to `Community 13`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **What connects `MLResults`, `INITIAL_RESULTS`, `__dirname` to the rest of the system?**
-  _182 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+- **Why does `devDependencies` connect `Community 14` to `Community 13`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **What connects `name`, `private`, `version` to the rest of the system?**
+  _249 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.015503875968992248 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.04878048780487805 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.12987012987012986 - nodes in this community are weakly interconnected._
+- **Should `Community 13` be split into smaller, more focused modules?**
+  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
