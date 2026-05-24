@@ -12,7 +12,8 @@
     "build": "tsc -b && vite build && npm run build:electron && electron-builder",
     "build:electron": "tsc -p tsconfig.electron.json",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "node -e \"const{cpSync,existsSync,mkdirSync}=require('fs');const{join}=require('path');const src='node_modules/onnxruntime-web/dist';const dst='public/assets';if(existsSync(src)){mkdirSync(dst,{recursive:true});['ort-wasm-simd-threaded.jsep.mjs','ort-wasm-simd-threaded.jsep.wasm','ort-wasm-simd-threaded.wasm','ort-wasm-simd-threaded.asyncify.mjs','ort-wasm-simd-threaded.asyncify.wasm'].forEach(f=>{const s=join(src,f);const d=join(dst,f);if(existsSync(s)){cpSync(s,d);console.log('Copied',f);}})}\""
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",

@@ -409,10 +409,21 @@ let pcaMean: number[] | null = null;
 let modelMetrics: Record<string, any> | null = null;
 let modelsLoaded = false;
 
+function resolveBaseUrl(basePath: string): string {
+  const loc = self.location;
+  if (loc.protocol === 'file:') {
+    return new URL(basePath, loc.href).href;
+  }
+  return new URL(basePath, loc.origin).href;
+}
+
 async function loadModels(): Promise<void> {
   if (modelsLoaded) return;
 
-  const base = '/models/';
+  ort.env.wasm.wasmPaths = resolveBaseUrl('../assets/');
+  ort.env.wasm.numThreads = 1;
+
+  const base = resolveBaseUrl('../models/');
 
   // Load ONNX models in parallel
   const onnxPromises: Promise<void>[] = [];
@@ -1046,10 +1057,9 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         
         let wearPredictions = new Array(speeds.length).fill(0.0001); // Default tiny wear
         try {
-            // NOTE: Must set wasm paths if not bundled properly, but vite usually handles it 
-            // or we load it from public folder
-            ort.env.wasm.wasmPaths = '/';
-            const session = await ort.InferenceSession.create('/models/tire_wear_model.onnx');
+            ort.env.wasm.wasmPaths = resolveBaseUrl('../assets/');
+            const modelUrl = resolveBaseUrl('../models/tire_wear_model.onnx');
+            const session = await ort.InferenceSession.create(modelUrl);
             
             // Flatten features for Float32Array
             const flatFeatures = Float32Array.from(rfFeatures.flat());
