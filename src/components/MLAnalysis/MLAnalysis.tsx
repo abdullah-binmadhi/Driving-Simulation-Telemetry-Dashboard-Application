@@ -110,106 +110,121 @@ const MLAnalysis = () => {
     const [results, setResults] = useState<MLResults>(INITIAL_RESULTS);
     const [hasData, setHasData] = useState(false);
     const [sessionData, setSessionData] = useState<any[] | null>(null);
+    const [sessionCount, setSessionCount] = useState(0);
     const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
     const workerRef = useRef<Worker | null>(null);
 
-    // Mock file input for now
+    // Multi-file CSV upload — merges all sessions into one dataset
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
 
-        Papa.parse(file, {
-            header: true,
-            dynamicTyping: true,
-            skipEmptyLines: true,
-            complete: (results) => {
-                const data = results.data as any[];
-                if (data.length > 50) {
-                    // Normalize keys — CSV uses snake_case (DB names), worker expects camelCase
-                    const normalizedData = data.map((row, i) => {
-                        const getExact = (keys: string[]): number => {
-                            for (const key of keys) {
-                                const found = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase());
-                                if (found !== undefined && row[found] !== null && row[found] !== undefined)
-                                    return Number(row[found]) || 0;
-                            }
-                            return 0;
-                        };
-                        return {
-                            timestamp:  getExact(['timestamp', 'time']) || (i * 16),
-                            speed:      getExact(['speed']),
-                            throttle:   getExact(['throttle', 'gas']),
-                            brake:      getExact(['brake']),
-                            steering:   getExact(['steering', 'steer']),
-                            rpm:        getExact(['rpm']),
-                            gear:       getExact(['gear']),
-                            clutch:     getExact(['clutch']),
-                            fuel:       getExact(['fuel']),
-                            engineTemp: getExact(['engine_temp', 'enginetemp']),
-
-                            // G-Forces
-                            gForceX:    getExact(['gforcex', 'gforce_x', 'g_force_x']),
-                            gForceY:    getExact(['gforcey', 'gforce_y', 'g_force_y']),
-                            gForceZ:    getExact(['gforcez', 'gforce_z', 'g_force_z']),
-                            gforceCombined: getExact(['gforce_combined']),
-
-                            // Jerk & deltas (ML features)
-                            jerkX:               getExact(['jerk_x']),
-                            jerkY:               getExact(['jerk_y']),
-                            throttleDelta:       getExact(['throttle_delta']),
-                            brakeDelta:          getExact(['brake_delta']),
-                            steeringDelta:       getExact(['steering_delta']),
-                            speedDelta:          getExact(['speed_delta']),
-
-                            // Tire data
-                            tireTempFL:       getExact(['tire_temp_fl']),
-                            tireTempFR:       getExact(['tire_temp_fr']),
-                            tireTempRL:       getExact(['tire_temp_rl']),
-                            tireTempRR:       getExact(['tire_temp_rr']),
-                            tirePressureFL:   getExact(['tire_pressure_fl']),
-                            tirePressureFR:   getExact(['tire_pressure_fr']),
-                            tirePressureRL:   getExact(['tire_pressure_rl']),
-                            tirePressureRR:   getExact(['tire_pressure_rr']),
-
-                            // Position & orientation
-                            posX:                getExact(['pos_x']),
-                            posY:                getExact(['pos_y']),
-                            posZ:                getExact(['pos_z']),
-                            yawRate:             getExact(['yaw_rate']),
-
-                            // Derived ML features
-                            pedalOverlap:        getExact(['pedal_overlap']),
-                            turnRadius:          getExact(['turn_radius']),
-                            slipAngleEstimate:   getExact(['slip_angle_estimate']),
-
-                            // Categorical flags
-                            isTrailBraking:      getExact(['is_trail_braking']),
-                            isCoasting:          getExact(['is_coasting']),
-                            isWots:              getExact(['is_wots']),
-                            isBraking:           getExact(['is_braking']),
-                            isTurning:           getExact(['is_turning']),
-
-                            // Behavioral states
-                            oversteerCorrection: getExact(['oversteer_correction']),
-                            understeerPlough:    getExact(['understeer_plough']),
-                            brakeBiasUtilization: getExact(['brake_bias_utilization']),
-                            coastingTimePct:     getExact(['coasting_time_pct']),
-                        };
-                    });
-
-                    if (normalizedData[0].speed !== undefined || normalizedData[0].throttle !== undefined) {
-                        setSessionData(normalizedData);
-                        setHasData(true);
-                    } else {
-                        alert('Could not definitively find "speed", "throttle", "brake", and "steering" columns in the CSV headers.');
-                    }
-                } else {
-                    alert('CSV is too short or invalid. Need at least 50 data points for ML analysis.');
+        const normalizeRow = (row: any, i: number): any => {
+            const getExact = (keys: string[]): number => {
+                for (const key of keys) {
+                    const found = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase());
+                    if (found !== undefined && row[found] !== null && row[found] !== undefined)
+                        return Number(row[found]) || 0;
                 }
-            },
-            error: (err: any) => {
-                alert('Failed to parse CSV file: ' + err.message);
-            }
+                return 0;
+            };
+            return {
+                timestamp:  getExact(['timestamp', 'time']) || (i * 16),
+                speed:      getExact(['speed']),
+                throttle:   getExact(['throttle', 'gas']),
+                brake:      getExact(['brake']),
+                steering:   getExact(['steering', 'steer']),
+                rpm:        getExact(['rpm']),
+                gear:       getExact(['gear']),
+                clutch:     getExact(['clutch']),
+                fuel:       getExact(['fuel']),
+                engineTemp: getExact(['engine_temp', 'enginetemp']),
+                gForceX:    getExact(['gforcex', 'gforce_x', 'g_force_x']),
+                gForceY:    getExact(['gforcey', 'gforce_y', 'g_force_y']),
+                gForceZ:    getExact(['gforcez', 'gforce_z', 'g_force_z']),
+                gforceCombined: getExact(['gforce_combined']),
+                jerkX:               getExact(['jerk_x']),
+                jerkY:               getExact(['jerk_y']),
+                throttleDelta:       getExact(['throttle_delta']),
+                brakeDelta:          getExact(['brake_delta']),
+                steeringDelta:       getExact(['steering_delta']),
+                speedDelta:          getExact(['speed_delta']),
+                tireTempFL:       getExact(['tire_temp_fl']),
+                tireTempFR:       getExact(['tire_temp_fr']),
+                tireTempRL:       getExact(['tire_temp_rl']),
+                tireTempRR:       getExact(['tire_temp_rr']),
+                tirePressureFL:   getExact(['tire_pressure_fl']),
+                tirePressureFR:   getExact(['tire_pressure_fr']),
+                tirePressureRL:   getExact(['tire_pressure_rl']),
+                tirePressureRR:   getExact(['tire_pressure_rr']),
+                posX:                getExact(['pos_x']),
+                posY:                getExact(['pos_y']),
+                posZ:                getExact(['pos_z']),
+                yawRate:             getExact(['yaw_rate']),
+                pedalOverlap:        getExact(['pedal_overlap']),
+                turnRadius:          getExact(['turn_radius']),
+                slipAngleEstimate:   getExact(['slip_angle_estimate']),
+                isTrailBraking:      getExact(['is_trail_braking']),
+                isCoasting:          getExact(['is_coasting']),
+                isWots:              getExact(['is_wots']),
+                isBraking:           getExact(['is_braking']),
+                isTurning:           getExact(['is_turning']),
+                oversteerCorrection: getExact(['oversteer_correction']),
+                understeerPlough:    getExact(['understeer_plough']),
+                brakeBiasUtilization: getExact(['brake_bias_utilization']),
+                coastingTimePct:     getExact(['coasting_time_pct']),
+            };
+        };
+
+        setHasData(false);
+        setSessionData(null);
+        setSessionCount(0);
+
+        let filesProcessed = 0;
+        const allData: any[] = [];
+        const fileList = Array.from(files);
+
+        fileList.forEach((file) => {
+            Papa.parse(file, {
+                header: true,
+                dynamicTyping: true,
+                skipEmptyLines: true,
+                complete: (parseResult) => {
+                    filesProcessed++;
+                    const data = parseResult.data as any[];
+                    if (data.length > 50) {
+                        const normalized = data.map((row, i) => normalizeRow(row, i));
+                        // Check that required columns exist
+                        if (normalized[0]?.speed !== undefined || normalized[0]?.throttle !== undefined) {
+                            allData.push(...normalized);
+                        } else {
+                            console.warn(`Skipped "${file.name}" — missing speed/throttle columns`);
+                        }
+                    } else {
+                        console.warn(`Skipped "${file.name}" — only ${data.length} rows (need >50)`);
+                    }
+
+                    // All files done?
+                    if (filesProcessed === fileList.length) {
+                        if (allData.length < 50) {
+                            alert(`Merged dataset has only ${allData.length} rows. Need at least 50 for ML analysis.`);
+                            return;
+                        }
+                        setSessionData(allData);
+                        setHasData(true);
+                        setSessionCount(fileList.length);
+                    }
+                },
+                error: (err: any) => {
+                    filesProcessed++;
+                    console.error(`Failed to parse "${file.name}":`, err.message);
+                    if (filesProcessed === fileList.length && allData.length >= 50) {
+                        setSessionData(allData);
+                        setHasData(true);
+                        setSessionCount(fileList.length);
+                    }
+                },
+            });
         });
     };
 
@@ -258,8 +273,8 @@ const MLAnalysis = () => {
                 <div className="flex items-center gap-4 bg-slate-900 p-2 rounded-xl border border-slate-800">
                     <label className="flex items-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer transition-colors border border-slate-700 font-semibold">
                         <FileText className="w-5 h-5 text-blue-400" />
-                        <span>Load Session CSV</span>
-                        <input type="file" accept=".csv" className="hidden" onChange={handleFileUpload} />
+                        <span>{hasData ? `${sessionCount} Session${sessionCount > 1 ? 's' : ''} Loaded` : 'Load Session CSV(s)'}</span>
+                        <input type="file" accept=".csv" multiple className="hidden" onChange={handleFileUpload} />
                     </label>
 
                     <button
