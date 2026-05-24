@@ -16,11 +16,15 @@ export class MockConnector extends EventEmitter implements GameConnector {
     private rpm = 1000;
     private engineTemp = 80;
     private tireTemp = [70, 70, 70, 70];
+    private tireWearState = [100, 100, 100, 100]; // 100 = new, 0 = destroyed
     private brakeTemp = [100, 100, 100, 100];
+    private oilTempState = 80;
     private distanceTraveled = 0;
     private lapTime = 0;
-    private bestLap = 0;
+    private bestLap = Infinity;
     private lastLap = 0;
+    private lapCount = 0;
+    private lastLoopTime = 0;
 
     // Track Mapping (Figure-8 layout)
     private posX = 0;
@@ -37,6 +41,28 @@ export class MockConnector extends EventEmitter implements GameConnector {
 
         console.log('[Mock] Starting Procedural Realistic Simulation...');
         this.isRunning = true;
+
+        // Reset session state
+        this.time = 0;
+        this.speed = 0;
+        this.gear = 1;
+        this.rpm = 1000;
+        this.engineTemp = 80;
+        this.oilTempState = 80;
+        this.tireTemp = [70, 70, 70, 70];
+        this.tireWearState = [100, 100, 100, 100];
+        this.brakeTemp = [100, 100, 100, 100];
+        this.distanceTraveled = 0;
+        this.lapTime = 0;
+        this.bestLap = Infinity;
+        this.lastLap = 0;
+        this.lapCount = 0;
+        this.lastLoopTime = 0;
+        this.posX = 0;
+        this.posZ = 0;
+        this.heading = 0;
+        this.clutchTimer = 0;
+
         this.emit('status', 'connected');
 
         this.interval = setInterval(() => {
@@ -70,9 +96,18 @@ export class MockConnector extends EventEmitter implements GameConnector {
         this.time += dt;
         this.lapTime += dt;
 
-        // --- Driver Behavior Model (Based on a ~20s lap loop) ---
-        const loopTime = this.time % 20; // 20 second loop
+        // --- Lap detection (20s loop wraps → new lap) ---
+        const loopTime = this.time % 20;
+        if (loopTime < this.lastLoopTime) {
+            // Completed a lap
+            this.lastLap = this.lapTime;
+            this.bestLap = Math.min(this.bestLap, this.lapTime);
+            this.lapTime = 0;
+            this.lapCount++;
+        }
+        this.lastLoopTime = loopTime;
 
+        // --- Driver Behavior Model (Based on a ~20s lap loop) ---
         let throttleTarget = 0;
         let brakeTarget = 0;
         let steeringTarget = 0;
@@ -207,6 +242,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
         this.rpm = this.rpm + (targetRpm - this.rpm) * 0.2;
 
         const turnRate = steering * (this.speed > 0 ? (10 / (this.speed + 5)) : 0);
+        const yawRate = turnRate; // rad/s — same as turn rate for simple model
         this.heading += turnRate * dt;
 
         this.posX += Math.cos(this.heading) * this.speed * dt;
@@ -218,8 +254,21 @@ export class MockConnector extends EventEmitter implements GameConnector {
 
         // Temperatures and Damage
         this.engineTemp = 80 + (this.rpm / 8000) * 20 + Math.sin(this.time) * 2;
+        this.oilTempState = 85 + (this.rpm / 8000) * 30 + Math.sin(this.time * 0.7) * 3; // oil lags behind coolant
         this.tireTemp = this.tireTemp.map(t => Math.max(70, Math.min(120, t + (Math.abs(gForceLat) * dt * performanceMultiplier) - ((t - 70) * dt * 0.1))));
         this.brakeTemp = this.brakeTemp.map(t => Math.max(50, Math.min(600, t + (brake * 50 * dt * performanceMultiplier) - ((t - 50) * dt * 0.5))));
+
+        // Realistic tire wear: cumulative G-force × speed × surface abrasion
+        // Each tire wears independently based on load (FL/FR take more cornering load)
+        const wearRateBase = 0.000008 * healthDamageRate * performanceMultiplier;
+        const gSum = Math.abs(gForceLat) + Math.abs(gForceLong);
+        const wearThisFrame = gSum * (this.speed * 3.6) * wearRateBase * dt * 60;
+        // Front tires wear faster (steering + braking load), rears slightly less
+        this.tireWearState[0] -= wearThisFrame * 1.15; // FL — most loaded in left corners
+        this.tireWearState[1] -= wearThisFrame * 1.10; // FR
+        this.tireWearState[2] -= wearThisFrame * 0.85; // RL
+        this.tireWearState[3] -= wearThisFrame * 0.80; // RR
+        this.tireWearState = this.tireWearState.map(w => Math.max(0, w)) as [number, number, number, number];
 
         // Advanced Telemetry Calculations
         const slipAngleEstimate = Math.abs(gForceLat) * 5 + (this.speed > 20 ? Math.random() * 2 : 0);
@@ -251,16 +300,34 @@ export class MockConnector extends EventEmitter implements GameConnector {
             gForceX: gForceLat,
             gForceY: gForceLong,
             gForceZ: 1.0,
+            yawRate,
             carDamage,
             fuel: 50 - (this.distanceTraveled / 1000),
             engineTemp: this.engineTemp,
+            oilTemp: this.oilTempState,
             tireTemp: [this.tireTemp[0], this.tireTemp[1], this.tireTemp[2], this.tireTemp[3]],
+            tireTempFL: this.tireTemp[0],
+            tireTempFR: this.tireTemp[1],
+            tireTempRL: this.tireTemp[2],
+            tireTempRR: this.tireTemp[3],
             tireSurfaceTemp: this.tireTemp.map((temp, index) => temp + (brake * 8) + (this.brakeTemp[index] - 100) * 0.02) as [number, number, number, number],
-            tireWear: [100, 100, 100, 100],
+            tireSurfaceTempFL: this.tireTemp[0] + (brake * 8) + (this.brakeTemp[0] - 100) * 0.02,
+            tireSurfaceTempFR: this.tireTemp[1] + (brake * 8) + (this.brakeTemp[1] - 100) * 0.02,
+            tireSurfaceTempRL: this.tireTemp[2] + (brake * 8) + (this.brakeTemp[2] - 100) * 0.02,
+            tireSurfaceTempRR: this.tireTemp[3] + (brake * 8) + (this.brakeTemp[3] - 100) * 0.02,
+            tireWear: [this.tireWearState[0], this.tireWearState[1], this.tireWearState[2], this.tireWearState[3]],
             tirePressure: this.tireTemp.map((temp, index) => 30 + (temp - 70) * 0.035 + Math.sin(this.time + index) * 0.15) as [number, number, number, number],
+            tirePressureFL: 30 + (this.tireTemp[0] - 70) * 0.035 + Math.sin(this.time) * 0.15,
+            tirePressureFR: 30 + (this.tireTemp[1] - 70) * 0.035 + Math.sin(this.time + 1) * 0.15,
+            tirePressureRL: 30 + (this.tireTemp[2] - 70) * 0.035 + Math.sin(this.time + 2) * 0.15,
+            tirePressureRR: 30 + (this.tireTemp[3] - 70) * 0.035 + Math.sin(this.time + 3) * 0.15,
             posX: this.posX,
             posY: 0,
             posZ: this.posZ,
+            yaw: this.heading,
+            lapTime: this.lapTime * 1000, // convert to ms
+            lastLap: this.lastLap * 1000,
+            bestLap: this.bestLap === Infinity ? undefined : this.bestLap * 1000,
             slipAngleEstimate,
             pedalOverlap: (throttle * brake),
             oversteerCorrection,
