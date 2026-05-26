@@ -1,5 +1,3 @@
-import * as ort from 'onnxruntime-web';
-
 import {
   TIRE_WEAR_FEATURES,
   GRIP_FEATURES,
@@ -40,10 +38,10 @@ import type {
 
 // ─── Module-level model state ────────────────────────────────────────────
 
-let tireWearSession: ort.InferenceSession | null = null;
-let gripSession: ort.InferenceSession | null = null;
-let shiftSession: ort.InferenceSession | null = null;
-let pedalSession: ort.InferenceSession | null = null;
+let tireWearSession: any = null;
+let gripSession: any = null;
+let shiftSession: any = null;
+let pedalSession: any = null;
 let clusterCentroids: number[][] | null = null;
 let clusterScalerMean: number[] | null = null;
 let clusterScalerScale: number[] | null = null;
@@ -52,6 +50,7 @@ let pcaScalerMean: number[] | null = null;
 let pcaScalerScale: number[] | null = null;
 let modelMetrics: Record<string, Record<string, number>> | null = null;
 let modelsLoaded = false;
+let ortModule: { InferenceSession: any; Tensor: any; env: any } | null = null;
 
 const modelStatus: ModelStatusMap = {
   tire_wear: 'not_found',
@@ -77,28 +76,40 @@ function resolveBaseUrl(basePath: string): string {
 async function loadModels(): Promise<void> {
   if (modelsLoaded) return;
 
-  ort.env.wasm.wasmPaths = resolveBaseUrl('../assets/');
-  ort.env.wasm.numThreads = 1;
+  const MODEL_TIMEOUT = 10000;
+  const timeout = sleep(MODEL_TIMEOUT).then(() => {
+    console.warn(`Model loading timed out after ${MODEL_TIMEOUT}ms, using fallbacks`);
+  });
+
+  await Promise.race([_initModels(), timeout]);
+  modelsLoaded = Object.values(modelStatus).some((s) => s === 'loaded');
+}
+
+async function _initModels(): Promise<void> {
+  try {
+    ortModule = await import('onnxruntime-web');
+    ortModule.env.wasm.wasmPaths = resolveBaseUrl('../assets/');
+    ortModule.env.wasm.numThreads = 1;
+  } catch (err) {
+    console.warn('ONNX runtime failed to load, using heuristic fallbacks:', err);
+  }
 
   const base = resolveBaseUrl('../models/');
 
-  const onnxPromises: Promise<void>[] = [
-    ort.InferenceSession.create(base + 'tire_wear_model.onnx')
-      .then((s) => { tireWearSession = s; modelStatus.tire_wear = 'loaded'; })
-      .catch((err) => { modelStatus.tire_wear = 'error'; console.warn('Tire wear model:', err.message); }),
+  const onnxPromises: Promise<void>[] = [];
+  if (ortModule) {
+    const create = (name: string, key: keyof ModelStatusMap, ref: (s: any) => void) =>
+      ortModule!.InferenceSession.create(base + name)
+        .then((s: any) => { ref(s); modelStatus[key] = 'loaded'; })
+        .catch((err: any) => { modelStatus[key] = 'error'; console.warn(`${name}:`, err.message); });
 
-    ort.InferenceSession.create(base + 'grip_model.onnx')
-      .then((s) => { gripSession = s; modelStatus.grip = 'loaded'; })
-      .catch((err) => { modelStatus.grip = 'error'; console.warn('Grip model:', err.message); }),
-
-    ort.InferenceSession.create(base + 'shift_model.onnx')
-      .then((s) => { shiftSession = s; modelStatus.shift = 'loaded'; })
-      .catch((err) => { modelStatus.shift = 'error'; console.warn('Shift model:', err.message); }),
-
-    ort.InferenceSession.create(base + 'pedal_overlap_model.onnx')
-      .then((s) => { pedalSession = s; modelStatus.pedal_overlap = 'loaded'; })
-      .catch((err) => { modelStatus.pedal_overlap = 'error'; console.warn('Pedal overlap model:', err.message); }),
-  ];
+    onnxPromises.push(
+      create('tire_wear_model.onnx', 'tire_wear', (s) => { tireWearSession = s; }),
+      create('grip_model.onnx', 'grip', (s) => { gripSession = s; }),
+      create('shift_model.onnx', 'shift', (s) => { shiftSession = s; }),
+      create('pedal_overlap_model.onnx', 'pedal_overlap', (s) => { pedalSession = s; }),
+    );
+  }
 
   const jsonPromises: Promise<void>[] = [
     fetch(base + 'state_clusters.json')
@@ -128,7 +139,6 @@ async function loadModels(): Promise<void> {
   ];
 
   await Promise.all([...onnxPromises, ...jsonPromises]);
-  modelsLoaded = Object.values(modelStatus).some((s) => s === 'loaded');
 }
 
 // ─── Safety Score (heuristic, boundary-safe) ────────────────────────────
@@ -363,8 +373,8 @@ async function classifyGrip(data: NormalizedRow[]): Promise<GripResult> {
         for (const row of chunk) {
           if (row._sessionBoundary) continue;
           const features = extractFeatures(row, GRIP_FEATURES);
-          const input = new ort.Tensor('float32', Float32Array.from(features), [1, GRIP_FEATURES.length]);
-          const feeds: Record<string, ort.Tensor> = {};
+          const input = new ortModule!.Tensor('float32', Float32Array.from(features), [1, GRIP_FEATURES.length]);
+          const feeds: Record<string, any> = {};
           feeds[gripSession.inputNames[0]] = input;
           const output = await gripSession.run(feeds);
           const preds = output[gripSession.outputNames[0]].data as Float32Array;
@@ -403,8 +413,8 @@ async function classifyPedalOverlap(data: NormalizedRow[]): Promise<SVMResult> {
         for (const row of chunk) {
           if (row._sessionBoundary) continue;
           const features = extractFeatures(row, PEDAL_FEATURES);
-          const input = new ort.Tensor('float32', Float32Array.from(features), [1, PEDAL_FEATURES.length]);
-          const feeds: Record<string, ort.Tensor> = {};
+          const input = new ortModule!.Tensor('float32', Float32Array.from(features), [1, PEDAL_FEATURES.length]);
+          const feeds: Record<string, any> = {};
           feeds[pedalSession.inputNames[0]] = input;
           const output = await pedalSession.run(feeds);
           const pred = output[pedalSession.outputNames[0]].data as Float32Array;
@@ -542,8 +552,8 @@ async function predictTireWear(data: NormalizedRow[]): Promise<RFWearResult> {
           if (data[idx]._sessionBoundary) {
             life = ML_CONFIG.TIRE_WEAR_INITIAL_LIFE;
           }
-          const input = new ort.Tensor('float32', Float32Array.from(chunk[j]), [1, TIRE_WEAR_FEATURES.length]);
-          const feeds: Record<string, ort.Tensor> = {};
+          const input = new ortModule!.Tensor('float32', Float32Array.from(chunk[j]), [1, TIRE_WEAR_FEATURES.length]);
+          const feeds: Record<string, any> = {};
           feeds[tireWearSession.inputNames[0]] = input;
           const output = await tireWearSession.run(feeds);
           const preds = output[tireWearSession.outputNames[0]].data as Float32Array;
@@ -601,8 +611,8 @@ async function classifyShifts(data: NormalizedRow[]): Promise<ShiftResult> {
         const chunk = gearChanges.slice(i, i + CHUNK);
         for (const idx of chunk) {
           const features = extractFeatures(data[idx], SHIFT_FEATURES);
-          const input = new ort.Tensor('float32', Float32Array.from(features), [1, SHIFT_FEATURES.length]);
-          const feeds: Record<string, ort.Tensor> = {};
+          const input = new ortModule!.Tensor('float32', Float32Array.from(features), [1, SHIFT_FEATURES.length]);
+          const feeds: Record<string, any> = {};
           feeds[shiftSession.inputNames[0]] = input;
           const output = await shiftSession.run(feeds);
           const pred = output[shiftSession.outputNames[0]].data as Float32Array;
@@ -871,13 +881,13 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
       throw new Error('Session data too short. Need at least 100 data points.');
     }
 
-    const reportProgress = (pct: number) => {
-      self.postMessage({ type: 'PROGRESS', progress: Math.round(pct) });
+    const reportProgress = (pct: number, status?: string) => {
+      self.postMessage({ type: 'PROGRESS', progress: Math.round(pct), status });
     };
 
-    reportProgress(5);
+    reportProgress(5, 'Loading ML models...');
     await loadModels();
-    reportProgress(10);
+    reportProgress(10, 'Validating telemetry data...');
 
     // Filter valid rows
     const validData = rawData.filter(
@@ -922,15 +932,15 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
         : 0;
       jerks.push(Math.abs((a1 - a0) / dt) || 0);
     }
-    reportProgress(15);
+    reportProgress(15, 'Computing jerk & acceleration...');
 
     // ── Safety Score ──
     const safetyScore = computeSafetyScore(validData);
-    reportProgress(20);
+    reportProgress(20, 'Evaluating safety score...');
 
     // ── Anomaly Detection ──
     const anomalies = detectAnomalies(validData, jerks, accelerations, speeds, gForcesCombined, timestamps);
-    reportProgress(25);
+    reportProgress(25, 'Detecting anomalies...');
 
     // ── PCA Driver Profile ──
     const pca = projectPCA(validData);
@@ -940,44 +950,44 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     else if (pca.meanY > 0) profile = 'Smooth';
     else profile = 'Conservative';
     const { knnProfile, knnConfidence } = classifyKNN(pca.meanX, pca.meanY);
-    reportProgress(35);
+    reportProgress(35, 'Profiling driver style...');
 
     // ── Pedal Overlap ──
     const svm = await classifyPedalOverlap(validData);
-    reportProgress(45);
+    reportProgress(45, 'Classifying pedal overlap...');
 
     // ── Driving States ──
     const hmm = clusterStates(validData);
-    reportProgress(55);
+    reportProgress(55, 'Clustering driving states...');
 
     // ── Tire Wear ──
     const rfWear = await predictTireWear(validData);
-    reportProgress(65);
+    reportProgress(65, 'Predicting tire wear...');
 
     // ── Grip ──
     const grip = await classifyGrip(validData);
-    reportProgress(72);
+    reportProgress(72, 'Analyzing grip retention...');
 
     // ── Shifts ──
     const shifts = await classifyShifts(validData);
-    reportProgress(78);
+    reportProgress(78, 'Classifying shift quality...');
 
     // ── Fatigue ──
     const fatigue = detectFatigue(validData);
-    reportProgress(83);
+    reportProgress(83, 'Detecting fatigue...');
 
     // ── Corner Exit Forecast ──
     const exitForecast = computeExitForecast(speeds, throttles, steerings, accelerations);
-    reportProgress(87);
+    reportProgress(87, 'Forecasting corner exits...');
 
     // ── Braking Consistency + Technique ──
     const { dtwScore, trailPercent } = computeDTW(brakes, validData);
-    reportProgress(90);
+    reportProgress(90, 'Measuring braking consistency...');
 
     // ── Markov + Aggression ──
     const markovMatrix = buildMarkovChain(hmm.data, validData);
     const aggressionMatrix = buildAggressionMatrix(hmm.data);
-    reportProgress(93);
+    reportProgress(93, 'Building transition matrix...');
 
     // ── Quality Metrics ──
     const qualityMetrics = computeQualityMetrics(
@@ -985,7 +995,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
       anomalies.anomalyCount, anomalies.data.length,
       knnConfidence, dtwScore,
     );
-    reportProgress(96);
+    reportProgress(96, 'Computing quality metrics...');
 
     // ── Session boundaries for chart markers ──
     const sessionBoundaries = validData
@@ -1025,3 +1035,9 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     self.postMessage({ type: 'ERROR', message: err.message || 'Unknown error in ML Engine.' });
   }
 };
+
+// Catch unhandled errors during worker initialization (static import failures, etc.)
+self.addEventListener('error', (e) => {
+  console.error('ML Worker init error:', e.error || e.message);
+  self.postMessage({ type: 'ERROR', message: `Worker initialization failed: ${e.error?.message || e.message || 'Unknown error'}` });
+});

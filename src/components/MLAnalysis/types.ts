@@ -138,6 +138,7 @@ export interface QualityMetrics {
 export interface MLResults {
   progress: number;
   isProcessing: boolean;
+  status?: string;
   safetyScore: SafetyScoreResult;
   pca: PCAProjection & { profile: string; knnProfile?: string };
   anomalies: AnomalyResult;
@@ -164,7 +165,7 @@ export type IncomingMessage = {
 };
 
 export type OutgoingMessage =
-  | { type: 'PROGRESS'; progress: number }
+  | { type: 'PROGRESS'; progress: number; status?: string }
   | { type: 'ERROR'; message: string }
   | { type: 'COMPLETE'; results: MLResults };
 

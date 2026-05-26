@@ -260,7 +260,7 @@ const MLAnalysis = () => {
       return;
     }
 
-    setResults({ ...INITIAL_RESULTS, progress: 1, isProcessing: true });
+    setResults({ ...INITIAL_RESULTS, progress: 1, isProcessing: true, status: 'Starting analysis...' });
 
     workerRef.current?.terminate();
 
@@ -277,7 +277,7 @@ const MLAnalysis = () => {
 
     worker.onmessage = (e) => {
       if (e.data.type === 'PROGRESS') {
-        setResults((r) => ({ ...r, progress: e.data.progress }));
+        setResults((r) => ({ ...r, progress: e.data.progress, status: e.data.status }));
       }
       if (e.data.type === 'COMPLETE') {
         clearTimeout(timeout);
@@ -407,7 +407,7 @@ const MLAnalysis = () => {
 
       {/* ─── Progress Bar ────────────────────────────────────────────────── */}
       {results.isProcessing && (
-        <div className="px-6 py-2">
+        <div className="px-6 py-2 space-y-1">
           <div className="flex items-center gap-3">
             <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
               <div
@@ -418,8 +418,14 @@ const MLAnalysis = () => {
             <span className="text-xs font-mono font-bold text-purple-400 w-12 text-right">
               {results.progress || 0}%
             </span>
-            <Settings className="w-4 h-4 text-purple-400 animate-spin" />
+            <Settings className="w-4 h-4 text-purple-400 animate-spin shrink-0" />
           </div>
+          {results.status && (
+            <div className="text-xs text-slate-500 font-medium flex items-center gap-2 pl-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+              {results.status}
+            </div>
+          )}
         </div>
       )}
 
