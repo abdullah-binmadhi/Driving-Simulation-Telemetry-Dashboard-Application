@@ -16,6 +16,7 @@ dist-app
 
 # ── Local env ────────────────────────────────────────────────────────────────
 *.local
+.env
 
 # ── Editor & OS junk ─────────────────────────────────────────────────────────
 .vscode/*
@@ -27,6 +28,13 @@ dist-app
 *.njsproj
 *.sln
 *.sw?
+
+# ── Stitch generated designs ─────────────────────────────────────────────────
+stitch-output/
+
+# ── Graphify cache / run artifacts (regeneratable) ───────────────────────────
+graphify-out/cache/
+graphify-out/202*/
 
 # ── Dev scratch / test files ─────────────────────────────────────────────────
 test-*.js

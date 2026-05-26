@@ -1,1058 +1,1242 @@
-import React from 'react';
-import { Play, FileText, AlertTriangle, Brain, Target, Activity, Settings, GitCommit, Zap, Timer, TrendingUp, GitFork, Gauge, ArrowRightLeft, ShieldCheck, Layers } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ScatterChart, Scatter, ZAxis } from 'recharts';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import {
+  Play, Square, AlertTriangle, Brain, Target, Activity, Zap, Timer,
+  TrendingUp, GitFork, Gauge, ArrowRightLeft, ShieldCheck, Layers, Settings,
+  Upload, X,
+} from 'lucide-react';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  ScatterChart, Scatter, ZAxis, ReferenceLine,
+} from 'recharts';
 import Papa from 'papaparse';
 
-// Types for ML Output
-interface MLResults {
-    safetyScore: {
-        score: number;
-        deductions: string[];
-        penaltyBreakdown?: Array<{ label: string; count: number; pct: number; color: string }>;
-    };
-    pca: {
-        data: Array<{
-            x: number;
-            y: number;
-            intensity: number;
-            timestamp: number;
-        }>;
-        profile: string;
-        knnProfile?: string;
-    };
-    anomalies: {
-        data: Array<{
-            timestamp: number;
-            speed: number;
-            isAnomaly: boolean;
-            jerk: number;
-            type: string;
-        }>;
-        anomalyCount: number;
-    };
-    svm: {
-        overlapPercentage: number;
-        overlapEvents: number;
-    };
-    rfWear: {
-        data: Array<{
-            timestamp: number;
-            life: number;
-            wearRate: number;
-        }>;
-        endLife: number;
-        analysisText?: string;
-    };
-    hmm: {
-        data: Array<{
-            timestamp: number;
-            state: string; // Cruising, Braking, Cornering, Erratic
-        }>;
-        statePercentages: Record<string, number>;
-    };
-    // 8 new ML model results
-    fatigue: { score: number; decay: number; decayLabel?: string; trend?: string; timeline?: Array<{ segment: string; avgJerk: number; smoothness: number }> };
-    grip: { score: number; understeer: number; oversteer: number; };
-    shifts: { early: number; optimal: number; late: number; };
-    exitForecast: { speedCoeff: number; throttleCoeff: number; predicted?: Array<{ apex: number; actual: number; predicted: number }> };
-    consistency: { dtwScore: number; };
-    brakingTech: { trailPercent: number; };
-    markov: Record<string, Record<string, number>>;
-    aggression: { safeFast: number; safeSlow: number; riskyFast: number; riskySlow: number; };
-    qualityMetrics: {
-        clusteringSilhouette: { score: number, analysis: string, formula: string };
-        pcaVariance: { score: number, analysis: string, formula: string };
-        randomForestOOB: { score: number, analysis: string, formula: string };
-        anomalySkewness: { score: number, analysis: string, formula: string };
-        svmMargin: { score: number, analysis: string, formula: string };
-        regressionFit: { score: number, analysis: string, formula: string };
-        knnConfidence: { score: number, analysis: string, formula: string };
-        dtwConsistency?: { score: number, analysis: string, formula: string };
-        dtPurity?: { score: number, analysis: string, formula: string };
-        nbAccuracy?: { score: number, analysis: string, formula: string };
-    };
-    isProcessing: boolean;
-    progress: number;
-    error: string | null;
-    modelStatus?: Record<string, 'loaded' | 'not_found' | 'error'>;
-}
+import { ML_CONFIG } from '../../ml-config';
+import { mergeSessions, colorForState, downsample } from './utils';
+import type { NormalizedRow, MLResults } from './types';
+
+// ─── Constants ────────────────────────────────────────────────────────────
+
+const TAB_LABELS = ['Overview', 'Safety & Risk', 'Driving Style', 'Vehicle Dynamics', 'Wear', 'Quality'] as const;
+type Tab = (typeof TAB_LABELS)[number];
 
 const INITIAL_RESULTS: MLResults = {
-    safetyScore: { score: 0, deductions: [] },
-    pca: { data: [], profile: 'Unknown' },
-    anomalies: { data: [], anomalyCount: 0 },
-    svm: { overlapPercentage: 0, overlapEvents: 0 },
-    rfWear: { data: [], endLife: 100, analysisText: "Awaiting analysis..." },
-    hmm: { data: [], statePercentages: {} },
-    fatigue: { score: 100, decay: 0, decayLabel: '0.0%', trend: 'stable' },
-    grip: { score: 100, understeer: 0, oversteer: 0 },
-    shifts: { early: 0, optimal: 0, late: 0 },
-    exitForecast: { speedCoeff: 0.5, throttleCoeff: 0.2 },
-    consistency: { dtwScore: 85 },
-    brakingTech: { trailPercent: 50 },
-    markov: {},
-    aggression: { safeFast: 25, safeSlow: 25, riskyFast: 25, riskySlow: 25 },
-    qualityMetrics: {
-        clusteringSilhouette: { score: 0, analysis: "", formula: "" },
-        pcaVariance: { score: 0, analysis: "", formula: "" },
-        randomForestOOB: { score: 0, analysis: "", formula: "" },
-        anomalySkewness: { score: 0, analysis: "", formula: "" },
-        svmMargin: { score: 0, analysis: "", formula: "" },
-        regressionFit: { score: 0, analysis: "", formula: "" },
-        knnConfidence: { score: 0, analysis: "", formula: "" }
-    },
-    isProcessing: false,
-    progress: 0,
-    error: null,
-    modelStatus: undefined,
+  progress: 0,
+  isProcessing: false,
+  safetyScore: { score: 0, deductions: [], penaltyBreakdown: [] },
+  pca: { data: [], profile: 'Unknown' },
+  anomalies: { data: [], anomalyCount: 0 },
+  svm: { overlapPercentage: 0, overlapEvents: 0 },
+  rfWear: { data: [], endLife: 100 },
+  hmm: { data: [], statePercentages: {} },
+  fatigue: { score: 100, decay: 0, decayLabel: '0.0%', trend: 'stable', timeline: [] },
+  grip: { score: 100, understeer: 0, oversteer: 0 },
+  shifts: { early: 0, optimal: 0, late: 0 },
+  exitForecast: { speedCoeff: 0.5, throttleCoeff: 0.2 },
+  consistency: { dtwScore: 85 },
+  brakingTech: { trailPercent: 50 },
+  markov: {},
+  aggression: { safeFast: 25, safeSlow: 25, riskyFast: 25, riskySlow: 25 },
+  qualityMetrics: {
+    clusteringSilhouette: { score: 0, analysis: '', formula: '' },
+    pcaVariance: { score: 0, analysis: '', formula: '' },
+    randomForestOOB: { score: 0, analysis: '', formula: '' },
+    anomalySkewness: { score: 0, analysis: '', formula: '' },
+    svmMargin: { score: 0, analysis: '', formula: '' },
+    regressionFit: { score: 0, analysis: '', formula: '' },
+    knnConfidence: { score: 0, analysis: '', formula: '' },
+  },
+  modelStatus: {} as Record<string, 'loaded' | 'not_found' | 'error'>,
+  sessionBoundaries: [],
 };
 
+type Toast = { message: string; type: 'error' | 'warning' | 'info' };
+
+const colorMap: Record<string, string> = {
+  emerald: 'text-emerald-400',
+  indigo: 'text-indigo-400',
+  amber: 'text-amber-400',
+  pink: 'text-pink-400',
+  red: 'text-red-400',
+  orange: 'text-orange-400',
+  purple: 'text-purple-400',
+  blue: 'text-blue-400',
+  teal: 'text-teal-400',
+  fuchsia: 'text-fuchsia-400',
+  green: 'text-green-400',
+  slate: 'text-slate-400',
+  sky: 'text-sky-400',
+  white: 'text-white',
+};
+
+const bgColorMap: Record<string, string> = {
+  emerald: 'bg-emerald-500/10 border-emerald-500/30',
+  indigo: 'bg-indigo-500/10 border-indigo-500/30',
+  amber: 'bg-amber-500/10 border-amber-500/30',
+  pink: 'bg-pink-500/10 border-pink-500/30',
+  red: 'bg-red-500/10 border-red-500/30',
+  orange: 'bg-orange-500/10 border-orange-500/30',
+  purple: 'bg-purple-500/10 border-purple-500/30',
+  blue: 'bg-blue-500/10 border-blue-500/30',
+  teal: 'bg-teal-500/10 border-teal-500/30',
+  fuchsia: 'bg-fuchsia-500/10 border-fuchsia-500/30',
+};
+
+// ─── Component ────────────────────────────────────────────────────────────
 
 const MLAnalysis = () => {
-    const [results, setResults] = useState<MLResults>(INITIAL_RESULTS);
-    const [hasData, setHasData] = useState(false);
-    const [sessionData, setSessionData] = useState<any[] | null>(null);
-    const [sessionCount, setSessionCount] = useState(0);
-    const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
-    const workerRef = useRef<Worker | null>(null);
+  // State
+  const [results, setResults] = useState<MLResults>(INITIAL_RESULTS);
+  const [sessionData, setSessionData] = useState<NormalizedRow[] | null>(null);
+  const [sessionCount, setSessionCount] = useState(0);
+  const [activeTab, setActiveTab] = useState<Tab>('Overview');
+  const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [toast, setToast] = useState<Toast | null>(null);
+  const [abortTimeout, setAbortTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
-    // Multi-file CSV upload — merges all sessions into one dataset
-    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (!files || files.length === 0) return;
+  const workerRef = useRef<Worker | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-        const normalizeRow = (row: any, i: number): any => {
-            const getExact = (keys: string[]): number => {
-                for (const key of keys) {
-                    const found = Object.keys(row).find(k => k.toLowerCase() === key.toLowerCase());
-                    if (found !== undefined && row[found] !== null && row[found] !== undefined)
-                        return Number(row[found]) || 0;
-                }
-                return 0;
-            };
-            return {
-                timestamp:  getExact(['timestamp', 'time']) || (i * 16),
-                speed:      getExact(['speed']),
-                throttle:   getExact(['throttle', 'gas']),
-                brake:      getExact(['brake']),
-                steering:   getExact(['steering', 'steer']),
-                rpm:        getExact(['rpm']),
-                gear:       getExact(['gear']),
-                clutch:     getExact(['clutch']),
-                fuel:       getExact(['fuel']),
-                engineTemp: getExact(['engine_temp', 'enginetemp']),
-                gForceX:    getExact(['gforcex', 'gforce_x', 'g_force_x']),
-                gForceY:    getExact(['gforcey', 'gforce_y', 'g_force_y']),
-                gForceZ:    getExact(['gforcez', 'gforce_z', 'g_force_z']),
-                gforceCombined: getExact(['gforce_combined']),
-                jerkX:               getExact(['jerk_x']),
-                jerkY:               getExact(['jerk_y']),
-                throttleDelta:       getExact(['throttle_delta']),
-                brakeDelta:          getExact(['brake_delta']),
-                steeringDelta:       getExact(['steering_delta']),
-                speedDelta:          getExact(['speed_delta']),
-                tireTempFL:       getExact(['tire_temp_fl']),
-                tireTempFR:       getExact(['tire_temp_fr']),
-                tireTempRL:       getExact(['tire_temp_rl']),
-                tireTempRR:       getExact(['tire_temp_rr']),
-                tirePressureFL:   getExact(['tire_pressure_fl']),
-                tirePressureFR:   getExact(['tire_pressure_fr']),
-                tirePressureRL:   getExact(['tire_pressure_rl']),
-                tirePressureRR:   getExact(['tire_pressure_rr']),
-                posX:                getExact(['pos_x']),
-                posY:                getExact(['pos_y']),
-                posZ:                getExact(['pos_z']),
-                yawRate:             getExact(['yaw_rate']),
-                pedalOverlap:        getExact(['pedal_overlap']),
-                turnRadius:          getExact(['turn_radius']),
-                slipAngleEstimate:   getExact(['slip_angle_estimate']),
-                isTrailBraking:      getExact(['is_trail_braking']),
-                isCoasting:          getExact(['is_coasting']),
-                isWots:              getExact(['is_wots']),
-                isBraking:           getExact(['is_braking']),
-                isTurning:           getExact(['is_turning']),
-                oversteerCorrection: getExact(['oversteer_correction']),
-                understeerPlough:    getExact(['understeer_plough']),
-                brakeBiasUtilization: getExact(['brake_bias_utilization']),
-                coastingTimePct:     getExact(['coasting_time_pct']),
-            };
-        };
+  const isDone = !results.isProcessing && results.progress === 100;
 
-        setHasData(false);
-        setSessionData(null);
-        setSessionCount(0);
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      workerRef.current?.terminate();
+      if (abortTimeout) clearTimeout(abortTimeout);
+    };
+  }, [abortTimeout]);
 
-        let filesProcessed = 0;
-        const allData: any[] = [];
-        const fileList = Array.from(files);
+  // ─── Toast auto-dismiss ──────────────────────────────────────────────
 
-        fileList.forEach((file) => {
-            Papa.parse(file, {
-                header: true,
-                dynamicTyping: true,
-                skipEmptyLines: true,
-                complete: (parseResult) => {
-                    filesProcessed++;
-                    const data = parseResult.data as any[];
-                    if (data.length > 50) {
-                        const normalized = data.map((row, i) => normalizeRow(row, i));
-                        // Check that required columns exist
-                        if (normalized[0]?.speed !== undefined || normalized[0]?.throttle !== undefined) {
-                            allData.push(...normalized);
-                        } else {
-                            console.warn(`Skipped "${file.name}" — missing speed/throttle columns`);
-                        }
-                    } else {
-                        console.warn(`Skipped "${file.name}" — only ${data.length} rows (need >50)`);
-                    }
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 4000);
+    return () => clearTimeout(t);
+  }, [toast]);
 
-                    // All files done?
-                    if (filesProcessed === fileList.length) {
-                        if (allData.length < 50) {
-                            alert(`Merged dataset has only ${allData.length} rows. Need at least 50 for ML analysis.`);
-                            return;
-                        }
-                        setSessionData(allData);
-                        setHasData(true);
-                        setSessionCount(fileList.length);
-                    }
-                },
-                error: (err: any) => {
-                    filesProcessed++;
-                    console.error(`Failed to parse "${file.name}":`, err.message);
-                    if (filesProcessed === fileList.length && allData.length >= 50) {
-                        setSessionData(allData);
-                        setHasData(true);
-                        setSessionCount(fileList.length);
-                    }
-                },
-            });
-        });
+  // ─── Row normalizer (camelCase + snake_case) ─────────────────────────
+
+  const normalizeRow = useCallback((row: Record<string, unknown>, i: number): NormalizedRow => {
+    const getExact = (keys: string[]): number => {
+      for (const key of keys) {
+        const found = Object.keys(row).find((k) => k.toLowerCase() === key.toLowerCase());
+        if (found !== undefined && row[found] != null) return Number(row[found]) || 0;
+      }
+      return 0;
     };
 
-    const runAnalysis = () => {
-        if (!hasData || !sessionData) return;
+    return {
+      timestamp: getExact(['timestamp', 'time']) || i * 16,
+      speed: getExact(['speed']),
+      throttle: getExact(['throttle', 'gas']),
+      brake: getExact(['brake']),
+      steering: getExact(['steering', 'steer']),
+      rpm: getExact(['rpm']),
+      gear: getExact(['gear']),
+      clutch: getExact(['clutch']),
+      fuel: getExact(['fuel']),
+      engineTemp: getExact(['engine_temp', 'engineTemp']),
+      gForceX: getExact(['gforcex', 'gforce_x', 'gForceX']),
+      gForceY: getExact(['gforcey', 'gforce_y', 'gForceY']),
+      gForceZ: getExact(['gforcez', 'gforce_z', 'gForceZ']),
+      gforceCombined: getExact(['gforce_combined', 'gforceCombined']),
+      jerkX: getExact(['jerk_x', 'jerkX']),
+      jerkY: getExact(['jerk_y', 'jerkY']),
+      throttleDelta: getExact(['throttle_delta', 'throttleDelta']),
+      brakeDelta: getExact(['brake_delta', 'brakeDelta']),
+      steeringDelta: getExact(['steering_delta', 'steeringDelta']),
+      speedDelta: getExact(['speed_delta', 'speedDelta']),
+      tireTempFL: getExact(['tire_temp_fl', 'tireTempFL']),
+      tireTempFR: getExact(['tire_temp_fr', 'tireTempFR']),
+      tireTempRL: getExact(['tire_temp_rl', 'tireTempRL']),
+      tireTempRR: getExact(['tire_temp_rr', 'tireTempRR']),
+      tirePressureFL: getExact(['tire_pressure_fl', 'tirePressureFL']),
+      tirePressureFR: getExact(['tire_pressure_fr', 'tirePressureFR']),
+      tirePressureRL: getExact(['tire_pressure_rl', 'tirePressureRL']),
+      tirePressureRR: getExact(['tire_pressure_rr', 'tirePressureRR']),
+      posX: getExact(['pos_x', 'posX']),
+      posY: getExact(['pos_y', 'posY']),
+      posZ: getExact(['pos_z', 'posZ']),
+      yawRate: getExact(['yaw_rate', 'yawRate']),
+      pedalOverlap: getExact(['pedal_overlap', 'pedalOverlap']),
+      turnRadius: getExact(['turn_radius', 'turnRadius']),
+      slipAngleEstimate: getExact(['slip_angle_estimate', 'slipAngleEstimate']),
+      isTrailBraking: getExact(['is_trail_braking', 'isTrailBraking']),
+      isCoasting: getExact(['is_coasting', 'isCoasting']),
+      isWots: getExact(['is_wots', 'isWots']),
+      isBraking: getExact(['is_braking', 'isBraking']),
+      isTurning: getExact(['is_turning', 'isTurning']),
+      oversteerCorrection: getExact(['oversteer_correction', 'oversteerCorrection']),
+      understeerPlough: getExact(['understeer_plough', 'understeerPlough']),
+      brakeBiasUtilization: getExact(['brake_bias_utilization', 'brakeBiasUtilization']),
+      coastingTimePct: getExact(['coasting_time_pct', 'coastingTimePct']),
+      _sessionId: 0,
+      _sessionBoundary: false,
+    };
+  }, []);
 
-        setResults({ ...INITIAL_RESULTS, isProcessing: true, progress: 5 });
+  // ─── File handling ──────────────────────────────────────────────────
 
-        if (workerRef.current) {
-            workerRef.current.terminate();
-        }
+  const processFiles = useCallback((files: File[]) => {
+    if (files.length === 0) return;
 
-        workerRef.current = new Worker(new URL('./mlWorker.ts', import.meta.url), { type: 'module' });
+    let filesProcessed = 0;
+    const allRaw: Record<string, unknown>[][] = [];
+    const failedFiles: string[] = [];
 
-        workerRef.current.onmessage = (e) => {
-            if (e.data.type === 'PROGRESS') setResults(r => ({ ...r, progress: e.data.progress }));
-            if (e.data.type === 'COMPLETE') {
-                const r = e.data.results;
-                const required = ['safetyScore', 'pca', 'anomalies', 'svm', 'rfWear', 'hmm', 'fatigue', 'grip', 'shifts', 'qualityMetrics'];
-                for (const key of required) {
-                    if (!(key in r)) console.warn(`ML worker missing required field: ${key}`);
-                }
-                setResults(prev => ({ ...prev, ...r, isProcessing: false, progress: 100, error: null }));
-            }
-            if (e.data.type === 'ERROR') setResults(r => ({ ...r, isProcessing: false, error: e.data.message }));
-        };
+    const tryFinalize = () => {
+      if (filesProcessed !== files.length) return;
 
-        workerRef.current.postMessage({ type: 'ANALYZE_SESSION', payload: { sessionArray: sessionData } });
+      if (allRaw.length === 0) {
+        setToast({ message: 'No valid session data found in any file.', type: 'error' });
+        return;
+      }
+
+      const normalized = allRaw.map((rows) => rows.map((row, i) => normalizeRow(row, i)));
+      const merged = mergeSessions(normalized);
+
+      if (merged.length < 50) {
+        setToast({ message: `Merged dataset has only ${merged.length} rows. Need at least 50.`, type: 'warning' });
+        return;
+      }
+
+      setSessionData(merged as NormalizedRow[]);
+      setSessionCount(normalized.length);
+      setResults(INITIAL_RESULTS);
+
+      if (failedFiles.length > 0) {
+        setToast({ message: `${normalized.length} session(s) loaded. ${failedFiles.length} file(s) skipped.`, type: 'warning' });
+      }
     };
 
-    // Cleanup worker on unmount
-    useEffect(() => {
-        return () => {
-            if (workerRef.current) {
-                workerRef.current.terminate();
+    for (const file of files) {
+      Papa.parse(file, {
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true,
+        comments: '#',
+        complete: (parseResult) => {
+          const data = parseResult.data as Record<string, unknown>[];
+          if (data.length > 50) {
+            if (data[0]?.speed !== undefined || data[0]?.throttle !== undefined) {
+              allRaw.push(data);
+            } else {
+              failedFiles.push(file.name);
+              console.warn(`Skipped "${file.name}" — missing speed/throttle`);
             }
-        };
-    }, []);
-
-    const isDone = results.progress === 100 && !results.isProcessing;
-
-    return (
-        <div className="h-full flex flex-col p-8 overflow-y-auto">
-            <div className="flex justify-between items-center mb-8">
-                <div>
-                    <h1 className="text-3xl font-bold flex items-center gap-3">
-                        <Brain className="w-8 h-8 text-purple-500" />
-                        Machine Learning Analysis
-                    </h1>
-                    <p className="text-slate-400 mt-2">Analyze single-session driving behavior using 6 advanced ML models.</p>
-                </div>
-
-                <div className="flex items-center gap-4 bg-slate-900 p-2 rounded-xl border border-slate-800">
-                    <label className="flex items-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer transition-colors border border-slate-700 font-semibold">
-                        <FileText className="w-5 h-5 text-blue-400" />
-                        <span>{hasData ? `${sessionCount} Session${sessionCount > 1 ? 's' : ''} Loaded` : 'Load Session CSV(s)'}</span>
-                        <input type="file" accept=".csv" multiple className="hidden" onChange={handleFileUpload} />
-                    </label>
-
-                    <button
-                        onClick={runAnalysis}
-                        disabled={!hasData || results.isProcessing}
-                        className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-lg transition-all shadow-lg ${!hasData ? 'bg-slate-800 text-slate-500 cursor-not-allowed' :
-                            results.isProcessing ? 'bg-purple-600/50 text-white animate-pulse' :
-                                'bg-purple-600 hover:bg-purple-500 text-white hover:scale-105'
-                            }`}
-                    >
-                        {results.isProcessing ? (
-                            <>
-                                <Settings className="w-6 h-6 animate-spin" />
-                                Processing... {results.progress}%
-                            </>
-                        ) : (
-                            <>
-                                <Play className="w-6 h-6 fill-current" />
-                                Run Analysis
-                            </>
-                        )}
-                    </button>
-                </div>
-            </div>
-
-            {results.error && (
-                <div className="mb-8 p-4 bg-red-900/50 border border-red-500 rounded-xl text-red-200 flex items-center gap-3">
-                    <AlertTriangle className="w-6 h-6" />
-                    <strong>ML Engine Error:</strong> {results.error}
-                </div>
-            )}
-
-            {results.modelStatus && (
-                <div className="mb-6 flex flex-wrap gap-2">
-                    {Object.entries(results.modelStatus).map(([name, status]) => (
-                        <div key={name} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold border ${
-                            status === 'loaded'
-                                ? 'bg-emerald-900/30 border-emerald-700/40 text-emerald-400'
-                                : 'bg-slate-800 border-slate-700 text-slate-500'
-                        }`}>
-                            <span className={`w-2 h-2 rounded-full ${status === 'loaded' ? 'bg-emerald-400' : 'bg-slate-600'}`} />
-                            {name.replace(/_/g, ' ')}
-                        </div>
-                    ))}
-                </div>
-            )}
-
-            {!isDone && !results.isProcessing && !results.error && (
-                <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-3xl m-8 text-slate-500">
-                    <Brain className="w-24 h-24 text-slate-800 mb-6" />
-                    <h2 className="text-2xl font-bold text-slate-400">Awaiting Telemetry Data</h2>
-                    <p className="max-w-md text-center mt-2">Upload a recorded CSV session file and click Run Analysis to begin processing.</p>
-                </div>
-            )}
-
-            {isDone && (
-                <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 animate-in fade-in duration-500">
-                    {/* Top Row: Safety Score & PCA */}
-
-                    {/* 1. Multivariate Regression (Safety Score) */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Target className="w-5 h-5 text-green-500" />
-                                Safety Score
-                            </h3>
-                            <p className="text-sm text-slate-400">Heuristic Penalty Score</p>
-                        </div>
-
-                        <div className="flex items-center justify-center py-2">
-                            <div className="relative">
-                                <svg viewBox="0 0 100 50" className="w-48 h-24 overflow-visible">
-                                    <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#1e293b" strokeWidth="12" strokeLinecap="round" />
-                                    <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke={`url(#gradient)`} strokeWidth="12" strokeLinecap="round" strokeDasharray={`${(results.safetyScore.score / 100) * 125} 125`} />
-                                    <defs>
-                                        <linearGradient id="gradient">
-                                            <stop offset="0%" stopColor="#ef4444" />
-                                            <stop offset="50%" stopColor="#eab308" />
-                                            <stop offset="100%" stopColor="#22c55e" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-                                <div className="absolute bottom-0 inset-x-0 text-center">
-                                    <span className="text-5xl font-black font-mono text-white tracking-tighter">{results.safetyScore.score}</span><span className="text-slate-500 font-bold text-xl">/100</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Penalty Category Breakdown */}
-                        {results.safetyScore.penaltyBreakdown && results.safetyScore.penaltyBreakdown.length > 0 && (
-                            <div>
-                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Penalty Distribution</div>
-                                <div className="w-full h-3 rounded-full overflow-hidden flex mb-2">
-                                    {results.safetyScore.penaltyBreakdown.map((p, i) => (
-                                        <div key={i} style={{ width: `${p.pct}%`, backgroundColor: p.color }} className="h-full" title={`${p.label}: ${p.count} events`} />
-                                    ))}
-                                </div>
-                                <div className="flex flex-col gap-1">
-                                    {results.safetyScore.penaltyBreakdown.map((p, i) => (
-                                        <div key={i} className="flex justify-between items-center text-xs">
-                                            <div className="flex items-center gap-2">
-                                                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
-                                                <span className="text-slate-400">{p.label}</span>
-                                            </div>
-                                            <span className="font-mono font-bold text-slate-300">{p.count} events ({p.pct.toFixed(0)}%)</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Professional Interpretation */}
-                        <div className="bg-slate-950 rounded-xl p-3 border border-slate-800">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
-                            <p className="text-xs text-slate-300 leading-relaxed">
-                                {results.safetyScore.score >= 85
-                                     ? "Driver exhibits highly controlled inputs with minimal penalty events. Heuristic penalty scoring shows that speed, jerk, and steering inputs remain within low-risk boundaries throughout the session. Consistent with a disciplined, experienced driver profile."
-                                    : results.safetyScore.score >= 65
-                                    ? "Moderate penalty density detected. Penalty analysis identifies periodic exceedances of jerk and steering volatility thresholds. Driving quality is adequate but lapses indicate moments of reactive rather than anticipatory driving — typically observed in intermediate-level drivers."
-                                    : "Significant safety cost accumulation across the session. High jerk and/or steering volatility events are frequent, indicating inconsistent control. The heuristic penalty system strongly weights harsh inputs as the primary risk contributor. Immediate focus on smoother pedal transitions and planned braking zones is advised."}
-                            </p>
-                        </div>
-                    </div>
-
-
-                    {/* 2. Isolation Forest Proxy (Smoothness Anomalies) */}
-                    <div className="xl:col-span-2 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col">
-                        <div className="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                    <Activity className="w-5 h-5 text-red-500" />
-                                    Discomfort Anomalies
-                                </h3>
-                                <p className="text-sm text-slate-400">Statistical Anomaly Det. (3σ + G-Force)</p>
-                            </div>
-                            <div className="bg-red-950/50 text-red-400 px-3 py-1 rounded-full text-sm font-bold border border-red-900/50">
-                                {results.anomalies.anomalyCount} Harsh Events Detected
-                            </div>
-                        </div>
-
-                        <div className="flex-1 w-full h-[200px] min-h-[200px]">
-                            <ResponsiveContainer width="99%" height={250}>
-                                <LineChart data={results.anomalies.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                                    <XAxis dataKey="timestamp" stroke="#475569" tickFormatter={(t) => `${(t / 1000).toFixed(1)}s`} />
-                                    <YAxis stroke="#475569" dataKey="speed" domain={['auto', 'auto']} />
-                                    <Tooltip
-                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
-                                        itemStyle={{ color: '#e2e8f0' }}
-                                        labelStyle={{ color: '#cbd5e1' }}
-                                        labelFormatter={(t) => `Time: ${(t / 1000).toFixed(1)}s`}
-                                        formatter={(value: any, name: string | undefined, props: any) => {
-                                            if (name === 'speed' && props.payload.isAnomaly) {
-                                                return [value, `${props.payload.type} (Speed)`];
-                                            }
-                                            return [value, name];
-                                        }}
-                                    />
-                                    {/* Anomalies highlighted using custom dots */}
-                                    <Line
-                                        type="monotone"
-                                        dataKey="speed"
-                                        stroke="#3b82f6"
-                                        strokeWidth={2}
-                                        dot={(props) => {
-                                            if (props.payload.isAnomaly) {
-                                                return <circle cx={props.cx} cy={props.cy} r={6} fill="#ef4444" stroke="#7f1d1d" strokeWidth={2} />;
-                                            }
-                                            return <></>;
-                                        }}
-                                        activeDot={{ r: 4 }}
-                                    />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </div>
-
-                    {/* 3. PCA Driver Profile */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Brain className="w-5 h-5 text-indigo-500" />
-                                Driver Profiler
-                            </h3>
-                            <p className="text-sm text-slate-400">Principal Component Analysis (PCA)</p>
-                        </div>
-
-                        <div className="flex-1 w-full h-[250px] min-h-[250px] -ml-6">
-                            <ResponsiveContainer width="99%" height={250}>
-                                <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                                    <XAxis type="number" dataKey="x" name="Component 1" stroke="#475569" hide />
-                                    <YAxis type="number" dataKey="y" name="Component 2" stroke="#475569" hide />
-                                    <ZAxis type="number" dataKey="intensity" range={[10, 50]} />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '8px' }} itemStyle={{ color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1' }} />
-                                    <Scatter name="Driving States" data={results.pca.data} fill="#6366f1" opacity={0.6} />
-
-                                    {/* Quadrant Lines */}
-                                    <CustomReferenceLines />
-                                </ScatterChart>
-                            </ResponsiveContainer>
-                        </div>
-                        <div className="text-center bg-indigo-950/30 border border-indigo-900/50 rounded-xl p-3">
-                            <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">{results.pca.profile || results.pca.knnProfile || "Unknown Style"}</span>
-                        </div>
-                    </div>
-
-                    {/* 4. SVM Pedal Overlap */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Zap className="w-5 h-5 text-orange-500" />
-                                Pedal Confusion
-                            </h3>
-                            <p className="text-sm text-slate-400">Pedal Overlap Ratio</p>
-                        </div>
-
-                        <div className="flex-1 flex flex-col items-center justify-center p-4">
-                            <div className="text-6xl font-black font-mono text-white mb-2">{results.svm.overlapPercentage.toFixed(1)}<span className="text-3xl text-slate-500">%</span></div>
-                            <div className="text-slate-400 text-sm mb-6 text-center">of session driven with overlapping pedeal inputs.</div>
-
-                            <div className="w-full bg-slate-950 rounded-full h-8 border border-slate-800 overflow-hidden relative">
-                                <div className="h-full bg-orange-500" style={{ width: `${Math.min(results.svm.overlapPercentage * 2, 100)}%` }}></div>
-                            </div>
-                            <div className="w-full flex justify-between mt-2 text-xs font-bold text-slate-500">
-                                <span>Perfect (0%)</span>
-                                <span>Messy ({'>'} 10%)</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {/* 5. Predictive Tire Degradation (Random Forest) */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-3">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Activity className="w-5 h-5 text-pink-500" />
-                                Predictive Tire Degradation
-                            </h3>
-                            <p className="text-sm text-slate-400">Tire Wear Projection (ONNX/Heuristic)</p>
-                        </div>
-
-                        {/* Wear Rate Summary KPIs */}
-                        <div className="grid grid-cols-3 gap-2 text-center">
-                            <div className="bg-slate-800 rounded-xl p-2">
-                                <div className="text-xs text-slate-500 mb-0.5">Start</div>
-                                <div className="text-lg font-black text-white font-mono">100%</div>
-                            </div>
-                            <div className="bg-slate-800 rounded-xl p-2">
-                                <div className="text-xs text-slate-500 mb-0.5">Wear Rate</div>
-                                <div className="text-lg font-black text-orange-400 font-mono">{(100 - results.rfWear.endLife).toFixed(1)}%</div>
-                            </div>
-                            <div className="bg-slate-800 rounded-xl p-2">
-                                <div className="text-xs text-slate-500 mb-0.5">Remaining</div>
-                                <div className="text-lg font-black font-mono" style={{ color: results.rfWear.endLife > 80 ? '#22c55e' : results.rfWear.endLife > 50 ? '#eab308' : '#ef4444' }}>{results.rfWear.endLife.toFixed(1)}%</div>
-                            </div>
-                        </div>
-
-                        <div className="flex-1 w-full h-[180px] min-h-[180px] relative">
-                            <ResponsiveContainer width="99%" height={250}>
-                                <LineChart data={results.rfWear.data} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                                    <XAxis dataKey="timestamp" stroke="#475569" tick={false} />
-                                    <YAxis stroke="#475569" domain={[0, 100]} ticks={[30, 50, 80, 100]} tickFormatter={(v) => `${v}%`} fontSize={10} />
-                                    <Tooltip
-                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
-                                        itemStyle={{ color: '#e2e8f0' }}
-                                        labelStyle={{ color: '#cbd5e1' }}
-                                        labelFormatter={() => `Est. Remaining Tire Life`}
-                                        formatter={(val: any) => [`${Number(val).toFixed(2)}%`, `Tire Life`]}
-                                    />
-                                    {/* Threshold reference elements drawn as SVG overlay via data */}
-                                    <Line type="monotone" dataKey="life" stroke="#ec4899" strokeWidth={2.5} dot={false} strokeOpacity={0.9} />
-                                </LineChart>
-                            </ResponsiveContainer>
-                            {/* Threshold Legend */}
-                            <div className="absolute top-1 right-2 flex flex-col gap-0.5 text-[10px]">
-                                <span className="text-emerald-400">▬ &gt;80% Healthy</span>
-                                <span className="text-amber-400">▬ 50–80% Warning</span>
-                                <span className="text-red-400">▬ &lt;50% Critical</span>
-                            </div>
-                        </div>
-
-                        {/* Interpretation */}
-                        <div className="bg-slate-950 rounded-xl p-3 border border-slate-800">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
-                            <p className="text-xs text-slate-300 leading-relaxed">
-                                {results.rfWear.endLife > 80
-                                    ? "Random Forest ensemble predicts minimal tire degradation across this session. Longitudinal and lateral force inputs remained within mechanical grip limits, preserving compound temperature and minimizing rubber ablation. The vehicle's tires are operating well within safe service margins."
-                                    : results.rfWear.endLife > 50
-                                    ? "Moderate tire wear is projected. The Random Forest model detects episodic overloading of the tire compound — likely during hard cornering or braking zones — that pushes thermal cycling into sub-optimal ranges. Continued sessions at this wear rate will approach service thresholds within a few laps."
-                                    : "Critical degradation detected. The model extrapolates sustained high-load driving events (aggressive braking, traction loss events) as primary accelerants. At this wear rate, grip levels are likely compromised, posing both a performance and safety risk. Pit stop or tire change is recommended."}
-                            </p>
-                        </div>
-                    </div>
-
-
-                    {/* 6. HMM State Timeline */}
-                    <div className="xl:col-span-3 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <GitCommit className="w-5 h-5 text-emerald-500" />
-                                Contextual Driving States
-                            </h3>
-                            <p className="text-sm text-slate-400">K-Means State Clustering</p>
-                        </div>
-
-                        <div className="flex gap-4 mt-6">
-                            {Object.entries(results.hmm.statePercentages).map(([state, pct]) => (
-                                <div key={state} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
-                                        <div className={`w-3 h-3 rounded-full ${getStateColor(state)}`}></div>
-                                        <span className="text-slate-300 font-semibold">{state}</span>
-                                    </div>
-                                    <span className="font-mono text-white text-xl">{pct.toFixed(0)}%</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-8 h-8 rounded-lg overflow-hidden flex shadow-inner border border-slate-800">
-                            {results.hmm.data.map((d, i) => (
-                                <div
-                                    key={i}
-                                    className={`h-full flex-1 ${getStateColor(d.state, true)} hover:opacity-100 transition-opacity opacity-80 cursor-default`}
-                                    title={`Time: ${(d.timestamp / 1000).toFixed(1)}s | State: ${d.state}`}
-                                ></div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* ==== 8 NEW ADVANCED ML MODEL CARDS ==== */}
-
-                    {/* 8. Driver Fatigue Tracker */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Timer className="w-5 h-5 text-amber-400" />
-                                Driver Fatigue Tracker
-                            </h3>
-                            <p className="text-xs text-slate-400">Jerk Decay Fatigue Score</p>
-                        </div>
-
-                        {/* Score + decay KPIs */}
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-slate-800 rounded-xl p-3">
-                                <div className="text-xs text-slate-500 mb-0.5">Focus Retained</div>
-                                <span className={`text-3xl font-black font-mono ${results.fatigue.score > 70 ? 'text-emerald-400' : results.fatigue.score > 40 ? 'text-amber-400' : 'text-red-400'}`}>{Math.round(results.fatigue.score)}%</span>
-                            </div>
-                            <div className="bg-slate-800 rounded-xl p-3">
-                                <div className="text-xs text-slate-500 mb-0.5">Jerk Decay Δ</div>
-                                <span className={`text-3xl font-black font-mono ${Math.abs(results.fatigue.decay) < 0.1 ? 'text-emerald-400' : Math.abs(results.fatigue.decay) < 0.3 ? 'text-amber-400' : 'text-red-400'}`}>{results.fatigue.decayLabel || (results.fatigue.decay > 0 ? '+' : '') + results.fatigue.decay.toFixed(3)}</span>
-                                <div className="text-[10px] text-slate-500 mt-0.5">{results.fatigue.trend === 'improving' ? '↑ Improving' : results.fatigue.trend === 'fatiguing' ? '↓ Fatiguing' : '→ Stable'}</div>
-                            </div>
-                        </div>
-
-                        {/* Timeline area chart using CSS bars */}
-                        {results.fatigue.timeline && results.fatigue.timeline.length > 0 && (
-                            <div>
-                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Input Smoothness Timeline</div>
-                                <div className="flex items-end gap-0.5 h-16">
-                                    {results.fatigue.timeline.map((b, i) => (
-                                        <div key={i} className="flex-1 flex flex-col items-center gap-0.5" title={`${b.segment}: ${b.smoothness}% smooth, avg jerk: ${b.avgJerk}`}>
-                                            <div
-                                                className="w-full rounded-t transition-all duration-500"
-                                                style={{
-                                                    height: `${b.smoothness}%`,
-                                                    backgroundColor: b.smoothness > 70 ? '#22c55e' : b.smoothness > 40 ? '#f59e0b' : '#ef4444',
-                                                    opacity: 0.85
-                                                }}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="flex justify-between text-[10px] text-slate-600 mt-1">
-                                    <span>Session Start</span>
-                                    <span>Session End</span>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Interpretation */}
-                        <div className="bg-slate-950 rounded-xl p-3 border border-slate-800">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
-                            <p className="text-xs text-slate-300 leading-relaxed">
-                                {results.fatigue.score > 70
-                                    ? "Jerk trend analysis detects no meaningful decay in input smoothness across the session. Steering corrections, jerk magnitude, and throttle modulation remained statistically stable from first quartile to last — a strong indicator of sustained concentration and physical consistency."
-                                    : results.fatigue.score > 40
-                                    ? "Moderate fatigue signature detected. The analysis observes a gradual upward drift in jerk frequency and steering micro-corrections in the latter segments of the session. This degradation pattern is characteristic of attention fatigue — the driver compensates with reactive inputs rather than planned anticipatory control."
-                                    : "Significant cognitive and physical fatigue detected. The jerk decay score indicates a steep degradation for input quality across session time buckets. Late-session inputs become markedly more erratic, with sharp jerk spikes and inconsistent modulation — a clear sign that concentration capacity was exceeded."}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* 9. Grip Limits Analyzer */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <TrendingUp className="w-5 h-5 text-red-400" />
-                                Grip Limits Analyzer
-                            </h3>
-                            <p className="text-xs text-slate-400">Grip Classification (ONNX/Physics)</p>
-                        </div>
-                        <div className="flex-1 grid grid-cols-3 gap-3 text-center">
-                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
-                                <span className="text-2xl font-black text-emerald-400">{Math.round(results.grip.score)}%</span>
-                                <span className="text-xs text-slate-400">In Grip</span>
-                            </div>
-                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
-                                <span className="text-2xl font-black text-amber-400">{results.grip.understeer}</span>
-                                <span className="text-xs text-slate-400">Understeer Events</span>
-                            </div>
-                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
-                                <span className="text-2xl font-black text-red-400">{results.grip.oversteer}</span>
-                                <span className="text-xs text-slate-400">Oversteer Events</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 10. Shift Point Analyzer */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <GitFork className="w-5 h-5 text-purple-400" />
-                                Shift Point Analyzer
-                            </h3>
-                            <p className="text-xs text-slate-400">Shift Timing (ONNX/RPM Threshold)</p>
-                        </div>
-                        <div className="flex-1 grid grid-cols-3 gap-3 text-center">
-                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
-                                <span className="text-2xl font-black text-blue-400">{results.shifts.early}</span>
-                                <span className="text-xs text-slate-400">Early Shifts</span>
-                            </div>
-                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
-                                <span className="text-2xl font-black text-emerald-400">{results.shifts.optimal}</span>
-                                <span className="text-xs text-slate-400">Optimal Shifts</span>
-                            </div>
-                            <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
-                                <span className="text-2xl font-black text-red-400">{results.shifts.late}</span>
-                                <span className="text-xs text-slate-400">Late Shifts</span>
-                            </div>
-                        </div>
-                        <p className="text-xs text-slate-400">Early &lt;4000 RPM / Optimal 4000–7200 RPM / Late &gt;7200 RPM. {results.shifts.optimal > results.shifts.early + results.shifts.late ? "✅ Good timing discipline." : "⚠️ Shift points need refinement."}</p>
-                    </div>
-
-
-
-                    {/* 12. Pedal Consistency (DTW) */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Gauge className="w-5 h-5 text-indigo-400" />
-                                Pedal Consistency
-                            </h3>
-                            <p className="text-xs text-slate-400">Brake Zone Similarity Score</p>
-                        </div>
-
-                        {/* Ring + score breakdown */}
-                        <div className="flex gap-4 items-center">
-                            <div className="relative w-24 h-24 flex-shrink-0">
-                                <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-                                    <circle cx="50" cy="50" r="40" fill="none" stroke="#1e293b" strokeWidth="14" />
-                                    <circle cx="50" cy="50" r="40" fill="none"
-                                        stroke={results.consistency.dtwScore > 70 ? "#818cf8" : results.consistency.dtwScore > 40 ? "#f59e0b" : "#ef4444"}
-                                        strokeWidth="14"
-                                        strokeDasharray={`${2.51 * results.consistency.dtwScore} 251`}
-                                        strokeLinecap="round" />
-                                </svg>
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-xl font-black text-indigo-400">{Math.round(results.consistency.dtwScore)}</span>
-                                </div>
-                            </div>
-                            <div className="flex-1 flex flex-col gap-2">
-                                {[{ label: 'Score Band', val: results.consistency.dtwScore > 70 ? 'Elite' : results.consistency.dtwScore > 40 ? 'Moderate' : 'Poor', color: results.consistency.dtwScore > 70 ? '#818cf8' : results.consistency.dtwScore > 40 ? '#f59e0b' : '#ef4444' },
-                                  { label: 'DTW Distance', val: (100 - results.consistency.dtwScore).toFixed(0) + ' units', color: '#94a3b8' },
-                                  { label: 'Consistency', val: results.consistency.dtwScore > 70 ? 'High Repeatability' : 'Variable Pattern', color: '#94a3b8' }].map((r, i) => (
-                                    <div key={i} className="flex justify-between text-xs">
-                                        <span className="text-slate-500">{r.label}</span>
-                                        <span className="font-bold" style={{ color: r.color }}>{r.val}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Score spectrum bar */}
-                        <div>
-                            <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: 'linear-gradient(to right, #ef4444, #f59e0b, #818cf8)' }}>
-                                <div className="w-1.5 h-full bg-white rounded-full transition-all" style={{ marginLeft: `${results.consistency.dtwScore - 1}%` }} />
-                            </div>
-                            <div className="flex justify-between text-[10px] text-slate-600 mt-1">
-                                <span>0 Inconsistent</span><span>50 Moderate</span><span>100 Elite</span>
-                            </div>
-                        </div>
-
-                        {/* Interpretation */}
-                        <div className="bg-slate-950 rounded-xl p-3 border border-slate-800">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
-                            <p className="text-xs text-slate-300 leading-relaxed">
-                                {results.consistency.dtwScore > 70
-                                    ? "Brake profile comparison shows highly repeatable braking patterns across detected brake zones. The mean difference between brake zone profiles is minimal, indicating that the driver applies consistent initial pressure, maintains a predictable decay curve, and releases at a stereotyped point — signature behaviour of a technically refined braker."
-                                    : results.consistency.dtwScore > 40
-                                    ? "Moderate variation detected between braking zone profiles. Zone-to-zone variation in initial pressure and hold duration suggests the driver adapts reactively to perceived speed rather than following a fixed technique. This is common in drivers who lack consistent reference points entering corners."
-                                    : "High profile differences — brake profiles are structurally dissimilar between zones. The driver shows no repeatable braking character: pressure onset, peak magnitude, and release timing all vary significantly. This unpredictability is a primary source of lap time variance and reduces corner entry confidence."}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* 13. Braking Technique */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <ArrowRightLeft className="w-5 h-5 text-orange-400" />
-                                Braking Technique
-                            </h3>
-                            <p className="text-xs text-slate-400">Trail vs Stab Braking Heuristic</p>
-                        </div>
-                        <div className="flex-1 flex flex-col justify-center gap-4">
-                            <div className="flex justify-between text-sm text-slate-400 font-semibold">
-                                <span>Stab Braking</span>
-                                <span>Trail Braking</span>
-                            </div>
-                            <div className="w-full h-4 bg-slate-800 rounded-full overflow-hidden flex">
-                                <div className="h-full bg-blue-500 transition-all duration-700" style={{ width: `${100 - results.brakingTech.trailPercent}%` }}></div>
-                                <div className="h-full bg-orange-500 transition-all duration-700" style={{ width: `${results.brakingTech.trailPercent}%` }}></div>
-                            </div>
-                            <div className="flex justify-between font-mono font-bold">
-                                <span className="text-blue-400">{100 - results.brakingTech.trailPercent}%</span>
-                                <span className="text-orange-400">{results.brakingTech.trailPercent}%</span>
-                            </div>
-                            <p className="text-xs text-slate-500">{results.brakingTech.trailPercent > 40 ? "🏎️ Trail braking used frequently — advanced technique that rotates the car into corners." : "🔵 Primarily stab braking — safer but leaves corner entry speed on the table."}</p>
-                        </div>
-                    </div>
-
-                    {/* 14. Transition Probability Flow (Markov) */}
-                    <div className="xl:col-span-2 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <ShieldCheck className="w-5 h-5 text-teal-400" />
-                                State Transition Flow
-                            </h3>
-                            <p className="text-xs text-slate-400">Markov Chain — Driving state transition probabilities</p>
-                        </div>
-                        <div className="flex-1 grid grid-cols-2 gap-3">
-                            {(['Cruising', 'Cornering', 'Slow / Cautious', 'Erratic'] as const).map(fromState => {
-                                const row = results.markov[fromState] || {};
-                                const total = Object.values(row).reduce((a: number, b: any) => a + Number(b), 0) || 1;
-                                const topTo = Object.entries(row).sort((a, b) => b[1] - a[1]).slice(0, 2);
-                                return (
-                                    <div key={fromState} className="bg-slate-800 p-3 rounded-xl">
-                                        <div className={`text-xs font-bold mb-2 ${fromState === 'Erratic' ? 'text-red-400' : fromState === 'Cruising' ? 'text-emerald-400' : fromState === 'Cornering' ? 'text-amber-400' : 'text-blue-400'}`}>{fromState} →</div>
-                                        {topTo.length === 0
-                                            ? <p className="text-xs text-slate-500">No transitions</p>
-                                            : topTo.map(([to, count]) => (
-                                                <div key={to} className="flex justify-between text-xs text-slate-300 py-0.5">
-                                                    <span>{to}</span>
-                                                    <span className="font-mono font-bold text-teal-400">{((Number(count) / total) * 100).toFixed(0)}%</span>
-                                                </div>
-                                            ))}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* 15. Aggression vs Safety Matrix */}
-                    <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col gap-4">
-                        <div>
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-1">
-                                <Layers className="w-5 h-5 text-fuchsia-400" />
-                                Aggression Matrix
-                            </h3>
-                            <p className="text-xs text-slate-400">Driving Style Quadrants</p>
-                        </div>
-                        <div className="flex-1 grid grid-cols-2 gap-2">
-                            <div className="bg-emerald-900/50 border border-emerald-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
-                                <span className="text-xs text-emerald-400 font-bold">SAFE + FAST</span>
-                                <span className="text-2xl font-black text-emerald-300">{Math.round(results.aggression.safeFast)}%</span>
-                            </div>
-                            <div className="bg-amber-900/50 border border-amber-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
-                                <span className="text-xs text-amber-400 font-bold">RISKY + FAST</span>
-                                <span className="text-2xl font-black text-amber-300">{Math.round(results.aggression.riskyFast)}%</span>
-                            </div>
-                            <div className="bg-blue-900/50 border border-blue-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
-                                <span className="text-xs text-blue-400 font-bold">SAFE + SLOW</span>
-                                <span className="text-2xl font-black text-blue-300">{Math.round(results.aggression.safeSlow)}%</span>
-                            </div>
-                            <div className="bg-red-900/50 border border-red-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
-                                <span className="text-xs text-red-400 font-bold">RISKY + SLOW</span>
-                                <span className="text-2xl font-black text-red-300">{Math.round(results.aggression.riskySlow)}%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 7. ML Quality Statistics Panel - Interactive */}
-                    <div className="xl:col-span-3 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-xl mt-4">
-                        <div className="mb-6">
-                            <h3 className="text-xl font-bold flex items-center gap-2 text-white">
-                                <Settings className="w-5 h-5 text-slate-400" />
-                                Model Confidence & Quality Metrics
-                            </h3>
-                            <p className="text-sm text-slate-400 mt-1">Select a metric below to view mathematical reasoning and dataset contexts.</p>
-                        </div>
-
-                        <div className="grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-10 gap-3">
-                            <MetricCard id="clusteringSilhouette" title="State Clustering" color="emerald" score={(results.qualityMetrics.clusteringSilhouette.score).toFixed(2)} label="Silhouette" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="pcaVariance" title="Feature Map" color="indigo" score={`${(results.qualityMetrics.pcaVariance.score * 100).toFixed(1)}%`} label="PCA Variance" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="randomForestOOB" title="Wear Model" color="pink" score={results.qualityMetrics.randomForestOOB.score.toFixed(2)} label="RF Convergence" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="anomalySkewness" title="Anomaly Skewness" color="red" score={results.qualityMetrics.anomalySkewness.score.toFixed(2)} label="Outlier Purity" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="svmMargin" title="SVM Boundary" color="orange" score={results.qualityMetrics.svmMargin.score.toFixed(2)} label="Margin Width" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="regressionFit" title="Safety Fit" color="green" score={results.qualityMetrics.regressionFit.score.toFixed(2)} label="R² Fit" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="knnConfidence" title="Driver Match" color="blue" score={`${(results.qualityMetrics.knnConfidence.score * 100).toFixed(1)}%`} label="KNN Confidence" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            {results.qualityMetrics.dtwConsistency && <MetricCard id="dtwConsistency" title="Brake Consistency" color="violet" score={results.qualityMetrics.dtwConsistency.score.toFixed(2)} label="DTW Quality" selected={selectedMetric} onSelect={setSelectedMetric} />}
-                            {results.qualityMetrics.dtPurity && <MetricCard id="dtPurity" title="Grip Tree" color="amber" score={results.qualityMetrics.dtPurity.score.toFixed(2)} label="Node Purity" selected={selectedMetric} onSelect={setSelectedMetric} />}
-                            {results.qualityMetrics.nbAccuracy && <MetricCard id="nbAccuracy" title="Shift Accuracy" color="sky" score={`${(results.qualityMetrics.nbAccuracy.score * 100).toFixed(1)}%`} label="NB Accuracy" selected={selectedMetric} onSelect={setSelectedMetric} />}
-                        </div>
-
-                        {/* Interactive Expand Pane */}
-                        {selectedMetric && (() => {
-                            const metric = results.qualityMetrics[selectedMetric as keyof typeof results.qualityMetrics];
-                            if (!metric) return null;
-
-                            const metaMap: Record<string, { purpose: string; ranges: string; tip: string }> = {
-                                clusteringSilhouette: {
-                                    purpose: "Evaluates how well the K-Means clustering has separated the four driving states (Cruising, Cornering, Slow/Cautious, Erratic). A high score means state groups are tight and well-separated from each other — making the state timeline reliable.",
-                                    ranges: "< 0.25: Poor separation (states overlap heavily) | 0.25–0.5: Moderate (some blending between states) | > 0.5: Well-defined clusters (high state confidence) | > 0.7: Excellent (distinct driving states detected)",
-                                    tip: "Low silhouette scores indicate the driver transitions fluidly between states without sharp behavioral boundaries, which can make state attribution ambiguous."
-                                },
-                                pcaVariance: {
-                                    purpose: "Measures how much of the total driving variability is captured by the first two principal components used for the Driver Profiler scatter plot. Higher explained variance = the 2D visualization faithfully represents the true multi-dimensional driving signature.",
-                                    ranges: "< 50%: Low — 2D plot loses significant nuance | 50–75%: Moderate — main trends captured | > 75%: High — highly representative projection | > 90%: Excellent — near-complete behavioral fingerprint in 2D",
-                                    tip: "If the PCA variance is low, it means driving behavior is highly multidimensional and complex — a good driver of high variance is still meaningful, just harder to reduce."
-                                },
-                                randomForestOOB: {
-                                    purpose: "Measures the convergence stability of the Random Forest ensemble used to predict tire wear. Each tree votes independently — high convergence means trees broadly agree on wear trajectory, giving reliable end-of-session tire life predictions.",
-                                    ranges: "0.4–0.6: High prediction variance — trees disagree significantly | 0.6–0.75: Moderate agreement | 0.75–0.9: Strong convergence | > 0.9: Near-perfect ensemble consensus",
-                                    tip: "High variance can occur when the driving session contains extreme events (e.g., sudden full-throttle bursts) that some trees were not exposed to during training subsampling."
-                                },
-                                anomalySkewness: {
-                                    purpose: "Assesses the rarity and isolation of detected anomaly events relative to the full dataset. A high skewness score means anomalies are genuinely rare outliers — meaningful signal. A low score means the session was so erratic that 'anomaly' becomes the norm, reducing detection confidence.",
-                                    ranges: "> 0.8: Strong — anomalies are rare and clearly isolated | 0.5–0.8: Moderate — frequent mild discomfort events | 0.3–0.5: Low — widespread erratic driving | < 0.3: Poor — session too chaotic for reliable outlier detection",
-                                    tip: "Isolation Forest works best when anomalies are truly sparse. Sessions driven uniformly fast or uniformly aggressive will produce degenerate anomaly scores."
-                                },
-                                svmMargin: {
-                                    purpose: "Represents the width of the SVM decision boundary between clean pedal inputs and overlapping (simultaneous throttle + brake) inputs. A wide margin means the model separates these classes with high geometric confidence.",
-                                    ranges: "> 0.8: Clean separation — pedal control is precise and disciplined | 0.5–0.8: Moderate margin — occasional overlap contaminates the boundary | < 0.5: Narrow margin — frequent overlap blurs the decision surface | < 0.3: Degenerate — classes are inseparable",
-                                    tip: "Trail braking intentionally overlaps throttle and brake to shift weight — this is advanced technique and will lower SVM margin scores even though it is skill-based, not error-based."
-                                },
-                                regressionFit: {
-                                    purpose: "Reports the R² (coefficient of determination) of the multivariate regression model underlying the Safety Score. R² measures what proportion of safety cost variance is explained by the five input features: speed, throttle, brake, steering, and jerk.",
-                                    ranges: "< 0.3: Poor fit — heuristic cost function weakly linked to linear inputs | 0.3–0.6: Moderate — main drivers captured | 0.6–0.8: Good fit — features reliably predict penalty cost | > 0.8: Excellent — strong linear relationship between inputs and safety risk",
-                                    tip: "A low R² doesn't mean the safety score is wrong — it may simply mean the relationship between inputs and penalties is non-linear, which the heuristic still captures well."
-                                },
-                                knnConfidence: {
-                                    purpose: "Reports how close the driver's PCA footprint is to the nearest labeled archetype in the K-Nearest Neighbors style classification (Aggressive, Smooth, Conservative, Balanced). High confidence = the driver is a near-textbook example of their assigned style.",
-                                    ranges: "> 80%: Very close to a known archetype — clear stylistic identity | 50–80%: Moderate — meaningful style match with some unique traits | 30–50%: Weak — driver blends multiple styles or adapts dynamically | < 30%: Outlier — driving style is highly idiosyncratic",
-                                    tip: "Adaptive or context-aware drivers who adjust their style to track conditions will naturally score lower — not a negative finding, but a sign of behavioral complexity."
-                                },
-                                dtwConsistency: {
-                                    purpose: "Quantifies the reproducibility of brake zone pressure profiles using Dynamic Time Warping distance. DTW aligns time-series curves non-linearly to find the minimum cost alignment between two braking events — lower warp distance = more consistent technique.",
-                                    ranges: "Score > 0.7: Elite — zones are near-identical in shape and phase | 0.4–0.7: Moderate — recognizable pattern with zone-specific variation | < 0.4: Poor — braking is essentially ad hoc with no repeatable profile",
-                                    tip: "DTW is more robust than simple correlation because it handles slight timing offsets — pressing the brake 0.1s earlier in one zone doesn't unfairly penalize consistency."
-                                },
-                                dtPurity: {
-                                    purpose: "Measures the Gini purity of the Decision Tree leaf nodes after classification of traction states (In-Grip, Understeer, Oversteer). High purity means the tree's classification boundaries cleanly separate grip events — low purity means the events are hard to distinguish.",
-                                    ranges: "> 0.7: Clean leaf nodes — grip physics are clearly distinguishable | 0.4–0.7: Mixed — some class overlap at boundaries | < 0.4: Low purity — traction limit events closely resemble normal driving inputs",
-                                    tip: "Low purity can indicate a very smooth driver who never reaches traction limits (few class-discriminating examples) — not necessarily a negative outcome."
-                                },
-                                nbAccuracy: {
-                                    purpose: "Approximates the classification accuracy of the Naive Bayes model for gear shift timing. This is estimated as the proportion of detected shift events that fell into the optimal RPM window, adjusted for baseline class probability.",
-                                    ranges: "> 80%: Excellent — engine consistently kept in optimal power band | 60–80%: Good — most shifts are well-timed with occasional sub-optimal events | 40–60%: Moderate — shift timing is inconsistent | < 40%: Poor — largely reactive shifting with no consistent strategy",
-                                    tip: "Naive Bayes assumes conditional independence between RPM and throttle — in reality these are correlated. This makes it a fast but slightly overconfident classifier when both signals trend together."
-                                }
-                            };
-
-                            const metaInfo = metaMap[selectedMetric] || { purpose: "Advanced model quality indicator.", ranges: "Higher is generally better.", tip: "" };
-
-                            return (
-                                <div className="mt-6 bg-slate-950 rounded-2xl p-6 border border-slate-800 animate-in slide-in-from-top-4 fade-in duration-300">
-                                    <div className="flex justify-between items-start mb-5">
-                                        <h4 className="text-lg font-bold text-white capitalize">
-                                            {selectedMetric.replace(/([A-Z])/g, ' $1').trim()} — Quality Metric
-                                        </h4>
-                                        <button onClick={() => setSelectedMetric(null)} className="text-slate-500 hover:text-white transition-colors text-xl">✕</button>
-                                    </div>
-                                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                                        <div className="space-y-4">
-                                            <div>
-                                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">📌 Purpose</div>
-                                                <p className="text-sm text-slate-300 leading-relaxed">{metaInfo.purpose}</p>
-                                            </div>
-                                            <div>
-                                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">📐 Mathematical Formula</div>
-                                                <div className="font-mono text-sm px-3 py-2 bg-slate-900 rounded-lg text-emerald-400 inline-block border border-slate-800">{metric.formula}</div>
-                                            </div>
-                                            {metaInfo.tip && (
-                                                <div className="bg-indigo-950/40 border border-indigo-800/50 rounded-xl p-3">
-                                                    <div className="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-1">💡 Expert Note</div>
-                                                    <p className="text-xs text-indigo-200 leading-relaxed">{metaInfo.tip}</p>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="space-y-4">
-                                            <div>
-                                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">📊 Score Interpretation</div>
-                                                <div className="flex flex-col gap-1.5">
-                                                    {metaInfo.ranges.split('|').map((r, i) => (
-                                                        <div key={i} className="text-xs text-slate-400 flex items-start gap-2">
-                                                            <span className="text-slate-600 mt-0.5">▸</span>
-                                                            <span>{r.trim()}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">🔍 Session Analysis</div>
-                                                <p className="text-slate-300 leading-relaxed text-sm">{metric.analysis}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })()}
-
-                    </div>
-
-                </div>
-            )}
-        </div>
-    );
-};
-
-// Helper components & functions
-const CustomReferenceLines = () => (
-    <g>
-        <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#334155" strokeWidth={2} />
-        <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#334155" strokeWidth={2} />
-        <text x="5%" y="10%" fill="#475569" fontSize={12} className="uppercase font-bold tracking-wider">Smooth</text>
-        <text x="85%" y="10%" fill="#475569" fontSize={12} className="uppercase font-bold tracking-wider">Erratic</text>
-        <text x="5%" y="95%" fill="#475569" fontSize={12} className="uppercase font-bold tracking-wider">Cautious</text>
-        <text x="85%" y="95%" fill="#475569" fontSize={12} className="uppercase font-bold tracking-wider">Aggressive</text>
-    </g>
-);
-
-const MetricCard = ({ id, title, score, label, color, selected, onSelect }: any) => {
-    const isSelected = selected === id;
-    return (
-        <button
-            onClick={() => onSelect(isSelected ? null : id)}
-            className={`flex flex-col items-center p-4 rounded-2xl border transition-all duration-200 text-left w-full
-                ${isSelected
-                    ? `bg-slate-800 border-slate-600 shadow-lg scale-105`
-                    : `bg-slate-900/50 border-slate-800 hover:bg-slate-800 hover:border-slate-700`
-                }
-            `}
-        >
-            <span className="text-slate-400 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-2 text-center h-8 sm:h-auto flex items-center justify-center">{title}</span>
-            <span className={`text-2xl sm:text-3xl font-black font-mono text-${color}-400`}>{score}</span>
-            <span className="text-[10px] sm:text-xs text-slate-500 mt-1 text-center font-semibold">{label}</span>
-        </button>
-    );
-};
-
-const getStateColor = (state: string, isBg: boolean = false) => {
-    switch (state) {
-        case 'Cruising': return isBg ? 'bg-emerald-500' : 'bg-emerald-500';
-        case 'Slow / Cautious': return isBg ? 'bg-blue-500' : 'bg-blue-500';
-        case 'Cornering': return isBg ? 'bg-amber-500' : 'bg-amber-500';
-        case 'Erratic': return isBg ? 'bg-red-500' : 'bg-red-500';
-        default: return 'bg-slate-500';
+          } else {
+            failedFiles.push(file.name);
+            console.warn(`Skipped "${file.name}" — only ${data.length} rows`);
+          }
+          filesProcessed++;
+          tryFinalize();
+        },
+        error: (err) => {
+          failedFiles.push(file.name);
+          console.error(`Failed to parse "${file.name}":`, err.message);
+          filesProcessed++;
+          tryFinalize();
+        },
+      });
     }
+  }, [normalizeRow]);
+
+  const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) processFiles(Array.from(e.target.files));
+  }, [processFiles]);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files.length > 0) processFiles(Array.from(e.dataTransfer.files));
+  }, [processFiles]);
+
+  // ─── Run / Cancel Analysis ──────────────────────────────────────────
+
+  const runAnalysis = useCallback(() => {
+    if (!sessionData || sessionData.length < 50) {
+      setToast({ message: 'Need at least 50 data rows to run analysis.', type: 'warning' });
+      return;
+    }
+
+    setResults({ ...INITIAL_RESULTS, progress: 1, isProcessing: true });
+
+    workerRef.current?.terminate();
+
+    const worker = new Worker(new URL('./mlWorker.ts', import.meta.url), { type: 'module' });
+    workerRef.current = worker;
+
+    const timeout = setTimeout(() => {
+      worker.terminate();
+      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+      setToast({ message: 'Analysis timed out after 2 minutes. Try with fewer or shorter sessions.', type: 'error' });
+    }, ML_CONFIG.ANALYSIS_TIMEOUT_MS);
+
+    setAbortTimeout(timeout);
+
+    worker.onmessage = (e) => {
+      if (e.data.type === 'PROGRESS') {
+        setResults((r) => ({ ...r, progress: e.data.progress }));
+      }
+      if (e.data.type === 'COMPLETE') {
+        clearTimeout(timeout);
+        setAbortTimeout(null);
+        setResults((r) => ({ ...r, ...e.data.results, progress: 100, isProcessing: false }));
+      }
+      if (e.data.type === 'ERROR') {
+        clearTimeout(timeout);
+        setAbortTimeout(null);
+        setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+        setToast({ message: e.data.message, type: 'error' });
+      }
+    };
+
+    worker.postMessage({ type: 'ANALYZE_SESSION', payload: { sessionArray: sessionData } });
+  }, [sessionData]);
+
+  const cancelAnalysis = useCallback(() => {
+    workerRef.current?.terminate();
+    if (abortTimeout) clearTimeout(abortTimeout);
+    setAbortTimeout(null);
+    setResults(INITIAL_RESULTS);
+    setToast({ message: 'Analysis cancelled.', type: 'info' });
+  }, [abortTimeout]);
+
+  // ─── Derived values for hero ─────────────────────────────────────────
+
+  const heroMetrics = isDone
+    ? [
+        { label: 'Safety Score', value: results.safetyScore.score, unit: '', color: 'emerald' as const },
+        { label: 'Driving Profile', value: results.pca.profile || results.pca.knnProfile || 'Unknown', unit: '', color: 'indigo' as const },
+        { label: 'Grip Retention', value: Math.round(results.grip.score), unit: '%', color: 'amber' as const },
+        { label: 'Tire Remaining', value: Math.round(results.rfWear.endLife), unit: '%', color: 'pink' as const },
+      ]
+    : [];
+
+  // ─── Render ─────────────────────────────────────────────────────────
+
+  return (
+    <div className="h-full flex flex-col bg-slate-950">
+      {/* Toast */}
+      {toast && (
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-2xl border text-sm font-semibold animate-in slide-in-from-right-4 fade-in duration-200 ${
+          toast.type === 'error'
+            ? 'bg-red-900/90 border-red-700/50 text-red-200'
+            : toast.type === 'warning'
+              ? 'bg-amber-900/90 border-amber-700/50 text-amber-200'
+              : 'bg-slate-800/90 border-slate-700/50 text-slate-200'
+        }`}>
+          <AlertTriangle className="w-4 h-4 shrink-0" />
+          <span>{toast.message}</span>
+          <button onClick={() => setToast(null)} className="ml-2 hover:text-white transition-colors"><X className="w-4 h-4" /></button>
+        </div>
+      )}
+
+      {/* ─── Header ─────────────────────────────────────────────────────── */}
+      <div className="flex items-start justify-between p-6 pb-4 border-b border-slate-800">
+        <div>
+          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+            <Brain className="w-7 h-7 text-purple-400" />
+            Machine Learning Analysis
+          </h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Analyze telemetry across 13+ ML models — safety, fatigue, grip, shifts, and more.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {/* Drag-drop zone */}
+          <div
+            onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+            onDragLeave={() => setIsDragging(false)}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+            className={`relative flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-dashed cursor-pointer transition-all text-sm font-semibold ${
+              isDragging
+                ? 'border-purple-500 bg-purple-900/20 text-purple-300'
+                : sessionData
+                  ? 'border-emerald-700/50 bg-emerald-900/20 text-emerald-300 hover:bg-emerald-900/30'
+                  : 'border-slate-700 bg-slate-800/50 text-slate-300 hover:border-slate-600 hover:bg-slate-800'
+            }`}
+          >
+            <Upload className={`w-4 h-4 ${isDragging ? 'animate-bounce' : ''}`} />
+            <span>
+              {isDragging
+                ? 'Drop files here'
+                : sessionData
+                  ? `${sessionCount} Session${sessionCount > 1 ? 's' : ''} Loaded`
+                  : 'Load CSV(s)'
+              }
+            </span>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".csv"
+              multiple
+              className="hidden"
+              onChange={handleFileUpload}
+            />
+          </div>
+
+          {/* Run / Cancel */}
+          {!results.isProcessing ? (
+            <button
+              onClick={runAnalysis}
+              disabled={!sessionData}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg ${
+                !sessionData
+                  ? 'bg-slate-800 text-slate-600 cursor-not-allowed'
+                  : 'bg-purple-600 hover:bg-purple-500 text-white hover:scale-105'
+              }`}
+            >
+              <Play className="w-4 h-4 fill-current" />
+              Run Analysis
+            </button>
+          ) : (
+            <button
+              onClick={cancelAnalysis}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-red-600/80 hover:bg-red-600 text-white transition-all"
+            >
+              <Square className="w-4 h-4" />
+              Cancel
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* ─── Progress Bar ────────────────────────────────────────────────── */}
+      {results.isProcessing && (
+        <div className="px-6 py-2">
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-purple-500 to-violet-400 rounded-full transition-all duration-300"
+                style={{ width: `${results.progress || 0}%` }}
+              />
+            </div>
+            <span className="text-xs font-mono font-bold text-purple-400 w-12 text-right">
+              {results.progress || 0}%
+            </span>
+            <Settings className="w-4 h-4 text-purple-400 animate-spin" />
+          </div>
+        </div>
+      )}
+
+      {/* ─── Empty State ─────────────────────────────────────────────────── */}
+      {!isDone && !results.isProcessing && !toast?.type && (
+        <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-3xl mx-8 my-8 text-slate-500">
+          <Brain className="w-20 h-20 text-slate-800 mb-4" />
+          <h2 className="text-xl font-bold text-slate-400">Awaiting Telemetry Data</h2>
+          <p className="text-sm text-slate-600 mt-2 max-w-md text-center">
+            Drop one or more CSV session files above, or click <strong>Load CSV(s)</strong> to begin.
+          </p>
+        </div>
+      )}
+
+      {/* ─── Results ─────────────────────────────────────────────────────── */}
+      {isDone && (
+        <div className="flex-1 overflow-y-auto">
+          {/* Summary Hero Row */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 px-6 pt-4 pb-3">
+            {heroMetrics.map((m) => (
+              <div key={m.label} className={`${bgColorMap[m.color]} rounded-xl border p-4 flex items-center justify-between`}>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{m.label}</span>
+                <span className={`text-2xl font-black font-mono ${colorMap[m.color]}`}>
+                  {m.value}{m.unit}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Session Badge */}
+          {sessionCount > 1 && (
+            <div className="px-6 pb-2 flex gap-1.5 text-xs text-slate-500">
+              <span className="font-semibold">Sessions:</span>
+              {Array.from({ length: sessionCount }).map((_, i) => (
+                <span key={i} className="px-2 py-0.5 rounded bg-slate-800 font-mono">S{i + 1}</span>
+              ))}
+            </div>
+          )}
+
+          {/* Model Status Badges */}
+          {results.modelStatus && Object.keys(results.modelStatus).length > 0 && (
+            <div className="px-6 pb-3 flex flex-wrap gap-1.5">
+              {Object.entries(results.modelStatus).map(([name, status]) => (
+                <div key={name} className={`flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
+                  status === 'loaded'
+                    ? 'bg-emerald-900/30 border-emerald-700/40 text-emerald-400'
+                    : 'bg-slate-800 border-slate-700 text-slate-500'
+                }`}>
+                  <span className={`w-1.5 h-1.5 rounded-full ${status === 'loaded' ? 'bg-emerald-400' : 'bg-slate-600'}`} />
+                  {name.replace(/_/g, ' ')}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ─── Tab Bar ──────────────────────────────────────────────────── */}
+          <div className="px-6 pb-4">
+            <div className="flex gap-1 bg-slate-900 rounded-xl p-1 border border-slate-800 inline-flex">
+              {TAB_LABELS.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                    activeTab === tab
+                      ? 'bg-purple-600 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ─── Tab Content ──────────────────────────────────────────────── */}
+          <div className="px-6 pb-8">
+            {activeTab === 'Overview' && <OverviewTab results={results} sessionBoundaries={results.sessionBoundaries} />}
+            {activeTab === 'Safety & Risk' && <SafetyTab results={results} />}
+            {activeTab === 'Driving Style' && <StyleTab results={results} />}
+            {activeTab === 'Vehicle Dynamics' && <DynamicsTab results={results} />}
+            {activeTab === 'Wear' && <WearTab results={results} />}
+            {activeTab === 'Quality' && (
+              <QualityTab
+                results={results}
+                selectedMetric={selectedMetric}
+                onSelectMetric={setSelectedMetric}
+              />
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ══════════════════════════════════════════════════════════════════════════
+//  TAB COMPONENTS
+// ══════════════════════════════════════════════════════════════════════════
+
+// ─── Overview ──────────────────────────────────────────────────────────────
+
+function OverviewTab({ results, sessionBoundaries }: { results: MLResults; sessionBoundaries: number[] }) {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      {/* Safety Score Gauge */}
+      <Card title="Safety Score" subtitle="Heuristic Penalty Score" icon={Target} color="emerald">
+        <div className="flex flex-col items-center py-2">
+          <div className="relative">
+            <svg viewBox="0 0 100 50" className="w-40 h-20 overflow-visible">
+              <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#1e293b" strokeWidth="12" strokeLinecap="round" />
+              <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="url(#ov-grad)" strokeWidth="12" strokeLinecap="round"
+                strokeDasharray={`${(results.safetyScore.score / 100) * 125} 125`} />
+              <defs>
+                <linearGradient id="ov-grad">
+                  <stop offset="0%" stopColor="#ef4444" /><stop offset="50%" stopColor="#eab308" /><stop offset="100%" stopColor="#22c55e" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div className="absolute bottom-0 inset-x-0 text-center">
+              <span className="text-4xl font-black font-mono text-white">{results.safetyScore.score}</span>
+              <span className="text-slate-600 font-bold text-lg">/100</span>
+            </div>
+          </div>
+        </div>
+        {results.safetyScore.penaltyBreakdown && results.safetyScore.penaltyBreakdown.length > 0 && (
+          <div className="mt-2">
+            <div className="flex gap-1 h-2 rounded-full overflow-hidden mb-2">
+              {results.safetyScore.penaltyBreakdown.map((p, i) => (
+                <div key={i} style={{ width: `${p.pct}%`, backgroundColor: p.color }} className="h-full" title={`${p.label}: ${p.count}`} />
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-slate-500">
+              {results.safetyScore.penaltyBreakdown.map((p, i) => (
+                <span key={i} className="flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: p.color }} />
+                  {p.label}: {p.count}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        <Interpretation>
+          {results.safetyScore.score >= 85
+            ? 'Driver exhibits highly controlled inputs with minimal penalty events.'
+            : results.safetyScore.score >= 65
+              ? 'Moderate penalty density — periodic exceedances of jerk and steering volatility thresholds.'
+              : 'Significant safety cost — high jerk and/or steering volatility events are frequent.'}
+        </Interpretation>
+      </Card>
+
+      {/* Driver Profile */}
+      <Card title="Driver Profile" subtitle="PCA + KNN Classification" icon={Brain} color="indigo">
+        <div className="h-44 -ml-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+              <XAxis type="number" dataKey="x" hide />
+              <YAxis type="number" dataKey="y" hide />
+              <ZAxis type="number" dataKey="intensity" range={[15, 50]} />
+              <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }} />
+              <Scatter data={results.pca.data} fill="#6366f1" opacity={0.5} />
+              {/* Quadrant lines */}
+              <ReferenceLine x={0} stroke="#334155" strokeWidth={1} />
+              <ReferenceLine y={0} stroke="#334155" strokeWidth={1} />
+              {/* Quadrant labels via SVG */}
+              <text x="5%" y="12%" fill="#475569" fontSize={10} fontWeight="bold">Smooth</text>
+              <text x="75%" y="12%" fill="#475569" fontSize={10} fontWeight="bold">Erratic</text>
+              <text x="5%" y="95%" fill="#475569" fontSize={10} fontWeight="bold">Cautious</text>
+              <text x="75%" y="95%" fill="#475569" fontSize={10} fontWeight="bold">Aggressive</text>
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="text-center bg-indigo-950/30 border border-indigo-900/50 rounded-lg py-1.5 text-xs font-bold text-indigo-300 uppercase tracking-widest">
+          {results.pca.profile || results.pca.knnProfile || 'Unknown'}
+        </div>
+      </Card>
+
+      {/* Session Timeline */}
+      <Card title="Session Timeline" subtitle="Speed with Anomaly Markers" icon={Activity} color="red" className="xl:col-span-1 lg:col-span-2">
+        <div className="h-44">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={downsample(results.anomalies.data, 500)} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+              <XAxis dataKey="timestamp" stroke="#475569" tickFormatter={(t) => `${(t / 1000).toFixed(0)}s`} fontSize={10} />
+              <YAxis stroke="#475569" fontSize={10} />
+              <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }} />
+              {sessionBoundaries.map((ts, i) => (
+                <ReferenceLine key={i} x={ts} stroke="#475569" strokeDasharray="4 4" strokeWidth={1} label={{ value: `S${i + 1}→S${i + 2}`, fill: '#475569', fontSize: 9 }} />
+              ))}
+              <Line type="monotone" dataKey="speed" stroke="#3b82f6" strokeWidth={2} dot={false} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="flex justify-between text-xs text-slate-500 mt-1">
+          <span>{results.anomalies.anomalyCount} harsh events</span>
+          <span className="text-red-400">{results.safetyScore.score >= 70 ? '✅ Safe' : results.safetyScore.score >= 40 ? '⚠️ Moderate' : '🔴 Risky'}</span>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// ─── Safety & Risk ─────────────────────────────────────────────────────────
+
+function SafetyTab({ results }: { results: MLResults }) {
+  const bd = results.safetyScore.penaltyBreakdown || [];
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      {/* Safety Score Detail */}
+      <Card title="Safety Score" subtitle="Detailed Penalty Breakdown" icon={Target} color="emerald">
+        <div className="text-center py-4">
+          <span className="text-6xl font-black font-mono text-white">{results.safetyScore.score}</span>
+          <span className="text-slate-600 font-bold text-2xl">/100</span>
+        </div>
+        {bd.length > 0 && (
+          <div>
+            <div className="h-3 rounded-full overflow-hidden flex mb-3">
+              {bd.map((p, i) => (
+                <div key={i} style={{ width: `${p.pct}%`, backgroundColor: p.color }} className="h-full" title={`${p.label}: ${p.count}`} />
+              ))}
+            </div>
+            <div className="space-y-1.5">
+              {bd.map((p, i) => (
+                <div key={i} className="flex justify-between text-xs">
+                  <span className="flex items-center gap-1.5 text-slate-400">
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
+                    {p.label}
+                  </span>
+                  <span className="font-mono font-bold text-slate-300">{p.count} ({p.pct.toFixed(0)}%)</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        <Interpretation>
+          {results.safetyScore.score >= 85
+            ? 'Disciplined driver profile with minimal risk events.'
+            : results.safetyScore.score >= 65
+              ? 'Adequate but periodic lapses in smoothness.'
+              : 'Frequent harsh inputs — focus on smoother transitions.'}
+        </Interpretation>
+      </Card>
+
+      {/* Anomalies */}
+      <Card title="Discomfort Anomalies" subtitle="3σ + G-Force Detection" icon={Activity} color="red" className="xl:col-span-2">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-xs text-slate-500">{results.anomalies.anomalyCount} events</span>
+          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+            results.anomalies.anomalyCount < 5 ? 'bg-emerald-900/40 text-emerald-400' :
+            results.anomalies.anomalyCount < 20 ? 'bg-amber-900/40 text-amber-400' :
+            'bg-red-900/40 text-red-400'
+          }`}>
+            {results.anomalies.anomalyCount < 5 ? 'Low' : results.anomalies.anomalyCount < 20 ? 'Moderate' : 'High'}
+          </span>
+        </div>
+        <div className="h-48">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={downsample(results.anomalies.data, 500)} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+              <XAxis dataKey="timestamp" stroke="#475569" tickFormatter={(t) => `${(t / 1000).toFixed(0)}s`} fontSize={10} />
+              <YAxis stroke="#475569" fontSize={10} />
+              <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }} />
+              <Line type="monotone" dataKey="speed" stroke="#3b82f6" strokeWidth={2}
+                dot={(props) => props.payload.isAnomaly
+                  ? <circle key={props.key} cx={props.cx} cy={props.cy} r={5} fill="#ef4444" stroke="#7f1d1d" strokeWidth={2} />
+                  : <></>}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="flex flex-wrap gap-2 mt-1 text-[10px] text-slate-500">
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500" /> Anomaly</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500" /> Speed</span>
+        </div>
+      </Card>
+
+      {/* Aggression Matrix */}
+      <Card title="Aggression Matrix" subtitle="Driving Style Quadrants" icon={Layers} color="fuchsia">
+        <div className="grid grid-cols-2 gap-2">
+          <Quadrant color="emerald" label="SAFE + FAST" value={Math.round(results.aggression.safeFast)} />
+          <Quadrant color="amber" label="RISKY + FAST" value={Math.round(results.aggression.riskyFast)} />
+          <Quadrant color="blue" label="SAFE + SLOW" value={Math.round(results.aggression.safeSlow)} />
+          <Quadrant color="red" label="RISKY + SLOW" value={Math.round(results.aggression.riskySlow)} />
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// ─── Driving Style ─────────────────────────────────────────────────────────
+
+function StyleTab({ results }: { results: MLResults }) {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      {/* PCA */}
+      <Card title="Driver Profiler" subtitle="PCA Projection" icon={Brain} color="indigo">
+        <div className="h-48 -ml-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <ScatterChart margin={{ top: 15, right: 15, bottom: 15, left: 15 }}>
+              <XAxis type="number" dataKey="x" hide />
+              <YAxis type="number" dataKey="y" hide />
+              <ZAxis type="number" dataKey="intensity" range={[15, 50]} />
+              <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }} />
+              <Scatter data={results.pca.data} fill="#6366f1" opacity={0.5} />
+              <ReferenceLine x={0} stroke="#334155" strokeWidth={1} />
+              <ReferenceLine y={0} stroke="#334155" strokeWidth={1} />
+              <text x="5%" y="12%" fill="#475569" fontSize={10} fontWeight="bold">Smooth</text>
+              <text x="75%" y="12%" fill="#475569" fontSize={10} fontWeight="bold">Erratic</text>
+              <text x="5%" y="95%" fill="#475569" fontSize={10} fontWeight="bold">Cautious</text>
+              <text x="75%" y="95%" fill="#475569" fontSize={10} fontWeight="bold">Aggressive</text>
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="text-center bg-indigo-950/30 border border-indigo-900/50 rounded-lg py-1.5 text-xs font-bold text-indigo-300 uppercase tracking-widest">
+          {results.pca.profile || results.pca.knnProfile || 'Unknown'}
+        </div>
+      </Card>
+
+      {/* State Timeline */}
+      <Card title="Driving States" subtitle="K-Means Classification" icon={Layers} color="teal" className="xl:col-span-2">
+        <div className="grid grid-cols-4 gap-2 mb-3">
+          {Object.entries(results.hmm.statePercentages).map(([state, pct]) => (
+            <div key={state} className="bg-slate-800/50 rounded-lg p-2 text-center">
+              <div className={`w-2 h-2 rounded-full ${colorForState(state)} mx-auto mb-1`} />
+              <div className="text-[10px] text-slate-500">{state}</div>
+              <div className="text-sm font-bold font-mono text-white">{pct.toFixed(0)}%</div>
+            </div>
+          ))}
+        </div>
+        <div className="h-6 rounded-md overflow-hidden flex border border-slate-700">
+          {downsample(results.hmm.data, 1000).map((d, i) => (
+            <div key={i} className={`h-full flex-1 ${colorForState(d.state, true)} opacity-70`}
+              title={`${d.state} @ ${(d.timestamp / 1000).toFixed(1)}s`} />
+          ))}
+        </div>
+      </Card>
+
+      {/* Markov */}
+      <Card title="State Transitions" subtitle="Markov Chain" icon={ShieldCheck} color="teal">
+        <div className="space-y-2">
+          {(['Cruising', 'Cornering', 'Slow / Cautious', 'Erratic'] as const).map((from) => {
+            const row = results.markov[from] || {};
+            const total = Object.values(row).reduce((a, b) => a + Number(b), 0) || 1;
+            const top = Object.entries(row).sort((a, b) => b[1] - a[1]).slice(0, 2);
+            return (
+              <div key={from} className="bg-slate-800/50 rounded-lg p-2">
+                <div className="text-xs font-bold mb-1" style={{ color: from === 'Erratic' ? '#f87171' : from === 'Cruising' ? '#34d399' : from === 'Cornering' ? '#fbbf24' : '#60a5fa' }}>
+                  {from}
+                </div>
+                {top.length === 0
+                  ? <div className="text-[10px] text-slate-600">No transitions</div>
+                  : top.map(([to, count]) => (
+                      <div key={to} className="flex justify-between text-[10px] text-slate-400 py-0.5">
+                        <span>→ {to}</span>
+                        <span className="font-mono font-bold text-teal-400">{((Number(count) / total) * 100).toFixed(0)}%</span>
+                      </div>
+                    ))}
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+
+      {/* DTW Consistency */}
+      <Card title="Pedal Consistency" subtitle="Brake Zone DTW Score" icon={Gauge} color="indigo">
+        <div className="flex gap-4 items-center py-2">
+          <div className="relative w-20 h-20 shrink-0">
+            <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#1e293b" strokeWidth="12" />
+              <circle cx="50" cy="50" r="40" fill="none"
+                stroke={results.consistency.dtwScore > 70 ? '#818cf8' : results.consistency.dtwScore > 40 ? '#f59e0b' : '#ef4444'}
+                strokeWidth="12"
+                strokeDasharray={`${2.51 * results.consistency.dtwScore} 251`}
+                strokeLinecap="round" />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-lg font-black text-indigo-400">{Math.round(results.consistency.dtwScore)}</span>
+            </div>
+          </div>
+          <div className="text-xs text-slate-500">
+            <div className="font-semibold text-slate-300 mb-1">
+              {results.consistency.dtwScore > 70 ? 'High Repeatability' : results.consistency.dtwScore > 40 ? 'Variable Pattern' : 'Inconsistent'}
+            </div>
+            <div className="w-full h-1.5 rounded-full bg-slate-800 mt-1">
+              <div className="h-full rounded-full bg-gradient-to-r from-red-500 via-amber-400 to-indigo-400"
+                style={{ width: `${results.consistency.dtwScore}%` }} />
+            </div>
+            <div className="flex justify-between mt-0.5">
+              <span>0</span><span>50</span><span>100</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// ─── Vehicle Dynamics ──────────────────────────────────────────────────────
+
+function DynamicsTab({ results }: { results: MLResults }) {
+  const exitData = results.exitForecast.predicted;
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      {/* Pedal Overlap */}
+      <Card title="Pedal Confusion" subtitle="SVM Overlap Ratio" icon={Zap} color="orange">
+        <div className="text-center py-2">
+          <span className="text-5xl font-black font-mono text-white">{results.svm.overlapPercentage.toFixed(1)}</span>
+          <span className="text-slate-500 text-xl">%</span>
+        </div>
+        <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-full bg-orange-500 rounded-full" style={{ width: `${Math.min(results.svm.overlapPercentage * 2, 100)}%` }} />
+        </div>
+        <div className="flex justify-between text-[10px] text-slate-600 mt-1">
+          <span>Perfect (0%)</span>
+          <span>Messy (&gt;10%)</span>
+        </div>
+      </Card>
+
+      {/* Grip */}
+      <Card title="Grip Limits" subtitle="ONNX / Physics Classification" icon={TrendingUp} color="red">
+        <div className="grid grid-cols-3 gap-2 text-center py-2">
+          <div className="bg-slate-800/50 rounded-lg p-2">
+            <div className="text-lg font-black text-emerald-400">{Math.round(results.grip.score)}%</div>
+            <div className="text-[10px] text-slate-500">In Grip</div>
+          </div>
+          <div className="bg-slate-800/50 rounded-lg p-2">
+            <div className="text-lg font-black text-amber-400">{results.grip.understeer}</div>
+            <div className="text-[10px] text-slate-500">Understeer</div>
+          </div>
+          <div className="bg-slate-800/50 rounded-lg p-2">
+            <div className="text-lg font-black text-red-400">{results.grip.oversteer}</div>
+            <div className="text-[10px] text-slate-500">Oversteer</div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Shifts */}
+      <Card title="Shift Points" subtitle="ONNX / RPM Heuristic" icon={GitFork} color="purple">
+        <div className="grid grid-cols-3 gap-2 text-center py-2">
+          <div className="bg-slate-800/50 rounded-lg p-2">
+            <div className="text-lg font-black text-blue-400">{results.shifts.early}</div>
+            <div className="text-[10px] text-slate-500">Early</div>
+          </div>
+          <div className="bg-slate-800/50 rounded-lg p-2">
+            <div className="text-lg font-black text-emerald-400">{results.shifts.optimal}</div>
+            <div className="text-[10px] text-slate-500">Optimal</div>
+          </div>
+          <div className="bg-slate-800/50 rounded-lg p-2">
+            <div className="text-lg font-black text-red-400">{results.shifts.late}</div>
+            <div className="text-[10px] text-slate-500">Late</div>
+          </div>
+        </div>
+        <p className="text-[10px] text-slate-500 mt-1">
+          Early &lt;4000 RPM / Optimal 4000–7200 RPM / Late &gt;7200 RPM.
+          {results.shifts.optimal > results.shifts.early + results.shifts.late ? ' ✅ Good timing.' : ' ⚠️ Needs refinement.'}
+        </p>
+      </Card>
+
+      {/* Braking Technique */}
+      <Card title="Braking Technique" subtitle="Trail vs Stab Braking" icon={ArrowRightLeft} color="blue">
+        <div className="py-2">
+          <div className="flex justify-between text-xs text-slate-500 mb-1">
+            <span>Stab</span>
+            <span>Trail</span>
+          </div>
+          <div className="h-3 bg-slate-800 rounded-full overflow-hidden flex">
+            <div className="h-full bg-blue-500 transition-all" style={{ width: `${100 - results.brakingTech.trailPercent}%` }} />
+            <div className="h-full bg-orange-500 transition-all" style={{ width: `${results.brakingTech.trailPercent}%` }} />
+          </div>
+          <div className="flex justify-between font-mono font-bold text-xs mt-1">
+            <span className="text-blue-400">{100 - results.brakingTech.trailPercent}%</span>
+            <span className="text-orange-400">{results.brakingTech.trailPercent}%</span>
+          </div>
+        </div>
+        <Interpretation>
+          {results.brakingTech.trailPercent > 40
+            ? 'Trail braking used frequently — advanced corner-entry technique.'
+            : 'Primarily stab braking — safer but leaves speed on the table.'}
+        </Interpretation>
+      </Card>
+
+      {/* Fatigue */}
+      <Card title="Driver Fatigue" subtitle="Jerk Decay Analysis" icon={Timer} color="amber">
+        <div className="grid grid-cols-2 gap-2 py-2">
+          <div className="bg-slate-800/50 rounded-lg p-2 text-center">
+            <div className="text-xs text-slate-500 mb-0.5">Focus</div>
+            <span className={`text-xl font-black font-mono ${results.fatigue.score > 70 ? 'text-emerald-400' : results.fatigue.score > 40 ? 'text-amber-400' : 'text-red-400'}`}>
+              {Math.round(results.fatigue.score)}%
+            </span>
+          </div>
+          <div className="bg-slate-800/50 rounded-lg p-2 text-center">
+            <div className="text-xs text-slate-500 mb-0.5">Trend</div>
+            <span className={`text-xl font-black font-mono ${
+              results.fatigue.trend === 'improving' ? 'text-emerald-400' :
+              results.fatigue.trend === 'fatiguing' ? 'text-red-400' : 'text-slate-400'
+            }`}>
+              {results.fatigue.trend === 'improving' ? '↑' : results.fatigue.trend === 'fatiguing' ? '↓' : '→'}
+            </span>
+          </div>
+        </div>
+        {results.fatigue.timeline.length > 0 && (
+          <div className="flex items-end gap-0.5 h-12 mb-2">
+            {results.fatigue.timeline.map((b, i) => (
+              <div key={i} className="flex-1 flex flex-col items-center" title={`${b.segment}: ${b.smoothness.toFixed(0)}%`}>
+                <div className="w-full rounded-t transition-all"
+                  style={{
+                    height: `${b.smoothness}%`,
+                    backgroundColor: b.smoothness > 70 ? '#22c55e' : b.smoothness > 40 ? '#f59e0b' : '#ef4444',
+                  }} />
+              </div>
+            ))}
+          </div>
+        )}
+        {/* Per-session fatigue breakdown */}
+        {results.fatigue.perSession && results.fatigue.perSession.length > 1 && (
+          <div className="mt-1 text-[10px] text-slate-500">
+            <span className="font-semibold">Per session: </span>
+            {results.fatigue.perSession.map((s) => (
+              <span key={s.sessionId} className="ml-2 font-mono">S{s.sessionId + 1}: {Math.round(s.score)}%</span>
+            ))}
+          </div>
+        )}
+      </Card>
+
+      {/* Corner Exit Forecast */}
+      <Card title="Corner Exit Forecast" subtitle="Ridge Regression Model" icon={TrendingUp} color="green">
+        {exitData && exitData.length > 0 ? (
+          <>
+            <div className="h-36">
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+                  <XAxis type="number" dataKey="actual" name="Actual Exit Speed" stroke="#475569" fontSize={10} />
+                  <YAxis type="number" dataKey="predicted" name="Predicted Exit Speed" stroke="#475569" fontSize={10} />
+                  <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }} />
+                  <Scatter data={exitData} fill="#22c55e" opacity={0.6} />
+                  {/* Perfect prediction reference line */}
+                  <ReferenceLine x={0} y={0} stroke="#334155" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+              <span>Speed coeff: {results.exitForecast.speedCoeff.toFixed(3)}</span>
+              <span>Throttle coeff: {results.exitForecast.throttleCoeff.toFixed(3)}</span>
+            </div>
+          </>
+        ) : (
+          <div className="text-center py-6 text-xs text-slate-600">Not enough exit events to model.</div>
+        )}
+      </Card>
+    </div>
+  );
+}
+
+// ─── Wear ──────────────────────────────────────────────────────────────────
+
+function WearTab({ results }: { results: MLResults }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 max-w-3xl">
+      <Card title="Predictive Tire Degradation" subtitle="Random Forest / Heuristic" icon={Activity} color="pink">
+        <div className="grid grid-cols-3 gap-3 mb-4 text-center">
+          <div className="bg-slate-800/50 rounded-xl p-3">
+            <div className="text-[10px] text-slate-500 mb-0.5">Start</div>
+            <div className="text-lg font-black text-white font-mono">100%</div>
+          </div>
+          <div className="bg-slate-800/50 rounded-xl p-3">
+            <div className="text-[10px] text-slate-500 mb-0.5">Wear Rate</div>
+            <div className="text-lg font-black text-orange-400 font-mono">{(100 - results.rfWear.endLife).toFixed(1)}%</div>
+          </div>
+          <div className="bg-slate-800/50 rounded-xl p-3">
+            <div className="text-[10px] text-slate-500 mb-0.5">Remaining</div>
+            <div className={`text-lg font-black font-mono ${results.rfWear.endLife > 80 ? 'text-emerald-400' : results.rfWear.endLife > 50 ? 'text-amber-400' : 'text-red-400'}`}>
+              {results.rfWear.endLife.toFixed(1)}%
+            </div>
+          </div>
+        </div>
+        <div className="h-48">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={downsample(results.rfWear.data, ML_CONFIG.MAX_CHART_POINTS)} margin={{ top: 5, right: 5, bottom: 5, left: -20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+              <XAxis dataKey="timestamp" stroke="#475569" tick={false} />
+              <YAxis stroke="#475569" domain={[0, 100]} fontSize={10} />
+              <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }} />
+              {/* Reference lines */}
+              <ReferenceLine y={80} stroke="#22c55e" strokeDasharray="3 3" label={{ value: 'Healthy', fill: '#22c55e', fontSize: 10 }} />
+              <ReferenceLine y={50} stroke="#f59e0b" strokeDasharray="3 3" label={{ value: 'Warning', fill: '#f59e0b', fontSize: 10 }} />
+              <Line type="monotone" dataKey="life" stroke="#ec4899" strokeWidth={2.5} dot={false} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <Interpretation>
+          {results.rfWear.endLife > 80
+            ? 'Minimal tire degradation. Inputs within mechanical grip limits.'
+            : results.rfWear.endLife > 50
+              ? 'Moderate tire wear — episodic overloading during cornering or braking.'
+              : 'Critical degradation — sustained high-load events. Tire change recommended.'}
+        </Interpretation>
+      </Card>
+    </div>
+  );
+}
+
+// ─── Model Quality ─────────────────────────────────────────────────────────
+
+function QualityTab({
+  results,
+  selectedMetric,
+  onSelectMetric,
+}: {
+  results: MLResults;
+  selectedMetric: string | null;
+  onSelectMetric: (id: string | null) => void;
+}) {
+  const q = results.qualityMetrics;
+
+  const allMetrics: Array<{ id: string; title: string; score: string; label: string; color: string }> = [
+    { id: 'clusteringSilhouette', title: 'State Clustering', score: q.clusteringSilhouette.score.toFixed(2), label: 'Silhouette', color: 'emerald' },
+    { id: 'pcaVariance', title: 'Feature Map', score: `${(q.pcaVariance.score * 100).toFixed(1)}%`, label: 'PCA Variance', color: 'indigo' },
+    { id: 'randomForestOOB', title: 'Wear Model', score: q.randomForestOOB.score.toFixed(2), label: 'RF R²', color: 'pink' },
+    { id: 'anomalySkewness', title: 'Anomaly Skew', score: q.anomalySkewness.score.toFixed(2), label: 'Outlier', color: 'red' },
+    { id: 'svmMargin', title: 'SVM Boundary', score: q.svmMargin.score.toFixed(2), label: 'Margin', color: 'orange' },
+    { id: 'regressionFit', title: 'Safety Fit', score: q.regressionFit.score.toFixed(2), label: 'R² Fit', color: 'green' },
+    { id: 'knnConfidence', title: 'Driver Match', score: `${(q.knnConfidence.score * 100).toFixed(1)}%`, label: 'KNN', color: 'blue' },
+  ];
+
+  if (q.dtwConsistency) allMetrics.push({ id: 'dtwConsistency', title: 'Brake Consistency', score: q.dtwConsistency.score.toFixed(2), label: 'DTW', color: 'teal' });
+  if (q.dtPurity) allMetrics.push({ id: 'dtPurity', title: 'Grip Tree', score: q.dtPurity.score.toFixed(2), label: 'Purity', color: 'amber' });
+  if (q.nbAccuracy) allMetrics.push({ id: 'nbAccuracy', title: 'Shift Accuracy', score: `${(q.nbAccuracy.score * 100).toFixed(1)}%`, label: 'NB Acc', color: 'sky' });
+
+  return (
+    <div>
+      <div className="flex items-center gap-2 mb-4">
+        <Settings className="w-5 h-5 text-slate-400" />
+        <h3 className="text-lg font-bold text-white">Model Confidence & Quality Metrics</h3>
+        <span className="text-xs text-slate-500">Click a card for details</span>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-3 mb-6">
+        {allMetrics.map((m) => (
+          <button
+            key={m.id}
+            onClick={() => onSelectMetric(selectedMetric === m.id ? null : m.id)}
+            className={`flex flex-col items-center p-4 rounded-2xl border transition-all duration-200 ${
+              selectedMetric === m.id
+                ? 'bg-slate-800 border-slate-600 shadow-lg scale-105'
+                : 'bg-slate-900/50 border-slate-800 hover:bg-slate-800 hover:border-slate-700'
+            }`}
+          >
+            <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase mb-2 text-center h-8 flex items-center">
+              {m.title}
+            </span>
+            <span className={`text-2xl font-black font-mono ${colorMap[m.color] || 'text-slate-400'}`}>
+              {m.score}
+            </span>
+            <span className="text-[10px] text-slate-600 mt-1 font-semibold">{m.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Expanded detail */}
+      {selectedMetric && (() => {
+        const metric = q[selectedMetric as keyof typeof q];
+        if (!metric || !('analysis' in metric)) return null;
+
+        const meta: Record<string, { purpose: string; ranges: string; tip: string }> = {
+          clusteringSilhouette: {
+            purpose: 'Evaluates K-Means cluster separation for the four driving states.',
+            ranges: '< 0.25: Poor | 0.25–0.5: Moderate | > 0.5: Well-defined | > 0.7: Excellent',
+            tip: 'Low scores indicate fluid transitions between states without sharp boundaries.',
+          },
+          pcaVariance: {
+            purpose: 'How much driving variability is captured by the top 2 PCA components.',
+            ranges: '< 50%: Low | 50–75%: Moderate | > 75%: High | > 90%: Excellent',
+            tip: 'Low variance means behavior is multidimensional — hard to reduce to 2D.',
+          },
+          randomForestOOB: {
+            purpose: 'Ensemble convergence for tire wear predictions.',
+            ranges: '0.4–0.6: High variance | 0.6–0.75: Moderate | 0.75–0.9: Strong | > 0.9: Excellent',
+            tip: 'High variance occurs when sessions contain extreme events unseen during training.',
+          },
+          anomalySkewness: {
+            purpose: 'Rarity and isolation of detected anomalies.',
+            ranges: '> 0.8: Strong | 0.5–0.8: Moderate | 0.3–0.5: Low | < 0.3: Poor',
+            tip: 'Works best when anomalies are truly sparse.',
+          },
+          svmMargin: {
+            purpose: 'Width of SVM decision boundary for pedal overlap detection.',
+            ranges: '> 0.8: Clean | 0.5–0.8: Moderate | < 0.5: Narrow | < 0.3: Degenerate',
+            tip: 'Trail braking intentionally overlaps pedals — lowers margin scores despite being skill.',
+          },
+          regressionFit: {
+            purpose: 'R² of safety score regression model.',
+            ranges: '< 0.3: Poor | 0.3–0.6: Moderate | 0.6–0.8: Good | > 0.8: Excellent',
+            tip: 'Low R² may mean relationship is non-linear, which heuristic still captures.',
+          },
+          knnConfidence: {
+            purpose: 'Distance to nearest driving style archetype.',
+            ranges: '> 80%: Clear identity | 50–80%: Moderate | 30–50%: Weak | < 30%: Idiosyncratic',
+            tip: 'Adaptive drivers score lower — not negative, just complex.',
+          },
+          dtwConsistency: {
+            purpose: 'Reproducibility of brake zone pressure profiles via DTW.',
+            ranges: '> 0.7: Elite | 0.4–0.7: Moderate | < 0.4: Poor',
+            tip: 'DTW handles timing offsets — 0.1s delay in brake application doesn\'t penalize.',
+          },
+          dtPurity: {
+            purpose: 'Gini purity of grip classification tree leaves.',
+            ranges: '> 0.7: Clean | 0.4–0.7: Mixed | < 0.4: Low',
+            tip: 'Low purity can indicate a smooth driver who never reaches traction limits.',
+          },
+          nbAccuracy: {
+            purpose: 'Naive Bayes classification accuracy for shift timing.',
+            ranges: '> 80%: Excellent | 60–80%: Good | 40–60%: Moderate | < 40%: Poor',
+            tip: 'NB assumes independence between RPM and throttle — slightly overconfident.',
+          },
+        };
+
+        const info = meta[selectedMetric] || { purpose: 'Quality metric.', ranges: 'Higher is better.', tip: '' };
+
+        return (
+          <div className="bg-slate-900 rounded-2xl p-6 border border-slate-700 animate-in fade-in slide-in-from-top-4 duration-300">
+            <div className="flex justify-between items-start mb-4">
+              <h4 className="text-base font-bold text-white capitalize">
+                {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}
+              </h4>
+              <button onClick={() => onSelectMetric(null)} className="text-slate-500 hover:text-white transition-colors">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Purpose</div>
+                  <p className="text-xs text-slate-300 leading-relaxed">{info.purpose}</p>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Formula</div>
+                  <div className="font-mono text-xs px-3 py-2 bg-slate-950 rounded-lg text-emerald-400 inline-block border border-slate-800">
+                    {metric.formula}
+                  </div>
+                </div>
+                {info.tip && (
+                  <div className="bg-indigo-950/40 border border-indigo-800/50 rounded-lg p-3">
+                    <div className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider mb-1">Expert Note</div>
+                    <p className="text-[11px] text-indigo-200 leading-relaxed">{info.tip}</p>
+                  </div>
+                )}
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Score Interpretation</div>
+                  <div className="text-xs text-slate-400 space-y-1">
+                    {info.ranges.split('|').map((r, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <span className="text-slate-600 mt-0.5">▸</span>
+                        <span>{r.trim()}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Session Analysis</div>
+                  <p className="text-xs text-slate-300 leading-relaxed">{metric.analysis}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  REUSABLE SUB-COMPONENTS
+// ══════════════════════════════════════════════════════════════════════════
+
+function Card({
+  title, subtitle, icon: Icon, color, children, className,
+}: {
+  title: string;
+  subtitle: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  children: React.ReactNode;
+  className?: string;
+  interpretation?: string;
+}) {
+  return (
+    <div className={`bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col gap-3 ${className || ''}`}>
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <Icon className={`w-4 h-4 ${colorMap[color] || 'text-slate-400'}`} />
+            {title}
+          </h3>
+          <p className="text-[10px] text-slate-500 mt-0.5">{subtitle}</p>
+        </div>
+      </div>
+      <div className="flex-1">{children}</div>
+    </div>
+  );
+}
+
+function Interpretation({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mt-3 pt-3 border-t border-slate-800">
+      <p className="text-[11px] text-slate-400 leading-relaxed">{children}</p>
+    </div>
+  );
+}
+
+function Quadrant({ color, label, value }: { color: string; value: number; label: string }) {
+  return (
+    <div className={`${bgColorMap[color] || 'bg-slate-800/50'} rounded-xl p-3 text-center border`}>
+      <div className={`text-[10px] font-bold ${colorMap[color] || 'text-slate-400'} uppercase tracking-wider`}>{label}</div>
+      <div className={`text-xl font-black font-mono mt-1 ${colorMap[color] || 'text-slate-400'}`}>{value}%</div>
+    </div>
+  );
 }
 
 export default MLAnalysis;
