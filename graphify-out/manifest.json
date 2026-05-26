@@ -2,381 +2,386 @@
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/tsconfig.node.json": {
     "mtime": 1770964529.5873423,
     "ast_hash": "eec85c9d7c6b599801557f1afd86672c",
-    "semantic_hash": ""
+    "semantic_hash": "eec85c9d7c6b599801557f1afd86672c"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/tailwind.config.js": {
     "mtime": 1770964638.0576546,
     "ast_hash": "3346df3fd0a1ea3f84440703bf8fd2cb",
-    "semantic_hash": ""
+    "semantic_hash": "3346df3fd0a1ea3f84440703bf8fd2cb"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/tsconfig.electron.json": {
     "mtime": 1770964665.235859,
     "ast_hash": "2bcec6a831b3bc39ed7a0e820c8f6876",
-    "semantic_hash": ""
+    "semantic_hash": "2bcec6a831b3bc39ed7a0e820c8f6876"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/tsconfig.app.json": {
     "mtime": 1773290835.0184567,
     "ast_hash": "4e1b8e96f232816d5830682a8d5d35d5",
-    "semantic_hash": ""
+    "semantic_hash": "4e1b8e96f232816d5830682a8d5d35d5"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/package.json": {
     "mtime": 1779761325.054383,
     "ast_hash": "d978c920acdd867451a5a6ebf4d02d7d",
-    "semantic_hash": ""
+    "semantic_hash": "d978c920acdd867451a5a6ebf4d02d7d"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/tsconfig.json": {
     "mtime": 1770964529.5867574,
     "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
-    "semantic_hash": ""
+    "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/eslint.config.js": {
     "mtime": 1770964529.5830681,
     "ast_hash": "b8893da386a89dfd3672dad848f4ec7e",
-    "semantic_hash": ""
+    "semantic_hash": "b8893da386a89dfd3672dad848f4ec7e"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/vite.config.ts": {
     "mtime": 1770967097.2214632,
     "ast_hash": "0dedec9dcbae30660d0666d66648e924",
-    "semantic_hash": ""
+    "semantic_hash": "0dedec9dcbae30660d0666d66648e924"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/postcss.config.js": {
     "mtime": 1770964629.2846007,
     "ast_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0",
-    "semantic_hash": ""
+    "semantic_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/public/models/pca_profile.json": {
     "mtime": 1779639018.443456,
     "ast_hash": "f6dde615916df402b9314ba21aa2aa24",
-    "semantic_hash": ""
+    "semantic_hash": "f6dde615916df402b9314ba21aa2aa24"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/public/models/state_clusters.json": {
     "mtime": 1779639018.4337294,
     "ast_hash": "592491727ce83155f401408973fe4ff6",
-    "semantic_hash": ""
+    "semantic_hash": "592491727ce83155f401408973fe4ff6"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/public/models/model_metrics.json": {
     "mtime": 1779639018.48474,
     "ast_hash": "0bd246b775ec1fdf53c0272f919ac564",
-    "semantic_hash": ""
+    "semantic_hash": "0bd246b775ec1fdf53c0272f919ac564"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/ml-pipeline/config.py": {
     "mtime": 1779761265.2126555,
     "ast_hash": "a969c8aab17997a36244da6b452bd101",
-    "semantic_hash": ""
+    "semantic_hash": "a969c8aab17997a36244da6b452bd101"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/ml-pipeline/train_model.py": {
-    "mtime": 1779761290.8485208,
-    "ast_hash": "506c29095472c1b17d3b169a44718be5",
-    "semantic_hash": ""
+    "mtime": 1779763620.7182076,
+    "ast_hash": "18a43d8e8b6467c1f69fd07100ff889e",
+    "semantic_hash": "18a43d8e8b6467c1f69fd07100ff889e"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/main.ts": {
     "mtime": 1779636915.9375005,
     "ast_hash": "4f2f74b26f55e95ae16b6d104b29ea62",
-    "semantic_hash": ""
+    "semantic_hash": "4f2f74b26f55e95ae16b6d104b29ea62"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/session-manager.ts": {
     "mtime": 1779636915.9374647,
     "ast_hash": "7d415a6439efedfb7c46c00076f57bb0",
-    "semantic_hash": ""
+    "semantic_hash": "7d415a6439efedfb7c46c00076f57bb0"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/connector-interface.ts": {
     "mtime": 1770965499.4224665,
     "ast_hash": "57196d0721e3dbabf41c041129a14a7e",
-    "semantic_hash": ""
+    "semantic_hash": "57196d0721e3dbabf41c041129a14a7e"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/database/db.ts": {
     "mtime": 1779636674.0344892,
     "ast_hash": "31e8caaeb60f80de88bd9e116a02efd4",
-    "semantic_hash": ""
+    "semantic_hash": "31e8caaeb60f80de88bd9e116a02efd4"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/game-connectors/mock.ts": {
     "mtime": 1779640179.5885305,
     "ast_hash": "0841176ca646280e576e16d3120e9219",
-    "semantic_hash": ""
+    "semantic_hash": "0841176ca646280e576e16d3120e9219"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/game-connectors/connection-manager.ts": {
     "mtime": 1771816886.6090076,
     "ast_hash": "2f7d6ffc90c75f539cccd9c24cb269a7",
-    "semantic_hash": ""
+    "semantic_hash": "2f7d6ffc90c75f539cccd9c24cb269a7"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/game-connectors/beamng.ts": {
     "mtime": 1779532261.5510187,
     "ast_hash": "684a323ebc2f8caec9997f9f5eae1cb4",
-    "semantic_hash": ""
+    "semantic_hash": "684a323ebc2f8caec9997f9f5eae1cb4"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/game-connectors/assetto-corsa.ts": {
     "mtime": 1770965503.44326,
     "ast_hash": "7fb20b6c0c0a23d97ad2795f2f8731cf",
-    "semantic_hash": ""
+    "semantic_hash": "7fb20b6c0c0a23d97ad2795f2f8731cf"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/electron/game-connectors/beamng/telemetry.lua": {
     "mtime": 1779532261.5514305,
     "ast_hash": "f7219f8894e364ebebd6d8d4240bc1bf",
-    "semantic_hash": ""
+    "semantic_hash": "f7219f8894e364ebebd6d8d4240bc1bf"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/App.tsx": {
     "mtime": 1773116382.057546,
     "ast_hash": "0637a744fdc7d76231b0ac0aa117d535",
-    "semantic_hash": ""
+    "semantic_hash": "0637a744fdc7d76231b0ac0aa117d535"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/main.tsx": {
     "mtime": 1770964529.5860765,
     "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
-    "semantic_hash": ""
+    "semantic_hash": "787e5a07efeb2bf6209d5937195f2f68"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/types/electron.d.ts": {
     "mtime": 1779637073.3793995,
     "ast_hash": "06d0fb1338abdc84f604c196ba3b6985",
-    "semantic_hash": ""
+    "semantic_hash": "06d0fb1338abdc84f604c196ba3b6985"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/types/telemetry.ts": {
     "mtime": 1779532261.5550313,
     "ast_hash": "ac09e3a166154655de1c21f8b7874138",
-    "semantic_hash": ""
+    "semantic_hash": "ac09e3a166154655de1c21f8b7874138"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/stores/settingsStore.ts": {
     "mtime": 1771816824.1638012,
     "ast_hash": "a0be5ef3f53bef04d9003da6c77125a8",
-    "semantic_hash": ""
+    "semantic_hash": "a0be5ef3f53bef04d9003da6c77125a8"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/stores/telemetryStore.ts": {
     "mtime": 1779532261.554638,
     "ast_hash": "c9fc8717aa38ee1a2342f3ee741218aa",
-    "semantic_hash": ""
+    "semantic_hash": "c9fc8717aa38ee1a2342f3ee741218aa"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/stores/sessionStore.ts": {
     "mtime": 1770968228.371687,
     "ast_hash": "ff58885a39e04df92c7df6e8768e2115",
-    "semantic_hash": ""
+    "semantic_hash": "ff58885a39e04df92c7df6e8768e2115"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/utils/browserSimulator.ts": {
     "mtime": 1779532261.5558465,
     "ast_hash": "e1ecbe6ff25ad4b7b3e4a3013d14f5ef",
-    "semantic_hash": ""
+    "semantic_hash": "e1ecbe6ff25ad4b7b3e4a3013d14f5ef"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Settings/Settings.tsx": {
     "mtime": 1778410273.2330868,
     "ast_hash": "f656eb8605ba4978c5fb5b2b8f94cbd9",
-    "semantic_hash": ""
+    "semantic_hash": "f656eb8605ba4978c5fb5b2b8f94cbd9"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Analysis/SessionList.tsx": {
     "mtime": 1770965464.7261045,
     "ast_hash": "98a6e09a6aac654b41a206031931c346",
-    "semantic_hash": ""
+    "semantic_hash": "98a6e09a6aac654b41a206031931c346"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Analysis/SessionGraphs.tsx": {
     "mtime": 1779240576.2348635,
     "ast_hash": "d92a792084a999b2e406e8dad1bf687f",
-    "semantic_hash": ""
+    "semantic_hash": "d92a792084a999b2e406e8dad1bf687f"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Analysis/Analysis.tsx": {
     "mtime": 1779240443.6607049,
     "ast_hash": "d9bca83679877d9c468d015042d4053e",
-    "semantic_hash": ""
+    "semantic_hash": "d9bca83679877d9c468d015042d4053e"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Layout/TitleBar.tsx": {
     "mtime": 1770965427.1488945,
     "ast_hash": "a6174fa21b31bf5bbc4fcf9cfbde73ae",
-    "semantic_hash": ""
+    "semantic_hash": "a6174fa21b31bf5bbc4fcf9cfbde73ae"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Layout/Layout.tsx": {
     "mtime": 1773288791.3277116,
     "ast_hash": "efd22d8597e9b35a61f394381010504a",
-    "semantic_hash": ""
+    "semantic_hash": "efd22d8597e9b35a61f394381010504a"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Layout/Sidebar.tsx": {
     "mtime": 1773116380.1003845,
     "ast_hash": "55623680f95261af1cd86bdae7ab6b3e",
-    "semantic_hash": ""
+    "semantic_hash": "55623680f95261af1cd86bdae7ab6b3e"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/ReactionTest/ReactionTest.tsx": {
     "mtime": 1779240576.2378109,
     "ast_hash": "fb3fa3633fe9e20751c216690e02fa6a",
-    "semantic_hash": ""
+    "semantic_hash": "fb3fa3633fe9e20751c216690e02fa6a"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/FrictionCircle.tsx": {
     "mtime": 1778410273.2287312,
     "ast_hash": "05b8f2bed92a05c24f6a37e164b8c3be",
-    "semantic_hash": ""
+    "semantic_hash": "05b8f2bed92a05c24f6a37e164b8c3be"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/LiveGraph.tsx": {
     "mtime": 1779240576.2368324,
     "ast_hash": "eeb6d0844f6db822a1d88bca817c5ce7",
-    "semantic_hash": ""
+    "semantic_hash": "eeb6d0844f6db822a1d88bca817c5ce7"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/SessionStats.tsx": {
     "mtime": 1778410273.2301967,
     "ast_hash": "36b257baf60e764c8d44fe3186ec06e0",
-    "semantic_hash": ""
+    "semantic_hash": "36b257baf60e764c8d44fe3186ec06e0"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/CarHealth.tsx": {
     "mtime": 1778411247.8036535,
     "ast_hash": "0e79abf51cf071f45ef5c649c526bd49",
-    "semantic_hash": ""
+    "semantic_hash": "0e79abf51cf071f45ef5c649c526bd49"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/Speedometer.tsx": {
     "mtime": 1778410273.2311225,
     "ast_hash": "b431bf4ef7e73dda20957232ae92f855",
-    "semantic_hash": ""
+    "semantic_hash": "b431bf4ef7e73dda20957232ae92f855"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/DataLogger.tsx": {
     "mtime": 1779637073.3794954,
     "ast_hash": "bdbfc1cad6ad367fe27d3c98641dd11d",
-    "semantic_hash": ""
+    "semantic_hash": "bdbfc1cad6ad367fe27d3c98641dd11d"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/Dashboard.tsx": {
     "mtime": 1779532261.5532222,
     "ast_hash": "ee62f0f1a17cec64e110a7f87493c474",
-    "semantic_hash": ""
+    "semantic_hash": "ee62f0f1a17cec64e110a7f87493c474"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/InputVisualizer.tsx": {
     "mtime": 1779532261.5536487,
     "ast_hash": "b797a84a38a8fd1f7c9c48295ae410cd",
-    "semantic_hash": ""
+    "semantic_hash": "b797a84a38a8fd1f7c9c48295ae410cd"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/RPMGauge.tsx": {
     "mtime": 1778410273.2298577,
     "ast_hash": "152ff83a2c5e033889595fc0046d2d4a",
-    "semantic_hash": ""
+    "semantic_hash": "152ff83a2c5e033889595fc0046d2d4a"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/SessionInfo.tsx": {
     "mtime": 1773288791.3407931,
     "ast_hash": "48eb24f50c5f501791c53ef3d786f509",
-    "semantic_hash": ""
+    "semantic_hash": "48eb24f50c5f501791c53ef3d786f509"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/BehaviorAnalysis.tsx": {
     "mtime": 1779532261.552812,
     "ast_hash": "cbdc4dd5456305316f22481819826be4",
-    "semantic_hash": ""
+    "semantic_hash": "cbdc4dd5456305316f22481819826be4"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/TrackMap.tsx": {
     "mtime": 1779532261.5541961,
     "ast_hash": "68328848e3dfbb3a03129e97218cc6da",
-    "semantic_hash": ""
+    "semantic_hash": "68328848e3dfbb3a03129e97218cc6da"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/LiveMultiGraph.tsx": {
     "mtime": 1779240576.236969,
     "ast_hash": "7fbb9aa489474fe6ad050544329fb4d6",
-    "semantic_hash": ""
+    "semantic_hash": "7fbb9aa489474fe6ad050544329fb4d6"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/TireStatus.tsx": {
     "mtime": 1778411221.1755314,
     "ast_hash": "2a7e5203758c118dadab3e676592ee39",
-    "semantic_hash": ""
+    "semantic_hash": "2a7e5203758c118dadab3e676592ee39"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/DriverProfile.tsx": {
     "mtime": 1773288791.3395069,
     "ast_hash": "4889b2f1b99fd2139a91a5e1badb17ad",
-    "semantic_hash": ""
+    "semantic_hash": "4889b2f1b99fd2139a91a5e1badb17ad"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/Dashboard/LapTiming.tsx": {
     "mtime": 1773288791.340116,
     "ast_hash": "93b22bf1315c7b2ac7c6841a8d4c2ab0",
-    "semantic_hash": ""
+    "semantic_hash": "93b22bf1315c7b2ac7c6841a8d4c2ab0"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/MLAnalysis/MLAnalysis.tsx": {
-    "mtime": 1779761892.011147,
-    "ast_hash": "5706f5f950e03db133d8a93adcec80ed",
-    "semantic_hash": ""
+    "mtime": 1779763403.8989694,
+    "ast_hash": "95f6cdd565d2f0bdcc57504b0285c121",
+    "semantic_hash": "95f6cdd565d2f0bdcc57504b0285c121"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/MLAnalysis/mlWorker.ts": {
-    "mtime": 1779761914.7889733,
-    "ast_hash": "b96f9e07ddeef4317b8f2c5aa1c61b28",
-    "semantic_hash": ""
+    "mtime": 1779763671.4935925,
+    "ast_hash": "7aac0b98603f6cda72fb87cba4d8752a",
+    "semantic_hash": "7aac0b98603f6cda72fb87cba4d8752a"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/hooks/useTelemetry.ts": {
     "mtime": 1773109702.300828,
     "ast_hash": "a095d08028852584501a176f112b47a3",
-    "semantic_hash": ""
+    "semantic_hash": "a095d08028852584501a176f112b47a3"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/index.html": {
     "mtime": 1770964529.5835497,
     "ast_hash": "ebafe82a9b82a0f4a68d799449b4e57c",
-    "semantic_hash": ""
+    "semantic_hash": "ebafe82a9b82a0f4a68d799449b4e57c"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/REPORT.md": {
     "mtime": 1771819136.6382613,
     "ast_hash": "3abda762eac8136266e30e4184f1d6fc",
-    "semantic_hash": ""
+    "semantic_hash": "3abda762eac8136266e30e4184f1d6fc"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/README.md": {
     "mtime": 1779532261.5501208,
     "ast_hash": "674b34fd8ffd6d43e9fe8083507e36af",
-    "semantic_hash": ""
+    "semantic_hash": "674b34fd8ffd6d43e9fe8083507e36af"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/DEPLOYMENT.md": {
     "mtime": 1770966498.59792,
     "ast_hash": "f858e22bc6fee45503f57bfac6e66d64",
-    "semantic_hash": ""
+    "semantic_hash": "f858e22bc6fee45503f57bfac6e66d64"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/ml-pipeline/requirements.txt": {
     "mtime": 1779239185.8321452,
     "ast_hash": "ee3f577594d7f760f03cd262b072996b",
-    "semantic_hash": ""
+    "semantic_hash": "ee3f577594d7f760f03cd262b072996b"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/images/reaction.png": {
     "mtime": 1773370821.1930366,
     "ast_hash": "17bfbe52bf3d43b59c821f66f11b1651",
-    "semantic_hash": ""
+    "semantic_hash": "17bfbe52bf3d43b59c821f66f11b1651"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/images/dashboard.png": {
     "mtime": 1773370821.1926181,
     "ast_hash": "8c40b700571f7a918c108011e9edca16",
-    "semantic_hash": ""
+    "semantic_hash": "8c40b700571f7a918c108011e9edca16"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/images/settings.png": {
     "mtime": 1773370821.1935072,
     "ast_hash": "0af62b2322636c5f12a4dce4a3d7fcbf",
-    "semantic_hash": ""
+    "semantic_hash": "0af62b2322636c5f12a4dce4a3d7fcbf"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/images/analysis.png": {
     "mtime": 1773370821.1913977,
     "ast_hash": "e52d85d01d0cbcf780d21c87ce9eba56",
-    "semantic_hash": ""
+    "semantic_hash": "e52d85d01d0cbcf780d21c87ce9eba56"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/public/vite.svg": {
     "mtime": 1770964529.584117,
     "ast_hash": "8e3a10e157f75ada21ab742c022d5430",
-    "semantic_hash": ""
+    "semantic_hash": "8e3a10e157f75ada21ab742c022d5430"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/assets/react.svg": {
     "mtime": 1770964529.5855007,
     "ast_hash": "f0402b67b6ce880f65666bb49e841696",
-    "semantic_hash": ""
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/public/assets/ort-wasm-simd-threaded.asyncify.mjs": {
     "mtime": 1779760134.042062,
     "ast_hash": "31991fce122c59c5a0d6b19707b1f788",
-    "semantic_hash": ""
+    "semantic_hash": "31991fce122c59c5a0d6b19707b1f788"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/public/assets/ort-wasm-simd-threaded.jsep.mjs": {
     "mtime": 1779760134.010541,
     "ast_hash": "359759fc2895fc482433e6bcf10828de",
-    "semantic_hash": ""
+    "semantic_hash": "359759fc2895fc482433e6bcf10828de"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/ml-features.ts": {
     "mtime": 1779761267.9838965,
     "ast_hash": "1da650bad124952674f5bb68e5bb3279",
-    "semantic_hash": ""
+    "semantic_hash": "1da650bad124952674f5bb68e5bb3279"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/ml-config.ts": {
-    "mtime": 1779761918.2725952,
-    "ast_hash": "41e245ae7509d6b5695de02401d13d8c",
-    "semantic_hash": ""
+    "mtime": 1779763402.8517776,
+    "ast_hash": "5f4f0e6b6c265b2650673a2681a65586",
+    "semantic_hash": "5f4f0e6b6c265b2650673a2681a65586"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/AGENTS.md": {
     "mtime": 1779755092.3200233,
     "ast_hash": "3b259e589d20fd74db26d761bdc286cd",
-    "semantic_hash": ""
+    "semantic_hash": "3b259e589d20fd74db26d761bdc286cd"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/ML-PIPELINE-FIX-PLAN.md": {
     "mtime": 1779760928.5842354,
     "ast_hash": "8fd1d4574eddf8dbba27b3910459b23b",
-    "semantic_hash": ""
+    "semantic_hash": "8fd1d4574eddf8dbba27b3910459b23b"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/ML-PIPELINE-RESTRUCTURE-PLAN.md": {
     "mtime": 1779759187.7695448,
     "ast_hash": "d60b69621615feb95127c8ee6d4e6b3d",
-    "semantic_hash": ""
+    "semantic_hash": "d60b69621615feb95127c8ee6d4e6b3d"
+  },
+  "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/docs/ML-PIPELINE-REMAINING-FIXES.md": {
+    "mtime": 1779763290.8047771,
+    "ast_hash": "b7660f65f993e14cf3f695d5d12cb737",
+    "semantic_hash": "b7660f65f993e14cf3f695d5d12cb737"
   }
 }

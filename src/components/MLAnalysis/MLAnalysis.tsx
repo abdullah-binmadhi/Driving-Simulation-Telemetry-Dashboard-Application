@@ -52,7 +52,7 @@ interface MLResults {
         statePercentages: Record<string, number>;
     };
     // 8 new ML model results
-    fatigue: { score: number; decay: number; timeline?: Array<{ segment: string; avgJerk: number; smoothness: number }> };
+    fatigue: { score: number; decay: number; decayLabel?: string; trend?: string; timeline?: Array<{ segment: string; avgJerk: number; smoothness: number }> };
     grip: { score: number; understeer: number; oversteer: number; };
     shifts: { early: number; optimal: number; late: number; };
     exitForecast: { speedCoeff: number; throttleCoeff: number; predicted?: Array<{ apex: number; actual: number; predicted: number }> };
@@ -85,7 +85,7 @@ const INITIAL_RESULTS: MLResults = {
     svm: { overlapPercentage: 0, overlapEvents: 0 },
     rfWear: { data: [], endLife: 100, analysisText: "Awaiting analysis..." },
     hmm: { data: [], statePercentages: {} },
-    fatigue: { score: 100, decay: 0 },
+    fatigue: { score: 100, decay: 0, decayLabel: '0.0%', trend: 'stable' },
     grip: { score: 100, understeer: 0, oversteer: 0 },
     shifts: { early: 0, optimal: 0, late: 0 },
     exitForecast: { speedCoeff: 0.5, throttleCoeff: 0.2 },
@@ -634,7 +634,8 @@ const MLAnalysis = () => {
                             </div>
                             <div className="bg-slate-800 rounded-xl p-3">
                                 <div className="text-xs text-slate-500 mb-0.5">Jerk Decay Δ</div>
-                                <span className={`text-3xl font-black font-mono ${Math.abs(results.fatigue.decay) < 0.1 ? 'text-emerald-400' : Math.abs(results.fatigue.decay) < 0.3 ? 'text-amber-400' : 'text-red-400'}`}>{results.fatigue.decay > 0 ? '+' : ''}{results.fatigue.decay.toFixed(3)}</span>
+                                <span className={`text-3xl font-black font-mono ${Math.abs(results.fatigue.decay) < 0.1 ? 'text-emerald-400' : Math.abs(results.fatigue.decay) < 0.3 ? 'text-amber-400' : 'text-red-400'}`}>{results.fatigue.decayLabel || (results.fatigue.decay > 0 ? '+' : '') + results.fatigue.decay.toFixed(3)}</span>
+                                <div className="text-[10px] text-slate-500 mt-0.5">{results.fatigue.trend === 'improving' ? '↑ Improving' : results.fatigue.trend === 'fatiguing' ? '↓ Fatiguing' : '→ Stable'}</div>
                             </div>
                         </div>
 

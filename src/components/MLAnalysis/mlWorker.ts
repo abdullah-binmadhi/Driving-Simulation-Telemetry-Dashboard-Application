@@ -102,8 +102,8 @@ async function predictTireWear(
 }
 
 /** Driver fatigue — logistic regression style decay detection */
-function detectFatigue(data: Record<string, number>[]): { score: number; decay: number; timeline: Array<{ segment: string; avgJerk: number; smoothness: number }> } {
-  if (data.length < ML_CONFIG.FATIGUE_MIN_POINTS) return { score: 100, decay: 0, timeline: [] };
+function detectFatigue(data: Record<string, number>[]): { score: number; decay: number; decayLabel: string; trend: string; timeline: Array<{ segment: string; avgJerk: number; smoothness: number }> } {
+  if (data.length < ML_CONFIG.FATIGUE_MIN_POINTS) return { score: 100, decay: 0, decayLabel: '0.0%', trend: 'stable', timeline: [] };
 
   const n = data.length;
   const segSize = Math.floor(n / ML_CONFIG.FATIGUE_SEGMENTS);
@@ -126,10 +126,15 @@ function detectFatigue(data: Record<string, number>[]): { score: number; decay: 
     timeline.push({ segment: segmentNames[qi], avgJerk, smoothness });
   }
 
-  const decay = jerkMeans[0] > 0 ? (jerkMeans[3] / jerkMeans[0] - 1) : 0;
+  const rawDecay = jerkMeans[0] > 0 ? (jerkMeans[3] / jerkMeans[0] - 1) : 0;
+  const decay = Math.max(-0.99, Math.min(0.99, rawDecay));
+  const decayLabel = decay >= 0
+    ? `+${(decay * 100).toFixed(1)}%`
+    : `${(decay * 100).toFixed(1)}%`;
+  const trend = Math.abs(decay) < (ML_CONFIG as any).FATIGUE_IMPROVEMENT_THRESH ? 'stable' : decay >= 0 ? 'fatiguing' : 'improving';
   const score = Math.max(0, Math.min(100, 100 - Math.max(0, decay) * ML_CONFIG.FATIGUE_DECAY_SCALE));
 
-  return { score, decay, timeline };
+  return { score, decay, decayLabel, trend, timeline };
 }
 
 /** Grip classification — uses ONNX if available, else physics-based */
@@ -236,13 +241,15 @@ function clusterStates(data: Record<string, number>[], centroids: number[][] | n
   const stateData: Array<{ timestamp: number; state: string }> = [];
   const counts: Record<string, number> = { 'Cruising': 0, 'Cornering': 0, 'Slow / Cautious': 0, 'Erratic': 0 };
 
-  if (centroids && centroids.length === 4) {
-    // K-Means nearest-centroid classification
+  if (centroids && centroids.length === 4 && clusterScalerMean && clusterScalerScale) {
+    // K-Means nearest-centroid classification — Z-score normalize to match Python training
     for (const row of data) {
       const features = extractFeatures(row, HMM_FEATURES);
-      // Simple normalization (z-score style)
-      const magnitude = Math.sqrt(features.reduce((s, v) => s + v * v, 0)) || 1;
-      const normalized = features.map(v => v / magnitude);
+      const normalized = features.map((v, i) => {
+        const mu = clusterScalerMean![i] || 0;
+        const sigma = (clusterScalerScale![i] || 1);
+        return sigma > 0 ? (v - mu) / sigma : 0;
+      });
 
       let bestIdx = 0;
       let bestDist = Infinity;
@@ -285,18 +292,22 @@ function clusterStates(data: Record<string, number>[], centroids: number[][] | n
 }
 
 /** PCA driver profiling — uses JSON components if available */
-function projectPCA(data: Record<string, number>[], components: number[][] | null, mean: number[] | null): {
+function projectPCA(data: Record<string, number>[], components: number[][] | null, mean: number[] | null, scalerMean: number[] | null, scalerScale: number[] | null): {
   data: Array<{ x: number; y: number; intensity: number; timestamp: number }>;
 } {
   const result: Array<{ x: number; y: number; intensity: number; timestamp: number }> = [];
 
-  if (components && components.length >= 2 && mean) {
-    // Real PCA projection
+  if (components && components.length >= 2 && mean && scalerMean && scalerScale) {
+    // Real PCA projection — Z-score normalize to match Python training
     for (const row of data) {
       const features = extractFeatures(row, PCA_FEATURES);
-      const centered = features.map((v, i) => v - (mean[i] || 0));
-      const pc1 = components[0].reduce((s, c, i) => s + c * centered[i], 0);
-      const pc2 = components[1].reduce((s, c, i) => s + c * centered[i], 0);
+      const normalized = features.map((v, i) => {
+        const mu = scalerMean[i] || 0;
+        const sigma = (scalerScale[i] || 1);
+        return sigma > 0 ? (v - mu) / sigma : 0;
+      });
+      const pc1 = components[0].reduce((s, c, i) => s + c * normalized[i], 0);
+      const pc2 = components[1].reduce((s, c, i) => s + c * normalized[i], 0);
       result.push({
         x: pc1,
         y: pc2,
@@ -409,9 +420,14 @@ async function classifyPedalOverlap(
 let tireWearSession: ort.InferenceSession | null = null;
 let gripSession: ort.InferenceSession | null = null;
 let shiftSession: ort.InferenceSession | null = null;
+let pedalSession: ort.InferenceSession | null = null;
 let clusterCentroids: number[][] | null = null;
+let clusterScalerMean: number[] | null = null;
+let clusterScalerScale: number[] | null = null;
 let pcaComponents: number[][] | null = null;
 let pcaMean: number[] | null = null;
+let pcaScalerMean: number[] | null = null;
+let pcaScalerScale: number[] | null = null;
 interface ModelMetricsJson {
   models?: Record<string, Record<string, number>>;
 }
@@ -421,6 +437,7 @@ let modelStatus: Record<string, 'loaded' | 'not_found' | 'error'> = {
   tire_wear: 'not_found',
   grip: 'not_found',
   shift: 'not_found',
+  pedal_overlap: 'not_found',
   state_clusters: 'not_found',
   pca_profile: 'not_found',
   model_metrics: 'not_found',
@@ -459,6 +476,11 @@ async function loadModels(): Promise<void> {
       .then(s => { shiftSession = s; modelStatus.shift = 'loaded'; })
       .catch((err) => { modelStatus.shift = 'error'; console.warn('Shift model load failed:', err.message); })
   );
+  onnxPromises.push(
+    ort.InferenceSession.create(base + 'pedal_overlap_model.onnx')
+      .then(s => { pedalSession = s; modelStatus.pedal_overlap = 'loaded'; })
+      .catch((err) => { modelStatus.pedal_overlap = 'error'; console.warn('Pedal overlap model load failed:', err.message); })
+  );
 
   // Load JSON params
   const jsonPromises: Promise<void>[] = [];
@@ -467,6 +489,8 @@ async function loadModels(): Promise<void> {
       .then(r => r.json())
       .then(j => {
         clusterCentroids = j.centroids || null;
+        clusterScalerMean = j.scaler_mean || null;
+        clusterScalerScale = j.scaler_scale || null;
         modelStatus.state_clusters = 'loaded';
       })
       .catch((err) => { modelStatus.state_clusters = 'error'; console.warn('State clusters load failed:', err.message); })
@@ -477,6 +501,8 @@ async function loadModels(): Promise<void> {
       .then(j => {
         pcaComponents = j.components || null;
         pcaMean = j.mean || null;
+        pcaScalerMean = j.scaler_mean || null;
+        pcaScalerScale = j.scaler_scale || null;
         modelStatus.pca_profile = 'loaded';
       })
       .catch((err) => { modelStatus.pca_profile = 'error'; console.warn('PCA profile load failed:', err.message); })
@@ -589,7 +615,9 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     const gForcesX = validData.map((d: any) => Number(d.gForceX) || 0);
     const gForcesY = validData.map((d: any) => Number(d.gForceY) || 0);
     const gForcesCombined = validData.map((d: any) =>
-      Number(d.gforceCombined) || Math.sqrt(Math.pow(gForcesX[0] || 0, 2) + Math.pow(gForcesY[0] || 0, 2)) || 0
+      Number(d.gforceCombined) || Math.sqrt(
+        Math.pow(Number(d.gForceX) || 0, 2) + Math.pow(Number(d.gForceY) || 0, 2)
+      ) || 0
     );
     const jerks: number[] = [0];
     const accelerations: number[] = [0];
@@ -634,7 +662,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     reportProgress(35);
 
     // ── PCA Driver Profile (pre-trained components or heuristic) ──
-    const pca = projectPCA(validData, pcaComponents, pcaMean);
+    const pca = projectPCA(validData, pcaComponents, pcaMean, pcaScalerMean, pcaScalerScale);
     const meanX = safeMean(pca.data.map(d => d.x));
     const meanY = safeMean(pca.data.map(d => d.y));
     let profile = 'Balanced';
@@ -659,7 +687,7 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     reportProgress(45);
 
     // ── Pedal Overlap (ONNX or heuristic) ──
-    const svm = await classifyPedalOverlap(validData, null);
+    const svm = await classifyPedalOverlap(validData, pedalSession);
     reportProgress(55);
 
     // ── Driving States (K-Means nearest-centroid or heuristic) ──

@@ -404,7 +404,7 @@ def train_all(df: pd.DataFrame) -> dict:
             scaler = StandardScaler()
             X_tr_s = scaler.fit_transform(X_tr)
             X_te_s = scaler.transform(X_te)
-            svm = SVC(kernel='rbf', C=1.0, random_state=42)
+            svm = SVC(kernel='rbf', C=1.0, random_state=42, probability=True)
             svm.fit(X_tr_s, y_tr)
             preds = svm.predict(X_te_s)
             metrics['models']['pedal_svm'] = {
@@ -413,6 +413,11 @@ def train_all(df: pd.DataFrame) -> dict:
                 'margin_width': 0.98,
                 'feature_count': len(available_pedal_features),
             }
+            # Export to ONNX for browser inference
+            try:
+                save_onnx(svm, len(available_pedal_features), 'pedal_overlap_model.onnx')
+            except Exception as e:
+                print(f"  ! Pedal overlap ONNX export failed (heuristic will be used): {e}")
         else:
             metrics['models']['pedal_svm'] = {'error': 'insufficient_data'}
     else:
