@@ -56,10 +56,39 @@ def load_all_csvs():
         return None
 
     print(f"Loading {len(csv_files)} session CSV(s)...")
+    # CamelCase → snake_case mapping for CSV columns from JS-side exports
+    CAMEL_TO_SNAKE = {
+        'jerkX': 'jerk_x', 'jerkY': 'jerk_y',
+        'pedalOverlap': 'pedal_overlap',
+        'tireTempFL': 'tire_temp_fl', 'tireTempFR': 'tire_temp_fr',
+        'tireTempRL': 'tire_temp_rl', 'tireTempRR': 'tire_temp_rr',
+        'tirePressureFL': 'tire_pressure_fl', 'tirePressureFR': 'tire_pressure_fr',
+        'tirePressureRL': 'tire_pressure_rl', 'tirePressureRR': 'tire_pressure_rr',
+        'slipAngleEstimate': 'slip_angle_estimate',
+        'turnRadius': 'turn_radius',
+        'isCoasting': 'is_coasting', 'isBraking': 'is_braking',
+        'isTurning': 'is_turning', 'isWots': 'is_wots',
+        'isTrailBraking': 'is_trail_braking',
+        'gforceCombined': 'gforce_combined',
+        'steeringDelta': 'steering_delta',
+        'throttleDelta': 'throttle_delta',
+        'brakeDelta': 'brake_delta',
+        'speedDelta': 'speed_delta',
+        'yawRate': 'yaw_rate',
+        'oversteerCorrection': 'oversteer_correction',
+        'understeerPlough': 'understeer_plough',
+        'brakeBiasUtilization': 'brake_bias_utilization',
+        'coastingTimePct': 'coasting_time_pct',
+        'engineTemp': 'engine_temp',
+        'posX': 'pos_x', 'posY': 'pos_y', 'posZ': 'pos_z',
+    }
+
     dfs = []
     for f in csv_files:
         try:
             df = pd.read_csv(f, **CSV_READ_OPTS)
+            # Rename camelCase columns to snake_case for config.py compatibility
+            df.rename(columns=CAMEL_TO_SNAKE, inplace=True)
             # Tag with filename for traceability
             df['_source_file'] = os.path.basename(f)
             dfs.append(df)

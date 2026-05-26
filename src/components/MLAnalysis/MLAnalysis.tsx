@@ -13,12 +13,13 @@ interface MLResults {
     };
     pca: {
         data: Array<{
-            x: number; // Component 1 (e.g. Aggression)
-            y: number; // Component 2 (e.g. Erraticism)
+            x: number;
+            y: number;
             intensity: number;
             timestamp: number;
         }>;
         profile: string;
+        knnProfile?: string;
     };
     anomalies: {
         data: Array<{
@@ -74,6 +75,7 @@ interface MLResults {
     isProcessing: boolean;
     progress: number;
     error: string | null;
+    modelStatus?: Record<string, 'loaded' | 'not_found' | 'error'>;
 }
 
 const INITIAL_RESULTS: MLResults = {
@@ -102,7 +104,8 @@ const INITIAL_RESULTS: MLResults = {
     },
     isProcessing: false,
     progress: 0,
-    error: null
+    error: null,
+    modelStatus: undefined,
 };
 
 
@@ -241,7 +244,14 @@ const MLAnalysis = () => {
 
         workerRef.current.onmessage = (e) => {
             if (e.data.type === 'PROGRESS') setResults(r => ({ ...r, progress: e.data.progress }));
-            if (e.data.type === 'COMPLETE') setResults(r => ({ ...r, ...e.data.results, isProcessing: false, progress: 100, error: null }));
+            if (e.data.type === 'COMPLETE') {
+                const r = e.data.results;
+                const required = ['safetyScore', 'pca', 'anomalies', 'svm', 'rfWear', 'hmm', 'fatigue', 'grip', 'shifts', 'qualityMetrics'];
+                for (const key of required) {
+                    if (!(key in r)) console.warn(`ML worker missing required field: ${key}`);
+                }
+                setResults(prev => ({ ...prev, ...r, isProcessing: false, progress: 100, error: null }));
+            }
             if (e.data.type === 'ERROR') setResults(r => ({ ...r, isProcessing: false, error: e.data.message }));
         };
 
@@ -307,6 +317,21 @@ const MLAnalysis = () => {
                 </div>
             )}
 
+            {results.modelStatus && (
+                <div className="mb-6 flex flex-wrap gap-2">
+                    {Object.entries(results.modelStatus).map(([name, status]) => (
+                        <div key={name} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold border ${
+                            status === 'loaded'
+                                ? 'bg-emerald-900/30 border-emerald-700/40 text-emerald-400'
+                                : 'bg-slate-800 border-slate-700 text-slate-500'
+                        }`}>
+                            <span className={`w-2 h-2 rounded-full ${status === 'loaded' ? 'bg-emerald-400' : 'bg-slate-600'}`} />
+                            {name.replace(/_/g, ' ')}
+                        </div>
+                    ))}
+                </div>
+            )}
+
             {!isDone && !results.isProcessing && !results.error && (
                 <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-3xl m-8 text-slate-500">
                     <Brain className="w-24 h-24 text-slate-800 mb-6" />
@@ -326,7 +351,7 @@ const MLAnalysis = () => {
                                 <Target className="w-5 h-5 text-green-500" />
                                 Safety Score
                             </h3>
-                            <p className="text-sm text-slate-400">Multivariate Regression Analysis</p>
+                            <p className="text-sm text-slate-400">Heuristic Penalty Score</p>
                         </div>
 
                         <div className="flex items-center justify-center py-2">
@@ -376,10 +401,10 @@ const MLAnalysis = () => {
                             <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
                             <p className="text-xs text-slate-300 leading-relaxed">
                                 {results.safetyScore.score >= 85
-                                    ? "Driver exhibits highly controlled inputs with minimal penalty events. Multivariate regression confirms that speed, jerk, and steering variance remain within low-risk boundaries throughout the session. Consistent with a disciplined, experienced driver profile."
+                                     ? "Driver exhibits highly controlled inputs with minimal penalty events. Heuristic penalty scoring shows that speed, jerk, and steering inputs remain within low-risk boundaries throughout the session. Consistent with a disciplined, experienced driver profile."
                                     : results.safetyScore.score >= 65
-                                    ? "Moderate penalty density detected. Regression analysis identifies periodic exceedances of jerk and steering volatility thresholds. Driving quality is adequate but lapses indicate moments of reactive rather than anticipatory driving — typically observed in intermediate-level drivers."
-                                    : "Significant multivariate safety cost accumulation across the session. High jerk and/or steering volatility events are frequent, indicating inconsistent control. The regression model strongly weights harsh inputs as the primary risk contributor. Immediate focus on smoother pedal transitions and planned braking zones is advised."}
+                                    ? "Moderate penalty density detected. Penalty analysis identifies periodic exceedances of jerk and steering volatility thresholds. Driving quality is adequate but lapses indicate moments of reactive rather than anticipatory driving — typically observed in intermediate-level drivers."
+                                    : "Significant safety cost accumulation across the session. High jerk and/or steering volatility events are frequent, indicating inconsistent control. The heuristic penalty system strongly weights harsh inputs as the primary risk contributor. Immediate focus on smoother pedal transitions and planned braking zones is advised."}
                             </p>
                         </div>
                     </div>
@@ -393,7 +418,7 @@ const MLAnalysis = () => {
                                     <Activity className="w-5 h-5 text-red-500" />
                                     Discomfort Anomalies
                                 </h3>
-                                <p className="text-sm text-slate-400">Isolation Forest (Outlier Detection)</p>
+                                <p className="text-sm text-slate-400">Statistical Anomaly Det. (3σ + G-Force)</p>
                             </div>
                             <div className="bg-red-950/50 text-red-400 px-3 py-1 rounded-full text-sm font-bold border border-red-900/50">
                                 {results.anomalies.anomalyCount} Harsh Events Detected
@@ -462,7 +487,7 @@ const MLAnalysis = () => {
                             </ResponsiveContainer>
                         </div>
                         <div className="text-center bg-indigo-950/30 border border-indigo-900/50 rounded-xl p-3">
-                            <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">{results.pca.profile || (results.pca as any).knnProfile || "Unknown Style"}</span>
+                            <span className="text-indigo-300 text-sm font-bold uppercase tracking-widest">{results.pca.profile || results.pca.knnProfile || "Unknown Style"}</span>
                         </div>
                     </div>
 
@@ -473,7 +498,7 @@ const MLAnalysis = () => {
                                 <Zap className="w-5 h-5 text-orange-500" />
                                 Pedal Confusion
                             </h3>
-                            <p className="text-sm text-slate-400">Support Vector Machine (SVM)</p>
+                            <p className="text-sm text-slate-400">Pedal Overlap Ratio</p>
                         </div>
 
                         <div className="flex-1 flex flex-col items-center justify-center p-4">
@@ -498,7 +523,7 @@ const MLAnalysis = () => {
                                 <Activity className="w-5 h-5 text-pink-500" />
                                 Predictive Tire Degradation
                             </h3>
-                            <p className="text-sm text-slate-400">Random Forest Wear Projection</p>
+                            <p className="text-sm text-slate-400">Tire Wear Projection (ONNX/Heuristic)</p>
                         </div>
 
                         {/* Wear Rate Summary KPIs */}
@@ -563,7 +588,7 @@ const MLAnalysis = () => {
                                 <GitCommit className="w-5 h-5 text-emerald-500" />
                                 Contextual Driving States
                             </h3>
-                            <p className="text-sm text-slate-400">Hidden Markov Model Approximation (Time Series Clustering)</p>
+                            <p className="text-sm text-slate-400">K-Means State Clustering</p>
                         </div>
 
                         <div className="flex gap-4 mt-6">
@@ -598,7 +623,7 @@ const MLAnalysis = () => {
                                 <Timer className="w-5 h-5 text-amber-400" />
                                 Driver Fatigue Tracker
                             </h3>
-                            <p className="text-xs text-slate-400">Logistic Regression — Input smoothness decay over session</p>
+                            <p className="text-xs text-slate-400">Jerk Decay Fatigue Score</p>
                         </div>
 
                         {/* Score + decay KPIs */}
@@ -608,7 +633,7 @@ const MLAnalysis = () => {
                                 <span className={`text-3xl font-black font-mono ${results.fatigue.score > 70 ? 'text-emerald-400' : results.fatigue.score > 40 ? 'text-amber-400' : 'text-red-400'}`}>{Math.round(results.fatigue.score)}%</span>
                             </div>
                             <div className="bg-slate-800 rounded-xl p-3">
-                                <div className="text-xs text-slate-500 mb-0.5">Logit Decay Δ</div>
+                                <div className="text-xs text-slate-500 mb-0.5">Jerk Decay Δ</div>
                                 <span className={`text-3xl font-black font-mono ${Math.abs(results.fatigue.decay) < 0.1 ? 'text-emerald-400' : Math.abs(results.fatigue.decay) < 0.3 ? 'text-amber-400' : 'text-red-400'}`}>{results.fatigue.decay > 0 ? '+' : ''}{results.fatigue.decay.toFixed(3)}</span>
                             </div>
                         </div>
@@ -643,10 +668,10 @@ const MLAnalysis = () => {
                             <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
                             <p className="text-xs text-slate-300 leading-relaxed">
                                 {results.fatigue.score > 70
-                                    ? "Logistic Regression detects no meaningful decay in input smoothness across the session. Steering corrections, jerk magnitude, and throttle modulation remained statistically stable from first quartile to last — a strong indicator of sustained concentration and physical consistency."
+                                    ? "Jerk trend analysis detects no meaningful decay in input smoothness across the session. Steering corrections, jerk magnitude, and throttle modulation remained statistically stable from first quartile to last — a strong indicator of sustained concentration and physical consistency."
                                     : results.fatigue.score > 40
-                                    ? "Moderate fatigue signature detected. The model observes a gradual upward drift in jerk frequency and steering micro-corrections in the latter segments of the session. This degradation pattern is characteristic of attention fatigue — the driver compensates with reactive inputs rather than planned anticipatory control."
-                                    : "Significant cognitive and physical fatigue detected. The logistic decay coefficient shows a steep negative sigmoid for input quality across session time buckets. Late-session inputs become markedly more erratic, with sharp jerk spikes and inconsistent modulation — a clear sign that concentration capacity was exceeded."}
+                                    ? "Moderate fatigue signature detected. The analysis observes a gradual upward drift in jerk frequency and steering micro-corrections in the latter segments of the session. This degradation pattern is characteristic of attention fatigue — the driver compensates with reactive inputs rather than planned anticipatory control."
+                                    : "Significant cognitive and physical fatigue detected. The jerk decay score indicates a steep degradation for input quality across session time buckets. Late-session inputs become markedly more erratic, with sharp jerk spikes and inconsistent modulation — a clear sign that concentration capacity was exceeded."}
                             </p>
                         </div>
                     </div>
@@ -658,7 +683,7 @@ const MLAnalysis = () => {
                                 <TrendingUp className="w-5 h-5 text-red-400" />
                                 Grip Limits Analyzer
                             </h3>
-                            <p className="text-xs text-slate-400">Decision Tree — Lateral G-Force traction classification</p>
+                            <p className="text-xs text-slate-400">Grip Classification (ONNX/Physics)</p>
                         </div>
                         <div className="flex-1 grid grid-cols-3 gap-3 text-center">
                             <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
@@ -683,7 +708,7 @@ const MLAnalysis = () => {
                                 <GitFork className="w-5 h-5 text-purple-400" />
                                 Shift Point Analyzer
                             </h3>
-                            <p className="text-xs text-slate-400">Naive Bayes — Gear change timing classification</p>
+                            <p className="text-xs text-slate-400">Shift Timing (ONNX/RPM Threshold)</p>
                         </div>
                         <div className="flex-1 grid grid-cols-3 gap-3 text-center">
                             <div className="bg-slate-800 rounded-2xl p-4 flex flex-col gap-1">
@@ -699,7 +724,7 @@ const MLAnalysis = () => {
                                 <span className="text-xs text-slate-400">Late Shifts</span>
                             </div>
                         </div>
-                        <p className="text-xs text-slate-400">Optimal range = 5500–6500 RPM. {results.shifts.optimal > results.shifts.early + results.shifts.late ? "✅ Good timing discipline." : "⚠️ Shift points need refinement."}</p>
+                        <p className="text-xs text-slate-400">Early &lt;4000 RPM / Optimal 4000–7200 RPM / Late &gt;7200 RPM. {results.shifts.optimal > results.shifts.early + results.shifts.late ? "✅ Good timing discipline." : "⚠️ Shift points need refinement."}</p>
                     </div>
 
 
@@ -711,7 +736,7 @@ const MLAnalysis = () => {
                                 <Gauge className="w-5 h-5 text-indigo-400" />
                                 Pedal Consistency
                             </h3>
-                            <p className="text-xs text-slate-400">Dynamic Time Warping — Brake zone repeatability score</p>
+                            <p className="text-xs text-slate-400">Brake Zone Similarity Score</p>
                         </div>
 
                         {/* Ring + score breakdown */}
@@ -756,10 +781,10 @@ const MLAnalysis = () => {
                             <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Interpretation</div>
                             <p className="text-xs text-slate-300 leading-relaxed">
                                 {results.consistency.dtwScore > 70
-                                    ? "DTW analysis confirms highly repeatable braking commitment patterns across detected brake zones. The warping distance between brake pressure profiles is minimal, indicating that the driver applies consistent initial pressure, maintains a predicable decay curve, and releases at a stereotyped point — signature behaviour of a technically refined braker."
+                                    ? "Brake profile comparison shows highly repeatable braking patterns across detected brake zones. The mean difference between brake zone profiles is minimal, indicating that the driver applies consistent initial pressure, maintains a predictable decay curve, and releases at a stereotyped point — signature behaviour of a technically refined braker."
                                     : results.consistency.dtwScore > 40
-                                    ? "Moderate DTW distance detected between braking zone profiles. Zone-to-zone variation in initial pressure and hold duration suggests the driver adapts reactively to perceived speed rather than following a fixed technique. This is common in drivers who lack consistent reference points entering corners."
-                                    : "High DTW warp distance — brake profiles are structurally dissimilar between zones. The driver shows no repeatable braking character: pressure onset, peak magnitude, and release timing all vary significantly. This unpredictability is a primary source of lap time variance and reduces corner entry confidence."}
+                                    ? "Moderate variation detected between braking zone profiles. Zone-to-zone variation in initial pressure and hold duration suggests the driver adapts reactively to perceived speed rather than following a fixed technique. This is common in drivers who lack consistent reference points entering corners."
+                                    : "High profile differences — brake profiles are structurally dissimilar between zones. The driver shows no repeatable braking character: pressure onset, peak magnitude, and release timing all vary significantly. This unpredictability is a primary source of lap time variance and reduces corner entry confidence."}
                             </p>
                         </div>
                     </div>
@@ -771,7 +796,7 @@ const MLAnalysis = () => {
                                 <ArrowRightLeft className="w-5 h-5 text-orange-400" />
                                 Braking Technique
                             </h3>
-                            <p className="text-xs text-slate-400">Decision Tree — Trail vs Stab braking classification</p>
+                            <p className="text-xs text-slate-400">Trail vs Stab Braking Heuristic</p>
                         </div>
                         <div className="flex-1 flex flex-col justify-center gap-4">
                             <div className="flex justify-between text-sm text-slate-400 font-semibold">
@@ -828,7 +853,7 @@ const MLAnalysis = () => {
                                 <Layers className="w-5 h-5 text-fuchsia-400" />
                                 Aggression Matrix
                             </h3>
-                            <p className="text-xs text-slate-400">K-Medoids Proxy — Speed vs Risk quadrant analysis</p>
+                            <p className="text-xs text-slate-400">Driving Style Quadrants</p>
                         </div>
                         <div className="flex-1 grid grid-cols-2 gap-2">
                             <div className="bg-emerald-900/50 border border-emerald-700/40 rounded-2xl p-3 text-center flex flex-col gap-1">
@@ -864,13 +889,13 @@ const MLAnalysis = () => {
                             <MetricCard id="clusteringSilhouette" title="State Clustering" color="emerald" score={(results.qualityMetrics.clusteringSilhouette.score).toFixed(2)} label="Silhouette" selected={selectedMetric} onSelect={setSelectedMetric} />
                             <MetricCard id="pcaVariance" title="Feature Map" color="indigo" score={`${(results.qualityMetrics.pcaVariance.score * 100).toFixed(1)}%`} label="PCA Variance" selected={selectedMetric} onSelect={setSelectedMetric} />
                             <MetricCard id="randomForestOOB" title="Wear Model" color="pink" score={results.qualityMetrics.randomForestOOB.score.toFixed(2)} label="RF Convergence" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            <MetricCard id="anomalySkewness" title="Isolation Tree" color="red" score={results.qualityMetrics.anomalySkewness.score.toFixed(2)} label="Outlier Purity" selected={selectedMetric} onSelect={setSelectedMetric} />
+                            <MetricCard id="anomalySkewness" title="Anomaly Skewness" color="red" score={results.qualityMetrics.anomalySkewness.score.toFixed(2)} label="Outlier Purity" selected={selectedMetric} onSelect={setSelectedMetric} />
                             <MetricCard id="svmMargin" title="SVM Boundary" color="orange" score={results.qualityMetrics.svmMargin.score.toFixed(2)} label="Margin Width" selected={selectedMetric} onSelect={setSelectedMetric} />
                             <MetricCard id="regressionFit" title="Safety Fit" color="green" score={results.qualityMetrics.regressionFit.score.toFixed(2)} label="R² Fit" selected={selectedMetric} onSelect={setSelectedMetric} />
                             <MetricCard id="knnConfidence" title="Driver Match" color="blue" score={`${(results.qualityMetrics.knnConfidence.score * 100).toFixed(1)}%`} label="KNN Confidence" selected={selectedMetric} onSelect={setSelectedMetric} />
-                            {results.qualityMetrics.dtwConsistency && <MetricCard id="dtwConsistency" title="DTW Brake" color="violet" score={results.qualityMetrics.dtwConsistency.score.toFixed(2)} label="DTW Quality" selected={selectedMetric} onSelect={setSelectedMetric} />}
+                            {results.qualityMetrics.dtwConsistency && <MetricCard id="dtwConsistency" title="Brake Consistency" color="violet" score={results.qualityMetrics.dtwConsistency.score.toFixed(2)} label="DTW Quality" selected={selectedMetric} onSelect={setSelectedMetric} />}
                             {results.qualityMetrics.dtPurity && <MetricCard id="dtPurity" title="Grip Tree" color="amber" score={results.qualityMetrics.dtPurity.score.toFixed(2)} label="Node Purity" selected={selectedMetric} onSelect={setSelectedMetric} />}
-                            {results.qualityMetrics.nbAccuracy && <MetricCard id="nbAccuracy" title="Shift Bayes" color="sky" score={`${(results.qualityMetrics.nbAccuracy.score * 100).toFixed(1)}%`} label="NB Accuracy" selected={selectedMetric} onSelect={setSelectedMetric} />}
+                            {results.qualityMetrics.nbAccuracy && <MetricCard id="nbAccuracy" title="Shift Accuracy" color="sky" score={`${(results.qualityMetrics.nbAccuracy.score * 100).toFixed(1)}%`} label="NB Accuracy" selected={selectedMetric} onSelect={setSelectedMetric} />}
                         </div>
 
                         {/* Interactive Expand Pane */}
