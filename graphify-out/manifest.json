@@ -35,9 +35,9 @@
     "semantic_hash": "b8893da386a89dfd3672dad848f4ec7e"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/vite.config.ts": {
-    "mtime": 1770967097.2214632,
-    "ast_hash": "0dedec9dcbae30660d0666d66648e924",
-    "semantic_hash": "0dedec9dcbae30660d0666d66648e924"
+    "mtime": 1779770785.257733,
+    "ast_hash": "b400000285562240a4aa736c5cba93b5",
+    "semantic_hash": ""
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/postcss.config.js": {
     "mtime": 1770964629.2846007,
@@ -275,13 +275,13 @@
     "semantic_hash": "93b22bf1315c7b2ac7c6841a8d4c2ab0"
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/MLAnalysis/MLAnalysis.tsx": {
-    "mtime": 1779769217.5786438,
-    "ast_hash": "687eb217211574eb31e75bdf1461ba63",
+    "mtime": 1779770651.4513001,
+    "ast_hash": "eb368a684b1708c89147d3dc96d90852",
     "semantic_hash": ""
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/MLAnalysis/mlWorker.ts": {
-    "mtime": 1779768511.8858707,
-    "ast_hash": "b980a6535bafa1e0870373985b0d409c",
+    "mtime": 1779770754.9216805,
+    "ast_hash": "f457c8c4a983967c8c6653f55eb4fd87",
     "semantic_hash": ""
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/hooks/useTelemetry.ts": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/src/components/MLAnalysis/types.ts": {
-    "mtime": 1779768461.788404,
-    "ast_hash": "1cf447f697b7b463ab86265ee7884d0e",
+    "mtime": 1779770538.4518373,
+    "ast_hash": "00f1872f6eeee5d049591b0f46a270a8",
     "semantic_hash": ""
   },
   "/Users/abdullahbinmadhi/Desktop/Projects/Driving-telemetry/Driving-Simulation-Telemetry-Dashboard-Application/stitch-output/redesign.html": {
