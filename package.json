@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "verify:features": "node scripts/verify-feature-order.cjs",
     "preview": "vite preview",
-    "postinstall": "node -e \"const{cpSync,existsSync,mkdirSync}=require('fs');const{join}=require('path');const src='node_modules/onnxruntime-web/dist';const dst='public/assets';if(existsSync(src)){mkdirSync(dst,{recursive:true});['ort-wasm-simd-threaded.jsep.mjs','ort-wasm-simd-threaded.jsep.wasm','ort-wasm-simd-threaded.wasm','ort-wasm-simd-threaded.asyncify.mjs','ort-wasm-simd-threaded.asyncify.wasm'].forEach(f=>{const s=join(src,f);const d=join(dst,f);if(existsSync(s)){cpSync(s,d);console.log('Copied',f);}})}\""
+    "postinstall": "node -e \"const{cpSync,existsSync,mkdirSync}=require('fs');const{join}=require('path');const src='node_modules/onnxruntime-web/dist';const dst='public/assets';if(existsSync(src)){mkdirSync(dst,{recursive:true});['ort-wasm-simd-threaded.jsep.mjs','ort-wasm-simd-threaded.jsep.wasm','ort-wasm-simd-threaded.wasm','ort-wasm-simd-threaded.asyncify.mjs','ort-wasm-simd-threaded.asyncify.wasm'].forEach(f=>{const s=join(src,f);const d=join(dst,f);if(existsSync(s)){cpSync(s,d);console.log('Copied',f);}})}\"",
+    "doctor": "npx react-doctor@latest"
   },
   "dependencies": {
     "@google/stitch-sdk": "^0.3.5",
@@ -76,6 +77,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
+    "react-doctor": "^0.2.9",
     "tailwindcss": "^3.4.19",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",

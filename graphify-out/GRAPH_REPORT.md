@@ -1,16 +1,16 @@
-# Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-26)
+# Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-27)
 
 ## Corpus Check
-- 73 files · ~68,317 words
+- 74 files · ~68,705 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 756 nodes · 987 edges · 53 communities (47 shown, 6 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
+- 833 nodes · 1161 edges · 58 communities (53 shown, 5 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7dfb1aed`
+- Built from commit: `d0835bd3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -52,8 +52,13 @@
 - [[_COMMUNITY_Validation & Testing|Validation & Testing]]
 - [[_COMMUNITY_Deployment Guide|Deployment Guide]]
 - [[_COMMUNITY_Magic Number Extraction|Magic Number Extraction]]
+- [[_COMMUNITY_Community 37|Community 37]]
+- [[_COMMUNITY_Community 38|Community 38]]
 - [[_COMMUNITY_UI Label Fixes|UI Label Fixes]]
+- [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Layout & Sidebar|Layout & Sidebar]]
+- [[_COMMUNITY_Community 42|Community 42]]
+- [[_COMMUNITY_Community 43|Community 43]]
 - [[_COMMUNITY_Car Health UI|Car Health UI]]
 - [[_COMMUNITY_Lap Timing|Lap Timing]]
 - [[_COMMUNITY_Live Graph|Live Graph]]
@@ -71,45 +76,45 @@
 3. `compilerOptions` - 20 edges
 4. `compilerOptions` - 18 edges
 5. `TelemetryData` - 17 edges
-6. `useSettingsStore` - 15 edges
-7. `BeamNGConnector` - 14 edges
-8. `scripts` - 13 edges
-9. `MLAnalysis — Full Rebuild Plan` - 11 edges
-10. `Phase 4 — Visual Redesign` - 11 edges
+6. `useSettingsStore` - 16 edges
+7. `ML Pipeline Restructure Plan` - 15 edges
+8. `scripts` - 14 edges
+9. `BeamNGConnector` - 14 edges
+10. `useTelemetryStore` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `clamp()` --calls--> `type`  [INFERRED]
+  electron/game-connectors/beamng/telemetry.lua → package.json
+- `firstNumber()` --calls--> `type`  [INFERRED]
+  electron/game-connectors/beamng/telemetry.lua → package.json
+- `getPressurePsi()` --calls--> `type`  [INFERRED]
+  electron/game-connectors/beamng/telemetry.lua → package.json
+- `firstPowertrainDevice()` --calls--> `type`  [INFERRED]
+  electron/game-connectors/beamng/telemetry.lua → package.json
 - `ortWasmThreaded()` --calls--> `require`  [INFERRED]
   public/assets/ort-wasm-simd-threaded.asyncify.mjs → electron/main.ts
-- `ortWasmThreaded()` --calls--> `require`  [INFERRED]
-  public/assets/ort-wasm-simd-threaded.jsep.mjs → electron/main.ts
-- `BeamNGConnector` --references--> `TelemetryData`  [EXTRACTED]
-  electron/game-connectors/beamng.ts → src/types/telemetry.ts
-- `useSettingsStore` --calls--> `Layout()`  [EXTRACTED]
-  src/stores/settingsStore.ts → src/components/Layout/Layout.tsx
-- `projectPCA()` --calls--> `extractFeatures()`  [EXTRACTED]
-  src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
 
-## Communities (53 total, 6 thin omitted)
+## Communities (58 total, 5 thin omitted)
 
 ### Community 0 - "ML Worker Core"
 Cohesion: 0.06
-Nodes (23): accelerations, aggressionMatrix, anomalies, brakes, { dtwScore, trailPercent }, exitForecast, fatigue, gForcesCombined (+15 more)
+Nodes (28): accelerations, aggressionMatrix, anomalies, brakes, { dtwScore, trailPercent }, exitForecast, fatigue, gForcesCombined (+20 more)
 
 ### Community 1 - "Model Metrics"
-Cohesion: 0.07
-Nodes (15): GameConnector, clamp(), nearZero(), AssettoCorsaConnector, BeamNGConnector, clamp(), normalizeArray(), normalizeHealth() (+7 more)
+Cohesion: 0.09
+Nodes (14): GameConnector, AssettoCorsaConnector, BeamNGConnector, clamp(), normalizeArray(), normalizeHealth(), normalizeSteering(), numberOrUndefined() (+6 more)
 
 ### Community 2 - "Electron & ONNX Runtime"
-Cohesion: 0.04
-Nodes (45): dependencies, better-sqlite3, clsx, express, @google/stitch-sdk, lucide-react, onnxruntime-web, papaparse (+37 more)
+Cohesion: 0.08
+Nodes (26): devDependencies, autoprefixer, concurrently, cross-env, electron, electron-builder, eslint, @eslint/js (+18 more)
 
 ### Community 3 - "ML Training Pipeline"
-Cohesion: 0.08
-Nodes (33): dataset_files, dataset_rows, components, pca_variance_pct, error, accuracy, f1, feature_count (+25 more)
+Cohesion: 0.05
+Nodes (46): dataset_files, dataset_rows, components, explained_variance, feature_count, pca_variance_pct, error, accuracy (+38 more)
 
 ### Community 4 - "PCA Profile"
-Cohesion: 0.14
-Nodes (10): ortWasmThreaded(), ortWasmThreaded(), db, __dirname, initDatabase(), __dirname, id, now (+2 more)
+Cohesion: 0.13
+Nodes (13): ortWasmThreaded(), ortWasmThreaded(), db, __dirname, initDatabase(), __dirname, id, now (+5 more)
 
 ### Community 5 - "ML Analysis UI"
 Cohesion: 0.09
@@ -117,31 +122,31 @@ Nodes (22): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, jsx
 
 ### Community 6 - "ML Inference Helpers"
 Cohesion: 0.09
-Nodes (21): 1. Slash Commands (`/agent-name`), 2. Automatic Delegation, 3. Named Mention, Agent Catalog, code:block1 (/explorer find where resolveBaseUrl is defined), code:block2 ("Find where database migrations are defined"), code:block3 ("Use the security-auditor to scan the Electron IPC handlers"), db-architect (+13 more)
+Nodes (22): 1. Slash Commands (`/agent-name`), 2. Automatic Delegation, 3. Named Mention, Agent Catalog, code:block1 (/explorer find where resolveBaseUrl is defined), code:block2 ("Find where database migrations are defined"), code:block3 ("Use the security-auditor to scan the Electron IPC handlers"), db-architect (+14 more)
 
 ### Community 7 - "State Clusters"
-Cohesion: 0.11
-Nodes (17): 1. The Dashboard (`/`), 2. Telemetry Analysis (`/analysis`), 3. Reaction Test (`/reaction`), 4. Settings Configuration (`/settings`), BeamNG.drive (High-Fidelity), code:bash (git clone https://github.com/abdullah-binmadhi/Driving-Simul), code:bash (# Install all required dependencies), code:bash (npm install) (+9 more)
+Cohesion: 0.10
+Nodes (19): 1. The Dashboard (`/`), 2. Telemetry Analysis (`/analysis`), 3. Reaction Test (`/reaction`), 4. Settings Configuration (`/settings`), Assetto Corsa, BeamNG.drive (High-Fidelity), code:bash (git clone https://github.com/abdullah-binmadhi/Driving-Simul), code:bash (# Install all required dependencies) (+11 more)
 
 ### Community 8 - "Game Connectors"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, moduleResolution, noEmit (+11 more)
 
 ### Community 9 - "Statistical Helpers"
-Cohesion: 0.22
-Nodes (12): derive_labels(), load_all_csvs(), main(), Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model, Check which expected columns are missing from the dataset., Derive supervised labels that aren't directly in the raw telemetry., Convert sklearn model to ONNX and save., Train all 8 models and return metrics. (+4 more)
+Cohesion: 0.20
+Nodes (13): derive_labels(), load_all_csvs(), main(), Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model, Check which expected columns are missing from the dataset., Derive supervised labels that aren't directly in the raw telemetry., Convert sklearn model to ONNX and save., Train all 8 models and return metrics. (+5 more)
 
 ### Community 10 - "Electron Types"
-Cohesion: 0.21
-Nodes (9): DriverProfile(), SessionInfo(), Settings(), AppSettings, DriverSettings, GameSettings, SessionSettings, SettingsState (+1 more)
+Cohesion: 0.14
+Nodes (11): DataLogger(), DriverProfile(), SessionInfo(), Layout(), Settings(), AppSettings, DriverSettings, GameSettings (+3 more)
 
 ### Community 11 - "Feature Config"
 Cohesion: 0.13
 Nodes (14): A. Core Physics and Kinematic Variables, A. Procedural Driver Modeling and Synthetic Data, A. The Live Dashboard Interface: A Pilot’s Perspective, B. Derived Behavioral and Efficiency Metrics: The "Why" Behind the Data, B. Impairment, Aggression, and Human-Factor Simulation, B. Vehicle Systems and Tire Thermal Dynamics, I. Introduction: The Intersection of Simulation and Data Science, II. Real-Time Telemetry and Visual Analytics (+6 more)
 
 ### Community 12 - "Settings & Logger"
-Cohesion: 0.09
-Nodes (34): code:typescript (// Around line 466-473, change from:), code:typescript (const decay = jerkMeans[0] > 0 ? (jerkMeans[3] / jerkMeans[0), code:typescript (return {), code:tsx (// Instead of raw number, use:), code:typescript (FATIGUE_IMPROVEMENT_THRESH: -0.02, // decay below this = mea), code:typescript (for (let i = 0; i < speeds.length; i += ML_CONFIG.ANOMALY_DO), code:typescript (// In ml-config.ts:), code:typescript (const anomalyStep = data.length > 10000 ? ML_CONFIG.ANOMALY_) (+26 more)
+Cohesion: 0.06
+Nodes (55): code:typescript (// Around line 466-473, change from:), code:typescript (const decay = jerkMeans[0] > 0 ? (jerkMeans[3] / jerkMeans[0), code:typescript (const rawDecay = jerkMeans[0] > 0 ? (jerkMeans[3] / jerkMean), code:typescript (return {), code:tsx (// Instead of raw number, use:), code:typescript (FATIGUE_IMPROVEMENT_THRESH: -0.02, // decay below this = mea), code:typescript (for (let i = 0; i < speeds.length; i += ML_CONFIG.ANOMALY_DO), code:typescript (// In ml-config.ts:) (+47 more)
 
 ### Community 13 - "ML Restructure Plan"
 Cohesion: 0.15
@@ -156,24 +161,24 @@ Cohesion: 0.36
 Nodes (7): Analysis(), SessionGraphs(), SessionGraphsProps, SessionList(), mockSessions, Session, useSessionStore
 
 ### Community 16 - "App TSConfig"
-Cohesion: 0.51
-Nodes (9): clamp(), estimateTireTemperature(), firstNumber(), firstPowertrainDevice(), getDeviceHealth(), getPosition(), getPressurePsi(), getWheelData() (+1 more)
+Cohesion: 0.10
+Nodes (29): clamp(), estimateTireTemperature(), firstNumber(), firstPowertrainDevice(), getDeviceHealth(), getPosition(), getPressurePsi(), getWheelData() (+21 more)
 
 ### Community 17 - "Agent Catalog"
-Cohesion: 0.05
-Nodes (44): 0.1 — Add order-enforcement comments to `config.py`, 0.2 — Move TS feature lists to shared constants file, 0.3 — Add camelCase→snake_case conversion in `train_model.py`, 0.4 — Add CI verification script, 1.1 — Card subtitle labels, 1.2 — Interpretation text fixes, 1.3 — Quality Metric Card subtitles, 2.1 — Create `src/ml-config.ts` (+36 more)
+Cohesion: 0.15
+Nodes (15): 0.1 — Add order-enforcement comments to `config.py`, 0.2 — Move TS feature lists to shared constants file, 0.3 — Add camelCase→snake_case conversion in `train_model.py`, 0.4 — Add CI verification script, 2.1 — Create `src/ml-config.ts`, 2.2 — Import and use in `mlWorker.ts`, 2.3 — Fix cross-file RPM inconsistency, Actions (+7 more)
 
 ### Community 18 - "Model Loader"
-Cohesion: 0.17
-Nodes (12): 1.3 Feature Column Name Mismatch, 4.1 Normalize All Feature Names to snake_case, 4.2 Add Feature Order Validation, 4.3 Update `MLAnalysis.tsx` `normalizeRow()`, 4. Phase 2: Feature Alignment, code:python (TIRE_WEAR_FEATURES = [), code:json ({), code:ts (// Add these aliases to the existing map:) (+4 more)
+Cohesion: 0.29
+Nodes (7): 1.3 Feature Column Name Mismatch, 4.1 Normalize All Feature Names to snake_case, code:python (TIRE_WEAR_FEATURES = [), code:ts (const TIRE_WEAR_FEATURES = [), code:python (# These are the canonical camelCase column names that normal), code:ts (const TIRE_WEAR_FEATURES = [), code:ts (function extractFeatures(row: Record<string, number>, featur)
 
 ### Community 19 - "NPM Scripts"
 Cohesion: 0.04
-Nodes (46): 1.1 Fix `normalizeRow` ({MLAnalysis.tsx}), 1.2 Timestamp-aware merging ({MLAnalysis.tsx}), 1.3 Column name cross-reference, 3.1 Timeout + Cancel, 3.2 Smooth progress, 3.3 Replace `alert()`, 3.4 Fix Tailwind JIT dynamic class, 4.10 Accessibility (+38 more)
+Nodes (45): 1.1 Fix `normalizeRow` ({MLAnalysis.tsx}), 1.2 Timestamp-aware merging ({MLAnalysis.tsx}), 1.3 Column name cross-reference, 2.1 Boundary-aware jerk/accel, 2.2 Boundary-aware fatigue, 2.3 Boundary-aware Markov chain, 2.4 Boundary-aware gear change detection, 2.5 Boundary-aware tire wear (heuristic path) (+37 more)
 
 ### Community 20 - "Feature Names"
-Cohesion: 0.14
-Nodes (15): 2.1 Boundary-aware jerk/accel, 2.2 Boundary-aware fatigue, 2.3 Boundary-aware Markov chain, 2.4 Boundary-aware gear change detection, 2.5 Boundary-aware tire wear (heuristic path), 2.6 ONNX inference chunking, 2.7 Downsample output arrays, code:ts (function downsample(arr, maxPoints = 2000) {) (+7 more)
+Cohesion: 0.11
+Nodes (18): 4.10 Accessibility, 4.1 Layout Architecture, 4.2 Tab Structure, 4.3 Summary Hero Row, 4.4 Per-Session Comparison, 4.5 Session Boundary Markers on Charts, 4.6 Drag-and-Drop Upload Zone, 4.7 Color Palette (+10 more)
 
 ### Community 21 - "Project README"
 Cohesion: 0.20
@@ -184,16 +189,16 @@ Cohesion: 0.12
 Nodes (16): AnomalyResult, ExitForecastResult, FatigueResult, GripResult, HMMResult, IncomingMessage, ModelStatusMap, OutgoingMessage (+8 more)
 
 ### Community 23 - "Node TSConfig"
-Cohesion: 0.17
-Nodes (15): BehaviorAnalysis, ProgressBar, Dashboard(), DataLogger(), FrictionCircle, InputVisualizer, InputVisualizerProps, RPMGauge (+7 more)
+Cohesion: 0.23
+Nodes (11): Dashboard(), SessionStats, TrackMap(), TrackPoint, useTelemetryListener(), SessionState, clamp(), enrichTelemetry() (+3 more)
 
 ### Community 24 - "Technical Report"
 Cohesion: 0.20
 Nodes (7): client, htmlUrl, htmlUrl2, outDir, outPath, pid, sid
 
 ### Community 25 - "Community 25"
-Cohesion: 0.20
-Nodes (8): 7.1 Add Model Status Indicator to `MLAnalysis.tsx`, 7.2 Add Worker Status Messages, 7.3 Add Model Quality Panel, 7. Phase 5: UI Feedback, Appendix B: `MLResults` Type Definition (Full), code:ts (interface MLResults {), code:ts (self.postMessage({), code:tsx (<details>)
+Cohesion: 0.22
+Nodes (7): 7.1 Add Model Status Indicator to `MLAnalysis.tsx`, 7.2 Add Worker Status Messages, 7.3 Add Model Quality Panel, 7. Phase 5: UI Feedback, code:ts (interface MLResults {), code:ts (self.postMessage({), code:tsx (<details>)
 
 ### Community 26 - "Community 26"
 Cohesion: 0.22
@@ -215,33 +220,57 @@ Nodes (5): 3.1 Remove All Dead Code from `mlWorker.ts`, 3.2 Remove Unused npm De
 Cohesion: 0.25
 Nodes (7): Code Signing (Important), code:bash (npm run build), code:bash (dist-app/), Deployment Guide, How to Build / Deploy, Output Location, Why Desktop?
 
+### Community 31 - "Dashboard & Stats"
+Cohesion: 0.25
+Nodes (7): Comprehensive ML Pipeline Configuration for Driving Telemetry All feature sets,, # NOTE: Feature ORDER must match ml-features.ts SHIFT_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts PEDAL_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts TIRE_WEAR_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts GRIP_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts HMM_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts PCA_FEATURES exactly
+
 ### Community 32 - "ONNX Batching Fix"
-Cohesion: 0.17
-Nodes (4): Layout(), HistoryItem, ReactionTest(), TestMode
+Cohesion: 0.43
+Nodes (3): HistoryItem, ReactionTest(), TestMode
 
 ### Community 33 - "Community 33"
-Cohesion: 1.00
-Nodes (3): _initModels(), loadModels(), resolveBaseUrl()
+Cohesion: 0.31
+Nodes (10): Effort Summary, ML Pipeline Fix Plan, Phase 0: Feature Name Alignment, Phase 1: UI Label Accuracy, Phase 2: Magic Number Extraction, Problem, Problem, Problem (+2 more)
 
 ### Community 34 - "Validation & Testing"
-Cohesion: 0.36
-Nodes (8): classifyGrip(), classifyPedalOverlap(), classifyShifts(), clusterStates(), predictTireWear(), extractFeatures(), jerkMagnitude(), sleep()
+Cohesion: 0.33
+Nodes (9): classifyGrip(), classifyPedalOverlap(), classifyShifts(), _initModels(), loadModels(), predictTireWear(), resolveBaseUrl(), extractFeatures() (+1 more)
 
 ### Community 35 - "Deployment Guide"
-Cohesion: 0.29
-Nodes (6): GRIP_FEATURES, HMM_FEATURES, PCA_FEATURES, PEDAL_FEATURES, SHIFT_FEATURES, TIRE_WEAR_FEATURES
+Cohesion: 0.20
+Nodes (10): 3a — Batch ONNX Inference, 3b — Fix Silent Catch Blocks, 3c — Add `modelsLoaded` Retry, 3d — Differentiate Error Types, code:typescript (.catch((err) => {), code:typescript (// Before: per-row loop with [1, 20] tensor), code:typescript (if (session) {), code:typescript (const anyLoaded = Object.values(modelStatus).some(s => s ===) (+2 more)
 
 ### Community 36 - "Magic Number Extraction"
-Cohesion: 0.16
-Nodes (24): bgColorMap, Card(), colorMap, DynamicsTab(), INITIAL_RESULTS, Interpretation(), MLAnalysis(), OverviewTab() (+16 more)
+Cohesion: 0.17
+Nodes (22): bgColorMap, Card(), colorMap, DynamicsTab(), INITIAL_RESULTS, Interpretation(), MLAnalysis(), OverviewTab() (+14 more)
 
-### Community 39 - "UI Label Fixes"
-Cohesion: 0.28
-Nodes (4): clamp(), enrichTelemetry(), MultiTraceDataPoint, signalSign()
+### Community 37 - "Community 37"
+Cohesion: 0.25
+Nodes (7): After making React code changes:, code:bash (curl --fail --silent --show-error \), code:bash (npx react-doctor@latest --verbose --diff), Command, /doctor — full local triage workflow, For general cleanup or code improvement:, React Doctor
+
+### Community 38 - "Community 38"
+Cohesion: 0.33
+Nodes (6): 5a — Remove `any` Casts, 5b — Fix `MLResults` Interface, 5c — Add Worker Output Validation, code:typescript (interface MLResults {), code:typescript (workerRef.current.onmessage = (e) => {), Phase 5: Type Safety
+
+### Community 40 - "Community 40"
+Cohesion: 0.33
+Nodes (6): 4.2 Add Feature Order Validation, 4.3 Update `MLAnalysis.tsx` `normalizeRow()`, 4. Phase 2: Feature Alignment, code:json ({), code:ts (// Add these aliases to the existing map:), code:python (# Before ONNX export, save the exact feature order)
 
 ### Community 41 - "Layout & Sidebar"
 Cohesion: 0.33
 Nodes (5): centroids, features, n_clusters, scaler_mean, scaler_scale
+
+### Community 42 - "Community 42"
+Cohesion: 0.50
+Nodes (4): 1.1 — Card subtitle labels, 1.2 — Interpretation text fixes, 1.3 — Quality Metric Card subtitles, Changes to `MLAnalysis.tsx`
+
+### Community 43 - "Community 43"
+Cohesion: 0.67
+Nodes (3): code:bash (npx tsc -b          # TypeScript type check), code:bash (cd ml-pipeline && python train_model.py), Verification
+
+### Community 44 - "Car Health UI"
+Cohesion: 0.18
+Nodes (12): BehaviorAnalysis, BehaviorAnalysisProps, ProgressBar, CarHealth(), CarHealthProps, HealthIndicator(), FrictionCircle, FrictionCircleProps (+4 more)
 
 ### Community 45 - "Lap Timing"
 Cohesion: 0.67
@@ -252,36 +281,36 @@ Cohesion: 0.50
 Nodes (3): LiveMultiGraph, LiveMultiGraphProps, MultiTraceDataPoint
 
 ### Community 49 - "Friction Circle"
-Cohesion: 0.20
-Nodes (9): 4.1 Layout Architecture, code:block15 (┌───────────────────────────────────────────────────────────), 10. Risk Register, 2.1 Key Architectural Changes, 2. Target Architecture, 9. Implementation Timeline, Appendix A: Files Changed Summary, Appendix C: Feature Map Cross-Reference (+1 more)
+Cohesion: 0.27
+Nodes (11): 10. Risk Register, 2.1 Key Architectural Changes, 2. Target Architecture, 9. Implementation Timeline, Appendix A: Files Changed Summary, Appendix B: `MLResults` Type Definition (Full), Appendix C: Feature Map Cross-Reference, code:ts (interface MLResults {) (+3 more)
 
 ### Community 54 - "ESLint Config"
-Cohesion: 0.38
-Nodes (7): computeFatigueForSession(), detectAnomalies(), detectFatigue(), projectPCA(), safeMean(), safeStd(), splitBySession()
+Cohesion: 0.26
+Nodes (11): clusterStates(), computeFatigueForSession(), detectAnomalies(), detectFatigue(), projectPCA(), jerkMagnitude(), medianDt(), mergeSessions() (+3 more)
 
 ### Community 64 - "Community 64"
 Cohesion: 0.08
-Nodes (24): build, appId, directories, extraResources, files, mac, productName, win (+16 more)
+Nodes (25): build, appId, directories, extraResources, files, mac, productName, win (+17 more)
 
 ## Knowledge Gaps
-- **361 isolated node(s):** `modelStatus`, `validData`, `timestamps`, `speeds`, `throttles` (+356 more)
+- **371 isolated node(s):** `tsBuildInfoFile`, `target`, `lib`, `module`, `types` (+366 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ML Config`?**
-  _High betweenness centrality (0.081) - this node is a cross-community bridge._
-- **Why does `TelemetryData` connect `Model Metrics` to `Node TSConfig`, `UI Label Fixes`?**
+- **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ESLint Config`, `ML Config`?**
+  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+- **Why does `TelemetryData` connect `Model Metrics` to `PCA Profile`, `UI Label Fixes`, `Node TSConfig`?**
   _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **What connects `modelStatus`, `validData`, `timestamps` to the rest of the system?**
-  _369 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `tsBuildInfoFile`, `target`, `lib` to the rest of the system?**
+  _384 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ML Worker Core` be split into smaller, more focused modules?**
-  _Cohesion score 0.0625 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06116642958748222 - nodes in this community are weakly interconnected._
 - **Should `Model Metrics` be split into smaller, more focused modules?**
-  _Cohesion score 0.06704260651629072 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0851063829787234 - nodes in this community are weakly interconnected._
 - **Should `Electron & ONNX Runtime` be split into smaller, more focused modules?**
-  _Cohesion score 0.043478260869565216 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `ML Training Pipeline` be split into smaller, more focused modules?**
-  _Cohesion score 0.0773109243697479 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05230496453900709 - nodes in this community are weakly interconnected._

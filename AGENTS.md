@@ -1,3 +1,6 @@
+# Pre-flight: Auto-load Graphify
+Before any codebase question, exploration, or build task: check if `graphify-out/graph.json` exists. If yes, load the `graphify` skill first via the skill tool. Use its knowledge graph to answer questions and locate relevant files before falling back to raw file scanning.
+
 # Global Subagent Squadron
 
 Custom DeepSeek-optimized subagents available globally via `~/.config/opencode/opencode.jsonc`.
