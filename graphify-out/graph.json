@@ -4,913 +4,1462 @@
   "graph": {},
   "nodes": [
     {
+      "label": "MLAnalysis.tsx",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1",
+      "id": "src_components_mlanalysis_mlanalysis_tsx",
+      "community": 36,
+      "norm_label": "mlanalysis.tsx"
+    },
+    {
+      "label": "TAB_LABELS",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L19",
+      "id": "mlanalysis_mlanalysis_tab_labels",
+      "community": 36,
+      "norm_label": "tab_labels"
+    },
+    {
+      "label": "Tab",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L20",
+      "id": "mlanalysis_mlanalysis_tab",
+      "community": 36,
+      "norm_label": "tab"
+    },
+    {
+      "label": "INITIAL_RESULTS",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L22",
+      "id": "mlanalysis_mlanalysis_initial_results",
+      "community": 36,
+      "norm_label": "initial_results"
+    },
+    {
+      "label": "Toast",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L52",
+      "id": "mlanalysis_mlanalysis_toast",
+      "community": 36,
+      "norm_label": "toast"
+    },
+    {
+      "label": "colorMap",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L54",
+      "id": "mlanalysis_mlanalysis_colormap",
+      "community": 36,
+      "norm_label": "colormap"
+    },
+    {
+      "label": "bgColorMap",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L71",
+      "id": "mlanalysis_mlanalysis_bgcolormap",
+      "community": 36,
+      "norm_label": "bgcolormap"
+    },
+    {
+      "label": "MLAnalysis()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L86",
+      "id": "mlanalysis_mlanalysis_mlanalysis",
+      "community": 36,
+      "norm_label": "mlanalysis()"
+    },
+    {
+      "label": "OverviewTab()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L561",
+      "id": "mlanalysis_mlanalysis_overviewtab",
+      "community": 36,
+      "norm_label": "overviewtab()"
+    },
+    {
+      "label": "SafetyTab()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L663",
+      "id": "mlanalysis_mlanalysis_safetytab",
+      "community": 36,
+      "norm_label": "safetytab()"
+    },
+    {
+      "label": "StyleTab()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L750",
+      "id": "mlanalysis_mlanalysis_styletab",
+      "community": 36,
+      "norm_label": "styletab()"
+    },
+    {
+      "label": "DynamicsTab()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L858",
+      "id": "mlanalysis_mlanalysis_dynamicstab",
+      "community": 36,
+      "norm_label": "dynamicstab()"
+    },
+    {
+      "label": "WearTab()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1014",
+      "id": "mlanalysis_mlanalysis_weartab",
+      "community": 36,
+      "norm_label": "weartab()"
+    },
+    {
+      "label": "QualityTab()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1062",
+      "id": "mlanalysis_mlanalysis_qualitytab",
+      "community": 36,
+      "norm_label": "qualitytab()"
+    },
+    {
+      "label": "Card()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1235",
+      "id": "mlanalysis_mlanalysis_card",
+      "community": 36,
+      "norm_label": "card()"
+    },
+    {
+      "label": "Interpretation()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1262",
+      "id": "mlanalysis_mlanalysis_interpretation",
+      "community": 36,
+      "norm_label": "interpretation()"
+    },
+    {
+      "label": "Quadrant()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1270",
+      "id": "mlanalysis_mlanalysis_quadrant",
+      "community": 36,
+      "norm_label": "quadrant()"
+    },
+    {
+      "label": "mlWorker.ts",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1",
+      "id": "src_components_mlanalysis_mlworker_ts",
+      "community": 0,
+      "norm_label": "mlworker.ts"
+    },
+    {
+      "label": "modelStatus",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L60",
+      "id": "mlanalysis_mlworker_modelstatus",
+      "community": 0,
+      "norm_label": "modelstatus"
+    },
+    {
+      "label": "resolveBaseUrl()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L72",
+      "id": "mlanalysis_mlworker_resolvebaseurl",
+      "community": 34,
+      "norm_label": "resolvebaseurl()"
+    },
+    {
+      "label": "loadModels()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L81",
+      "id": "mlanalysis_mlworker_loadmodels",
+      "community": 34,
+      "norm_label": "loadmodels()"
+    },
+    {
+      "label": "_initModels()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L93",
+      "id": "mlanalysis_mlworker_initmodels",
+      "community": 34,
+      "norm_label": "_initmodels()"
+    },
+    {
+      "label": "computeSafetyScore()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L151",
+      "id": "mlanalysis_mlworker_computesafetyscore",
+      "community": 0,
+      "norm_label": "computesafetyscore()"
+    },
+    {
+      "label": "detectAnomalies()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L200",
+      "id": "mlanalysis_mlworker_detectanomalies",
+      "community": 54,
+      "norm_label": "detectanomalies()"
+    },
+    {
+      "label": "projectPCA()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L242",
+      "id": "mlanalysis_mlworker_projectpca",
+      "community": 54,
+      "norm_label": "projectpca()"
+    },
+    {
+      "label": "classifyKNN()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L282",
+      "id": "mlanalysis_mlworker_classifyknn",
+      "community": 0,
+      "norm_label": "classifyknn()"
+    },
+    {
+      "label": "computeFatigueForSession()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L299",
+      "id": "mlanalysis_mlworker_computefatigueforsession",
+      "community": 54,
+      "norm_label": "computefatigueforsession()"
+    },
+    {
+      "label": "detectFatigue()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L333",
+      "id": "mlanalysis_mlworker_detectfatigue",
+      "community": 54,
+      "norm_label": "detectfatigue()"
+    },
+    {
+      "label": "classifyGrip()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L369",
+      "id": "mlanalysis_mlworker_classifygrip",
+      "community": 34,
+      "norm_label": "classifygrip()"
+    },
+    {
+      "label": "classifyPedalOverlap()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L410",
+      "id": "mlanalysis_mlworker_classifypedaloverlap",
+      "community": 34,
+      "norm_label": "classifypedaloverlap()"
+    },
+    {
+      "label": "clusterStates()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L450",
+      "id": "mlanalysis_mlworker_clusterstates",
+      "community": 54,
+      "norm_label": "clusterstates()"
+    },
+    {
+      "label": "buildMarkovChain()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L502",
+      "id": "mlanalysis_mlworker_buildmarkovchain",
+      "community": 0,
+      "norm_label": "buildmarkovchain()"
+    },
+    {
+      "label": "buildAggressionMatrix()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L523",
+      "id": "mlanalysis_mlworker_buildaggressionmatrix",
+      "community": 0,
+      "norm_label": "buildaggressionmatrix()"
+    },
+    {
+      "label": "predictTireWear()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L544",
+      "id": "mlanalysis_mlworker_predicttirewear",
+      "community": 34,
+      "norm_label": "predicttirewear()"
+    },
+    {
+      "label": "classifyShifts()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L601",
+      "id": "mlanalysis_mlworker_classifyshifts",
+      "community": 34,
+      "norm_label": "classifyshifts()"
+    },
+    {
+      "label": "computeExitForecast()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L650",
+      "id": "mlanalysis_mlworker_computeexitforecast",
+      "community": 0,
+      "norm_label": "computeexitforecast()"
+    },
+    {
+      "label": "computeDTW()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L734",
+      "id": "mlanalysis_mlworker_computedtw",
+      "community": 0,
+      "norm_label": "computedtw()"
+    },
+    {
+      "label": "computeQualityMetrics()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L786",
+      "id": "mlanalysis_mlworker_computequalitymetrics",
+      "community": 0,
+      "norm_label": "computequalitymetrics()"
+    },
+    {
+      "label": "reportProgress()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L889",
+      "id": "mlanalysis_mlworker_reportprogress",
+      "community": 0,
+      "norm_label": "reportprogress()"
+    },
+    {
+      "label": "validData",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L898",
+      "id": "mlanalysis_mlworker_validdata",
+      "community": 0,
+      "norm_label": "validdata"
+    },
+    {
+      "label": "timestamps",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L911",
+      "id": "mlanalysis_mlworker_timestamps",
+      "community": 0,
+      "norm_label": "timestamps"
+    },
+    {
+      "label": "speeds",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L912",
+      "id": "mlanalysis_mlworker_speeds",
+      "community": 0,
+      "norm_label": "speeds"
+    },
+    {
+      "label": "throttles",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L913",
+      "id": "mlanalysis_mlworker_throttles",
+      "community": 0,
+      "norm_label": "throttles"
+    },
+    {
+      "label": "brakes",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L914",
+      "id": "mlanalysis_mlworker_brakes",
+      "community": 0,
+      "norm_label": "brakes"
+    },
+    {
+      "label": "steerings",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L915",
+      "id": "mlanalysis_mlworker_steerings",
+      "community": 0,
+      "norm_label": "steerings"
+    },
+    {
+      "label": "gForcesCombined",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L919",
+      "id": "mlanalysis_mlworker_gforcescombined",
+      "community": 0,
+      "norm_label": "gforcescombined"
+    },
+    {
+      "label": "jerks",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L924",
+      "id": "mlanalysis_mlworker_jerks",
+      "community": 0,
+      "norm_label": "jerks"
+    },
+    {
+      "label": "accelerations",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L925",
+      "id": "mlanalysis_mlworker_accelerations",
+      "community": 0,
+      "norm_label": "accelerations"
+    },
+    {
+      "label": "safetyScore",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L943",
+      "id": "mlanalysis_mlworker_safetyscore",
+      "community": 0,
+      "norm_label": "safetyscore"
+    },
+    {
+      "label": "anomalies",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L947",
+      "id": "mlanalysis_mlworker_anomalies",
+      "community": 0,
+      "norm_label": "anomalies"
+    },
+    {
+      "label": "pca",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L951",
+      "id": "mlanalysis_mlworker_pca",
+      "community": 0,
+      "norm_label": "pca"
+    },
+    {
+      "label": "{ knnProfile, knnConfidence }",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L957",
+      "id": "mlanalysis_mlworker_knnprofile_knnconfidence",
+      "community": 0,
+      "norm_label": "{ knnprofile, knnconfidence }"
+    },
+    {
+      "label": "hmm",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L965",
+      "id": "mlanalysis_mlworker_hmm",
+      "community": 0,
+      "norm_label": "hmm"
+    },
+    {
+      "label": "fatigue",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L981",
+      "id": "mlanalysis_mlworker_fatigue",
+      "community": 0,
+      "norm_label": "fatigue"
+    },
+    {
+      "label": "exitForecast",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L985",
+      "id": "mlanalysis_mlworker_exitforecast",
+      "community": 0,
+      "norm_label": "exitforecast"
+    },
+    {
+      "label": "{ dtwScore, trailPercent }",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L989",
+      "id": "mlanalysis_mlworker_dtwscore_trailpercent",
+      "community": 0,
+      "norm_label": "{ dtwscore, trailpercent }"
+    },
+    {
+      "label": "markovMatrix",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L993",
+      "id": "mlanalysis_mlworker_markovmatrix",
+      "community": 0,
+      "norm_label": "markovmatrix"
+    },
+    {
+      "label": "aggressionMatrix",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L994",
+      "id": "mlanalysis_mlworker_aggressionmatrix",
+      "community": 0,
+      "norm_label": "aggressionmatrix"
+    },
+    {
+      "label": "qualityMetrics",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L998",
+      "id": "mlanalysis_mlworker_qualitymetrics",
+      "community": 0,
+      "norm_label": "qualitymetrics"
+    },
+    {
+      "label": "sessionBoundaries",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1006",
+      "id": "mlanalysis_mlworker_sessionboundaries",
+      "community": 0,
+      "norm_label": "sessionboundaries"
+    },
+    {
+      "label": "results",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L1011",
+      "id": "mlanalysis_mlworker_results",
+      "community": 0,
+      "norm_label": "results"
+    },
+    {
       "label": "SKILL.md",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L1",
-      "id": "agents_skills_react_doctor_skill_md",
       "community": 37,
-      "norm_label": "skill.md"
+      "norm_label": "skill.md",
+      "id": "agents_skills_react_doctor_skill_md"
     },
     {
       "label": "React Doctor",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L7",
-      "id": "react_doctor_skill_react_doctor",
       "community": 37,
-      "norm_label": "react doctor"
+      "norm_label": "react doctor",
+      "id": "react_doctor_skill_react_doctor"
     },
     {
       "label": "After making React code changes:",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L11",
-      "id": "react_doctor_skill_after_making_react_code_changes",
       "community": 37,
-      "norm_label": "after making react code changes:"
+      "norm_label": "after making react code changes:",
+      "id": "react_doctor_skill_after_making_react_code_changes"
     },
     {
       "label": "For general cleanup or code improvement:",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L17",
-      "id": "react_doctor_skill_for_general_cleanup_or_code_improvement",
       "community": 37,
-      "norm_label": "for general cleanup or code improvement:"
+      "norm_label": "for general cleanup or code improvement:",
+      "id": "react_doctor_skill_for_general_cleanup_or_code_improvement"
     },
     {
       "label": "/doctor \u2014 full local triage workflow",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L21",
-      "id": "react_doctor_skill_doctor_full_local_triage_workflow",
       "community": 37,
-      "norm_label": "/doctor \u2014 full local triage workflow"
+      "norm_label": "/doctor \u2014 full local triage workflow",
+      "id": "react_doctor_skill_doctor_full_local_triage_workflow"
     },
     {
       "label": "code:bash (curl --fail --silent --show-error \\)",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L25",
-      "id": "react_doctor_skill_codeblock_1",
       "community": 37,
-      "norm_label": "code:bash (curl --fail --silent --show-error \\)"
+      "norm_label": "code:bash (curl --fail --silent --show-error \\)",
+      "id": "react_doctor_skill_codeblock_1"
     },
     {
       "label": "Command",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L35",
-      "id": "react_doctor_skill_command",
       "community": 37,
-      "norm_label": "command"
+      "norm_label": "command",
+      "id": "react_doctor_skill_command"
     },
     {
       "label": "code:bash (npx react-doctor@latest --verbose --diff)",
       "file_type": "document",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
       "source_location": "L37",
-      "id": "react_doctor_skill_codeblock_2",
       "community": 37,
-      "norm_label": "code:bash (npx react-doctor@latest --verbose --diff)"
+      "norm_label": "code:bash (npx react-doctor@latest --verbose --diff)",
+      "id": "react_doctor_skill_codeblock_2"
     },
     {
       "label": "AGENTS.md",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L1",
-      "id": "agents_md",
       "community": 6,
-      "norm_label": "agents.md"
+      "norm_label": "agents.md",
+      "id": "agents_md"
     },
     {
       "label": "Pre-flight: Auto-load Graphify",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L1",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_pre_flight_auto_load_graphify",
       "community": 6,
-      "norm_label": "pre-flight: auto-load graphify"
+      "norm_label": "pre-flight: auto-load graphify",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_pre_flight_auto_load_graphify"
     },
     {
       "label": "Global Subagent Squadron",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L4",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_global_subagent_squadron",
       "community": 6,
-      "norm_label": "global subagent squadron"
+      "norm_label": "global subagent squadron",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_global_subagent_squadron"
     },
     {
       "label": "Agent Catalog",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L8",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_agent_catalog",
       "community": 6,
-      "norm_label": "agent catalog"
+      "norm_label": "agent catalog",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_agent_catalog"
     },
     {
       "label": "explorer",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L10",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_explorer",
       "community": 6,
-      "norm_label": "explorer"
+      "norm_label": "explorer",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_explorer"
     },
     {
       "label": "debugger",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L23",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_debugger",
       "community": 6,
-      "norm_label": "debugger"
+      "norm_label": "debugger",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_debugger"
     },
     {
       "label": "test-enforcer",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L36",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_test_enforcer",
       "community": 6,
-      "norm_label": "test-enforcer"
+      "norm_label": "test-enforcer",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_test_enforcer"
     },
     {
       "label": "refactor-ninja",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L49",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_refactor_ninja",
       "community": 6,
-      "norm_label": "refactor-ninja"
+      "norm_label": "refactor-ninja",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_refactor_ninja"
     },
     {
       "label": "doc-genius",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L62",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_doc_genius",
       "community": 6,
-      "norm_label": "doc-genius"
+      "norm_label": "doc-genius",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_doc_genius"
     },
     {
       "label": "git-scribe",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L75",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_git_scribe",
       "community": 6,
-      "norm_label": "git-scribe"
+      "norm_label": "git-scribe",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_git_scribe"
     },
     {
       "label": "security-auditor",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L88",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_security_auditor",
       "community": 6,
-      "norm_label": "security-auditor"
+      "norm_label": "security-auditor",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_security_auditor"
     },
     {
       "label": "db-architect",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L101",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_db_architect",
       "community": 6,
-      "norm_label": "db-architect"
+      "norm_label": "db-architect",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_db_architect"
     },
     {
       "label": "ui-stylist",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L114",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_ui_stylist",
       "community": 6,
-      "norm_label": "ui-stylist"
+      "norm_label": "ui-stylist",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_ui_stylist"
     },
     {
       "label": "dependency-medic",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L127",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_dependency_medic",
       "community": 6,
-      "norm_label": "dependency-medic"
+      "norm_label": "dependency-medic",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_dependency_medic"
     },
     {
       "label": "Model Selection Strategy",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L140",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_model_selection_strategy",
       "community": 6,
-      "norm_label": "model selection strategy"
+      "norm_label": "model selection strategy",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_model_selection_strategy"
     },
     {
       "label": "Permission Safety Tiers",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L149",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_permission_safety_tiers",
       "community": 6,
-      "norm_label": "permission safety tiers"
+      "norm_label": "permission safety tiers",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_permission_safety_tiers"
     },
     {
       "label": "Invocation",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L158",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_invocation",
       "community": 6,
-      "norm_label": "invocation"
+      "norm_label": "invocation",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_invocation"
     },
     {
       "label": "1. Slash Commands (`/agent-name`)",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L162",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_1_slash_commands_agent_name",
       "community": 6,
-      "norm_label": "1. slash commands (`/agent-name`)"
+      "norm_label": "1. slash commands (`/agent-name`)",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_1_slash_commands_agent_name"
     },
     {
       "label": "code:block1 (/explorer find where resolveBaseUrl is defined)",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L164",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_codeblock_1",
       "community": 6,
-      "norm_label": "code:block1 (/explorer find where resolvebaseurl is defined)"
+      "norm_label": "code:block1 (/explorer find where resolvebaseurl is defined)",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_codeblock_1"
     },
     {
       "label": "2. Automatic Delegation",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L170",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_2_automatic_delegation",
       "community": 6,
-      "norm_label": "2. automatic delegation"
+      "norm_label": "2. automatic delegation",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_2_automatic_delegation"
     },
     {
       "label": "code:block2 (\"Find where database migrations are defined\")",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L172",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_codeblock_2",
       "community": 6,
-      "norm_label": "code:block2 (\"find where database migrations are defined\")"
+      "norm_label": "code:block2 (\"find where database migrations are defined\")",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_codeblock_2"
     },
     {
       "label": "3. Named Mention",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L177",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_3_named_mention",
       "community": 6,
-      "norm_label": "3. named mention"
+      "norm_label": "3. named mention",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_3_named_mention"
     },
     {
       "label": "code:block3 (\"Use the security-auditor to scan the Electron IPC handlers\")",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L179",
-      "id": "driving_simulation_telemetry_dashboard_application_agents_codeblock_3",
       "community": 6,
-      "norm_label": "code:block3 (\"use the security-auditor to scan the electron ipc handlers\")"
+      "norm_label": "code:block3 (\"use the security-auditor to scan the electron ipc handlers\")",
+      "id": "driving_simulation_telemetry_dashboard_application_agents_codeblock_3"
     },
     {
       "label": "package.json",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L1",
-      "id": "package_json",
       "community": 52,
-      "norm_label": "package.json"
+      "norm_label": "package.json",
+      "id": "package_json"
     },
     {
       "label": "name",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L2",
-      "id": "driving_simulation_telemetry_dashboard_application_package_name",
       "community": 52,
-      "norm_label": "name"
+      "norm_label": "name",
+      "id": "driving_simulation_telemetry_dashboard_application_package_name"
     },
     {
       "label": "private",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L3",
-      "id": "driving_simulation_telemetry_dashboard_application_package_private",
       "community": 52,
-      "norm_label": "private"
+      "norm_label": "private",
+      "id": "driving_simulation_telemetry_dashboard_application_package_private"
     },
     {
       "label": "version",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L4",
-      "id": "driving_simulation_telemetry_dashboard_application_package_version",
       "community": 52,
-      "norm_label": "version"
+      "norm_label": "version",
+      "id": "driving_simulation_telemetry_dashboard_application_package_version"
     },
     {
       "label": "type",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L5",
-      "id": "driving_simulation_telemetry_dashboard_application_package_type",
       "community": 52,
-      "norm_label": "type"
+      "norm_label": "type",
+      "id": "driving_simulation_telemetry_dashboard_application_package_type"
     },
     {
       "label": "main",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L6",
-      "id": "driving_simulation_telemetry_dashboard_application_package_main",
       "community": 52,
-      "norm_label": "main"
+      "norm_label": "main",
+      "id": "driving_simulation_telemetry_dashboard_application_package_main"
     },
     {
       "label": "scripts",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L7",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts",
       "community": 64,
-      "norm_label": "scripts"
+      "norm_label": "scripts",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts"
     },
     {
       "label": "dev",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L8",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev",
       "community": 64,
-      "norm_label": "dev"
+      "norm_label": "dev",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev"
     },
     {
       "label": "electron:dev",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L9",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_electron_dev",
       "community": 64,
-      "norm_label": "electron:dev"
+      "norm_label": "electron:dev",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_electron_dev"
     },
     {
       "label": "dev:ui",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L10",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev_ui",
       "community": 64,
-      "norm_label": "dev:ui"
+      "norm_label": "dev:ui",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev_ui"
     },
     {
       "label": "dev:electron",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L11",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev_electron",
       "community": 64,
-      "norm_label": "dev:electron"
+      "norm_label": "dev:electron",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev_electron"
     },
     {
       "label": "build",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L12",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build",
       "community": 64,
-      "norm_label": "build"
+      "norm_label": "build",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build"
     },
     {
       "label": "build:electron",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L13",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build_electron",
       "community": 64,
-      "norm_label": "build:electron"
+      "norm_label": "build:electron",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build_electron"
     },
     {
       "label": "lint",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L14",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_lint",
       "community": 64,
-      "norm_label": "lint"
+      "norm_label": "lint",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_lint"
     },
     {
       "label": "verify:features",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L15",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_verify_features",
       "community": 64,
-      "norm_label": "verify:features"
+      "norm_label": "verify:features",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_verify_features"
     },
     {
       "label": "preview",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L16",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_preview",
       "community": 64,
-      "norm_label": "preview"
+      "norm_label": "preview",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_preview"
     },
     {
       "label": "postinstall",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L17",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_postinstall",
       "community": 64,
-      "norm_label": "postinstall"
+      "norm_label": "postinstall",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_postinstall"
     },
     {
       "label": "doctor",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L18",
-      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_doctor",
       "community": 64,
-      "norm_label": "doctor"
+      "norm_label": "doctor",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_doctor"
     },
     {
       "label": "dependencies",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L20",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies",
       "community": 16,
-      "norm_label": "dependencies"
+      "norm_label": "dependencies",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies"
     },
     {
       "label": "@google/stitch-sdk",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L21",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_google_stitch_sdk",
       "community": 16,
-      "norm_label": "@google/stitch-sdk"
+      "norm_label": "@google/stitch-sdk",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_google_stitch_sdk"
     },
     {
       "label": "better-sqlite3",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L22",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_better_sqlite3",
       "community": 16,
-      "norm_label": "better-sqlite3"
+      "norm_label": "better-sqlite3",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_better_sqlite3"
     },
     {
       "label": "clsx",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L23",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_clsx",
       "community": 16,
-      "norm_label": "clsx"
+      "norm_label": "clsx",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_clsx"
     },
     {
       "label": "express",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L24",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_express",
       "community": 16,
-      "norm_label": "express"
+      "norm_label": "express",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_express"
     },
     {
       "label": "lucide-react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L25",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_lucide_react",
       "community": 16,
-      "norm_label": "lucide-react"
+      "norm_label": "lucide-react",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_lucide_react"
     },
     {
       "label": "onnxruntime-web",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L26",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_onnxruntime_web",
       "community": 16,
-      "norm_label": "onnxruntime-web"
+      "norm_label": "onnxruntime-web",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_onnxruntime_web"
     },
     {
       "label": "papaparse",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L27",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_papaparse",
       "community": 16,
-      "norm_label": "papaparse"
+      "norm_label": "papaparse",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_papaparse"
     },
     {
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L28",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react",
       "community": 16,
-      "norm_label": "react"
+      "norm_label": "react",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react"
     },
     {
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L29",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react_dom",
       "community": 16,
-      "norm_label": "react-dom"
+      "norm_label": "react-dom",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react_dom"
     },
     {
       "label": "react-router-dom",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L30",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react_router_dom",
       "community": 16,
-      "norm_label": "react-router-dom"
+      "norm_label": "react-router-dom",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react_router_dom"
     },
     {
       "label": "recharts",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L31",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_recharts",
       "community": 16,
-      "norm_label": "recharts"
+      "norm_label": "recharts",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_recharts"
     },
     {
       "label": "tailwind-merge",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L32",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_tailwind_merge",
       "community": 16,
-      "norm_label": "tailwind-merge"
+      "norm_label": "tailwind-merge",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_tailwind_merge"
     },
     {
       "label": "ws",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L33",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_ws",
       "community": 16,
-      "norm_label": "ws"
+      "norm_label": "ws",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_ws"
     },
     {
       "label": "zustand",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L34",
-      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_zustand",
       "community": 16,
-      "norm_label": "zustand"
+      "norm_label": "zustand",
+      "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_zustand"
     },
     {
       "label": "build",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L36",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build",
       "community": 50,
-      "norm_label": "build"
+      "norm_label": "build",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build"
     },
     {
       "label": "appId",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L37",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_appid",
       "community": 50,
-      "norm_label": "appid"
+      "norm_label": "appid",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_appid"
     },
     {
       "label": "productName",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L38",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_productname",
       "community": 50,
-      "norm_label": "productname"
+      "norm_label": "productname",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_productname"
     },
     {
       "label": "directories",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L39",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_directories",
       "community": 50,
-      "norm_label": "directories"
+      "norm_label": "directories",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_directories"
     },
     {
       "label": "output",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L40",
-      "id": "driving_simulation_telemetry_dashboard_application_package_directories_output",
       "community": 50,
-      "norm_label": "output"
+      "norm_label": "output",
+      "id": "driving_simulation_telemetry_dashboard_application_package_directories_output"
     },
     {
       "label": "files",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L42",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_files",
       "community": 50,
-      "norm_label": "files"
+      "norm_label": "files",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_files"
     },
     {
       "label": "extraResources",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L47",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_extraresources",
       "community": 50,
-      "norm_label": "extraresources"
+      "norm_label": "extraresources",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_extraresources"
     },
     {
       "label": "mac",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L53",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_mac",
       "community": 50,
-      "norm_label": "mac"
+      "norm_label": "mac",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_mac"
     },
     {
       "label": "category",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L54",
-      "id": "driving_simulation_telemetry_dashboard_application_package_mac_category",
       "community": 50,
-      "norm_label": "category"
+      "norm_label": "category",
+      "id": "driving_simulation_telemetry_dashboard_application_package_mac_category"
     },
     {
       "label": "win",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L56",
-      "id": "driving_simulation_telemetry_dashboard_application_package_build_win",
       "community": 50,
-      "norm_label": "win"
+      "norm_label": "win",
+      "id": "driving_simulation_telemetry_dashboard_application_package_build_win"
     },
     {
       "label": "target",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L57",
-      "id": "driving_simulation_telemetry_dashboard_application_package_win_target",
       "community": 50,
-      "norm_label": "target"
+      "norm_label": "target",
+      "id": "driving_simulation_telemetry_dashboard_application_package_win_target"
     },
     {
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L60",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies",
       "community": 2,
-      "norm_label": "devdependencies"
+      "norm_label": "devdependencies",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies"
     },
     {
       "label": "@eslint/js",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L61",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_js",
       "community": 2,
-      "norm_label": "@eslint/js"
+      "norm_label": "@eslint/js",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_js"
     },
     {
       "label": "@types/better-sqlite3",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L62",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_better_sqlite3",
       "community": 2,
-      "norm_label": "@types/better-sqlite3"
+      "norm_label": "@types/better-sqlite3",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_better_sqlite3"
     },
     {
       "label": "@types/express",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L63",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_express",
       "community": 2,
-      "norm_label": "@types/express"
+      "norm_label": "@types/express",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_express"
     },
     {
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L64",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_node",
       "community": 2,
-      "norm_label": "@types/node"
+      "norm_label": "@types/node",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_node"
     },
     {
       "label": "@types/papaparse",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L65",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_papaparse",
       "community": 2,
-      "norm_label": "@types/papaparse"
+      "norm_label": "@types/papaparse",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_papaparse"
     },
     {
       "label": "@types/react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L66",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_react",
       "community": 2,
-      "norm_label": "@types/react"
+      "norm_label": "@types/react",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_react"
     },
     {
       "label": "@types/react-dom",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L67",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_react_dom",
       "community": 2,
-      "norm_label": "@types/react-dom"
+      "norm_label": "@types/react-dom",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_react_dom"
     },
     {
       "label": "@types/ws",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L68",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_ws",
       "community": 2,
-      "norm_label": "@types/ws"
+      "norm_label": "@types/ws",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_ws"
     },
     {
       "label": "@vitejs/plugin-react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L69",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_vitejs_plugin_react",
       "community": 2,
-      "norm_label": "@vitejs/plugin-react"
+      "norm_label": "@vitejs/plugin-react",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_vitejs_plugin_react"
     },
     {
       "label": "autoprefixer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L70",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_autoprefixer",
       "community": 2,
-      "norm_label": "autoprefixer"
+      "norm_label": "autoprefixer",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_autoprefixer"
     },
     {
       "label": "concurrently",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L71",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_concurrently",
       "community": 2,
-      "norm_label": "concurrently"
+      "norm_label": "concurrently",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_concurrently"
     },
     {
       "label": "cross-env",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L72",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_cross_env",
       "community": 2,
-      "norm_label": "cross-env"
+      "norm_label": "cross-env",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_cross_env"
     },
     {
       "label": "electron",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L73",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_electron",
       "community": 2,
-      "norm_label": "electron"
+      "norm_label": "electron",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_electron"
     },
     {
       "label": "electron-builder",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L74",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_electron_builder",
       "community": 2,
-      "norm_label": "electron-builder"
+      "norm_label": "electron-builder",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_electron_builder"
     },
     {
       "label": "eslint",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L75",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint",
       "community": 2,
-      "norm_label": "eslint"
+      "norm_label": "eslint",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint"
     },
     {
       "label": "eslint-plugin-react-hooks",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L76",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_plugin_react_hooks",
       "community": 2,
-      "norm_label": "eslint-plugin-react-hooks"
+      "norm_label": "eslint-plugin-react-hooks",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_plugin_react_hooks"
     },
     {
       "label": "eslint-plugin-react-refresh",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L77",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_plugin_react_refresh",
       "community": 2,
-      "norm_label": "eslint-plugin-react-refresh"
+      "norm_label": "eslint-plugin-react-refresh",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_plugin_react_refresh"
     },
     {
       "label": "globals",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L78",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_globals",
       "community": 2,
-      "norm_label": "globals"
+      "norm_label": "globals",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_globals"
     },
     {
       "label": "postcss",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L79",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_postcss",
       "community": 2,
-      "norm_label": "postcss"
+      "norm_label": "postcss",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_postcss"
     },
     {
       "label": "react-doctor",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L80",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_react_doctor",
       "community": 2,
-      "norm_label": "react-doctor"
+      "norm_label": "react-doctor",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_react_doctor"
     },
     {
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L81",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_tailwindcss",
       "community": 2,
-      "norm_label": "tailwindcss"
+      "norm_label": "tailwindcss",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_tailwindcss"
     },
     {
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L82",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_typescript",
       "community": 2,
-      "norm_label": "typescript"
+      "norm_label": "typescript",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_typescript"
     },
     {
       "label": "typescript-eslint",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L83",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_typescript_eslint",
       "community": 2,
-      "norm_label": "typescript-eslint"
+      "norm_label": "typescript-eslint",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_typescript_eslint"
     },
     {
       "label": "vite",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L84",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_vite",
       "community": 2,
-      "norm_label": "vite"
+      "norm_label": "vite",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_vite"
     },
     {
       "label": "wait-on",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L85",
-      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_wait_on",
       "community": 2,
-      "norm_label": "wait-on"
+      "norm_label": "wait-on",
+      "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_wait_on"
     },
     {
       "label": "tsconfig.node.json",
@@ -4243,555 +4792,6 @@
       "id": "mlanalysis_types_modelstatusmap"
     },
     {
-      "label": "MLAnalysis.tsx",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1",
-      "community": 36,
-      "norm_label": "mlanalysis.tsx",
-      "id": "src_components_mlanalysis_mlanalysis_tsx"
-    },
-    {
-      "label": "TAB_LABELS",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L19",
-      "community": 36,
-      "norm_label": "tab_labels",
-      "id": "mlanalysis_mlanalysis_tab_labels"
-    },
-    {
-      "label": "Tab",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L20",
-      "community": 36,
-      "norm_label": "tab",
-      "id": "mlanalysis_mlanalysis_tab"
-    },
-    {
-      "label": "INITIAL_RESULTS",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L22",
-      "community": 36,
-      "norm_label": "initial_results",
-      "id": "mlanalysis_mlanalysis_initial_results"
-    },
-    {
-      "label": "Toast",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L52",
-      "community": 36,
-      "norm_label": "toast",
-      "id": "mlanalysis_mlanalysis_toast"
-    },
-    {
-      "label": "colorMap",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L54",
-      "community": 36,
-      "norm_label": "colormap",
-      "id": "mlanalysis_mlanalysis_colormap"
-    },
-    {
-      "label": "bgColorMap",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L71",
-      "community": 36,
-      "norm_label": "bgcolormap",
-      "id": "mlanalysis_mlanalysis_bgcolormap"
-    },
-    {
-      "label": "MLAnalysis()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L86",
-      "community": 36,
-      "norm_label": "mlanalysis()",
-      "id": "mlanalysis_mlanalysis_mlanalysis"
-    },
-    {
-      "label": "OverviewTab()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L530",
-      "community": 36,
-      "norm_label": "overviewtab()",
-      "id": "mlanalysis_mlanalysis_overviewtab"
-    },
-    {
-      "label": "SafetyTab()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L632",
-      "community": 36,
-      "norm_label": "safetytab()",
-      "id": "mlanalysis_mlanalysis_safetytab"
-    },
-    {
-      "label": "StyleTab()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L719",
-      "community": 36,
-      "norm_label": "styletab()",
-      "id": "mlanalysis_mlanalysis_styletab"
-    },
-    {
-      "label": "DynamicsTab()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L827",
-      "community": 36,
-      "norm_label": "dynamicstab()",
-      "id": "mlanalysis_mlanalysis_dynamicstab"
-    },
-    {
-      "label": "WearTab()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L983",
-      "community": 36,
-      "norm_label": "weartab()",
-      "id": "mlanalysis_mlanalysis_weartab"
-    },
-    {
-      "label": "QualityTab()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1031",
-      "community": 36,
-      "norm_label": "qualitytab()",
-      "id": "mlanalysis_mlanalysis_qualitytab"
-    },
-    {
-      "label": "Card()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1204",
-      "community": 36,
-      "norm_label": "card()",
-      "id": "mlanalysis_mlanalysis_card"
-    },
-    {
-      "label": "Interpretation()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1231",
-      "community": 36,
-      "norm_label": "interpretation()",
-      "id": "mlanalysis_mlanalysis_interpretation"
-    },
-    {
-      "label": "Quadrant()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1239",
-      "community": 36,
-      "norm_label": "quadrant()",
-      "id": "mlanalysis_mlanalysis_quadrant"
-    },
-    {
-      "label": "mlWorker.ts",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L1",
-      "community": 0,
-      "norm_label": "mlworker.ts",
-      "id": "src_components_mlanalysis_mlworker_ts"
-    },
-    {
-      "label": "modelStatus",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L55",
-      "community": 0,
-      "norm_label": "modelstatus",
-      "id": "mlanalysis_mlworker_modelstatus"
-    },
-    {
-      "label": "resolveBaseUrl()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L67",
-      "community": 34,
-      "norm_label": "resolvebaseurl()",
-      "id": "mlanalysis_mlworker_resolvebaseurl"
-    },
-    {
-      "label": "loadModels()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L76",
-      "community": 34,
-      "norm_label": "loadmodels()",
-      "id": "mlanalysis_mlworker_loadmodels"
-    },
-    {
-      "label": "_initModels()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L88",
-      "community": 34,
-      "norm_label": "_initmodels()",
-      "id": "mlanalysis_mlworker_initmodels"
-    },
-    {
-      "label": "computeSafetyScore()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L146",
-      "community": 0,
-      "norm_label": "computesafetyscore()",
-      "id": "mlanalysis_mlworker_computesafetyscore"
-    },
-    {
-      "label": "detectAnomalies()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L195",
-      "community": 54,
-      "norm_label": "detectanomalies()",
-      "id": "mlanalysis_mlworker_detectanomalies"
-    },
-    {
-      "label": "projectPCA()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L237",
-      "community": 54,
-      "norm_label": "projectpca()",
-      "id": "mlanalysis_mlworker_projectpca"
-    },
-    {
-      "label": "classifyKNN()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L277",
-      "community": 0,
-      "norm_label": "classifyknn()",
-      "id": "mlanalysis_mlworker_classifyknn"
-    },
-    {
-      "label": "computeFatigueForSession()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L294",
-      "community": 54,
-      "norm_label": "computefatigueforsession()",
-      "id": "mlanalysis_mlworker_computefatigueforsession"
-    },
-    {
-      "label": "detectFatigue()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L328",
-      "community": 54,
-      "norm_label": "detectfatigue()",
-      "id": "mlanalysis_mlworker_detectfatigue"
-    },
-    {
-      "label": "classifyGrip()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L364",
-      "community": 34,
-      "norm_label": "classifygrip()",
-      "id": "mlanalysis_mlworker_classifygrip"
-    },
-    {
-      "label": "classifyPedalOverlap()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L405",
-      "community": 34,
-      "norm_label": "classifypedaloverlap()",
-      "id": "mlanalysis_mlworker_classifypedaloverlap"
-    },
-    {
-      "label": "clusterStates()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L445",
-      "community": 54,
-      "norm_label": "clusterstates()",
-      "id": "mlanalysis_mlworker_clusterstates"
-    },
-    {
-      "label": "buildMarkovChain()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L497",
-      "community": 0,
-      "norm_label": "buildmarkovchain()",
-      "id": "mlanalysis_mlworker_buildmarkovchain"
-    },
-    {
-      "label": "buildAggressionMatrix()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L518",
-      "community": 0,
-      "norm_label": "buildaggressionmatrix()",
-      "id": "mlanalysis_mlworker_buildaggressionmatrix"
-    },
-    {
-      "label": "predictTireWear()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L539",
-      "community": 34,
-      "norm_label": "predicttirewear()",
-      "id": "mlanalysis_mlworker_predicttirewear"
-    },
-    {
-      "label": "classifyShifts()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L596",
-      "community": 34,
-      "norm_label": "classifyshifts()",
-      "id": "mlanalysis_mlworker_classifyshifts"
-    },
-    {
-      "label": "computeExitForecast()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L645",
-      "community": 0,
-      "norm_label": "computeexitforecast()",
-      "id": "mlanalysis_mlworker_computeexitforecast"
-    },
-    {
-      "label": "computeDTW()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L729",
-      "community": 0,
-      "norm_label": "computedtw()",
-      "id": "mlanalysis_mlworker_computedtw"
-    },
-    {
-      "label": "computeQualityMetrics()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L781",
-      "community": 0,
-      "norm_label": "computequalitymetrics()",
-      "id": "mlanalysis_mlworker_computequalitymetrics"
-    },
-    {
-      "label": "reportProgress()",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L884",
-      "community": 0,
-      "norm_label": "reportprogress()",
-      "id": "mlanalysis_mlworker_reportprogress"
-    },
-    {
-      "label": "validData",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L893",
-      "community": 0,
-      "norm_label": "validdata",
-      "id": "mlanalysis_mlworker_validdata"
-    },
-    {
-      "label": "timestamps",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L906",
-      "community": 0,
-      "norm_label": "timestamps",
-      "id": "mlanalysis_mlworker_timestamps"
-    },
-    {
-      "label": "speeds",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L907",
-      "community": 0,
-      "norm_label": "speeds",
-      "id": "mlanalysis_mlworker_speeds"
-    },
-    {
-      "label": "throttles",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L908",
-      "community": 0,
-      "norm_label": "throttles",
-      "id": "mlanalysis_mlworker_throttles"
-    },
-    {
-      "label": "brakes",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L909",
-      "community": 0,
-      "norm_label": "brakes",
-      "id": "mlanalysis_mlworker_brakes"
-    },
-    {
-      "label": "steerings",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L910",
-      "community": 0,
-      "norm_label": "steerings",
-      "id": "mlanalysis_mlworker_steerings"
-    },
-    {
-      "label": "gForcesCombined",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L914",
-      "community": 0,
-      "norm_label": "gforcescombined",
-      "id": "mlanalysis_mlworker_gforcescombined"
-    },
-    {
-      "label": "jerks",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L919",
-      "community": 0,
-      "norm_label": "jerks",
-      "id": "mlanalysis_mlworker_jerks"
-    },
-    {
-      "label": "accelerations",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L920",
-      "community": 0,
-      "norm_label": "accelerations",
-      "id": "mlanalysis_mlworker_accelerations"
-    },
-    {
-      "label": "safetyScore",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L938",
-      "community": 0,
-      "norm_label": "safetyscore",
-      "id": "mlanalysis_mlworker_safetyscore"
-    },
-    {
-      "label": "anomalies",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L942",
-      "community": 0,
-      "norm_label": "anomalies",
-      "id": "mlanalysis_mlworker_anomalies"
-    },
-    {
-      "label": "pca",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L946",
-      "community": 0,
-      "norm_label": "pca",
-      "id": "mlanalysis_mlworker_pca"
-    },
-    {
-      "label": "{ knnProfile, knnConfidence }",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L952",
-      "community": 0,
-      "norm_label": "{ knnprofile, knnconfidence }",
-      "id": "mlanalysis_mlworker_knnprofile_knnconfidence"
-    },
-    {
-      "label": "hmm",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L960",
-      "community": 0,
-      "norm_label": "hmm",
-      "id": "mlanalysis_mlworker_hmm"
-    },
-    {
-      "label": "fatigue",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L976",
-      "community": 0,
-      "norm_label": "fatigue",
-      "id": "mlanalysis_mlworker_fatigue"
-    },
-    {
-      "label": "exitForecast",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L980",
-      "community": 0,
-      "norm_label": "exitforecast",
-      "id": "mlanalysis_mlworker_exitforecast"
-    },
-    {
-      "label": "{ dtwScore, trailPercent }",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L984",
-      "community": 0,
-      "norm_label": "{ dtwscore, trailpercent }",
-      "id": "mlanalysis_mlworker_dtwscore_trailpercent"
-    },
-    {
-      "label": "markovMatrix",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L988",
-      "community": 0,
-      "norm_label": "markovmatrix",
-      "id": "mlanalysis_mlworker_markovmatrix"
-    },
-    {
-      "label": "aggressionMatrix",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L989",
-      "community": 0,
-      "norm_label": "aggressionmatrix",
-      "id": "mlanalysis_mlworker_aggressionmatrix"
-    },
-    {
-      "label": "qualityMetrics",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L993",
-      "community": 0,
-      "norm_label": "qualitymetrics",
-      "id": "mlanalysis_mlworker_qualitymetrics"
-    },
-    {
-      "label": "sessionBoundaries",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L1001",
-      "community": 0,
-      "norm_label": "sessionboundaries",
-      "id": "mlanalysis_mlworker_sessionboundaries"
-    },
-    {
-      "label": "results",
-      "file_type": "code",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L1006",
-      "community": 0,
-      "norm_label": "results",
-      "id": "mlanalysis_mlworker_results"
-    },
-    {
       "label": "useTelemetry.ts",
       "file_type": "code",
       "source_file": "src/hooks/useTelemetry.ts",
@@ -7503,6 +7503,1647 @@
   ],
   "links": [
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "src_ml_config_ml_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_utils_mergesessions"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_utils_colorforstate"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_utils_downsample"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_types_normalizedrow"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_types_mlresults"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_tab_labels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_tab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_initial_results"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_toast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_colormap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_bgcolormap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_mlanalysis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L524",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_overviewtab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L626",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_safetytab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L713",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_styletab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L821",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_dynamicstab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L977",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_weartab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1025",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_qualitytab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_card"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1225",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_interpretation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1233",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "mlanalysis_mlanalysis_quadrant"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_components_mlanalysis_mlanalysis_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "src_ml_config_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "src_components_mlanalysis_utils_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlanalysis_tsx",
+      "target": "src_components_mlanalysis_types_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_tab_labels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_tab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_initial_results",
+      "target": "mlanalysis_mlanalysis_mlanalysis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_toast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_colormap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_bgcolormap"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "src_app_tsx"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "src_ml_config_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "src_components_mlanalysis_utils_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_utils_downsample"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_utils_mergesessions"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_utils_colorforstate"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "src_components_mlanalysis_types_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_types_normalizedrow"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_types_mlresults"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L523",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_overviewtab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L625",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_safetytab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L712",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_styletab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L820",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_dynamicstab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L976",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_weartab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1024",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_qualitytab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_card"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1224",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_interpretation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L1232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlanalysis_mlanalysis",
+      "target": "mlanalysis_mlanalysis_quadrant"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L602",
+      "weight": 1.0,
+      "source": "mlanalysis_utils_downsample",
+      "target": "mlanalysis_mlanalysis_overviewtab"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L678",
+      "weight": 1.0,
+      "source": "mlanalysis_utils_downsample",
+      "target": "mlanalysis_mlanalysis_safetytab"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L751",
+      "weight": 1.0,
+      "source": "mlanalysis_utils_downsample",
+      "target": "mlanalysis_mlanalysis_styletab"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
+      "source_location": "L998",
+      "weight": 1.0,
+      "source": "mlanalysis_utils_downsample",
+      "target": "mlanalysis_mlanalysis_weartab"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_tire_wear_features"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_grip_features"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_hmm_features"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_pca_features"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_shift_features"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_pedal_features"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_config_ml_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_safemean"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_safestd"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_jerkmagnitude"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_downsample"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_utils_splitbysession"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_normalizedrow"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_fatigueresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_gripresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_shiftresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_svmresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_rfwearresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_hmmresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_pcaprojection"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_safetyscoreresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_anomalyresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_exitforecastresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_qualitymetrics"
+    },
+    {
+      "relation": "contains",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L983",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_qualitymetric"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_mlresults"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_incomingmessage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_penaltycategory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_types_modelstatusmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_modelstatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_resolvebaseurl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_loadmodels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_initmodels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L136",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_computesafetyscore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L185",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_detectanomalies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L227",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_projectpca"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L267",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifyknn"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L284",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_computefatigueforsession"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L318",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_detectfatigue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L354",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifygrip"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L395",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifypedaloverlap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L435",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_clusterstates"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L487",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_buildmarkovchain"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L508",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_buildaggressionmatrix"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L529",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_predicttirewear"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L586",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_classifyshifts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L635",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_computeexitforecast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L719",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_computedtw"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L771",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_computequalitymetrics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L874",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_reportprogress"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L883",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_validdata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L896",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_timestamps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L897",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_speeds"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L898",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_throttles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L899",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_brakes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L900",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_steerings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L904",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_gforcescombined"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L909",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_jerks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L910",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_accelerations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L928",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_safetyscore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L932",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_anomalies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L936",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_pca"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L942",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_knnprofile_knnconfidence"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L950",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_hmm"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L966",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_fatigue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L970",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_exitforecast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L974",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_dtwscore_trailpercent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L978",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_markovmatrix"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L979",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_aggressionmatrix"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L983",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_qualitymetrics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L991",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_sessionboundaries"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L996",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_results"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L431",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "public_models_model_metrics_json"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_features_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_ml_config_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_components_mlanalysis_utils_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "src_components_mlanalysis_types_ts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_initmodels",
+      "target": "mlanalysis_mlworker_resolvebaseurl"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_resolvebaseurl",
+      "target": "mlanalysis_mlworker_loadmodels"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_loadmodels",
+      "target": "mlanalysis_mlworker_initmodels"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_loadmodels",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L193",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_utils_safemean",
+      "target": "mlanalysis_mlworker_detectanomalies"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L194",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_utils_safestd",
+      "target": "mlanalysis_mlworker_detectanomalies"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L260",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_projectpca",
+      "target": "mlanalysis_utils_safemean"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_projectpca",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L323",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_detectfatigue",
+      "target": "mlanalysis_mlworker_computefatigueforsession"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L305",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_utils_safemean",
+      "target": "mlanalysis_mlworker_computefatigueforsession"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L304",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_utils_jerkmagnitude",
+      "target": "mlanalysis_mlworker_computefatigueforsession"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L331",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_detectfatigue",
+      "target": "mlanalysis_utils_safemean"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L319",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_detectfatigue",
+      "target": "mlanalysis_utils_splitbysession"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L365",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_classifygrip",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L374",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_classifygrip",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L405",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_classifypedaloverlap",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L413",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_classifypedaloverlap",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L465",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_clusterstates",
+      "target": "mlanalysis_utils_jerkmagnitude"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L442",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_clusterstates",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L532",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_predicttirewear",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L558",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_predicttirewear",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L603",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_classifyshifts",
+      "target": "mlanalysis_utils_extractfeatures"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L613",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_classifyshifts",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".agents/skills/react-doctor/SKILL.md",
@@ -9211,16 +10852,6 @@
       "confidence_score": 1.0,
       "source": "public_models_model_metrics_json",
       "target": "models_model_metrics_models"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L431",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "public_models_model_metrics_json"
     },
     {
       "relation": "contains",
@@ -11823,17 +13454,6 @@
       "target": "src_components_reactiontest_reactiontest_tsx"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app_tsx",
-      "target": "src_components_mlanalysis_mlanalysis_tsx"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/App.tsx",
@@ -11853,17 +13473,6 @@
       "confidence_score": 1.0,
       "source": "src_app_tsx",
       "target": "src_main_tsx"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "src_app_tsx"
     },
     {
       "relation": "imports_from",
@@ -11948,83 +13557,6 @@
       "target": "src_ml_features_pedal_features"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_ts"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_tire_wear_features"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_grip_features"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_hmm_features"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_pca_features"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_shift_features"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_features_pedal_features"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/ml-config.ts",
@@ -12043,61 +13575,6 @@
       "confidence_score": 1.0,
       "source": "src_ml_config_ts",
       "target": "src_ml_config_mlconfig"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "src_ml_config_ts"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_config_ts"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "src_ml_config_ts"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "src_ml_config_ml_config"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_ml_config_ml_config"
     },
     {
       "relation": "contains",
@@ -14044,39 +15521,6 @@
       "target": "mlanalysis_utils_splitbysession"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "src_components_mlanalysis_utils_ts"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_components_mlanalysis_utils_ts"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "src_components_mlanalysis_utils_ts"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -14088,336 +15532,6 @@
       "target": "mlanalysis_utils_safestd"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_safemean"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L193",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_utils_safemean",
-      "target": "mlanalysis_mlworker_detectanomalies"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L260",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_projectpca",
-      "target": "mlanalysis_utils_safemean"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L305",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_utils_safemean",
-      "target": "mlanalysis_mlworker_computefatigueforsession"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L331",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_detectfatigue",
-      "target": "mlanalysis_utils_safemean"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_safestd"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L194",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_utils_safestd",
-      "target": "mlanalysis_mlworker_detectanomalies"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_jerkmagnitude"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L304",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_utils_jerkmagnitude",
-      "target": "mlanalysis_mlworker_computefatigueforsession"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L465",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_clusterstates",
-      "target": "mlanalysis_utils_jerkmagnitude"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L232",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_projectpca",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L365",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_classifygrip",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L405",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_classifypedaloverlap",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L442",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_clusterstates",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L532",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_predicttirewear",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L603",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_classifyshifts",
-      "target": "mlanalysis_utils_extractfeatures"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_utils_downsample"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_downsample"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L602",
-      "weight": 1.0,
-      "source": "mlanalysis_utils_downsample",
-      "target": "mlanalysis_mlanalysis_overviewtab"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L678",
-      "weight": 1.0,
-      "source": "mlanalysis_utils_downsample",
-      "target": "mlanalysis_mlanalysis_safetytab"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L751",
-      "weight": 1.0,
-      "source": "mlanalysis_utils_downsample",
-      "target": "mlanalysis_mlanalysis_styletab"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L998",
-      "weight": 1.0,
-      "source": "mlanalysis_utils_downsample",
-      "target": "mlanalysis_mlanalysis_weartab"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_utils_downsample"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_sleep"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L80",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_loadmodels",
-      "target": "mlanalysis_utils_sleep"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L374",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_classifygrip",
-      "target": "mlanalysis_utils_sleep"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L413",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_classifypedaloverlap",
-      "target": "mlanalysis_utils_sleep"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L558",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_predicttirewear",
-      "target": "mlanalysis_utils_sleep"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L613",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_classifyshifts",
-      "target": "mlanalysis_utils_sleep"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -14427,72 +15541,6 @@
       "confidence_score": 1.0,
       "source": "mlanalysis_utils_mediandt",
       "target": "mlanalysis_utils_mergesessions"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_utils_mergesessions"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_utils_mergesessions"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_utils_colorforstate"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_utils_colorforstate"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_utils_splitbysession"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L319",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_detectfatigue",
-      "target": "mlanalysis_utils_splitbysession"
     },
     {
       "relation": "contains",
@@ -14673,1054 +15721,6 @@
       "confidence_score": 1.0,
       "source": "src_components_mlanalysis_types_ts",
       "target": "mlanalysis_types_modelstatusmap"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "src_components_mlanalysis_types_ts"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "src_components_mlanalysis_types_ts"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "src_components_mlanalysis_types_ts"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_types_normalizedrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_normalizedrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_types_normalizedrow"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_fatigueresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_gripresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_shiftresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_svmresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_rfwearresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_hmmresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_pcaprojection"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_safetyscoreresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_anomalyresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_exitforecastresult"
-    },
-    {
-      "relation": "contains",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L983",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_qualitymetric"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_qualitymetrics"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_types_mlresults"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_mlresults"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_types_mlresults"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_incomingmessage"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_penaltycategory"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_types_modelstatusmap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_tab_labels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_tab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_initial_results"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L52",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_toast"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_colormap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L71",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_bgcolormap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_mlanalysis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L524",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_overviewtab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L626",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_safetytab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L713",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_styletab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L821",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_dynamicstab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L977",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_weartab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1025",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_qualitytab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1198",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_card"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1225",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_interpretation"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1233",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlanalysis_tsx",
-      "target": "mlanalysis_mlanalysis_quadrant"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_tab_labels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_tab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_initial_results",
-      "target": "mlanalysis_mlanalysis_mlanalysis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L52",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_toast"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_colormap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L71",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_bgcolormap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L523",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_overviewtab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L625",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_safetytab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L712",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_styletab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L820",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_dynamicstab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L976",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_weartab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1024",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_qualitytab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1197",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_card"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1224",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_interpretation"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/MLAnalysis.tsx",
-      "source_location": "L1232",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlanalysis_mlanalysis",
-      "target": "mlanalysis_mlanalysis_quadrant"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L56",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_modelstatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_resolvebaseurl"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L77",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_loadmodels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L88",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_initmodels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L136",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_computesafetyscore"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L185",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_detectanomalies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L227",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_projectpca"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L267",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifyknn"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L284",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_computefatigueforsession"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L318",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_detectfatigue"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L354",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifygrip"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L395",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifypedaloverlap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L435",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_clusterstates"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L487",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_buildmarkovchain"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L508",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_buildaggressionmatrix"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L529",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_predicttirewear"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L586",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_classifyshifts"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L635",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_computeexitforecast"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L719",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_computedtw"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L771",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_computequalitymetrics"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L874",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_reportprogress"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L883",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_validdata"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L896",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_timestamps"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L897",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_speeds"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L898",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_throttles"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L899",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_brakes"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L900",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_steerings"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L904",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_gforcescombined"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L909",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_jerks"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L910",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_accelerations"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L928",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_safetyscore"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L932",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_anomalies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L936",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_pca"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L942",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_knnprofile_knnconfidence"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L950",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_hmm"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L966",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_fatigue"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L970",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_exitforecast"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L974",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_dtwscore_trailpercent"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L978",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_markovmatrix"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L979",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_aggressionmatrix"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L983",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_qualitymetrics"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L991",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_sessionboundaries"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L996",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_results"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L91",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_initmodels",
-      "target": "mlanalysis_mlworker_resolvebaseurl"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L80",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_resolvebaseurl",
-      "target": "mlanalysis_mlworker_loadmodels"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L84",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_loadmodels",
-      "target": "mlanalysis_mlworker_initmodels"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L323",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_detectfatigue",
-      "target": "mlanalysis_mlworker_computefatigueforsession"
     },
     {
       "relation": "contains",
@@ -19334,5 +19334,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d698bbe16d8b9f4b8cd272f4c2285867ad81b48a"
+  "built_at_commit": "c3386f444739040fb4176e0e47bf7037870f5acf"
 }

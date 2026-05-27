@@ -1,7 +1,7 @@
 # Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-27)
 
 ## Corpus Check
-- 74 files · ~68,705 words
+- 74 files · ~68,806 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d698bbe1`
+- Built from commit: `c3386f44`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -92,10 +92,10 @@
   public/assets/ort-wasm-simd-threaded.jsep.mjs → electron/main.ts
 - `BeamNGConnector` --references--> `TelemetryData`  [EXTRACTED]
   electron/game-connectors/beamng.ts → src/types/telemetry.ts
-- `TelemetryData` --references--> `TelemetryState`  [EXTRACTED]
-  src/types/telemetry.ts → src/stores/telemetryStore.ts
-- `useSettingsStore` --calls--> `Layout()`  [EXTRACTED]
-  src/stores/settingsStore.ts → src/components/Layout/Layout.tsx
+- `projectPCA()` --calls--> `extractFeatures()`  [EXTRACTED]
+  src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
+- `clusterStates()` --calls--> `extractFeatures()`  [EXTRACTED]
+  src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
 
 ## Communities (61 total, 5 thin omitted)
 
@@ -308,7 +308,7 @@ Cohesion: 0.13
 Nodes (14): scripts, build, build:electron, dev, dev:electron, dev:ui, doctor, electron:dev (+6 more)
 
 ## Knowledge Gaps
-- **373 isolated node(s):** `After making React code changes:`, `For general cleanup or code improvement:`, `code:bash (curl --fail --silent --show-error \)`, `code:bash (npx react-doctor@latest --verbose --diff)`, `Pre-flight: Auto-load Graphify` (+368 more)
+- **373 isolated node(s):** `modelStatus`, `validData`, `timestamps`, `speeds`, `throttles` (+368 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -319,7 +319,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ESLint Config`, `ML Config`?**
   _High betweenness centrality (0.039) - this node is a cross-community bridge._
-- **What connects `After making React code changes:`, `For general cleanup or code improvement:`, `code:bash (curl --fail --silent --show-error \)` to the rest of the system?**
+- **What connects `modelStatus`, `validData`, `timestamps` to the rest of the system?**
   _386 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ML Worker Core` be split into smaller, more focused modules?**
   _Cohesion score 0.059379217273954114 - nodes in this community are weakly interconnected._
