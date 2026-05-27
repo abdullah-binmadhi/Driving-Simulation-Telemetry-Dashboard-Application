@@ -263,11 +263,22 @@ const MLAnalysis = () => {
     setResults({ ...INITIAL_RESULTS, progress: 1, isProcessing: true, status: 'Starting analysis...' });
 
     workerRef.current?.terminate();
+    workerRef.current = null;
 
-    const worker = new Worker(new URL('./mlWorker.ts', import.meta.url), { type: 'module' });
+    let worker: Worker;
+    try {
+      worker = new Worker(new URL('./mlWorker.ts', import.meta.url), { type: 'module' });
+    } catch (err: any) {
+      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+      setToast({ message: `Failed to create worker: ${err.message || 'Unknown error'}`, type: 'error' });
+      return;
+    }
+
     workerRef.current = worker;
 
     const timeout = setTimeout(() => {
+      if (abortTimeout) clearTimeout(abortTimeout);
+      setAbortTimeout(null);
       worker.terminate();
       setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
       setToast({ message: 'Analysis timed out after 2 minutes. Try with fewer or shorter sessions.', type: 'error' });
@@ -275,18 +286,38 @@ const MLAnalysis = () => {
 
     setAbortTimeout(timeout);
 
+    const cleanup = () => {
+      clearTimeout(timeout);
+      setAbortTimeout(null);
+    };
+
+    worker.onerror = (e) => {
+      console.error('ML worker error:', e);
+      cleanup();
+      worker.terminate();
+      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+      setToast({ message: `Worker failed: ${e.message || 'Failed to load ML engine'}`, type: 'error' });
+    };
+
+    worker.onmessageerror = () => {
+      cleanup();
+      worker.terminate();
+      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+      setToast({ message: 'Worker communication error (message deserialization failed).', type: 'error' });
+    };
+
     worker.onmessage = (e) => {
       if (e.data.type === 'PROGRESS') {
         setResults((r) => ({ ...r, progress: e.data.progress, status: e.data.status }));
       }
       if (e.data.type === 'COMPLETE') {
         clearTimeout(timeout);
-        setAbortTimeout(null);
+        cleanup();
         setResults((r) => ({ ...r, ...e.data.results, progress: 100, isProcessing: false }));
       }
       if (e.data.type === 'ERROR') {
         clearTimeout(timeout);
-        setAbortTimeout(null);
+        cleanup();
         setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
         setToast({ message: e.data.message, type: 'error' });
       }

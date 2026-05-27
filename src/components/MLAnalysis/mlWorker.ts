@@ -36,6 +36,11 @@ import type {
   ModelStatusMap,
 } from './types';
 
+self.addEventListener('error', (e) => {
+  console.error('ML Worker init error:', e.error || e.message);
+  self.postMessage({ type: 'ERROR', message: `Worker initialization failed: ${e.error?.message || e.message || 'Unknown error'}` });
+});
+
 // ─── Module-level model state ────────────────────────────────────────────
 
 let tireWearSession: any = null;
@@ -1035,9 +1040,3 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     self.postMessage({ type: 'ERROR', message: err.message || 'Unknown error in ML Engine.' });
   }
 };
-
-// Catch unhandled errors during worker initialization (static import failures, etc.)
-self.addEventListener('error', (e) => {
-  console.error('ML Worker init error:', e.error || e.message);
-  self.postMessage({ type: 'ERROR', message: `Worker initialization failed: ${e.error?.message || e.message || 'Unknown error'}` });
-});
