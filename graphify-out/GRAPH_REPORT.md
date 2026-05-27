@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 833 nodes · 1161 edges · 58 communities (53 shown, 5 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.8)
+- 833 nodes · 1156 edges · 61 communities (56 shown, 5 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d0835bd3`
+- Built from commit: `d698bbe1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -65,6 +65,9 @@
 - [[_COMMUNITY_Live Multi Graph|Live Multi Graph]]
 - [[_COMMUNITY_Tire Status UI|Tire Status UI]]
 - [[_COMMUNITY_Friction Circle|Friction Circle]]
+- [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Root TSConfig|Root TSConfig]]
 - [[_COMMUNITY_ESLint Config|ESLint Config]]
 - [[_COMMUNITY_Vite Config|Vite Config]]
@@ -83,22 +86,22 @@
 10. `useTelemetryStore` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `clamp()` --calls--> `type`  [INFERRED]
-  electron/game-connectors/beamng/telemetry.lua → package.json
-- `firstNumber()` --calls--> `type`  [INFERRED]
-  electron/game-connectors/beamng/telemetry.lua → package.json
-- `getPressurePsi()` --calls--> `type`  [INFERRED]
-  electron/game-connectors/beamng/telemetry.lua → package.json
-- `firstPowertrainDevice()` --calls--> `type`  [INFERRED]
-  electron/game-connectors/beamng/telemetry.lua → package.json
 - `ortWasmThreaded()` --calls--> `require`  [INFERRED]
   public/assets/ort-wasm-simd-threaded.asyncify.mjs → electron/main.ts
+- `ortWasmThreaded()` --calls--> `require`  [INFERRED]
+  public/assets/ort-wasm-simd-threaded.jsep.mjs → electron/main.ts
+- `BeamNGConnector` --references--> `TelemetryData`  [EXTRACTED]
+  electron/game-connectors/beamng.ts → src/types/telemetry.ts
+- `TelemetryData` --references--> `TelemetryState`  [EXTRACTED]
+  src/types/telemetry.ts → src/stores/telemetryStore.ts
+- `useSettingsStore` --calls--> `Layout()`  [EXTRACTED]
+  src/stores/settingsStore.ts → src/components/Layout/Layout.tsx
 
-## Communities (58 total, 5 thin omitted)
+## Communities (61 total, 5 thin omitted)
 
 ### Community 0 - "ML Worker Core"
 Cohesion: 0.06
-Nodes (28): accelerations, aggressionMatrix, anomalies, brakes, { dtwScore, trailPercent }, exitForecast, fatigue, gForcesCombined (+20 more)
+Nodes (29): accelerations, aggressionMatrix, anomalies, brakes, { dtwScore, trailPercent }, exitForecast, fatigue, gForcesCombined (+21 more)
 
 ### Community 1 - "Model Metrics"
 Cohesion: 0.09
@@ -133,8 +136,8 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, moduleResolution, noEmit (+11 more)
 
 ### Community 9 - "Statistical Helpers"
-Cohesion: 0.20
-Nodes (13): derive_labels(), load_all_csvs(), main(), Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model, Check which expected columns are missing from the dataset., Derive supervised labels that aren't directly in the raw telemetry., Convert sklearn model to ONNX and save., Train all 8 models and return metrics. (+5 more)
+Cohesion: 0.22
+Nodes (12): derive_labels(), load_all_csvs(), main(), Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model, Check which expected columns are missing from the dataset., Derive supervised labels that aren't directly in the raw telemetry., Convert sklearn model to ONNX and save., Train all 8 models and return metrics. (+4 more)
 
 ### Community 10 - "Electron Types"
 Cohesion: 0.14
@@ -161,8 +164,8 @@ Cohesion: 0.36
 Nodes (7): Analysis(), SessionGraphs(), SessionGraphsProps, SessionList(), mockSessions, Session, useSessionStore
 
 ### Community 16 - "App TSConfig"
-Cohesion: 0.10
-Nodes (29): clamp(), estimateTireTemperature(), firstNumber(), firstPowertrainDevice(), getDeviceHealth(), getPosition(), getPressurePsi(), getWheelData() (+21 more)
+Cohesion: 0.13
+Nodes (15): dependencies, better-sqlite3, clsx, express, @google/stitch-sdk, lucide-react, onnxruntime-web, papaparse (+7 more)
 
 ### Community 17 - "Agent Catalog"
 Cohesion: 0.15
@@ -174,11 +177,11 @@ Nodes (7): 1.3 Feature Column Name Mismatch, 4.1 Normalize All Feature Names to 
 
 ### Community 19 - "NPM Scripts"
 Cohesion: 0.04
-Nodes (45): 1.1 Fix `normalizeRow` ({MLAnalysis.tsx}), 1.2 Timestamp-aware merging ({MLAnalysis.tsx}), 1.3 Column name cross-reference, 2.1 Boundary-aware jerk/accel, 2.2 Boundary-aware fatigue, 2.3 Boundary-aware Markov chain, 2.4 Boundary-aware gear change detection, 2.5 Boundary-aware tire wear (heuristic path) (+37 more)
+Nodes (48): 1.1 Fix `normalizeRow` ({MLAnalysis.tsx}), 1.2 Timestamp-aware merging ({MLAnalysis.tsx}), 1.3 Column name cross-reference, 3.1 Timeout + Cancel, 3.2 Smooth progress, 3.3 Replace `alert()`, 3.4 Fix Tailwind JIT dynamic class, 4.10 Accessibility (+40 more)
 
 ### Community 20 - "Feature Names"
-Cohesion: 0.11
-Nodes (18): 4.10 Accessibility, 4.1 Layout Architecture, 4.2 Tab Structure, 4.3 Summary Hero Row, 4.4 Per-Session Comparison, 4.5 Session Boundary Markers on Charts, 4.6 Drag-and-Drop Upload Zone, 4.7 Color Palette (+10 more)
+Cohesion: 0.14
+Nodes (15): 2.1 Boundary-aware jerk/accel, 2.2 Boundary-aware fatigue, 2.3 Boundary-aware Markov chain, 2.4 Boundary-aware gear change detection, 2.5 Boundary-aware tire wear (heuristic path), 2.6 ONNX inference chunking, 2.7 Downsample output arrays, code:ts (function downsample(arr, maxPoints = 2000) {) (+7 more)
 
 ### Community 21 - "Project README"
 Cohesion: 0.20
@@ -284,30 +287,42 @@ Nodes (3): LiveMultiGraph, LiveMultiGraphProps, MultiTraceDataPoint
 Cohesion: 0.27
 Nodes (11): 10. Risk Register, 2.1 Key Architectural Changes, 2. Target Architecture, 9. Implementation Timeline, Appendix A: Files Changed Summary, Appendix B: `MLResults` Type Definition (Full), Appendix C: Feature Map Cross-Reference, code:ts (interface MLResults {) (+3 more)
 
+### Community 50 - "Community 50"
+Cohesion: 0.18
+Nodes (11): build, appId, directories, extraResources, files, mac, productName, win (+3 more)
+
+### Community 51 - "Community 51"
+Cohesion: 0.51
+Nodes (9): clamp(), estimateTireTemperature(), firstNumber(), firstPowertrainDevice(), getDeviceHealth(), getPosition(), getPressurePsi(), getWheelData() (+1 more)
+
+### Community 52 - "Community 52"
+Cohesion: 0.33
+Nodes (5): main, name, private, type, version
+
 ### Community 54 - "ESLint Config"
 Cohesion: 0.26
 Nodes (11): clusterStates(), computeFatigueForSession(), detectAnomalies(), detectFatigue(), projectPCA(), jerkMagnitude(), medianDt(), mergeSessions() (+3 more)
 
 ### Community 64 - "Community 64"
-Cohesion: 0.08
-Nodes (25): build, appId, directories, extraResources, files, mac, productName, win (+17 more)
+Cohesion: 0.13
+Nodes (14): scripts, build, build:electron, dev, dev:electron, dev:ui, doctor, electron:dev (+6 more)
 
 ## Knowledge Gaps
-- **371 isolated node(s):** `tsBuildInfoFile`, `target`, `lib`, `module`, `types` (+366 more)
+- **373 isolated node(s):** `After making React code changes:`, `For general cleanup or code improvement:`, `code:bash (curl --fail --silent --show-error \)`, `code:bash (npx react-doctor@latest --verbose --diff)`, `Pre-flight: Auto-load Graphify` (+368 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ESLint Config`, `ML Config`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
 - **Why does `TelemetryData` connect `Model Metrics` to `PCA Profile`, `UI Label Fixes`, `Node TSConfig`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **What connects `tsBuildInfoFile`, `target`, `lib` to the rest of the system?**
-  _384 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ESLint Config`, `ML Config`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **What connects `After making React code changes:`, `For general cleanup or code improvement:`, `code:bash (curl --fail --silent --show-error \)` to the rest of the system?**
+  _386 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ML Worker Core` be split into smaller, more focused modules?**
-  _Cohesion score 0.06116642958748222 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.059379217273954114 - nodes in this community are weakly interconnected._
 - **Should `Model Metrics` be split into smaller, more focused modules?**
   _Cohesion score 0.0851063829787234 - nodes in this community are weakly interconnected._
 - **Should `Electron & ONNX Runtime` be split into smaller, more focused modules?**
