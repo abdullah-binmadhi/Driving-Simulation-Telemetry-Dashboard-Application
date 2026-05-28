@@ -11,8 +11,9 @@ import {
 import Papa from 'papaparse';
 
 import { ML_CONFIG } from '../../ml-config';
+import MLWorker from './mlWorker?worker';
 import { mergeSessions, colorForState, downsample } from './utils';
-import type { NormalizedRow, MLResults } from './types';
+import type { NormalizedRow, MLResults, OutgoingMessage } from './types';
 
 // ─── Constants ────────────────────────────────────────────────────────────
 
@@ -50,6 +51,12 @@ const INITIAL_RESULTS: MLResults = {
 };
 
 type Toast = { message: string; type: 'error' | 'warning' | 'info' };
+
+const WORKER_STARTUP_TIMEOUT_MS = 15000;
+
+const errorMessage = (err: unknown): string => (
+  err instanceof Error ? err.message : 'Unknown error'
+);
 
 const colorMap: Record<string, string> = {
   emerald: 'text-emerald-400',
@@ -260,70 +267,90 @@ const MLAnalysis = () => {
       return;
     }
 
-    setResults({ ...INITIAL_RESULTS, progress: 1, isProcessing: true, status: 'Starting analysis...' });
+    setResults({ ...INITIAL_RESULTS, progress: 1, isProcessing: true, status: 'Starting analysis engine...' });
 
     workerRef.current?.terminate();
     workerRef.current = null;
 
-    let worker: Worker;
     try {
-      worker = new Worker(new URL('./mlWorker.ts', import.meta.url), { type: 'module' });
-    } catch (err: any) {
+      const worker = new MLWorker();
+      workerRef.current = worker;
+
+      const startupTimeout = setTimeout(() => {
+        worker.terminate();
+        if (workerRef.current === worker) workerRef.current = null;
+        setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+        setToast({ message: 'ML worker did not start. Reload the app and try again.', type: 'error' });
+      }, WORKER_STARTUP_TIMEOUT_MS);
+
+      const timeout = setTimeout(() => {
+        clearTimeout(startupTimeout);
+        setAbortTimeout(null);
+        worker.terminate();
+        if (workerRef.current === worker) workerRef.current = null;
+        setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+        setToast({ message: 'Analysis timed out after 2 minutes. Try with fewer or shorter sessions.', type: 'error' });
+      }, ML_CONFIG.ANALYSIS_TIMEOUT_MS);
+
+      setAbortTimeout(timeout);
+
+      const cleanup = () => {
+        clearTimeout(startupTimeout);
+        clearTimeout(timeout);
+        setAbortTimeout(null);
+      };
+
+      const fail = (message: string) => {
+        cleanup();
+        worker.terminate();
+        if (workerRef.current === worker) workerRef.current = null;
+        setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
+        setToast({ message, type: 'error' });
+      };
+
+      worker.onerror = (e) => {
+        console.error('ML worker error:', e);
+        fail(`Worker failed: ${e.message || 'Failed to load ML engine'}`);
+      };
+
+      worker.onmessageerror = () => {
+        fail('Worker communication error (message deserialization failed).');
+      };
+
+      worker.onmessage = (e: MessageEvent<OutgoingMessage>) => {
+        const message = e.data;
+
+        if (message.type === 'READY') {
+          clearTimeout(startupTimeout);
+          setResults((r) => ({ ...r, progress: 2, status: 'Sending telemetry to worker...' }));
+          try {
+            worker.postMessage({ type: 'ANALYZE_SESSION', payload: { sessionArray: sessionData } });
+          } catch (err) {
+            fail(`Failed to send telemetry data to worker: ${errorMessage(err)}`);
+          }
+          return;
+        }
+
+        clearTimeout(startupTimeout);
+
+        if (message.type === 'PROGRESS') {
+          setResults((r) => ({ ...r, progress: message.progress, status: message.status }));
+        }
+        if (message.type === 'COMPLETE') {
+          cleanup();
+          worker.terminate();
+          if (workerRef.current === worker) workerRef.current = null;
+          setResults((r) => ({ ...r, ...message.results, progress: 100, isProcessing: false }));
+        }
+        if (message.type === 'ERROR') {
+          fail(message.message);
+        }
+      };
+    } catch (err) {
       setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
-      setToast({ message: `Failed to create worker: ${err.message || 'Unknown error'}`, type: 'error' });
+      setToast({ message: `Failed to create worker: ${errorMessage(err)}`, type: 'error' });
       return;
     }
-
-    workerRef.current = worker;
-
-    const timeout = setTimeout(() => {
-      if (abortTimeout) clearTimeout(abortTimeout);
-      setAbortTimeout(null);
-      worker.terminate();
-      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
-      setToast({ message: 'Analysis timed out after 2 minutes. Try with fewer or shorter sessions.', type: 'error' });
-    }, ML_CONFIG.ANALYSIS_TIMEOUT_MS);
-
-    setAbortTimeout(timeout);
-
-    const cleanup = () => {
-      clearTimeout(timeout);
-      setAbortTimeout(null);
-    };
-
-    worker.onerror = (e) => {
-      console.error('ML worker error:', e);
-      cleanup();
-      worker.terminate();
-      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
-      setToast({ message: `Worker failed: ${e.message || 'Failed to load ML engine'}`, type: 'error' });
-    };
-
-    worker.onmessageerror = () => {
-      cleanup();
-      worker.terminate();
-      setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
-      setToast({ message: 'Worker communication error (message deserialization failed).', type: 'error' });
-    };
-
-    worker.onmessage = (e) => {
-      if (e.data.type === 'PROGRESS') {
-        setResults((r) => ({ ...r, progress: e.data.progress, status: e.data.status }));
-      }
-      if (e.data.type === 'COMPLETE') {
-        clearTimeout(timeout);
-        cleanup();
-        setResults((r) => ({ ...r, ...e.data.results, progress: 100, isProcessing: false }));
-      }
-      if (e.data.type === 'ERROR') {
-        clearTimeout(timeout);
-        cleanup();
-        setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
-        setToast({ message: e.data.message, type: 'error' });
-      }
-    };
-
-    worker.postMessage({ type: 'ANALYZE_SESSION', payload: { sessionArray: sessionData } });
   }, [sessionData]);
 
   const cancelAnalysis = useCallback(() => {

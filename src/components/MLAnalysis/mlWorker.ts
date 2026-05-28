@@ -1040,3 +1040,5 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     self.postMessage({ type: 'ERROR', message: err.message || 'Unknown error in ML Engine.' });
   }
 };
+
+self.postMessage({ type: 'READY' });

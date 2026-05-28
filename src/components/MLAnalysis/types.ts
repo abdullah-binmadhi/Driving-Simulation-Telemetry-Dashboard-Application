@@ -165,6 +165,7 @@ export type IncomingMessage = {
 };
 
 export type OutgoingMessage =
+  | { type: 'READY' }
   | { type: 'PROGRESS'; progress: number; status?: string }
   | { type: 'ERROR'; message: string }
   | { type: 'COMPLETE'; results: MLResults };
