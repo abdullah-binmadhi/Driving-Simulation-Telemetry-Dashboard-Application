@@ -1,16 +1,16 @@
-# Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-27)
+# Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-28)
 
 ## Corpus Check
-- 74 files · ~68,806 words
+- 74 files · ~68,908 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 833 nodes · 1156 edges · 61 communities (56 shown, 5 thin omitted)
+- 834 nodes · 1158 edges · 62 communities (56 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c3386f44`
+- Built from commit: `5ede5a54`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -70,6 +70,7 @@
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Root TSConfig|Root TSConfig]]
 - [[_COMMUNITY_ESLint Config|ESLint Config]]
+- [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Vite Config|Vite Config]]
 - [[_COMMUNITY_Community 64|Community 64]]
 
@@ -97,7 +98,7 @@
 - `clusterStates()` --calls--> `extractFeatures()`  [EXTRACTED]
   src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
 
-## Communities (61 total, 5 thin omitted)
+## Communities (62 total, 6 thin omitted)
 
 ### Community 0 - "ML Worker Core"
 Cohesion: 0.06
@@ -244,7 +245,7 @@ Cohesion: 0.20
 Nodes (10): 3a — Batch ONNX Inference, 3b — Fix Silent Catch Blocks, 3c — Add `modelsLoaded` Retry, 3d — Differentiate Error Types, code:typescript (.catch((err) => {), code:typescript (// Before: per-row loop with [1, 20] tensor), code:typescript (if (session) {), code:typescript (const anyLoaded = Object.values(modelStatus).some(s => s ===) (+2 more)
 
 ### Community 36 - "Magic Number Extraction"
-Cohesion: 0.17
+Cohesion: 0.16
 Nodes (22): bgColorMap, Card(), colorMap, DynamicsTab(), INITIAL_RESULTS, Interpretation(), MLAnalysis(), OverviewTab() (+14 more)
 
 ### Community 37 - "Community 37"
@@ -304,13 +305,13 @@ Cohesion: 0.26
 Nodes (11): clusterStates(), computeFatigueForSession(), detectAnomalies(), detectFatigue(), projectPCA(), jerkMagnitude(), medianDt(), mergeSessions() (+3 more)
 
 ### Community 64 - "Community 64"
-Cohesion: 0.13
-Nodes (14): scripts, build, build:electron, dev, dev:electron, dev:ui, doctor, electron:dev (+6 more)
+Cohesion: 0.17
+Nodes (12): scripts, build, build:electron, dev, dev:electron, dev:ui, doctor, electron:dev (+4 more)
 
 ## Knowledge Gaps
-- **373 isolated node(s):** `modelStatus`, `validData`, `timestamps`, `speeds`, `throttles` (+368 more)
+- **372 isolated node(s):** `modelStatus`, `validData`, `timestamps`, `speeds`, `throttles` (+367 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -320,7 +321,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ESLint Config`, `ML Config`?**
   _High betweenness centrality (0.039) - this node is a cross-community bridge._
 - **What connects `modelStatus`, `validData`, `timestamps` to the rest of the system?**
-  _386 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _385 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ML Worker Core` be split into smaller, more focused modules?**
   _Cohesion score 0.059379217273954114 - nodes in this community are weakly interconnected._
 - **Should `Model Metrics` be split into smaller, more focused modules?**
