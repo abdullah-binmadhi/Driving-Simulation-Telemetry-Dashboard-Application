@@ -160,7 +160,7 @@ export interface MLResults {
 }
 
 export type IncomingMessage =
-  | { type: 'INIT' }
+  | { type: 'INIT'; payload?: { modelsBase?: string; assetsBase?: string } }
   | {
     type: 'ANALYZE_SESSION';
     payload: { sessionArray: NormalizedRow[] };

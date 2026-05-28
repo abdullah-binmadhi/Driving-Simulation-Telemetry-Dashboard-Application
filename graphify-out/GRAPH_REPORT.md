@@ -1,7 +1,7 @@
 # Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-28)
 
 ## Corpus Check
-- 75 files · ~206,636 words
+- 75 files · ~206,690 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d57b2ce3`
+- Built from commit: `4106a6c4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -85,8 +85,8 @@
   electron/session-manager.ts → src/types/telemetry.ts
 - `BeamNGConnector` --references--> `TelemetryData`  [EXTRACTED]
   electron/game-connectors/beamng.ts → src/types/telemetry.ts
-- `projectPCA()` --calls--> `safeMean()`  [EXTRACTED]
-  src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
+- `TelemetryData` --references--> `TelemetryState`  [EXTRACTED]
+  src/types/telemetry.ts → src/stores/telemetryStore.ts
 
 ## Communities (52 total, 3 thin omitted)
 
@@ -271,7 +271,7 @@ Cohesion: 0.29
 Nodes (10): clusterStates(), computeFatigueForSession(), detectAnomalies(), detectFatigue(), jerkMagnitude(), medianDt(), mergeSessions(), safeMean() (+2 more)
 
 ## Knowledge Gaps
-- **378 isolated node(s):** `int`, `str`, `name`, `private`, `version` (+373 more)
+- **378 isolated node(s):** `tsBuildInfoFile`, `target`, `lib`, `module`, `types` (+373 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -282,7 +282,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.044) - this node is a cross-community bridge._
 - **Why does `MLAnalysis()` connect `Magic Number Extraction` to `Electron Types`, `ESLint Config`, `ML Config`?**
   _High betweenness centrality (0.039) - this node is a cross-community bridge._
-- **What connects `int`, `str`, `Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model` to the rest of the system?**
+- **What connects `tsBuildInfoFile`, `target`, `lib` to the rest of the system?**
   _392 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ML Worker Core` be split into smaller, more focused modules?**
   _Cohesion score 0.059379217273954114 - nodes in this community are weakly interconnected._

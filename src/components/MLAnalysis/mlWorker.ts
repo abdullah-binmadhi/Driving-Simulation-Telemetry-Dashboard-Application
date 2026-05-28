@@ -56,6 +56,8 @@ let pcaScalerScale: number[] | null = null;
 let modelMetrics: Record<string, Record<string, number>> | null = null;
 let modelsLoaded = false;
 let ortModule: { InferenceSession: any; Tensor: any; env: any } | null = null;
+let modelsBaseDir = '';
+let assetsBaseDir = '';
 
 const modelStatus: ModelStatusMap = {
   tire_wear: 'not_found',
@@ -100,8 +102,8 @@ async function loadModels(): Promise<void> {
 }
 
 async function _initModels(): Promise<void> {
-  const modelsBase = resolveFromRoot('models/');
-  const assetsBase = resolveFromRoot('assets/');
+  const modelsBase = modelsBaseDir || resolveFromRoot('models/');
+  const assetsBase = assetsBaseDir || resolveFromRoot('assets/');
 
   // ── 1. Load ONNX runtime ─────────────────────────────────────────────
   try {
@@ -918,6 +920,11 @@ function computeQualityMetrics(
 
 self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
   if (e.data.type === 'INIT') {
+    const payload = e.data.payload;
+    if (payload) {
+      modelsBaseDir = payload.modelsBase || '';
+      assetsBaseDir = payload.assetsBase || '';
+    }
     self.postMessage({ type: 'READY' });
     return;
   }

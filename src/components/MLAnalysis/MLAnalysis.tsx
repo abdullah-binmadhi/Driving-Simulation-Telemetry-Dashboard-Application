@@ -11,7 +11,7 @@ import {
 import Papa from 'papaparse';
 
 import { ML_CONFIG } from '../../ml-config';
-import MLWorker from './mlWorker?worker';
+import MLWorker from './mlWorker?worker&inline';
 import { mergeSessions, colorForState, downsample } from './utils';
 import type { NormalizedRow, MLResults, OutgoingMessage } from './types';
 
@@ -347,7 +347,9 @@ const MLAnalysis = () => {
         }
       };
 
-      worker.postMessage({ type: 'INIT' });
+      const modelsBase = new URL('models/', window.location.href).href;
+      const assetsBase = new URL('assets/', window.location.href).href;
+      worker.postMessage({ type: 'INIT', payload: { modelsBase, assetsBase } });
     } catch (err) {
       setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
       setToast({ message: `Failed to create worker: ${errorMessage(err)}`, type: 'error' });
