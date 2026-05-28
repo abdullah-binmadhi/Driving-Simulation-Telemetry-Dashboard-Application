@@ -6,6 +6,11 @@ import type { TelemetryData } from '../src/types/telemetry.js';
 const G = 9.80665;
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 const nearZero = (value: number | undefined, threshold = 0.005) => Math.abs(value || 0) < threshold;
+const normalizeUnitInterval = (value: number | undefined): number => {
+    const numeric = value ?? 0;
+    const normalized = numeric > 1 ? numeric / 100 : numeric;
+    return clamp(normalized, 0, 1);
+};
 
 export class SessionManager extends EventEmitter {
     private currentSessionId: number | null = null;
@@ -128,10 +133,10 @@ export class SessionManager extends EventEmitter {
             data.isTurning = (Math.abs(data.steering) > 0.05) ? 1 : 0;
 
             // Extract Ground Truth ML Labels from incoming payload
-            data.trueTireWearFL = data.tireWear ? data.tireWear[0] : 1;
-            data.trueTireWearFR = data.tireWear ? data.tireWear[1] : 1;
-            data.trueTireWearRL = data.tireWear ? data.tireWear[2] : 1;
-            data.trueTireWearRR = data.tireWear ? data.tireWear[3] : 1;
+            data.trueTireWearFL = normalizeUnitInterval(data.tireWear?.[0]);
+            data.trueTireWearFR = normalizeUnitInterval(data.tireWear?.[1]);
+            data.trueTireWearRL = normalizeUnitInterval(data.tireWear?.[2]);
+            data.trueTireWearRR = normalizeUnitInterval(data.tireWear?.[3]);
             // Keep native slip ratio when available; otherwise derive a proxy after G-force fallbacks.
 
             // Stats Calculation and Spatial Distance

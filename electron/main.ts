@@ -10,6 +10,74 @@ import { SessionManager } from './session-manager.js';
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+type CsvValue = string | number | boolean | null | undefined;
+type CsvRow = Record<string, CsvValue>;
+
+const numberValue = (row: Record<string, unknown>, key: string): number => {
+    const value = row[key];
+    return typeof value === 'number' && Number.isFinite(value) ? value : Number(value) || 0;
+};
+
+const normalizeUnitInterval = (value: number): number => {
+    const normalized = value > 1 ? value / 100 : value;
+    return Math.max(0, Math.min(1, normalized));
+};
+
+const deriveFatigueLabel = (rows: Record<string, unknown>[]): number => {
+    if (rows.length <= 100) return 0;
+
+    const quarterSize = Math.floor(rows.length / 4);
+    const q1 = rows.slice(0, quarterSize);
+    const q4 = rows.slice(quarterSize * 3);
+    const meanAbsJerk = (sample: Record<string, unknown>[]) => {
+        if (sample.length === 0) return 0;
+        return sample.reduce((sum, row) => sum + Math.abs(numberValue(row, 'jerk_x')), 0) / sample.length;
+    };
+
+    const q1Jerk = meanAbsJerk(q1);
+    const q4Jerk = meanAbsJerk(q4);
+    return q1Jerk > 0 && q4Jerk > q1Jerk * 1.5 ? 1 : 0;
+};
+
+const buildMlCsvRows = (
+    rows: Record<string, unknown>[],
+    sessionMeta: Record<string, unknown> | undefined,
+): CsvRow[] => {
+    const fatigueLabel = deriveFatigueLabel(rows);
+    const penaltySums = rows.map((row) =>
+        numberValue(row, 'oversteer_correction') +
+        numberValue(row, 'understeer_plough') +
+        numberValue(row, 'pedal_overlap'),
+    );
+    const maxPenalty = Math.max(...penaltySums, 1);
+    const sessionScore = numberValue(sessionMeta ?? {}, 'score');
+
+    return rows.map((source, index) => {
+        const row: CsvRow = { ...(source as CsvRow) };
+        const rpm = numberValue(source, 'rpm');
+        const gear = numberValue(source, 'gear');
+        const previousGear = index > 0 ? numberValue(rows[index - 1], 'gear') : gear;
+        const isGearChange = index > 0 && Math.abs(gear - previousGear) > 0;
+        const penaltySum = penaltySums[index] ?? 0;
+
+        row.game = String(sessionMeta?.game ?? 'unknown');
+        row.track = String(sessionMeta?.track ?? 'unknown');
+        row.vehicle = String(sessionMeta?.vehicle ?? 'unknown');
+        row.true_tire_wear_fl = normalizeUnitInterval(numberValue(source, 'true_tire_wear_fl'));
+        row.true_tire_wear_fr = normalizeUnitInterval(numberValue(source, 'true_tire_wear_fr'));
+        row.true_tire_wear_rl = normalizeUnitInterval(numberValue(source, 'true_tire_wear_rl'));
+        row.true_tire_wear_rr = normalizeUnitInterval(numberValue(source, 'true_tire_wear_rr'));
+        row.fatigue_label = fatigueLabel;
+        row.shift_quality = isGearChange ? (rpm < 4000 ? 1 : rpm > 7200 ? 3 : 2) : 2;
+        row.pedal_overlap_flag = numberValue(source, 'pedal_overlap') > 0.05 ? 1 : 0;
+        row.safety_score = sessionScore > 0
+            ? sessionScore
+            : Math.max(0, Math.min(100, 100 - (penaltySum / maxPenalty) * 40));
+
+        return row;
+    });
+};
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // Disabled as we use electron-builder with NSIS
 // if (process.platform === 'win32') {
@@ -77,6 +145,7 @@ const createWindow = () => {
             const data = stmt.all(sessionId) as any[];
 
             if (data.length === 0) return { success: false, message: 'No telemetry data found for this session' };
+            const exportRows = buildMlCsvRows(data, sessionMeta);
 
             // --- Build CSV with session metadata header ---
             const lines: string[] = [];
@@ -105,13 +174,13 @@ const createWindow = () => {
 
             // Column headers: ALL columns except internal IDs, using EXACT DB names
             // Exclude session_id and id (internal), keep everything else
-            const firstRow = data[0];
+            const firstRow = exportRows[0];
             const excludeCols = new Set(['session_id', 'id']);
             const columns = Object.keys(firstRow).filter(k => !excludeCols.has(k));
             lines.push(columns.join(','));
 
             // Data rows — preserve full float precision, no rounding
-            for (const row of data) {
+            for (const row of exportRows) {
                 const values = columns.map(col => {
                     const val = row[col];
                     if (val === null || val === undefined) return '';

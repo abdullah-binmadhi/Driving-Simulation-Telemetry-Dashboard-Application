@@ -878,6 +878,11 @@ function computeQualityMetrics(
 // ─── Main entry point ───────────────────────────────────────────────────
 
 self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
+  if (e.data.type === 'INIT') {
+    self.postMessage({ type: 'READY' });
+    return;
+  }
+
   if (e.data.type !== 'ANALYZE_SESSION') return;
 
   try {
@@ -1040,5 +1045,3 @@ self.onmessage = async (e: MessageEvent<IncomingMessage>) => {
     self.postMessage({ type: 'ERROR', message: err.message || 'Unknown error in ML Engine.' });
   }
 };
-
-self.postMessage({ type: 'READY' });

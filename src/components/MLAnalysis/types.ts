@@ -159,10 +159,12 @@ export interface MLResults {
   perSession?: Array<{ sessionId: number; labels: Record<string, number | string> }>;
 }
 
-export type IncomingMessage = {
-  type: 'ANALYZE_SESSION';
-  payload: { sessionArray: NormalizedRow[] };
-};
+export type IncomingMessage =
+  | { type: 'INIT' }
+  | {
+    type: 'ANALYZE_SESSION';
+    payload: { sessionArray: NormalizedRow[] };
+  };
 
 export type OutgoingMessage =
   | { type: 'READY' }

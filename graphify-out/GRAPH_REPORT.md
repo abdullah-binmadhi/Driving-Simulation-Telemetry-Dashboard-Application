@@ -1,16 +1,16 @@
 # Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-28)
 
 ## Corpus Check
-- 74 files · ~68,908 words
+- 74 files · ~69,330 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 834 nodes · 1158 edges · 62 communities (56 shown, 6 thin omitted)
+- 842 nodes · 1174 edges · 61 communities (56 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5ede5a54`
+- Built from commit: `252254e2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -31,7 +31,7 @@
 - [[_COMMUNITY_ML Restructure Plan|ML Restructure Plan]]
 - [[_COMMUNITY_Package Build Config|Package Build Config]]
 - [[_COMMUNITY_Dependencies|Dependencies]]
-- [[_COMMUNITY_App TSConfig|App TSConfig]]
+- [[_COMMUNITY_Community 16|Community 16]]
 - [[_COMMUNITY_Agent Catalog|Agent Catalog]]
 - [[_COMMUNITY_Model Loader|Model Loader]]
 - [[_COMMUNITY_NPM Scripts|NPM Scripts]]
@@ -70,7 +70,6 @@
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Root TSConfig|Root TSConfig]]
 - [[_COMMUNITY_ESLint Config|ESLint Config]]
-- [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Vite Config|Vite Config]]
 - [[_COMMUNITY_Community 64|Community 64]]
 
@@ -79,7 +78,7 @@
 2. `Fix` - 21 edges
 3. `compilerOptions` - 20 edges
 4. `compilerOptions` - 18 edges
-5. `TelemetryData` - 17 edges
+5. `TelemetryData` - 18 edges
 6. `useSettingsStore` - 16 edges
 7. `ML Pipeline Restructure Plan` - 15 edges
 8. `scripts` - 14 edges
@@ -91,14 +90,14 @@
   public/assets/ort-wasm-simd-threaded.asyncify.mjs → electron/main.ts
 - `ortWasmThreaded()` --calls--> `require`  [INFERRED]
   public/assets/ort-wasm-simd-threaded.jsep.mjs → electron/main.ts
+- `SessionManager` --references--> `TelemetryData`  [EXTRACTED]
+  electron/session-manager.ts → src/types/telemetry.ts
 - `BeamNGConnector` --references--> `TelemetryData`  [EXTRACTED]
   electron/game-connectors/beamng.ts → src/types/telemetry.ts
-- `projectPCA()` --calls--> `extractFeatures()`  [EXTRACTED]
-  src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
-- `clusterStates()` --calls--> `extractFeatures()`  [EXTRACTED]
-  src/components/MLAnalysis/mlWorker.ts → src/components/MLAnalysis/utils.ts
+- `TelemetryData` --references--> `TelemetryState`  [EXTRACTED]
+  src/types/telemetry.ts → src/stores/telemetryStore.ts
 
-## Communities (62 total, 6 thin omitted)
+## Communities (61 total, 5 thin omitted)
 
 ### Community 0 - "ML Worker Core"
 Cohesion: 0.06
@@ -106,7 +105,7 @@ Nodes (29): accelerations, aggressionMatrix, anomalies, brakes, { dtwScore, trai
 
 ### Community 1 - "Model Metrics"
 Cohesion: 0.09
-Nodes (14): GameConnector, AssettoCorsaConnector, BeamNGConnector, clamp(), normalizeArray(), normalizeHealth(), normalizeSteering(), numberOrUndefined() (+6 more)
+Nodes (15): GameConnector, AssettoCorsaConnector, BeamNGConnector, clamp(), normalizeArray(), normalizeHealth(), normalizeSteering(), numberOrUndefined() (+7 more)
 
 ### Community 2 - "Electron & ONNX Runtime"
 Cohesion: 0.08
@@ -117,8 +116,8 @@ Cohesion: 0.05
 Nodes (46): dataset_files, dataset_rows, components, explained_variance, feature_count, pca_variance_pct, error, accuracy (+38 more)
 
 ### Community 4 - "PCA Profile"
-Cohesion: 0.13
-Nodes (13): ortWasmThreaded(), ortWasmThreaded(), db, __dirname, initDatabase(), __dirname, id, now (+5 more)
+Cohesion: 0.10
+Nodes (19): ortWasmThreaded(), ortWasmThreaded(), db, __dirname, initDatabase(), buildMlCsvRows(), CsvRow, CsvValue (+11 more)
 
 ### Community 5 - "ML Analysis UI"
 Cohesion: 0.09
@@ -164,7 +163,7 @@ Nodes (12): compilerOptions, esModuleInterop, forceConsistentCasingInFileNames, 
 Cohesion: 0.36
 Nodes (7): Analysis(), SessionGraphs(), SessionGraphsProps, SessionList(), mockSessions, Session, useSessionStore
 
-### Community 16 - "App TSConfig"
+### Community 16 - "Community 16"
 Cohesion: 0.13
 Nodes (15): dependencies, better-sqlite3, clsx, express, @google/stitch-sdk, lucide-react, onnxruntime-web, papaparse (+7 more)
 
@@ -305,27 +304,27 @@ Cohesion: 0.26
 Nodes (11): clusterStates(), computeFatigueForSession(), detectAnomalies(), detectFatigue(), projectPCA(), jerkMagnitude(), medianDt(), mergeSessions() (+3 more)
 
 ### Community 64 - "Community 64"
-Cohesion: 0.17
-Nodes (12): scripts, build, build:electron, dev, dev:electron, dev:ui, doctor, electron:dev (+4 more)
+Cohesion: 0.13
+Nodes (14): scripts, build, build:electron, dev, dev:electron, dev:ui, doctor, electron:dev (+6 more)
 
 ## Knowledge Gaps
-- **372 isolated node(s):** `modelStatus`, `validData`, `timestamps`, `speeds`, `throttles` (+367 more)
+- **374 isolated node(s):** `tsBuildInfoFile`, `target`, `lib`, `module`, `types` (+369 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `TelemetryData` connect `Model Metrics` to `PCA Profile`, `UI Label Fixes`, `Node TSConfig`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
 - **Why does `MLAnalysis()` connect `Magic Number Extraction` to `ONNX Batching Fix`, `ESLint Config`, `ML Config`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
-- **What connects `modelStatus`, `validData`, `timestamps` to the rest of the system?**
-  _385 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **What connects `tsBuildInfoFile`, `target`, `lib` to the rest of the system?**
+  _387 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `ML Worker Core` be split into smaller, more focused modules?**
   _Cohesion score 0.059379217273954114 - nodes in this community are weakly interconnected._
 - **Should `Model Metrics` be split into smaller, more focused modules?**
-  _Cohesion score 0.0851063829787234 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08503401360544217 - nodes in this community are weakly interconnected._
 - **Should `Electron & ONNX Runtime` be split into smaller, more focused modules?**
   _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `ML Training Pipeline` be split into smaller, more focused modules?**

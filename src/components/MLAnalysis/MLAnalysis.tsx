@@ -346,6 +346,8 @@ const MLAnalysis = () => {
           fail(message.message);
         }
       };
+
+      worker.postMessage({ type: 'INIT' });
     } catch (err) {
       setResults((r) => ({ ...r, progress: 0, isProcessing: false }));
       setToast({ message: `Failed to create worker: ${errorMessage(err)}`, type: 'error' });

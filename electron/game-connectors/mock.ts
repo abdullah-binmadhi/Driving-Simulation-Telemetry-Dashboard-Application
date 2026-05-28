@@ -2,6 +2,8 @@ import { EventEmitter } from 'events';
 import { GameConnector } from '../connector-interface.js';
 import type { TelemetryData } from '../../src/types/telemetry.js';
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
 export class MockConnector extends EventEmitter implements GameConnector {
     public readonly name = 'Simulation Mode';
     private isRunning = false;
@@ -16,7 +18,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
     private rpm = 1000;
     private engineTemp = 80;
     private tireTemp = [70, 70, 70, 70];
-    private tireWearState = [100, 100, 100, 100]; // 100 = new, 0 = destroyed
+    private tireWearState = [1, 1, 1, 1]; // 1.0 = new, 0.0 = destroyed
     private brakeTemp = [100, 100, 100, 100];
     private oilTempState = 80;
     private distanceTraveled = 0;
@@ -50,7 +52,7 @@ export class MockConnector extends EventEmitter implements GameConnector {
         this.engineTemp = 80;
         this.oilTempState = 80;
         this.tireTemp = [70, 70, 70, 70];
-        this.tireWearState = [100, 100, 100, 100];
+        this.tireWearState = [1, 1, 1, 1];
         this.brakeTemp = [100, 100, 100, 100];
         this.distanceTraveled = 0;
         this.lapTime = 0;
@@ -258,8 +260,8 @@ export class MockConnector extends EventEmitter implements GameConnector {
         this.tireTemp = this.tireTemp.map(t => Math.max(70, Math.min(120, t + (Math.abs(gForceLat) * dt * performanceMultiplier) - ((t - 70) * dt * 0.1))));
         this.brakeTemp = this.brakeTemp.map(t => Math.max(50, Math.min(600, t + (brake * 50 * dt * performanceMultiplier) - ((t - 50) * dt * 0.5))));
 
-        // Realistic tire wear: cumulative G-force × speed × surface abrasion
-        // Each tire wears independently based on load (FL/FR take more cornering load)
+        // Realistic tire wear: cumulative G-force × speed × surface abrasion.
+        // Stored on a 0.0-1.0 scale so it matches the telemetry schema and CSV export.
         const wearRateBase = 0.000008 * healthDamageRate * performanceMultiplier;
         const gSum = Math.abs(gForceLat) + Math.abs(gForceLong);
         const wearThisFrame = gSum * (this.speed * 3.6) * wearRateBase * dt * 60;
@@ -275,6 +277,14 @@ export class MockConnector extends EventEmitter implements GameConnector {
         const oversteerCorrection = (gForceLat > 1.2 && steering < -0.2) ? Math.abs(steering) : 0;
         const understeerPlough = (gForceLat > 1.0 && Math.abs(steering) > 0.8) ? 0.5 : 0;
         const coastingTimePct = (throttle === 0 && brake === 0) ? 1.0 : 0.0;
+        const actualSlipRatio = clamp(
+            Math.abs(gForceLat) * 0.08 +
+            Math.max(0, throttle - 0.6) * 0.05 +
+            Math.max(0, brake - 0.5) * 0.04 +
+            Math.abs(this.gear - 3) * 0.005,
+            0,
+            1
+        );
 
         // Health impact based on behavior
         const wearBase = this.distanceTraveled * 0.000001 * healthDamageRate;
@@ -332,7 +342,8 @@ export class MockConnector extends EventEmitter implements GameConnector {
             pedalOverlap: (throttle * brake),
             oversteerCorrection,
             understeerPlough,
-            coastingTimePct
+            coastingTimePct,
+            actualSlipRatio
         };
 
 
