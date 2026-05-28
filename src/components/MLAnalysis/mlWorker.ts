@@ -68,12 +68,21 @@ const modelStatus: ModelStatusMap = {
 };
 
 // ─── Base URL resolver ──────────────────────────────────────────────────
+// Always resolve from the app root, not from the worker's own bundle URL.
+// The worker can be compiled to an asset chunk with a different path, so
+// relative '../' traversal from self.location.href is unreliable.
 
-function resolveBaseUrl(basePath: string): string {
-  const loc = self.location;
-  return loc.protocol === 'file:'
-    ? new URL(basePath, loc.href).href
-    : new URL(basePath, loc.origin).href;
+function resolveFromRoot(path: string): string {
+  if (self.location.protocol === 'file:') {
+    // Electron: self.location.href is the html file or a file:// chunk.
+    // Strip back to the app root (the directory of index.html).
+    const parts = self.location.href.replace(/\/[^/]*$/, '');
+    // Walk up until we are out of any asset/chunk subdirectory
+    const appRoot = parts.replace(/\/(assets|src\/components\/[^/]+)\/?$/, '');
+    return appRoot.replace(/\/$/, '') + '/' + path.replace(/^\.?\//, '');
+  }
+  // Vite dev / production: serve from the origin root
+  return self.location.origin + '/' + path.replace(/^\.?\//, '');
 }
 
 // ─── Model loading ──────────────────────────────────────────────────────
@@ -91,20 +100,30 @@ async function loadModels(): Promise<void> {
 }
 
 async function _initModels(): Promise<void> {
+  const modelsBase = resolveFromRoot('models/');
+  const assetsBase = resolveFromRoot('assets/');
+
+  // ── 1. Load ONNX runtime ─────────────────────────────────────────────
   try {
     ortModule = await import('onnxruntime-web');
-    ortModule.env.wasm.wasmPaths = resolveBaseUrl('../assets/');
+    ortModule.env.wasm.wasmPaths = assetsBase;
     ortModule.env.wasm.numThreads = 1;
+
+    // Validate WASM is actually reachable (quick HEAD request, 5s timeout)
+    await Promise.race([
+      fetch(assetsBase + 'ort-wasm-simd-threaded.wasm', { method: 'HEAD' }),
+      sleep(5000).then(() => Promise.reject(new Error('WASM probe timed out'))),
+    ]);
   } catch (err) {
-    console.warn('ONNX runtime failed to load, using heuristic fallbacks:', err);
+    console.warn('ONNX runtime unavailable, using heuristic fallbacks:', (err as Error).message);
+    ortModule = null;
   }
 
-  const base = resolveBaseUrl('../models/');
-
+  // ── 2. Load ONNX model sessions ──────────────────────────────────────
   const onnxPromises: Promise<void>[] = [];
   if (ortModule) {
     const create = (name: string, key: keyof ModelStatusMap, ref: (s: any) => void) =>
-      ortModule!.InferenceSession.create(base + name)
+      ortModule!.InferenceSession.create(modelsBase + name)
         .then((s: any) => { ref(s); modelStatus[key] = 'loaded'; })
         .catch((err: any) => { modelStatus[key] = 'error'; console.warn(`${name}:`, err.message); });
 
@@ -112,12 +131,19 @@ async function _initModels(): Promise<void> {
       create('tire_wear_model.onnx', 'tire_wear', (s) => { tireWearSession = s; }),
       create('grip_model.onnx', 'grip', (s) => { gripSession = s; }),
       create('shift_model.onnx', 'shift', (s) => { shiftSession = s; }),
-      create('pedal_overlap_model.onnx', 'pedal_overlap', (s) => { pedalSession = s; }),
+    );
+
+    // pedal_overlap_model.onnx is optional — only load if it exists
+    onnxPromises.push(
+      fetch(modelsBase + 'pedal_overlap_model.onnx', { method: 'HEAD' })
+        .then(() => create('pedal_overlap_model.onnx', 'pedal_overlap', (s) => { pedalSession = s; }))
+        .catch(() => { modelStatus.pedal_overlap = 'not_found'; }),
     );
   }
 
+  // ── 3. Load JSON model artifacts ─────────────────────────────────────
   const jsonPromises: Promise<void>[] = [
-    fetch(base + 'state_clusters.json')
+    fetch(modelsBase + 'state_clusters.json')
       .then((r) => r.json())
       .then((j) => {
         clusterCentroids = j.centroids ?? null;
@@ -125,9 +151,9 @@ async function _initModels(): Promise<void> {
         clusterScalerScale = j.scaler_scale ?? null;
         modelStatus.state_clusters = 'loaded';
       })
-      .catch((err) => { modelStatus.state_clusters = 'error'; console.warn('State clusters:', err.message); }),
+      .catch((err) => { modelStatus.state_clusters = 'error'; console.warn('State clusters:', (err as Error).message); }),
 
-    fetch(base + 'pca_profile.json')
+    fetch(modelsBase + 'pca_profile.json')
       .then((r) => r.json())
       .then((j) => {
         pcaComponents = j.components ?? null;
@@ -135,12 +161,12 @@ async function _initModels(): Promise<void> {
         pcaScalerScale = j.scaler_scale ?? null;
         modelStatus.pca_profile = 'loaded';
       })
-      .catch((err) => { modelStatus.pca_profile = 'error'; console.warn('PCA profile:', err.message); }),
+      .catch((err) => { modelStatus.pca_profile = 'error'; console.warn('PCA profile:', (err as Error).message); }),
 
-    fetch(base + 'model_metrics.json')
+    fetch(modelsBase + 'model_metrics.json')
       .then((r) => r.json())
       .then((j) => { modelMetrics = j.models ?? null; modelStatus.model_metrics = 'loaded'; })
-      .catch((err) => { modelStatus.model_metrics = 'error'; console.warn('Model metrics:', err.message); }),
+      .catch((err) => { modelStatus.model_metrics = 'error'; console.warn('Model metrics:', (err as Error).message); }),
   ];
 
   await Promise.all([...onnxPromises, ...jsonPromises]);
@@ -422,8 +448,21 @@ async function classifyPedalOverlap(data: NormalizedRow[]): Promise<SVMResult> {
           const feeds: Record<string, any> = {};
           feeds[pedalSession.inputNames[0]] = input;
           const output = await pedalSession.run(feeds);
-          const pred = output[pedalSession.outputNames[0]].data as Float32Array;
-          if (pred[0] > 0.5) overlapFrames++;
+
+          // skl2onnx Pipeline outputs: outputNames[0] = 'label' (int64 class label)
+          // Legacy SVC with probability=True outputs: outputNames[0] = float probabilities
+          // Handle both: check tensor type at runtime.
+          const labelTensor = output[pedalSession.outputNames[0]];
+          const rawData = labelTensor.data;
+          let predicted: number;
+          if (rawData instanceof Float32Array || rawData instanceof Float64Array) {
+            // Old format: probability output — class 1 if prob > 0.5
+            predicted = (rawData as Float32Array)[0] > 0.5 ? 1 : 0;
+          } else {
+            // New Pipeline format: int64/int32 label output — compare directly
+            predicted = Number((rawData as BigInt64Array | Int32Array)[0]);
+          }
+          if (predicted === 1) overlapFrames++;
         }
         await sleep(0);
       }

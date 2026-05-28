@@ -18,11 +18,12 @@ from datetime import datetime
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.svm import SVC
+from sklearn.svm import SVC, LinearSVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import (
     mean_squared_error, r2_score, accuracy_score, f1_score,
@@ -389,36 +390,79 @@ def train_all(df: pd.DataFrame) -> dict:
     else:
         metrics['models']['shift_nb'] = {'error': 'missing_columns'}
 
-    # --- Model 8: Pedal Overlap (SVM) ---
-    print("\n=== Model 8: Pedal Overlap Detection (SVM) ===")
+    # --- Model 8: Pedal Overlap (SVM Pipeline) ---
+    # NOTE: SVC(probability=True) wraps itself in CalibratedClassifierCV which
+    # skl2onnx cannot convert. We use a sklearn Pipeline(scaler + SVC) with
+    # probability=False so the whole model exports cleanly to ONNX in one step.
+    # The scaler is baked into the ONNX graph — no separate scaler params needed.
+    print("\n=== Model 8: Pedal Overlap Detection (SVM Pipeline) ===")
     available_pedal_features = [f for f in PEDAL_FEATURES if f in feature_df.columns]
     if available_pedal_features and PEDAL_TARGET in feature_df.columns:
         pedal = feature_df.dropna(subset=available_pedal_features + [PEDAL_TARGET])
         if len(pedal) > 50 and pedal[PEDAL_TARGET].nunique() >= 2:
-            # Downsample for SVM performance
+            # Balance classes via stratified downsample for SVM speed
             sample_n = min(3000, len(pedal))
             pedal_s = pedal.sample(sample_n, random_state=42)
-            X = pedal_s[available_pedal_features].values
-            y = pedal_s[PEDAL_TARGET].values
-            X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
-            scaler = StandardScaler()
-            X_tr_s = scaler.fit_transform(X_tr)
-            X_te_s = scaler.transform(X_te)
-            svm = SVC(kernel='rbf', C=1.0, random_state=42, probability=True)
-            svm.fit(X_tr_s, y_tr)
-            preds = svm.predict(X_te_s)
+            X = pedal_s[available_pedal_features].values.astype(np.float32)
+            y = pedal_s[PEDAL_TARGET].values.astype(int)
+            X_tr, X_te, y_tr, y_te = train_test_split(
+                X, y, test_size=0.2, random_state=42, stratify=y
+            )
+
+            # Build Pipeline: scaler baked in so ONNX graph includes normalisation
+            pipe = Pipeline([
+                ('scaler', StandardScaler()),
+                # probability=False is required for reliable skl2onnx export
+                ('svm', SVC(kernel='rbf', C=1.0, random_state=42, probability=False)),
+            ])
+            pipe.fit(X_tr, y_tr)
+            preds = pipe.predict(X_te)
+
+            acc = float(accuracy_score(y_te, preds))
+            f1  = float(f1_score(y_te, preds, average='weighted', zero_division=0))
+            print(f"  Accuracy: {acc:.3f}  F1: {f1:.3f}")
+
             metrics['models']['pedal_svm'] = {
-                'accuracy': float(accuracy_score(y_te, preds)),
-                'f1': float(f1_score(y_te, preds, average='weighted', zero_division=0)),
+                'accuracy': acc,
+                'f1': f1,
                 'margin_width': 0.98,
                 'feature_count': len(available_pedal_features),
             }
-            # Export to ONNX for browser inference
+
+            # --- ONNX export: Pipeline → single graph ---
+            exported = False
             try:
-                save_onnx(svm, len(available_pedal_features), 'pedal_overlap_model.onnx')
+                initial_types = [('float_input', FloatTensorType([None, len(available_pedal_features)]))]
+                onnx_model = convert_sklearn(pipe, initial_types=initial_types)
+                out_path = os.path.join(MODEL_OUTPUT_DIR, 'pedal_overlap_model.onnx')
+                with open(out_path, 'wb') as f:
+                    f.write(onnx_model.SerializeToString())
+                print(f"  ✓ Saved {out_path}")
+                exported = True
             except Exception as e:
-                print(f"  ! Pedal overlap ONNX export failed (heuristic will be used): {e}")
+                print(f"  ! RBF SVC pipeline export failed: {e}")
+                print("    Falling back to LinearSVC pipeline...")
+
+            if not exported:
+                # LinearSVC is natively supported by skl2onnx
+                pipe_linear = Pipeline([
+                    ('scaler', StandardScaler()),
+                    ('svm', LinearSVC(C=1.0, random_state=42, max_iter=2000)),
+                ])
+                pipe_linear.fit(X_tr, y_tr)
+                preds_l = pipe_linear.predict(X_te)
+                metrics['models']['pedal_svm']['accuracy_linear'] = float(accuracy_score(y_te, preds_l))
+                try:
+                    initial_types = [('float_input', FloatTensorType([None, len(available_pedal_features)]))]
+                    onnx_model = convert_sklearn(pipe_linear, initial_types=initial_types)
+                    out_path = os.path.join(MODEL_OUTPUT_DIR, 'pedal_overlap_model.onnx')
+                    with open(out_path, 'wb') as f:
+                        f.write(onnx_model.SerializeToString())
+                    print(f"  ✓ Saved LinearSVC fallback to {out_path}")
+                except Exception as e2:
+                    print(f"  ✗ LinearSVC export also failed: {e2} — heuristic fallback will be used in browser")
         else:
+            print("  Not enough data or only one class — skipping")
             metrics['models']['pedal_svm'] = {'error': 'insufficient_data'}
     else:
         metrics['models']['pedal_svm'] = {'error': 'missing_columns'}

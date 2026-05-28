@@ -522,7 +522,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "id": "package_json",
-      "community": 52,
+      "community": 16,
       "norm_label": "package.json"
     },
     {
@@ -531,7 +531,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "id": "driving_simulation_telemetry_dashboard_application_package_name",
-      "community": 52,
+      "community": 16,
       "norm_label": "name"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "id": "driving_simulation_telemetry_dashboard_application_package_private",
-      "community": 52,
+      "community": 16,
       "norm_label": "private"
     },
     {
@@ -549,7 +549,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "id": "driving_simulation_telemetry_dashboard_application_package_version",
-      "community": 52,
+      "community": 16,
       "norm_label": "version"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "id": "driving_simulation_telemetry_dashboard_application_package_type",
-      "community": 52,
+      "community": 16,
       "norm_label": "type"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "id": "driving_simulation_telemetry_dashboard_application_package_main",
-      "community": 52,
+      "community": 16,
       "norm_label": "main"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts",
-      "community": 64,
+      "community": 16,
       "norm_label": "scripts"
     },
     {
@@ -585,7 +585,7 @@
       "source_file": "package.json",
       "source_location": "L8",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev",
-      "community": 64,
+      "community": 16,
       "norm_label": "dev"
     },
     {
@@ -594,7 +594,7 @@
       "source_file": "package.json",
       "source_location": "L9",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_electron_dev",
-      "community": 64,
+      "community": 16,
       "norm_label": "electron:dev"
     },
     {
@@ -603,7 +603,7 @@
       "source_file": "package.json",
       "source_location": "L10",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev_ui",
-      "community": 64,
+      "community": 16,
       "norm_label": "dev:ui"
     },
     {
@@ -612,7 +612,7 @@
       "source_file": "package.json",
       "source_location": "L11",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_dev_electron",
-      "community": 64,
+      "community": 16,
       "norm_label": "dev:electron"
     },
     {
@@ -621,68 +621,86 @@
       "source_file": "package.json",
       "source_location": "L12",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build",
-      "community": 64,
+      "community": 16,
       "norm_label": "build"
+    },
+    {
+      "label": "build:mac",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build_mac",
+      "community": 16,
+      "norm_label": "build:mac"
+    },
+    {
+      "label": "build:win",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build_win",
+      "community": 16,
+      "norm_label": "build:win"
     },
     {
       "label": "build:electron",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L13",
+      "source_location": "L15",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_build_electron",
-      "community": 64,
+      "community": 16,
       "norm_label": "build:electron"
     },
     {
       "label": "lint",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L14",
+      "source_location": "L16",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_lint",
-      "community": 64,
+      "community": 16,
       "norm_label": "lint"
     },
     {
       "label": "verify:features",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L15",
+      "source_location": "L17",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_verify_features",
-      "community": 64,
+      "community": 16,
       "norm_label": "verify:features"
     },
     {
       "label": "preview",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L16",
+      "source_location": "L18",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_preview",
-      "community": 64,
+      "community": 16,
       "norm_label": "preview"
     },
     {
       "label": "postinstall",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L17",
+      "source_location": "L19",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_postinstall",
-      "community": 64,
+      "community": 16,
       "norm_label": "postinstall"
     },
     {
       "label": "doctor",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L18",
+      "source_location": "L20",
       "id": "driving_simulation_telemetry_dashboard_application_package_scripts_doctor",
-      "community": 64,
+      "community": 16,
       "norm_label": "doctor"
     },
     {
       "label": "dependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L22",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies",
       "community": 16,
       "norm_label": "dependencies"
@@ -691,7 +709,7 @@
       "label": "@google/stitch-sdk",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L23",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_google_stitch_sdk",
       "community": 16,
       "norm_label": "@google/stitch-sdk"
@@ -700,7 +718,7 @@
       "label": "better-sqlite3",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L24",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_better_sqlite3",
       "community": 16,
       "norm_label": "better-sqlite3"
@@ -709,7 +727,7 @@
       "label": "clsx",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L25",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_clsx",
       "community": 16,
       "norm_label": "clsx"
@@ -718,7 +736,7 @@
       "label": "express",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L26",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_express",
       "community": 16,
       "norm_label": "express"
@@ -727,7 +745,7 @@
       "label": "lucide-react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L27",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_lucide_react",
       "community": 16,
       "norm_label": "lucide-react"
@@ -736,7 +754,7 @@
       "label": "onnxruntime-web",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L26",
+      "source_location": "L28",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_onnxruntime_web",
       "community": 16,
       "norm_label": "onnxruntime-web"
@@ -745,7 +763,7 @@
       "label": "papaparse",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L27",
+      "source_location": "L29",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_papaparse",
       "community": 16,
       "norm_label": "papaparse"
@@ -754,7 +772,7 @@
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L28",
+      "source_location": "L30",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react",
       "community": 16,
       "norm_label": "react"
@@ -763,7 +781,7 @@
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L29",
+      "source_location": "L31",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react_dom",
       "community": 16,
       "norm_label": "react-dom"
@@ -772,7 +790,7 @@
       "label": "react-router-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L30",
+      "source_location": "L32",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_react_router_dom",
       "community": 16,
       "norm_label": "react-router-dom"
@@ -781,7 +799,7 @@
       "label": "recharts",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L31",
+      "source_location": "L33",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_recharts",
       "community": 16,
       "norm_label": "recharts"
@@ -790,7 +808,7 @@
       "label": "tailwind-merge",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L32",
+      "source_location": "L34",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_tailwind_merge",
       "community": 16,
       "norm_label": "tailwind-merge"
@@ -799,7 +817,7 @@
       "label": "ws",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L33",
+      "source_location": "L35",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_ws",
       "community": 16,
       "norm_label": "ws"
@@ -808,7 +826,7 @@
       "label": "zustand",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L34",
+      "source_location": "L36",
       "id": "driving_simulation_telemetry_dashboard_application_package_dependencies_zustand",
       "community": 16,
       "norm_label": "zustand"
@@ -817,106 +835,106 @@
       "label": "build",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L36",
+      "source_location": "L38",
       "id": "driving_simulation_telemetry_dashboard_application_package_build",
-      "community": 50,
+      "community": 16,
       "norm_label": "build"
     },
     {
       "label": "appId",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L37",
+      "source_location": "L39",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_appid",
-      "community": 50,
+      "community": 16,
       "norm_label": "appid"
     },
     {
       "label": "productName",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L38",
+      "source_location": "L40",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_productname",
-      "community": 50,
+      "community": 16,
       "norm_label": "productname"
     },
     {
       "label": "directories",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L41",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_directories",
-      "community": 50,
+      "community": 16,
       "norm_label": "directories"
     },
     {
       "label": "output",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L40",
+      "source_location": "L42",
       "id": "driving_simulation_telemetry_dashboard_application_package_directories_output",
-      "community": 50,
+      "community": 16,
       "norm_label": "output"
     },
     {
       "label": "files",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L42",
+      "source_location": "L44",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_files",
-      "community": 50,
+      "community": 16,
       "norm_label": "files"
     },
     {
       "label": "extraResources",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L47",
+      "source_location": "L49",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_extraresources",
-      "community": 50,
+      "community": 16,
       "norm_label": "extraresources"
     },
     {
       "label": "mac",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L53",
+      "source_location": "L55",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_mac",
-      "community": 50,
+      "community": 16,
       "norm_label": "mac"
     },
     {
       "label": "category",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L54",
+      "source_location": "L56",
       "id": "driving_simulation_telemetry_dashboard_application_package_mac_category",
-      "community": 50,
+      "community": 16,
       "norm_label": "category"
     },
     {
       "label": "win",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L56",
+      "source_location": "L58",
       "id": "driving_simulation_telemetry_dashboard_application_package_build_win",
-      "community": 50,
+      "community": 16,
       "norm_label": "win"
     },
     {
       "label": "target",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L57",
+      "source_location": "L59",
       "id": "driving_simulation_telemetry_dashboard_application_package_win_target",
-      "community": 50,
+      "community": 16,
       "norm_label": "target"
     },
     {
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L60",
+      "source_location": "L62",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies",
       "community": 2,
       "norm_label": "devdependencies"
@@ -925,7 +943,7 @@
       "label": "@eslint/js",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L61",
+      "source_location": "L63",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_js",
       "community": 2,
       "norm_label": "@eslint/js"
@@ -934,7 +952,7 @@
       "label": "@types/better-sqlite3",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L62",
+      "source_location": "L64",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_better_sqlite3",
       "community": 2,
       "norm_label": "@types/better-sqlite3"
@@ -943,7 +961,7 @@
       "label": "@types/express",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L63",
+      "source_location": "L65",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_express",
       "community": 2,
       "norm_label": "@types/express"
@@ -952,7 +970,7 @@
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L64",
+      "source_location": "L66",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_node",
       "community": 2,
       "norm_label": "@types/node"
@@ -961,7 +979,7 @@
       "label": "@types/papaparse",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L65",
+      "source_location": "L67",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_papaparse",
       "community": 2,
       "norm_label": "@types/papaparse"
@@ -970,7 +988,7 @@
       "label": "@types/react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L66",
+      "source_location": "L68",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_react",
       "community": 2,
       "norm_label": "@types/react"
@@ -979,7 +997,7 @@
       "label": "@types/react-dom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L67",
+      "source_location": "L69",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_react_dom",
       "community": 2,
       "norm_label": "@types/react-dom"
@@ -988,7 +1006,7 @@
       "label": "@types/ws",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L68",
+      "source_location": "L70",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_types_ws",
       "community": 2,
       "norm_label": "@types/ws"
@@ -997,7 +1015,7 @@
       "label": "@vitejs/plugin-react",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L69",
+      "source_location": "L71",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_vitejs_plugin_react",
       "community": 2,
       "norm_label": "@vitejs/plugin-react"
@@ -1006,7 +1024,7 @@
       "label": "autoprefixer",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L70",
+      "source_location": "L72",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_autoprefixer",
       "community": 2,
       "norm_label": "autoprefixer"
@@ -1015,7 +1033,7 @@
       "label": "concurrently",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L71",
+      "source_location": "L73",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_concurrently",
       "community": 2,
       "norm_label": "concurrently"
@@ -1024,7 +1042,7 @@
       "label": "cross-env",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L72",
+      "source_location": "L74",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_cross_env",
       "community": 2,
       "norm_label": "cross-env"
@@ -1033,7 +1051,7 @@
       "label": "electron",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L73",
+      "source_location": "L75",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_electron",
       "community": 2,
       "norm_label": "electron"
@@ -1042,7 +1060,7 @@
       "label": "electron-builder",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L74",
+      "source_location": "L76",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_electron_builder",
       "community": 2,
       "norm_label": "electron-builder"
@@ -1051,7 +1069,7 @@
       "label": "eslint",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L75",
+      "source_location": "L77",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint",
       "community": 2,
       "norm_label": "eslint"
@@ -1060,7 +1078,7 @@
       "label": "eslint-plugin-react-hooks",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L76",
+      "source_location": "L78",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_plugin_react_hooks",
       "community": 2,
       "norm_label": "eslint-plugin-react-hooks"
@@ -1069,7 +1087,7 @@
       "label": "eslint-plugin-react-refresh",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L77",
+      "source_location": "L79",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_eslint_plugin_react_refresh",
       "community": 2,
       "norm_label": "eslint-plugin-react-refresh"
@@ -1078,7 +1096,7 @@
       "label": "globals",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L78",
+      "source_location": "L80",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_globals",
       "community": 2,
       "norm_label": "globals"
@@ -1087,7 +1105,7 @@
       "label": "postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L79",
+      "source_location": "L81",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_postcss",
       "community": 2,
       "norm_label": "postcss"
@@ -1096,7 +1114,7 @@
       "label": "react-doctor",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L80",
+      "source_location": "L82",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_react_doctor",
       "community": 2,
       "norm_label": "react-doctor"
@@ -1105,7 +1123,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L81",
+      "source_location": "L83",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_tailwindcss",
       "community": 2,
       "norm_label": "tailwindcss"
@@ -1114,7 +1132,7 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L82",
+      "source_location": "L84",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_typescript",
       "community": 2,
       "norm_label": "typescript"
@@ -1123,7 +1141,7 @@
       "label": "typescript-eslint",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L83",
+      "source_location": "L85",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_typescript_eslint",
       "community": 2,
       "norm_label": "typescript-eslint"
@@ -1132,7 +1150,7 @@
       "label": "vite",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L84",
+      "source_location": "L86",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_vite",
       "community": 2,
       "norm_label": "vite"
@@ -1141,7 +1159,7 @@
       "label": "wait-on",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L85",
+      "source_location": "L87",
       "id": "driving_simulation_telemetry_dashboard_application_package_devdependencies_wait_on",
       "community": 2,
       "norm_label": "wait-on"
@@ -1807,7 +1825,7 @@
       "label": "load_all_csvs()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L51",
+      "source_location": "L52",
       "id": "ml_pipeline_train_model_load_all_csvs",
       "community": 9,
       "norm_label": "load_all_csvs()"
@@ -1816,16 +1834,25 @@
       "label": "validate_columns()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L107",
+      "source_location": "L108",
       "id": "ml_pipeline_train_model_validate_columns",
       "community": 9,
       "norm_label": "validate_columns()"
     },
     {
+      "label": "DataFrame",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L108",
+      "id": "dataframe",
+      "community": 9,
+      "norm_label": "dataframe"
+    },
+    {
       "label": "derive_labels()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L120",
+      "source_location": "L121",
       "id": "ml_pipeline_train_model_derive_labels",
       "community": 9,
       "norm_label": "derive_labels()"
@@ -1834,16 +1861,34 @@
       "label": "save_onnx()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L163",
+      "source_location": "L164",
       "id": "ml_pipeline_train_model_save_onnx",
       "community": 9,
       "norm_label": "save_onnx()"
     },
     {
+      "label": "int",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L164",
+      "id": "int",
+      "community": 9,
+      "norm_label": "int"
+    },
+    {
+      "label": "str",
+      "file_type": "code",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L164",
+      "id": "str",
+      "community": 9,
+      "norm_label": "str"
+    },
+    {
       "label": "train_all()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L178",
+      "source_location": "L179",
       "id": "ml_pipeline_train_model_train_all",
       "community": 9,
       "norm_label": "train_all()"
@@ -1852,7 +1897,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L429",
+      "source_location": "L473",
       "id": "ml_pipeline_train_model_main",
       "community": 9,
       "norm_label": "main()"
@@ -1870,8 +1915,8 @@
       "label": "Load all CSV files from dataset/, skipping # comment headers.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L52",
-      "id": "ml_pipeline_train_model_rationale_52",
+      "source_location": "L53",
+      "id": "ml_pipeline_train_model_rationale_53",
       "community": 9,
       "norm_label": "load all csv files from dataset/, skipping # comment headers."
     },
@@ -1879,8 +1924,8 @@
       "label": "Check which expected columns are missing from the dataset.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L108",
-      "id": "ml_pipeline_train_model_rationale_108",
+      "source_location": "L109",
+      "id": "ml_pipeline_train_model_rationale_109",
       "community": 9,
       "norm_label": "check which expected columns are missing from the dataset."
     },
@@ -1888,8 +1933,8 @@
       "label": "Derive supervised labels that aren't directly in the raw telemetry.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L121",
-      "id": "ml_pipeline_train_model_rationale_121",
+      "source_location": "L122",
+      "id": "ml_pipeline_train_model_rationale_122",
       "community": 9,
       "norm_label": "derive supervised labels that aren't directly in the raw telemetry."
     },
@@ -1897,8 +1942,8 @@
       "label": "Convert sklearn model to ONNX and save.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L164",
-      "id": "ml_pipeline_train_model_rationale_164",
+      "source_location": "L165",
+      "id": "ml_pipeline_train_model_rationale_165",
       "community": 9,
       "norm_label": "convert sklearn model to onnx and save."
     },
@@ -1906,10 +1951,19 @@
       "label": "Train all 8 models and return metrics.",
       "file_type": "rationale",
       "source_file": "ml-pipeline/train_model.py",
-      "source_location": "L179",
-      "id": "ml_pipeline_train_model_rationale_179",
+      "source_location": "L180",
+      "id": "ml_pipeline_train_model_rationale_180",
       "community": 9,
       "norm_label": "train all 8 models and return metrics."
+    },
+    {
+      "label": "# NOTE: SVC(probability=True) wraps itself in CalibratedClassifierCV which",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L394",
+      "id": "ml_pipeline_train_model_rationale_394",
+      "community": 9,
+      "norm_label": "# note: svc(probability=true) wraps itself in calibratedclassifiercv which"
     },
     {
       "label": "stitch-redesign.mjs",
@@ -2889,7 +2943,7 @@
       "source_file": "src/types/electron.d.ts",
       "source_location": "L1",
       "id": "src_types_electron_d_ts",
-      "community": 64,
+      "community": 16,
       "norm_label": "electron.d.ts"
     },
     {
@@ -2898,7 +2952,7 @@
       "source_file": "src/types/electron.d.ts",
       "source_location": "L1",
       "id": "types_electron_d_ielectronapi",
-      "community": 64,
+      "community": 16,
       "norm_label": "ielectronapi"
     },
     {
@@ -2907,7 +2961,7 @@
       "source_file": "src/types/electron.d.ts",
       "source_location": "L18",
       "id": "types_electron_d_window",
-      "community": 64,
+      "community": 16,
       "norm_label": "window"
     },
     {
@@ -3015,7 +3069,7 @@
       "source_file": "src/stores/telemetryStore.ts",
       "source_location": "L12",
       "id": "stores_telemetrystore_telemetrystate",
-      "community": 1,
+      "community": 23,
       "norm_label": "telemetrystate"
     },
     {
@@ -3285,7 +3339,7 @@
       "source_file": "src/components/ReactionTest/ReactionTest.tsx",
       "source_location": "L1",
       "id": "src_components_reactiontest_reactiontest_tsx",
-      "community": 32,
+      "community": 23,
       "norm_label": "reactiontest.tsx"
     },
     {
@@ -3294,7 +3348,7 @@
       "source_file": "src/components/ReactionTest/ReactionTest.tsx",
       "source_location": "L6",
       "id": "reactiontest_reactiontest_testmode",
-      "community": 32,
+      "community": 23,
       "norm_label": "testmode"
     },
     {
@@ -3303,7 +3357,7 @@
       "source_file": "src/components/ReactionTest/ReactionTest.tsx",
       "source_location": "L8",
       "id": "reactiontest_reactiontest_historyitem",
-      "community": 32,
+      "community": 23,
       "norm_label": "historyitem"
     },
     {
@@ -3312,7 +3366,7 @@
       "source_file": "src/components/ReactionTest/ReactionTest.tsx",
       "source_location": "L17",
       "id": "reactiontest_reactiontest_reactiontest",
-      "community": 32,
+      "community": 23,
       "norm_label": "reactiontest()"
     },
     {
@@ -3465,7 +3519,7 @@
       "source_file": "src/components/Dashboard/DataLogger.tsx",
       "source_location": "L1",
       "id": "src_components_dashboard_datalogger_tsx",
-      "community": 10,
+      "community": 23,
       "norm_label": "datalogger.tsx"
     },
     {
@@ -3474,7 +3528,7 @@
       "source_file": "src/components/Dashboard/DataLogger.tsx",
       "source_location": "L5",
       "id": "dashboard_datalogger_datalogger",
-      "community": 10,
+      "community": 23,
       "norm_label": "datalogger()"
     },
     {
@@ -3492,7 +3546,7 @@
       "source_file": "src/components/Dashboard/Dashboard.tsx",
       "source_location": "L23",
       "id": "dashboard_dashboard_dashboard",
-      "community": 23,
+      "community": 44,
       "norm_label": "dashboard()"
     },
     {
@@ -3573,7 +3627,7 @@
       "source_file": "src/components/Dashboard/BehaviorAnalysis.tsx",
       "source_location": "L1",
       "id": "src_components_dashboard_behavioranalysis_tsx",
-      "community": 44,
+      "community": 50,
       "norm_label": "behavioranalysis.tsx"
     },
     {
@@ -3582,7 +3636,7 @@
       "source_file": "src/components/Dashboard/BehaviorAnalysis.tsx",
       "source_location": "L3",
       "id": "dashboard_behavioranalysis_progressbar",
-      "community": 44,
+      "community": 50,
       "norm_label": "progressbar"
     },
     {
@@ -3591,7 +3645,7 @@
       "source_file": "src/components/Dashboard/BehaviorAnalysis.tsx",
       "source_location": "L18",
       "id": "dashboard_behavioranalysis_behavioranalysisprops",
-      "community": 44,
+      "community": 50,
       "norm_label": "behavioranalysisprops"
     },
     {
@@ -3600,7 +3654,7 @@
       "source_file": "src/components/Dashboard/BehaviorAnalysis.tsx",
       "source_location": "L31",
       "id": "dashboard_behavioranalysis_behavioranalysis",
-      "community": 44,
+      "community": 50,
       "norm_label": "behavioranalysis"
     },
     {
@@ -4216,19 +4270,19 @@
       "norm_label": "modelstatus"
     },
     {
-      "label": "resolveBaseUrl()",
+      "label": "resolveFromRoot()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L72",
-      "id": "mlanalysis_mlworker_resolvebaseurl",
+      "source_location": "L75",
+      "id": "mlanalysis_mlworker_resolvefromroot",
       "community": 34,
-      "norm_label": "resolvebaseurl()"
+      "norm_label": "resolvefromroot()"
     },
     {
       "label": "loadModels()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L81",
+      "source_location": "L90",
       "id": "mlanalysis_mlworker_loadmodels",
       "community": 34,
       "norm_label": "loadmodels()"
@@ -4237,7 +4291,7 @@
       "label": "_initModels()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L93",
+      "source_location": "L102",
       "id": "mlanalysis_mlworker_initmodels",
       "community": 34,
       "norm_label": "_initmodels()"
@@ -4246,7 +4300,7 @@
       "label": "computeSafetyScore()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L151",
+      "source_location": "L177",
       "id": "mlanalysis_mlworker_computesafetyscore",
       "community": 0,
       "norm_label": "computesafetyscore()"
@@ -4255,7 +4309,7 @@
       "label": "detectAnomalies()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L200",
+      "source_location": "L226",
       "id": "mlanalysis_mlworker_detectanomalies",
       "community": 54,
       "norm_label": "detectanomalies()"
@@ -4264,16 +4318,16 @@
       "label": "projectPCA()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L242",
+      "source_location": "L268",
       "id": "mlanalysis_mlworker_projectpca",
-      "community": 54,
+      "community": 34,
       "norm_label": "projectpca()"
     },
     {
       "label": "classifyKNN()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L282",
+      "source_location": "L308",
       "id": "mlanalysis_mlworker_classifyknn",
       "community": 0,
       "norm_label": "classifyknn()"
@@ -4282,7 +4336,7 @@
       "label": "computeFatigueForSession()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L299",
+      "source_location": "L325",
       "id": "mlanalysis_mlworker_computefatigueforsession",
       "community": 54,
       "norm_label": "computefatigueforsession()"
@@ -4291,7 +4345,7 @@
       "label": "detectFatigue()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L333",
+      "source_location": "L359",
       "id": "mlanalysis_mlworker_detectfatigue",
       "community": 54,
       "norm_label": "detectfatigue()"
@@ -4300,7 +4354,7 @@
       "label": "classifyGrip()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L369",
+      "source_location": "L395",
       "id": "mlanalysis_mlworker_classifygrip",
       "community": 34,
       "norm_label": "classifygrip()"
@@ -4309,7 +4363,7 @@
       "label": "classifyPedalOverlap()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L410",
+      "source_location": "L436",
       "id": "mlanalysis_mlworker_classifypedaloverlap",
       "community": 34,
       "norm_label": "classifypedaloverlap()"
@@ -4318,7 +4372,7 @@
       "label": "clusterStates()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L450",
+      "source_location": "L489",
       "id": "mlanalysis_mlworker_clusterstates",
       "community": 54,
       "norm_label": "clusterstates()"
@@ -4327,7 +4381,7 @@
       "label": "buildMarkovChain()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L502",
+      "source_location": "L541",
       "id": "mlanalysis_mlworker_buildmarkovchain",
       "community": 0,
       "norm_label": "buildmarkovchain()"
@@ -4336,7 +4390,7 @@
       "label": "buildAggressionMatrix()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L523",
+      "source_location": "L562",
       "id": "mlanalysis_mlworker_buildaggressionmatrix",
       "community": 0,
       "norm_label": "buildaggressionmatrix()"
@@ -4345,7 +4399,7 @@
       "label": "predictTireWear()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L544",
+      "source_location": "L583",
       "id": "mlanalysis_mlworker_predicttirewear",
       "community": 34,
       "norm_label": "predicttirewear()"
@@ -4354,7 +4408,7 @@
       "label": "classifyShifts()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L601",
+      "source_location": "L640",
       "id": "mlanalysis_mlworker_classifyshifts",
       "community": 34,
       "norm_label": "classifyshifts()"
@@ -4363,7 +4417,7 @@
       "label": "computeExitForecast()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L650",
+      "source_location": "L689",
       "id": "mlanalysis_mlworker_computeexitforecast",
       "community": 0,
       "norm_label": "computeexitforecast()"
@@ -4372,7 +4426,7 @@
       "label": "computeDTW()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L734",
+      "source_location": "L773",
       "id": "mlanalysis_mlworker_computedtw",
       "community": 0,
       "norm_label": "computedtw()"
@@ -4381,7 +4435,7 @@
       "label": "computeQualityMetrics()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L786",
+      "source_location": "L825",
       "id": "mlanalysis_mlworker_computequalitymetrics",
       "community": 0,
       "norm_label": "computequalitymetrics()"
@@ -4390,7 +4444,7 @@
       "label": "reportProgress()",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L894",
+      "source_location": "L933",
       "id": "mlanalysis_mlworker_reportprogress",
       "community": 0,
       "norm_label": "reportprogress()"
@@ -4399,7 +4453,7 @@
       "label": "validData",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L903",
+      "source_location": "L942",
       "id": "mlanalysis_mlworker_validdata",
       "community": 0,
       "norm_label": "validdata"
@@ -4408,7 +4462,7 @@
       "label": "timestamps",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L916",
+      "source_location": "L955",
       "id": "mlanalysis_mlworker_timestamps",
       "community": 0,
       "norm_label": "timestamps"
@@ -4417,7 +4471,7 @@
       "label": "speeds",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L917",
+      "source_location": "L956",
       "id": "mlanalysis_mlworker_speeds",
       "community": 0,
       "norm_label": "speeds"
@@ -4426,7 +4480,7 @@
       "label": "throttles",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L918",
+      "source_location": "L957",
       "id": "mlanalysis_mlworker_throttles",
       "community": 0,
       "norm_label": "throttles"
@@ -4435,7 +4489,7 @@
       "label": "brakes",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L919",
+      "source_location": "L958",
       "id": "mlanalysis_mlworker_brakes",
       "community": 0,
       "norm_label": "brakes"
@@ -4444,7 +4498,7 @@
       "label": "steerings",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L920",
+      "source_location": "L959",
       "id": "mlanalysis_mlworker_steerings",
       "community": 0,
       "norm_label": "steerings"
@@ -4453,7 +4507,7 @@
       "label": "gForcesCombined",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L924",
+      "source_location": "L963",
       "id": "mlanalysis_mlworker_gforcescombined",
       "community": 0,
       "norm_label": "gforcescombined"
@@ -4462,7 +4516,7 @@
       "label": "jerks",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L929",
+      "source_location": "L968",
       "id": "mlanalysis_mlworker_jerks",
       "community": 0,
       "norm_label": "jerks"
@@ -4471,7 +4525,7 @@
       "label": "accelerations",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L930",
+      "source_location": "L969",
       "id": "mlanalysis_mlworker_accelerations",
       "community": 0,
       "norm_label": "accelerations"
@@ -4480,7 +4534,7 @@
       "label": "safetyScore",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L948",
+      "source_location": "L987",
       "id": "mlanalysis_mlworker_safetyscore",
       "community": 0,
       "norm_label": "safetyscore"
@@ -4489,7 +4543,7 @@
       "label": "anomalies",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L952",
+      "source_location": "L991",
       "id": "mlanalysis_mlworker_anomalies",
       "community": 0,
       "norm_label": "anomalies"
@@ -4498,7 +4552,7 @@
       "label": "pca",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L956",
+      "source_location": "L995",
       "id": "mlanalysis_mlworker_pca",
       "community": 0,
       "norm_label": "pca"
@@ -4507,7 +4561,7 @@
       "label": "{ knnProfile, knnConfidence }",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L962",
+      "source_location": "L1001",
       "id": "mlanalysis_mlworker_knnprofile_knnconfidence",
       "community": 0,
       "norm_label": "{ knnprofile, knnconfidence }"
@@ -4516,7 +4570,7 @@
       "label": "hmm",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L970",
+      "source_location": "L1009",
       "id": "mlanalysis_mlworker_hmm",
       "community": 0,
       "norm_label": "hmm"
@@ -4525,7 +4579,7 @@
       "label": "fatigue",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L986",
+      "source_location": "L1025",
       "id": "mlanalysis_mlworker_fatigue",
       "community": 0,
       "norm_label": "fatigue"
@@ -4534,7 +4588,7 @@
       "label": "exitForecast",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L990",
+      "source_location": "L1029",
       "id": "mlanalysis_mlworker_exitforecast",
       "community": 0,
       "norm_label": "exitforecast"
@@ -4543,7 +4597,7 @@
       "label": "{ dtwScore, trailPercent }",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L994",
+      "source_location": "L1033",
       "id": "mlanalysis_mlworker_dtwscore_trailpercent",
       "community": 0,
       "norm_label": "{ dtwscore, trailpercent }"
@@ -4552,7 +4606,7 @@
       "label": "markovMatrix",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L998",
+      "source_location": "L1037",
       "id": "mlanalysis_mlworker_markovmatrix",
       "community": 0,
       "norm_label": "markovmatrix"
@@ -4561,7 +4615,7 @@
       "label": "aggressionMatrix",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L999",
+      "source_location": "L1038",
       "id": "mlanalysis_mlworker_aggressionmatrix",
       "community": 0,
       "norm_label": "aggressionmatrix"
@@ -4570,7 +4624,7 @@
       "label": "qualityMetrics",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L1003",
+      "source_location": "L1042",
       "id": "mlanalysis_mlworker_qualitymetrics",
       "community": 0,
       "norm_label": "qualitymetrics"
@@ -4579,7 +4633,7 @@
       "label": "sessionBoundaries",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L1011",
+      "source_location": "L1050",
       "id": "mlanalysis_mlworker_sessionboundaries",
       "community": 0,
       "norm_label": "sessionboundaries"
@@ -4588,7 +4642,7 @@
       "label": "results",
       "file_type": "code",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L1016",
+      "source_location": "L1055",
       "id": "mlanalysis_mlworker_results",
       "community": 0,
       "norm_label": "results"
@@ -4599,7 +4653,7 @@
       "source_file": "src/hooks/useTelemetry.ts",
       "source_location": "L1",
       "id": "src_hooks_usetelemetry_ts",
-      "community": 23,
+      "community": 1,
       "norm_label": "usetelemetry.ts"
     },
     {
@@ -4608,7 +4662,7 @@
       "source_file": "src/hooks/useTelemetry.ts",
       "source_location": "L6",
       "id": "hooks_usetelemetry_usetelemetrylistener",
-      "community": 23,
+      "community": 44,
       "norm_label": "usetelemetrylistener()"
     },
     {
@@ -7580,6 +7634,60 @@
       "id": "docs_ml_pipeline_restructure_plan_appendix_c_feature_map_cross_reference",
       "community": 49,
       "norm_label": "appendix c: feature map cross-reference"
+    },
+    {
+      "label": "Load all CSV files from dataset/, skipping # comment headers.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L52",
+      "community": 9,
+      "norm_label": "load all csv files from dataset/, skipping # comment headers.",
+      "id": "ml_pipeline_train_model_rationale_52"
+    },
+    {
+      "label": "Check which expected columns are missing from the dataset.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L108",
+      "community": 9,
+      "norm_label": "check which expected columns are missing from the dataset.",
+      "id": "ml_pipeline_train_model_rationale_108"
+    },
+    {
+      "label": "Derive supervised labels that aren't directly in the raw telemetry.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L121",
+      "community": 9,
+      "norm_label": "derive supervised labels that aren't directly in the raw telemetry.",
+      "id": "ml_pipeline_train_model_rationale_121"
+    },
+    {
+      "label": "Convert sklearn model to ONNX and save.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L164",
+      "community": 9,
+      "norm_label": "convert sklearn model to onnx and save.",
+      "id": "ml_pipeline_train_model_rationale_164"
+    },
+    {
+      "label": "Train all 8 models and return metrics.",
+      "file_type": "rationale",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L179",
+      "community": 9,
+      "norm_label": "train all 8 models and return metrics.",
+      "id": "ml_pipeline_train_model_rationale_179"
+    },
+    {
+      "label": "resolveBaseUrl()",
+      "file_type": "code",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L72",
+      "community": 34,
+      "norm_label": "resolvebaseurl()",
+      "id": "mlanalysis_mlworker_resolvebaseurl"
     }
   ],
   "links": [
@@ -8252,6 +8360,26 @@
       "confidence_score": 1.0,
       "source": "driving_simulation_telemetry_dashboard_application_package_scripts",
       "target": "driving_simulation_telemetry_dashboard_application_package_scripts_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "driving_simulation_telemetry_dashboard_application_package_scripts",
+      "target": "driving_simulation_telemetry_dashboard_application_package_scripts_build_mac",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "driving_simulation_telemetry_dashboard_application_package_scripts",
+      "target": "driving_simulation_telemetry_dashboard_application_package_scripts_build_win",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9676,6 +9804,16 @@
       "target": "ml_pipeline_train_model_rationale_1"
     },
     {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L394",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_rationale_394",
+      "target": "ml_pipeline_train_model_py"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -9690,11 +9828,32 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_rationale_53",
+      "target": "ml_pipeline_train_model_load_all_csvs"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
       "source_location": "L52",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_load_all_csvs",
       "target": "ml_pipeline_train_model_rationale_52"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_validate_columns",
+      "target": "dataframe"
     },
     {
       "relation": "calls",
@@ -9711,11 +9870,43 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_rationale_109",
+      "target": "ml_pipeline_train_model_validate_columns"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
       "source_location": "L108",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_validate_columns",
       "target": "ml_pipeline_train_model_rationale_108"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_derive_labels",
+      "target": "dataframe"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L179",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_train_all",
+      "target": "dataframe"
     },
     {
       "relation": "calls",
@@ -9732,11 +9923,43 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_rationale_122",
+      "target": "ml_pipeline_train_model_derive_labels"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
       "source_location": "L121",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_derive_labels",
       "target": "ml_pipeline_train_model_rationale_121"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L164",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_save_onnx",
+      "target": "int"
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L164",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_save_onnx",
+      "target": "str"
     },
     {
       "relation": "calls",
@@ -9748,6 +9971,16 @@
       "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_save_onnx",
       "target": "ml_pipeline_train_model_train_all"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L165",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_rationale_165",
+      "target": "ml_pipeline_train_model_save_onnx"
     },
     {
       "relation": "rationale_for",
@@ -9769,6 +10002,16 @@
       "confidence_score": 1.0,
       "source": "ml_pipeline_train_model_train_all",
       "target": "ml_pipeline_train_model_main"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ml-pipeline/train_model.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ml_pipeline_train_model_rationale_180",
+      "target": "ml_pipeline_train_model_train_all"
     },
     {
       "relation": "rationale_for",
@@ -10137,9 +10380,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_ts",
-      "target": "electron_session_manager_normalizeunitinterval",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_normalizeunitinterval"
     },
     {
       "relation": "contains",
@@ -10228,9 +10471,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_normalizeunitinterval",
-      "target": "electron_session_manager_clamp",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_clamp"
     },
     {
       "relation": "calls",
@@ -10261,9 +10504,9 @@
       "source_file": "electron/session-manager.ts",
       "source_location": "L136",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_session_manager_sessionmanager_processdata",
-      "target": "electron_session_manager_normalizeunitinterval",
-      "confidence_score": 1.0
+      "target": "electron_session_manager_normalizeunitinterval"
     },
     {
       "relation": "method",
@@ -10612,9 +10855,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "electron_game_connectors_mock_ts",
-      "target": "game_connectors_mock_clamp",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_clamp"
     },
     {
       "relation": "contains",
@@ -10644,9 +10887,9 @@
       "source_file": "electron/game-connectors/mock.ts",
       "source_location": "L280",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_connectors_mock_mockconnector_emitnextframe",
-      "target": "game_connectors_mock_clamp",
-      "confidence_score": 1.0
+      "target": "game_connectors_mock_clamp"
     },
     {
       "relation": "method",
@@ -14337,6 +14580,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L115",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_initmodels",
+      "target": "mlanalysis_utils_sleep"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
       "source_location": "L374",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -15242,11 +15496,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L68",
+      "source_location": "L75",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_mlanalysis_mlworker_ts",
-      "target": "mlanalysis_mlworker_resolvebaseurl"
+      "target": "mlanalysis_mlworker_resolvefromroot"
     },
     {
       "relation": "contains",
@@ -15659,15 +15913,36 @@
       "target": "mlanalysis_mlworker_results"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mlanalysis_mlworker_ts",
+      "target": "mlanalysis_mlworker_resolvebaseurl"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L91",
+      "source_location": "L103",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "mlanalysis_mlworker_initmodels",
-      "target": "mlanalysis_mlworker_resolvebaseurl"
+      "target": "mlanalysis_mlworker_resolvefromroot"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MLAnalysis/mlWorker.ts",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "mlanalysis_mlworker_loadmodels",
+      "target": "mlanalysis_mlworker_initmodels"
     },
     {
       "relation": "calls",
@@ -15685,11 +15960,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/MLAnalysis/mlWorker.ts",
-      "source_location": "L84",
+      "source_location": "L91",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "mlanalysis_mlworker_loadmodels",
-      "target": "mlanalysis_mlworker_initmodels"
+      "source": "mlanalysis_mlworker_initmodels",
+      "target": "mlanalysis_mlworker_resolvebaseurl"
     },
     {
       "relation": "calls",
@@ -19604,5 +19879,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "252254e22f57efc1927d3705c321bbd8287bb32e"
+  "built_at_commit": "dccb02176db1beac38e3d09ec6797d5024dc7254"
 }
