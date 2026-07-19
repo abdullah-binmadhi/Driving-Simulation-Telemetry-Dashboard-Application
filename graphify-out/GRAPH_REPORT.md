@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 848 nodes · 1182 edges · 52 communities (49 shown, 3 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
+- 666 nodes · 890 edges · 46 communities (43 shown, 3 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5d37b655`
+- Built from commit: `8ad6edc7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,7 +37,6 @@
 - [[_COMMUNITY_NPM Scripts|NPM Scripts]]
 - [[_COMMUNITY_Feature Names|Feature Names]]
 - [[_COMMUNITY_Project README|Project README]]
-- [[_COMMUNITY_ML Config|ML Config]]
 - [[_COMMUNITY_Technical Report|Technical Report]]
 - [[_COMMUNITY_Community 25|Community 25]]
 - [[_COMMUNITY_Community 26|Community 26]]
@@ -45,15 +44,11 @@
 - [[_COMMUNITY_Feature Alignment Phase|Feature Alignment Phase]]
 - [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_BeamNG Lua Telemetry|BeamNG Lua Telemetry]]
-- [[_COMMUNITY_Dashboard & Stats|Dashboard & Stats]]
 - [[_COMMUNITY_Community 33|Community 33]]
-- [[_COMMUNITY_Validation & Testing|Validation & Testing]]
 - [[_COMMUNITY_Deployment Guide|Deployment Guide]]
-- [[_COMMUNITY_Magic Number Extraction|Magic Number Extraction]]
 - [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 38|Community 38]]
 - [[_COMMUNITY_Community 40|Community 40]]
-- [[_COMMUNITY_Layout & Sidebar|Layout & Sidebar]]
 - [[_COMMUNITY_Community 42|Community 42]]
 - [[_COMMUNITY_Community 43|Community 43]]
 - [[_COMMUNITY_Lap Timing|Lap Timing]]
@@ -61,54 +56,53 @@
 - [[_COMMUNITY_Friction Circle|Friction Circle]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Root TSConfig|Root TSConfig]]
-- [[_COMMUNITY_ESLint Config|ESLint Config]]
 - [[_COMMUNITY_Vite Config|Vite Config]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `MLAnalysis()` - 25 edges
-2. `Fix` - 21 edges
-3. `compilerOptions` - 20 edges
-4. `compilerOptions` - 18 edges
-5. `TelemetryData` - 18 edges
-6. `scripts` - 16 edges
-7. `useSettingsStore` - 16 edges
-8. `ML Pipeline Restructure Plan` - 15 edges
-9. `BeamNGConnector` - 14 edges
-10. `useTelemetryStore` - 14 edges
+1. `Fix` - 21 edges
+2. `compilerOptions` - 20 edges
+3. `compilerOptions` - 18 edges
+4. `TelemetryData` - 18 edges
+5. `useSettingsStore` - 16 edges
+6. `scripts` - 15 edges
+7. `ML Pipeline Restructure Plan` - 15 edges
+8. `BeamNGConnector` - 14 edges
+9. `useTelemetryStore` - 14 edges
+10. `compilerOptions` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ortWasmThreaded()` --calls--> `require`  [INFERRED]
-  public/assets/ort-wasm-simd-threaded.asyncify.mjs → electron/main.ts
-- `ortWasmThreaded()` --calls--> `require`  [INFERRED]
-  public/assets/ort-wasm-simd-threaded.jsep.mjs → electron/main.ts
 - `SessionManager` --references--> `TelemetryData`  [EXTRACTED]
   electron/session-manager.ts → src/types/telemetry.ts
 - `BeamNGConnector` --references--> `TelemetryData`  [EXTRACTED]
   electron/game-connectors/beamng.ts → src/types/telemetry.ts
 - `TelemetryData` --references--> `TelemetryState`  [EXTRACTED]
   src/types/telemetry.ts → src/stores/telemetryStore.ts
+- `useSettingsStore` --calls--> `Layout()`  [EXTRACTED]
+  src/stores/settingsStore.ts → src/components/Layout/Layout.tsx
+- `useSettingsStore` --calls--> `Settings()`  [EXTRACTED]
+  src/stores/settingsStore.ts → src/components/Settings/Settings.tsx
 
-## Communities (52 total, 3 thin omitted)
+## Communities (46 total, 3 thin omitted)
 
 ### Community 0 - "ML Worker Core"
-Cohesion: 0.06
-Nodes (29): accelerations, aggressionMatrix, anomalies, brakes, { dtwScore, trailPercent }, exitForecast, fatigue, gForcesCombined (+21 more)
+Cohesion: 0.29
+Nodes (6): GRIP_FEATURES, HMM_FEATURES, PCA_FEATURES, PEDAL_FEATURES, SHIFT_FEATURES, TIRE_WEAR_FEATURES
 
 ### Community 1 - "Model Metrics"
 Cohesion: 0.09
 Nodes (15): GameConnector, AssettoCorsaConnector, BeamNGConnector, clamp(), normalizeArray(), normalizeHealth(), normalizeSteering(), numberOrUndefined() (+7 more)
 
 ### Community 2 - "Electron & ONNX Runtime"
-Cohesion: 0.08
-Nodes (26): devDependencies, autoprefixer, concurrently, cross-env, electron, electron-builder, eslint, @eslint/js (+18 more)
+Cohesion: 0.05
+Nodes (43): dependencies, better-sqlite3, clsx, express, @google/stitch-sdk, lucide-react, react, react-dom (+35 more)
 
 ### Community 3 - "ML Training Pipeline"
-Cohesion: 0.05
-Nodes (46): dataset_files, dataset_rows, components, explained_variance, feature_count, pca_variance_pct, error, accuracy (+38 more)
+Cohesion: 0.14
+Nodes (15): 2.1 Boundary-aware jerk/accel, 2.2 Boundary-aware fatigue, 2.3 Boundary-aware Markov chain, 2.4 Boundary-aware gear change detection, 2.5 Boundary-aware tire wear (heuristic path), 2.6 ONNX inference chunking, 2.7 Downsample output arrays, code:ts (function downsample(arr, maxPoints = 2000) {) (+7 more)
 
 ### Community 4 - "PCA Profile"
-Cohesion: 0.10
-Nodes (19): ortWasmThreaded(), ortWasmThreaded(), db, __dirname, initDatabase(), buildMlCsvRows(), CsvRow, CsvValue (+11 more)
+Cohesion: 0.12
+Nodes (17): db, __dirname, initDatabase(), buildMlCsvRows(), CsvRow, CsvValue, deriveFatigueLabel(), __dirname (+9 more)
 
 ### Community 5 - "ML Analysis UI"
 Cohesion: 0.09
@@ -127,12 +121,12 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, moduleResolution, noEmit (+11 more)
 
 ### Community 9 - "Statistical Helpers"
-Cohesion: 0.17
-Nodes (16): DataFrame, int, derive_labels(), load_all_csvs(), main(), Multi-Model ML Training Pipeline for Driving Telemetry Dashboard. Trains 8 model, Check which expected columns are missing from the dataset., Derive supervised labels that aren't directly in the raw telemetry. (+8 more)
+Cohesion: 0.50
+Nodes (3): LiveMultiGraph, LiveMultiGraphProps, MultiTraceDataPoint
 
 ### Community 10 - "Electron Types"
 Cohesion: 0.05
-Nodes (42): BehaviorAnalysis, BehaviorAnalysisProps, ProgressBar, CarHealth(), CarHealthProps, HealthIndicator(), Dashboard(), DataLogger() (+34 more)
+Nodes (39): BehaviorAnalysis, BehaviorAnalysisProps, ProgressBar, CarHealth(), CarHealthProps, HealthIndicator(), Dashboard(), DataLogger() (+31 more)
 
 ### Community 11 - "Feature Config"
 Cohesion: 0.13
@@ -155,8 +149,8 @@ Cohesion: 0.36
 Nodes (7): Analysis(), SessionGraphs(), SessionGraphsProps, SessionList(), mockSessions, Session, useSessionStore
 
 ### Community 16 - "Community 16"
-Cohesion: 0.04
-Nodes (47): build, appId, directories, extraResources, files, mac, productName, win (+39 more)
+Cohesion: 0.07
+Nodes (26): build, appId, directories, extraResources, files, mac, productName, win (+18 more)
 
 ### Community 17 - "Agent Catalog"
 Cohesion: 0.15
@@ -167,8 +161,8 @@ Cohesion: 0.29
 Nodes (7): 1.3 Feature Column Name Mismatch, 4.1 Normalize All Feature Names to snake_case, code:python (TIRE_WEAR_FEATURES = [), code:ts (const TIRE_WEAR_FEATURES = [), code:python (# These are the canonical camelCase column names that normal), code:ts (const TIRE_WEAR_FEATURES = [), code:ts (function extractFeatures(row: Record<string, number>, featur)
 
 ### Community 19 - "NPM Scripts"
-Cohesion: 0.04
-Nodes (45): 1.1 Fix `normalizeRow` ({MLAnalysis.tsx}), 1.2 Timestamp-aware merging ({MLAnalysis.tsx}), 1.3 Column name cross-reference, 2.1 Boundary-aware jerk/accel, 2.2 Boundary-aware fatigue, 2.3 Boundary-aware Markov chain, 2.4 Boundary-aware gear change detection, 2.5 Boundary-aware tire wear (heuristic path) (+37 more)
+Cohesion: 0.06
+Nodes (30): 1.1 Fix `normalizeRow` ({MLAnalysis.tsx}), 1.2 Timestamp-aware merging ({MLAnalysis.tsx}), 1.3 Column name cross-reference, 3.1 Timeout + Cancel, 3.2 Smooth progress, 3.3 Replace `alert()`, 3.4 Fix Tailwind JIT dynamic class, Architecture Decisions (+22 more)
 
 ### Community 20 - "Feature Names"
 Cohesion: 0.11
@@ -177,10 +171,6 @@ Nodes (18): 4.10 Accessibility, 4.1 Layout Architecture, 4.2 Tab Structure, 4.3 
 ### Community 21 - "Project README"
 Cohesion: 0.20
 Nodes (10): 8.1 TypeScript Compilation, 8.2 Vite Build, 8.3 ONNX Model Validation, 8.4 Browser Smoke Test, 8.5 Edge Case Tests, 8.6 Cross-Session Consistency Test, 8. Phase 6: Validation & Testing, code:bash (npx tsc --noEmit) (+2 more)
-
-### Community 22 - "ML Config"
-Cohesion: 0.12
-Nodes (16): AnomalyResult, ExitForecastResult, FatigueResult, GripResult, HMMResult, IncomingMessage, ModelStatusMap, OutgoingMessage (+8 more)
 
 ### Community 24 - "Technical Report"
 Cohesion: 0.20
@@ -210,25 +200,13 @@ Nodes (5): 3.1 Remove All Dead Code from `mlWorker.ts`, 3.2 Remove Unused npm De
 Cohesion: 0.25
 Nodes (7): Code Signing (Important), code:bash (npm run build), code:bash (dist-app/), Deployment Guide, How to Build / Deploy, Output Location, Why Desktop?
 
-### Community 31 - "Dashboard & Stats"
-Cohesion: 0.25
-Nodes (7): Comprehensive ML Pipeline Configuration for Driving Telemetry All feature sets,, # NOTE: Feature ORDER must match ml-features.ts SHIFT_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts PEDAL_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts TIRE_WEAR_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts GRIP_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts HMM_FEATURES exactly, # NOTE: Feature ORDER must match ml-features.ts PCA_FEATURES exactly
-
 ### Community 33 - "Community 33"
 Cohesion: 0.31
 Nodes (10): Effort Summary, ML Pipeline Fix Plan, Phase 0: Feature Name Alignment, Phase 1: UI Label Accuracy, Phase 2: Magic Number Extraction, Problem, Problem, Problem (+2 more)
 
-### Community 34 - "Validation & Testing"
-Cohesion: 0.29
-Nodes (10): classifyGrip(), classifyPedalOverlap(), classifyShifts(), _initModels(), loadModels(), predictTireWear(), projectPCA(), resolveFromRoot() (+2 more)
-
 ### Community 35 - "Deployment Guide"
 Cohesion: 0.20
 Nodes (10): 3a — Batch ONNX Inference, 3b — Fix Silent Catch Blocks, 3c — Add `modelsLoaded` Retry, 3d — Differentiate Error Types, code:typescript (.catch((err) => {), code:typescript (// Before: per-row loop with [1, 20] tensor), code:typescript (if (session) {), code:typescript (const anyLoaded = Object.values(modelStatus).some(s => s ===) (+2 more)
-
-### Community 36 - "Magic Number Extraction"
-Cohesion: 0.16
-Nodes (22): bgColorMap, Card(), colorMap, DynamicsTab(), INITIAL_RESULTS, Interpretation(), MLAnalysis(), OverviewTab() (+14 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.25
@@ -241,10 +219,6 @@ Nodes (6): 5a — Remove `any` Casts, 5b — Fix `MLResults` Interface, 5c — A
 ### Community 40 - "Community 40"
 Cohesion: 0.33
 Nodes (6): 4.2 Add Feature Order Validation, 4.3 Update `MLAnalysis.tsx` `normalizeRow()`, 4. Phase 2: Feature Alignment, code:json ({), code:ts (// Add these aliases to the existing map:), code:python (# Before ONNX export, save the exact feature order)
-
-### Community 41 - "Layout & Sidebar"
-Cohesion: 0.33
-Nodes (5): centroids, features, n_clusters, scaler_mean, scaler_scale
 
 ### Community 42 - "Community 42"
 Cohesion: 0.50
@@ -266,12 +240,8 @@ Nodes (11): 10. Risk Register, 2.1 Key Architectural Changes, 2. Target Architec
 Cohesion: 0.51
 Nodes (9): clamp(), estimateTireTemperature(), firstNumber(), firstPowertrainDevice(), getDeviceHealth(), getPosition(), getPressurePsi(), getWheelData() (+1 more)
 
-### Community 54 - "ESLint Config"
-Cohesion: 0.29
-Nodes (10): clusterStates(), computeFatigueForSession(), detectAnomalies(), detectFatigue(), jerkMagnitude(), medianDt(), mergeSessions(), safeMean() (+2 more)
-
 ## Knowledge Gaps
-- **378 isolated node(s):** `tsBuildInfoFile`, `target`, `lib`, `module`, `types` (+373 more)
+- **319 isolated node(s):** `name`, `private`, `version`, `type`, `main` (+314 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -279,16 +249,16 @@ Nodes (10): clusterStates(), computeFatigueForSession(), detectAnomalies(), dete
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `TelemetryData` connect `Model Metrics` to `Electron Types`, `PCA Profile`?**
-  _High betweenness centrality (0.044) - this node is a cross-community bridge._
-- **Why does `MLAnalysis()` connect `Magic Number Extraction` to `Electron Types`, `ESLint Config`, `ML Config`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
-- **What connects `tsBuildInfoFile`, `target`, `lib` to the rest of the system?**
-  _392 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `ML Worker Core` be split into smaller, more focused modules?**
-  _Cohesion score 0.059379217273954114 - nodes in this community are weakly interconnected._
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Why does `Phase 4 — Visual Redesign` connect `Feature Names` to `NPM Scripts`?**
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `MLAnalysis — Full Rebuild Plan` connect `NPM Scripts` to `ML Training Pipeline`, `Feature Names`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **What connects `name`, `private`, `version` to the rest of the system?**
+  _319 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Model Metrics` be split into smaller, more focused modules?**
   _Cohesion score 0.08503401360544217 - nodes in this community are weakly interconnected._
 - **Should `Electron & ONNX Runtime` be split into smaller, more focused modules?**
-  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.045454545454545456 - nodes in this community are weakly interconnected._
 - **Should `ML Training Pipeline` be split into smaller, more focused modules?**
-  _Cohesion score 0.05230496453900709 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
