@@ -16,7 +16,6 @@
     "lint": "eslint .",
     "verify:features": "node scripts/verify-feature-order.cjs",
     "preview": "vite preview",
-    "postinstall": "node -e \"const{cpSync,existsSync,mkdirSync}=require('fs');const{join}=require('path');const src='node_modules/onnxruntime-web/dist';const dst='public/assets';if(existsSync(src)){mkdirSync(dst,{recursive:true});['ort-wasm-simd-threaded.jsep.mjs','ort-wasm-simd-threaded.jsep.wasm','ort-wasm-simd-threaded.wasm','ort-wasm-simd-threaded.asyncify.mjs','ort-wasm-simd-threaded.asyncify.wasm'].forEach(f=>{const s=join(src,f);const d=join(dst,f);if(existsSync(s)){cpSync(s,d);console.log('Copied',f);}})}\"",
     "doctor": "npx react-doctor@latest"
   },
   "dependencies": {
@@ -25,8 +24,6 @@
     "clsx": "^2.1.1",
     "express": "^5.2.1",
     "lucide-react": "^0.563.0",
-    "onnxruntime-web": "^1.26.0",
-    "papaparse": "^5.5.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0",
@@ -64,7 +61,6 @@
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.6",
     "@types/node": "^24.10.13",
-    "@types/papaparse": "^5.5.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/ws": "^8.18.1",

@@ -1,7 +1,7 @@
-# Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-05-28)
+# Graph Report - Driving-Simulation-Telemetry-Dashboard-Application  (2026-07-19)
 
 ## Corpus Check
-- 75 files · ~206,690 words
+- 63 files · ~189,945 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4106a6c4`
+- Built from commit: `5d37b655`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

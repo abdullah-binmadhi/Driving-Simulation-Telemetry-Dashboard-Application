@@ -4,7 +4,6 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Analysis from './components/Analysis/Analysis';
 import Settings from './components/Settings/Settings';
 import ReactionTest from './components/ReactionTest/ReactionTest';
-import MLAnalysis from './components/MLAnalysis/MLAnalysis';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="analysis" element={<Analysis />} />
           <Route path="reaction" element={<ReactionTest />} />
-          <Route path="ml-analysis" element={<MLAnalysis />} />
           <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
